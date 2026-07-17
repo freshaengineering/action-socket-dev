@@ -25,17 +25,16 @@ const nameExec = 'sfw'
  * @param {boolean} useCache flag to use or bypass cache
  */
 export default async function download ({ edition = 'free', ...inputs }) {
-  if (edition === 'enterprise' && inputs.firewallEndpoint) {
-    core.info(`Socket Firewall enterprise edition using firewall endpoint: ${inputs.firewallEndpoint}`)
-    return
-  }
-
   const distributionKey = `${process.platform}-${process.arch}`
   const distribution = distributions[distributionKey]
 
   // exit early
   if (!distribution) {
     throw new Error(`Unsupported architecture ${distributionKey}`)
+  }
+
+  if (edition === 'enterprise' && inputs.firewallEndpoint) {
+    core.info(`Socket Firewall enterprise edition using firewall endpoint: ${inputs.firewallEndpoint}`)
   }
 
   // free edition?
