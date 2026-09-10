@@ -33,6 +33,10 @@ export default async function download ({ edition = 'free', ...inputs }) {
     throw new Error(`Unsupported architecture ${distributionKey}`)
   }
 
+  if (edition === 'enterprise' && inputs.firewallEndpoint) {
+    core.info(`Socket Firewall enterprise edition using firewall endpoint: ${inputs.firewallEndpoint}`)
+  }
+
   // free edition?
   const repo = edition === 'free' ? 'sfw-free' : 'firewall-release'
 

@@ -21,6 +21,9 @@ inputs:
   socket-token:
     description: The Socket API Token
 
+  socket-firewall-endpoint:
+    description: The Socket Firewall endpoint URL (enterprise mode only, takes priority over socket-token)
+
   use-cache:
     description: Cache the Socket binaries
     default: 'true'

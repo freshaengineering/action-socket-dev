@@ -21,6 +21,7 @@ const inputs = {
   mode: core.getInput('mode', { required: true }).toLowerCase(),
   tokenGithub: core.getInput('github-token', { required: true }),
   tokenSocket: core.getInput('socket-token'),
+  firewallEndpoint: core.getInput('socket-firewall-endpoint'),
   versionFirewall: core.getInput('firewall-version'),
   versionPatch: core.getInput('patch-version'),
   patchEcosystems: core.getInput('patch-ecosystems'),
@@ -34,6 +35,10 @@ const inputs = {
 if (inputs.jobSummary === 'true') inputs.jobSummary = 'all'
 if (inputs.jobSummary === 'false') inputs.jobSummary = 'none'
 
+if (inputs.firewallEndpoint) {
+  core.exportVariable('SOCKET_SECURITY_FIREWALL_ENDPOINT', inputs.firewallEndpoint)
+}
+
 if (inputs.tokenSocket) {
   // setup socket token as a secret env
   core.exportVariable('SOCKET_API_KEY', inputs.tokenSocket)
@@ -45,7 +50,7 @@ core.debug(`Installing Socket Action in ${inputs.mode} mode`)
 
 switch (inputs.mode) {
   case 'firewall': {
-    const edition = inputs.tokenSocket ? 'enterprise' : 'free'
+    const edition = (inputs.tokenSocket || inputs.firewallEndpoint) ? 'enterprise' : 'free'
     await firewall({ edition, ...inputs })
     break
   }
