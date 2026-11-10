@@ -1,46 +1,12084 @@
-import A from"os";import e from"crypto";import t from"fs";import r from"path";import o from"http";import n from"https";import s from"net";import i from"tls";import E from"events";import g from"assert";import a from"util";import Q from"stream";import C from"buffer";import B from"querystring";import c from"stream/web";import I from"node:stream";import h from"node:util";import l from"node:events";import u from"worker_threads";import d from"perf_hooks";import f from"util/types";import y from"async_hooks";import p from"console";import w from"url";import D from"zlib";import R from"string_decoder";import m from"diagnostics_channel";import k from"child_process";import b from"timers";import{readFile as N}from"node:fs/promises";var F="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function S(A){return A&&A.__esModule&&Object.prototype.hasOwnProperty.call(A,"default")?A.default:A}var U,L,M={},Y={},v={};function T(){if(U)return v;return U=1,Object.defineProperty(v,"__esModule",{value:!0}),v.toCommandProperties=v.toCommandValue=void 0,v.toCommandValue=function(A){return null==A?"":"string"==typeof A||A instanceof String?A:JSON.stringify(A)},v.toCommandProperties=function(A){return Object.keys(A).length?{title:A.title,file:A.file,line:A.startLine,endLine:A.endLine,col:A.startColumn,endColumn:A.endColumn}:{}},v}function J(){if(L)return Y;L=1;var e=Y&&Y.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t);var o=Object.getOwnPropertyDescriptor(e,t);o&&!("get"in o?!e.__esModule:o.writable||o.configurable)||(o={enumerable:!0,get:function(){return e[t]}}),Object.defineProperty(A,r,o)}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),t=Y&&Y.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),r=Y&&Y.__importStar||function(A){if(A&&A.__esModule)return A;var r={};if(null!=A)for(var o in A)"default"!==o&&Object.prototype.hasOwnProperty.call(A,o)&&e(r,A,o);return t(r,A),r};Object.defineProperty(Y,"__esModule",{value:!0}),Y.issue=Y.issueCommand=void 0;const o=r(A),n=T();function s(A,e,t){const r=new i(A,e,t);process.stdout.write(r.toString()+o.EOL)}Y.issueCommand=s,Y.issue=function(A,e=""){s(A,{},e)};class i{constructor(A,e,t){A||(A="missing.command"),this.command=A,this.properties=e,this.message=t}toString(){let A="::"+this.command;if(this.properties&&Object.keys(this.properties).length>0){A+=" ";let e=!0;for(const t in this.properties)if(this.properties.hasOwnProperty(t)){const r=this.properties[t];r&&(e?e=!1:A+=",",A+=`${t}=${E(r)}`)}}var e;return A+=`::${e=this.message,(0,n.toCommandValue)(e).replace(/%/g,"%25").replace(/\r/g,"%0D").replace(/\n/g,"%0A")}`,A}}function E(A){return(0,n.toCommandValue)(A).replace(/%/g,"%25").replace(/\r/g,"%0D").replace(/\n/g,"%0A").replace(/:/g,"%3A").replace(/,/g,"%2C")}return Y}var G,H={};var V,O={},x={},W={};var q,P,_,Z={};function j(){return _||(_=1,P=function(){if(q)return Z;q=1;var A,e=i,t=o,r=n,s=E,g=a;function Q(A){var e=this;e.options=A||{},e.proxyOptions=e.options.proxy||{},e.maxSockets=e.options.maxSockets||t.Agent.defaultMaxSockets,e.requests=[],e.sockets=[],e.on("free",function(A,t,r,o){for(var n=B(t,r,o),s=0,i=e.requests.length;s<i;++s){var E=e.requests[s];if(E.host===n.host&&E.port===n.port)return e.requests.splice(s,1),void E.request.onSocket(A)}A.destroy(),e.removeSocket(A)})}function C(A,t){var r=this;Q.prototype.createSocket.call(r,A,function(o){var n=A.request.getHeader("host"),s=c({},r.options,{socket:o,servername:n?n.replace(/:.*$/,""):A.host}),i=e.connect(0,s);r.sockets[r.sockets.indexOf(o)]=i,t(i)})}function B(A,e,t){return"string"==typeof A?{host:A,port:e,localAddress:t}:A}function c(A){for(var e=1,t=arguments.length;e<t;++e){var r=arguments[e];if("object"==typeof r)for(var o=Object.keys(r),n=0,s=o.length;n<s;++n){var i=o[n];void 0!==r[i]&&(A[i]=r[i])}}return A}return Z.httpOverHttp=function(A){var e=new Q(A);return e.request=t.request,e},Z.httpsOverHttp=function(A){var e=new Q(A);return e.request=t.request,e.createSocket=C,e.defaultPort=443,e},Z.httpOverHttps=function(A){var e=new Q(A);return e.request=r.request,e},Z.httpsOverHttps=function(A){var e=new Q(A);return e.request=r.request,e.createSocket=C,e.defaultPort=443,e},g.inherits(Q,s.EventEmitter),Q.prototype.addRequest=function(A,e,t,r){var o=this,n=c({request:A},o.options,B(e,t,r));o.sockets.length>=this.maxSockets?o.requests.push(n):o.createSocket(n,function(e){function t(){o.emit("free",e,n)}function r(A){o.removeSocket(e),e.removeListener("free",t),e.removeListener("close",r),e.removeListener("agentRemove",r)}e.on("free",t),e.on("close",r),e.on("agentRemove",r),A.onSocket(e)})},Q.prototype.createSocket=function(e,t){var r=this,o={};r.sockets.push(o);var n=c({},r.proxyOptions,{method:"CONNECT",path:e.host+":"+e.port,agent:!1,headers:{host:e.host+":"+e.port}});e.localAddress&&(n.localAddress=e.localAddress),n.proxyAuth&&(n.headers=n.headers||{},n.headers["Proxy-Authorization"]="Basic "+new Buffer(n.proxyAuth).toString("base64")),A("making CONNECT request");var s=r.request(n);function i(n,i,E){var g;return s.removeAllListeners(),i.removeAllListeners(),200!==n.statusCode?(A("tunneling socket could not be established, statusCode=%d",n.statusCode),i.destroy(),(g=new Error("tunneling socket could not be established, statusCode="+n.statusCode)).code="ECONNRESET",e.request.emit("error",g),void r.removeSocket(o)):E.length>0?(A("got illegal response body from proxy"),i.destroy(),(g=new Error("got illegal response body from proxy")).code="ECONNRESET",e.request.emit("error",g),void r.removeSocket(o)):(A("tunneling connection has established"),r.sockets[r.sockets.indexOf(o)]=i,t(i))}s.useChunkedEncodingByDefault=!1,s.once("response",function(A){A.upgrade=!0}),s.once("upgrade",function(A,e,t){process.nextTick(function(){i(A,e,t)})}),s.once("connect",i),s.once("error",function(t){s.removeAllListeners(),A("tunneling socket could not be established, cause=%s\n",t.message,t.stack);var n=new Error("tunneling socket could not be established, cause="+t.message);n.code="ECONNRESET",e.request.emit("error",n),r.removeSocket(o)}),s.end()},Q.prototype.removeSocket=function(A){var e=this.sockets.indexOf(A);if(-1!==e){this.sockets.splice(e,1);var t=this.requests.shift();t&&this.createSocket(t,function(A){t.request.onSocket(A)})}},A=process.env.NODE_DEBUG&&/\btunnel\b/.test(process.env.NODE_DEBUG)?function(){var A=Array.prototype.slice.call(arguments);"string"==typeof A[0]?A[0]="TUNNEL: "+A[0]:A.unshift("TUNNEL:"),console.error.apply(console,A)}:function(){},Z.debug=A,Z}()),P}var X,K,z,$,AA,eA,tA,rA,oA,nA,sA={};function iA(){return K?X:(K=1,X={kClose:Symbol("close"),kDestroy:Symbol("destroy"),kDispatch:Symbol("dispatch"),kUrl:Symbol("url"),kWriting:Symbol("writing"),kResuming:Symbol("resuming"),kQueue:Symbol("queue"),kConnect:Symbol("connect"),kConnecting:Symbol("connecting"),kHeadersList:Symbol("headers list"),kKeepAliveDefaultTimeout:Symbol("default keep alive timeout"),kKeepAliveMaxTimeout:Symbol("max keep alive timeout"),kKeepAliveTimeoutThreshold:Symbol("keep alive timeout threshold"),kKeepAliveTimeoutValue:Symbol("keep alive timeout"),kKeepAlive:Symbol("keep alive"),kHeadersTimeout:Symbol("headers timeout"),kBodyTimeout:Symbol("body timeout"),kServerName:Symbol("server name"),kLocalAddress:Symbol("local address"),kHost:Symbol("host"),kNoRef:Symbol("no ref"),kBodyUsed:Symbol("used"),kRunning:Symbol("running"),kBlocking:Symbol("blocking"),kPending:Symbol("pending"),kSize:Symbol("size"),kBusy:Symbol("busy"),kQueued:Symbol("queued"),kFree:Symbol("free"),kConnected:Symbol("connected"),kClosed:Symbol("closed"),kNeedDrain:Symbol("need drain"),kReset:Symbol("reset"),kDestroyed:Symbol.for("nodejs.stream.destroyed"),kMaxHeadersSize:Symbol("max headers size"),kRunningIdx:Symbol("running index"),kPendingIdx:Symbol("pending index"),kError:Symbol("error"),kClients:Symbol("clients"),kClient:Symbol("client"),kParser:Symbol("parser"),kOnDestroyed:Symbol("destroy callbacks"),kPipelining:Symbol("pipelining"),kSocket:Symbol("socket"),kHostHeader:Symbol("host header"),kConnector:Symbol("connector"),kStrictContentLength:Symbol("strict content length"),kMaxRedirections:Symbol("maxRedirections"),kMaxRequests:Symbol("maxRequestsPerClient"),kProxy:Symbol("proxy agent options"),kCounter:Symbol("socket request counter"),kInterceptors:Symbol("dispatch interceptors"),kMaxResponseSize:Symbol("max response size"),kHTTP2Session:Symbol("http2Session"),kHTTP2SessionState:Symbol("http2Session state"),kHTTP2BuildRequest:Symbol("http2 build request"),kHTTP1BuildRequest:Symbol("http1 build request"),kHTTP2CopyHeaders:Symbol("http2 copy headers"),kHTTPConnVersion:Symbol("http connection version"),kRetryHandlerDefaultRetry:Symbol("retry agent default retry"),kConstruct:Symbol("constructable")})}function EA(){if($)return z;$=1;class A extends Error{constructor(A){super(A),this.name="UndiciError",this.code="UND_ERR"}}class e extends A{constructor(A){super(A),Error.captureStackTrace(this,e),this.name="ConnectTimeoutError",this.message=A||"Connect Timeout Error",this.code="UND_ERR_CONNECT_TIMEOUT"}}class t extends A{constructor(A){super(A),Error.captureStackTrace(this,t),this.name="HeadersTimeoutError",this.message=A||"Headers Timeout Error",this.code="UND_ERR_HEADERS_TIMEOUT"}}class r extends A{constructor(A){super(A),Error.captureStackTrace(this,r),this.name="HeadersOverflowError",this.message=A||"Headers Overflow Error",this.code="UND_ERR_HEADERS_OVERFLOW"}}class o extends A{constructor(A){super(A),Error.captureStackTrace(this,o),this.name="BodyTimeoutError",this.message=A||"Body Timeout Error",this.code="UND_ERR_BODY_TIMEOUT"}}class n extends A{constructor(A,e,t,r){super(A),Error.captureStackTrace(this,n),this.name="ResponseStatusCodeError",this.message=A||"Response Status Code Error",this.code="UND_ERR_RESPONSE_STATUS_CODE",this.body=r,this.status=e,this.statusCode=e,this.headers=t}}class s extends A{constructor(A){super(A),Error.captureStackTrace(this,s),this.name="InvalidArgumentError",this.message=A||"Invalid Argument Error",this.code="UND_ERR_INVALID_ARG"}}class i extends A{constructor(A){super(A),Error.captureStackTrace(this,i),this.name="InvalidReturnValueError",this.message=A||"Invalid Return Value Error",this.code="UND_ERR_INVALID_RETURN_VALUE"}}class E extends A{constructor(A){super(A),Error.captureStackTrace(this,E),this.name="AbortError",this.message=A||"Request aborted",this.code="UND_ERR_ABORTED"}}class g extends A{constructor(A){super(A),Error.captureStackTrace(this,g),this.name="InformationalError",this.message=A||"Request information",this.code="UND_ERR_INFO"}}class a extends A{constructor(A){super(A),Error.captureStackTrace(this,a),this.name="RequestContentLengthMismatchError",this.message=A||"Request body length does not match content-length header",this.code="UND_ERR_REQ_CONTENT_LENGTH_MISMATCH"}}class Q extends A{constructor(A){super(A),Error.captureStackTrace(this,Q),this.name="ResponseContentLengthMismatchError",this.message=A||"Response body length does not match content-length header",this.code="UND_ERR_RES_CONTENT_LENGTH_MISMATCH"}}class C extends A{constructor(A){super(A),Error.captureStackTrace(this,C),this.name="ClientDestroyedError",this.message=A||"The client is destroyed",this.code="UND_ERR_DESTROYED"}}class B extends A{constructor(A){super(A),Error.captureStackTrace(this,B),this.name="ClientClosedError",this.message=A||"The client is closed",this.code="UND_ERR_CLOSED"}}class c extends A{constructor(A,e){super(A),Error.captureStackTrace(this,c),this.name="SocketError",this.message=A||"Socket error",this.code="UND_ERR_SOCKET",this.socket=e}}class I extends A{constructor(A){super(A),Error.captureStackTrace(this,I),this.name="NotSupportedError",this.message=A||"Not supported error",this.code="UND_ERR_NOT_SUPPORTED"}}class h extends Error{constructor(A,e,t){super(A),Error.captureStackTrace(this,h),this.name="HTTPParserError",this.code=e?`HPE_${e}`:void 0,this.data=t?t.toString():void 0}}class l extends A{constructor(A){super(A),Error.captureStackTrace(this,l),this.name="ResponseExceededMaxSizeError",this.message=A||"Response content exceeded max size",this.code="UND_ERR_RES_EXCEEDED_MAX_SIZE"}}class u extends A{constructor(A,e,{headers:t,data:r}){super(A),Error.captureStackTrace(this,u),this.name="RequestRetryError",this.message=A||"Request retry error",this.code="UND_ERR_REQ_RETRY",this.statusCode=e,this.data=r,this.headers=t}}return z={HTTPParserError:h,UndiciError:A,HeadersTimeoutError:t,HeadersOverflowError:r,BodyTimeoutError:o,RequestContentLengthMismatchError:a,ConnectTimeoutError:e,ResponseStatusCodeError:n,InvalidArgumentError:s,InvalidReturnValueError:i,RequestAbortedError:E,ClientDestroyedError:C,ClientClosedError:B,InformationalError:g,SocketError:c,NotSupportedError:I,ResponseContentLengthMismatchError:Q,BalancedPoolMissingUpstreamError:class extends A{constructor(A){super(A),Error.captureStackTrace(this,I),this.name="MissingUpstreamError",this.message=A||"No upstream has been added to the BalancedPool",this.code="UND_ERR_BPL_MISSING_UPSTREAM"}},ResponseExceededMaxSizeError:l,RequestRetryError:u}}function gA(){if(rA)return tA;rA=1;const A=g,{kDestroyed:e,kBodyUsed:t}=iA(),{IncomingMessage:r}=o,n=Q,i=s,{InvalidArgumentError:E}=EA(),{Blob:I}=C,h=a,{stringify:l}=B,{headerNameLowerCasedRecord:u}=function(){if(eA)return AA;eA=1;const A={},e=["Accept","Accept-Encoding","Accept-Language","Accept-Ranges","Access-Control-Allow-Credentials","Access-Control-Allow-Headers","Access-Control-Allow-Methods","Access-Control-Allow-Origin","Access-Control-Expose-Headers","Access-Control-Max-Age","Access-Control-Request-Headers","Access-Control-Request-Method","Age","Allow","Alt-Svc","Alt-Used","Authorization","Cache-Control","Clear-Site-Data","Connection","Content-Disposition","Content-Encoding","Content-Language","Content-Length","Content-Location","Content-Range","Content-Security-Policy","Content-Security-Policy-Report-Only","Content-Type","Cookie","Cross-Origin-Embedder-Policy","Cross-Origin-Opener-Policy","Cross-Origin-Resource-Policy","Date","Device-Memory","Downlink","ECT","ETag","Expect","Expect-CT","Expires","Forwarded","From","Host","If-Match","If-Modified-Since","If-None-Match","If-Range","If-Unmodified-Since","Keep-Alive","Last-Modified","Link","Location","Max-Forwards","Origin","Permissions-Policy","Pragma","Proxy-Authenticate","Proxy-Authorization","RTT","Range","Referer","Referrer-Policy","Refresh","Retry-After","Sec-WebSocket-Accept","Sec-WebSocket-Extensions","Sec-WebSocket-Key","Sec-WebSocket-Protocol","Sec-WebSocket-Version","Server","Server-Timing","Service-Worker-Allowed","Service-Worker-Navigation-Preload","Set-Cookie","SourceMap","Strict-Transport-Security","Supports-Loading-Mode","TE","Timing-Allow-Origin","Trailer","Transfer-Encoding","Upgrade","Upgrade-Insecure-Requests","User-Agent","Vary","Via","WWW-Authenticate","X-Content-Type-Options","X-DNS-Prefetch-Control","X-Frame-Options","X-Permitted-Cross-Domain-Policies","X-Powered-By","X-Requested-With","X-XSS-Protection"];for(let t=0;t<e.length;++t){const r=e[t],o=r.toLowerCase();A[r]=A[o]=o}return Object.setPrototypeOf(A,null),AA={wellknownHeaderNames:e,headerNameLowerCasedRecord:A}}(),[d,f]=process.versions.node.split(".").map(A=>Number(A));function y(A){return A&&"object"==typeof A&&"function"==typeof A.pipe&&"function"==typeof A.on}function p(A){return I&&A instanceof I||A&&"object"==typeof A&&("function"==typeof A.stream||"function"==typeof A.arrayBuffer)&&/^(Blob|File)$/.test(A[Symbol.toStringTag])}function w(A){if("string"==typeof A){if(A=new URL(A),!/^https?:/.test(A.origin||A.protocol))throw new E("Invalid URL protocol: the URL must start with `http:` or `https:`.");return A}if(!A||"object"!=typeof A)throw new E("Invalid URL: The URL argument must be a non-null object.");if(!/^https?:/.test(A.origin||A.protocol))throw new E("Invalid URL protocol: the URL must start with `http:` or `https:`.");if(!(A instanceof URL)){if(null!=A.port&&""!==A.port&&!Number.isFinite(parseInt(A.port)))throw new E("Invalid URL: port must be a valid integer or a string representation of an integer.");if(null!=A.path&&"string"!=typeof A.path)throw new E("Invalid URL path: the path must be a string or null/undefined.");if(null!=A.pathname&&"string"!=typeof A.pathname)throw new E("Invalid URL pathname: the pathname must be a string or null/undefined.");if(null!=A.hostname&&"string"!=typeof A.hostname)throw new E("Invalid URL hostname: the hostname must be a string or null/undefined.");if(null!=A.origin&&"string"!=typeof A.origin)throw new E("Invalid URL origin: the origin must be a string or null/undefined.");const e=null!=A.port?A.port:"https:"===A.protocol?443:80;let t=null!=A.origin?A.origin:`${A.protocol}//${A.hostname}:${e}`,r=null!=A.path?A.path:`${A.pathname||""}${A.search||""}`;t.endsWith("/")&&(t=t.substring(0,t.length-1)),r&&!r.startsWith("/")&&(r=`/${r}`),A=new URL(t+r)}return A}function D(A){return!A||!(!A.destroyed&&!A[e])}function R(A){const e=A&&A._readableState;return D(A)&&e&&!e.endEmitted}const m=/timeout=(\d+)/;function k(A){return A instanceof Uint8Array||Buffer.isBuffer(A)}let b;const N=!!String.prototype.toWellFormed;const F=Object.create(null);return F.enumerable=!0,tA={kEnumerableProperty:F,nop:function(){},isDisturbed:function(A){return!(!A||!(n.isDisturbed?n.isDisturbed(A)||A[t]:A[t]||A.readableDidRead||A._readableState&&A._readableState.dataEmitted||R(A)))},isErrored:function(A){return!(!A||!(n.isErrored?n.isErrored(A):/state: 'errored'/.test(h.inspect(A))))},isReadable:function(A){return!(!A||!(n.isReadable?n.isReadable(A):/state: 'readable'/.test(h.inspect(A))))},toUSVString:function(A){return N?`${A}`.toWellFormed():h.toUSVString?h.toUSVString(A):`${A}`},isReadableAborted:R,isBlobLike:p,parseOrigin:function(A){if("/"!==(A=w(A)).pathname||A.search||A.hash)throw new E("invalid url");return A},parseURL:w,getServerName:function(e){if(!e)return null;A.strictEqual(typeof e,"string");const t=function(e){if("["===e[0]){const t=e.indexOf("]");return A(-1!==t),e.substring(1,t)}const t=e.indexOf(":");return-1===t?e:e.substring(0,t)}(e);return i.isIP(t)?"":t},isStream:y,isIterable:function(A){return!(null==A||"function"!=typeof A[Symbol.iterator]&&"function"!=typeof A[Symbol.asyncIterator])},isAsyncIterable:function(A){return!(null==A||"function"!=typeof A[Symbol.asyncIterator])},isDestroyed:D,headerNameToString:function(A){return u[A]||A.toLowerCase()},parseRawHeaders:function(A){const e=[];let t=!1,r=-1;for(let o=0;o<A.length;o+=2){const n=A[o+0].toString(),s=A[o+1].toString("utf8");14!==n.length||"content-length"!==n&&"content-length"!==n.toLowerCase()?19!==n.length||"content-disposition"!==n&&"content-disposition"!==n.toLowerCase()?e.push(n,s):r=e.push(n,s)-1:(e.push(n,s),t=!0)}return t&&-1!==r&&(e[r]=Buffer.from(e[r]).toString("latin1")),e},parseHeaders:function(A,e={}){if(!Array.isArray(A))return A;for(let t=0;t<A.length;t+=2){const r=A[t].toString().toLowerCase();let o=e[r];o?(Array.isArray(o)||(o=[o],e[r]=o),o.push(A[t+1].toString("utf8"))):Array.isArray(A[t+1])?e[r]=A[t+1].map(A=>A.toString("utf8")):e[r]=A[t+1].toString("utf8")}return"content-length"in e&&"content-disposition"in e&&(e["content-disposition"]=Buffer.from(e["content-disposition"]).toString("latin1")),e},parseKeepAliveTimeout:function(A){const e=A.toString().match(m);return e?1e3*parseInt(e[1],10):null},destroy:function(A,t){null!=A&&y(A)&&!D(A)&&("function"==typeof A.destroy?(Object.getPrototypeOf(A).constructor===r&&(A.socket=null),A.destroy(t)):t&&process.nextTick((A,e)=>{A.emit("error",e)},A,t),!0!==A.destroyed&&(A[e]=!0))},bodyLength:function(A){if(null==A)return 0;if(y(A)){const e=A._readableState;return e&&!1===e.objectMode&&!0===e.ended&&Number.isFinite(e.length)?e.length:null}return p(A)?null!=A.size?A.size:null:k(A)?A.byteLength:null},deepClone:function(A){return JSON.parse(JSON.stringify(A))},ReadableStreamFrom:function(A){if(b||(b=c.ReadableStream),b.from)return b.from(async function*(A){for await(const e of A)yield Buffer.isBuffer(e)?e:Buffer.from(e)}(A));let e;return new b({async start(){e=A[Symbol.asyncIterator]()},async pull(A){const{done:t,value:r}=await e.next();if(t)queueMicrotask(()=>{A.close()});else{const e=Buffer.isBuffer(r)?r:Buffer.from(r);A.enqueue(new Uint8Array(e))}return A.desiredSize>0},async cancel(A){await e.return()}},0)},isBuffer:k,validateHandler:function(A,e,t){if(!A||"object"!=typeof A)throw new E("handler must be an object");if("function"!=typeof A.onConnect)throw new E("invalid onConnect method");if("function"!=typeof A.onError)throw new E("invalid onError method");if("function"!=typeof A.onBodySent&&void 0!==A.onBodySent)throw new E("invalid onBodySent method");if(t||"CONNECT"===e){if("function"!=typeof A.onUpgrade)throw new E("invalid onUpgrade method")}else{if("function"!=typeof A.onHeaders)throw new E("invalid onHeaders method");if("function"!=typeof A.onData)throw new E("invalid onData method");if("function"!=typeof A.onComplete)throw new E("invalid onComplete method")}},getSocketInfo:function(A){return{localAddress:A.localAddress,localPort:A.localPort,remoteAddress:A.remoteAddress,remotePort:A.remotePort,remoteFamily:A.remoteFamily,timeout:A.timeout,bytesWritten:A.bytesWritten,bytesRead:A.bytesRead}},isFormDataLike:function(A){return A&&"object"==typeof A&&"function"==typeof A.append&&"function"==typeof A.delete&&"function"==typeof A.get&&"function"==typeof A.getAll&&"function"==typeof A.has&&"function"==typeof A.set&&"FormData"===A[Symbol.toStringTag]},buildURL:function(A,e){if(A.includes("?")||A.includes("#"))throw new Error('Query params cannot be passed when url already contains "?" or "#".');const t=l(e);return t&&(A+="?"+t),A},throwIfAborted:function(A){if(A)if("function"==typeof A.throwIfAborted)A.throwIfAborted();else if(A.aborted){const A=new Error("The operation was aborted");throw A.name="AbortError",A}},addAbortListener:function(A,e){return"addEventListener"in A?(A.addEventListener("abort",e,{once:!0}),()=>A.removeEventListener("abort",e)):(A.addListener("abort",e),()=>A.removeListener("abort",e))},parseRangeHeader:function(A){if(null==A||""===A)return{start:0,end:null,size:null};const e=A?A.match(/^bytes (\d+)-(\d+)\/(\d+)?$/):null;return e?{start:parseInt(e[1]),end:e[2]?parseInt(e[2]):null,size:e[3]?parseInt(e[3]):null}:null},nodeMajor:d,nodeMinor:f,nodeHasAutoSelectFamily:d>18||18===d&&f>=13,safeHTTPMethods:["GET","HEAD","OPTIONS","TRACE"]},tA}function aA(){if(nA)return oA;nA=1;let A,e=Date.now();const t=[];function r(){e=Date.now();let A=t.length,r=0;for(;r<A;){const o=t[r];0===o.state?o.state=e+o.delay:o.state>0&&e>=o.state&&(o.state=-1,o.callback(o.opaque)),-1===o.state?(o.state=-2,r!==A-1?t[r]=t.pop():t.pop(),A-=1):r+=1}t.length>0&&o()}function o(){A&&A.refresh?A.refresh():(clearTimeout(A),A=setTimeout(r,1e3),A.unref&&A.unref())}class n{constructor(A,e,t){this.callback=A,this.delay=e,this.opaque=t,this.state=-2,this.refresh()}refresh(){-2===this.state&&(t.push(this),A&&1!==t.length||o()),this.state=0}clear(){this.state=-1}}return oA={setTimeout:(A,e,t)=>e<1e3?setTimeout(A,e,t):new n(A,e,t),clearTimeout(A){A instanceof n?A.clear():clearTimeout(A)}}}var QA,CA,BA,cA,IA,hA,lA,uA,dA,fA,yA,pA,wA,DA,RA,mA,kA,bA,NA,FA,SA,UA,LA,MA,YA,vA,TA,JA,GA,HA,VA,OA,xA,WA,qA,PA,_A,ZA,jA,XA,KA,zA,$A,Ae,ee,te,re,oe,ne,se={exports:{}};function ie(){if(CA)return QA;CA=1;const A=l.EventEmitter;function e(A){if("string"==typeof A&&(A=Buffer.from(A)),!Buffer.isBuffer(A))throw new TypeError("The needle has to be a String or a Buffer.");const e=A.length;if(0===e)throw new Error("The needle cannot be an empty String/Buffer.");if(e>256)throw new Error("The needle cannot have a length bigger than 256.");this.maxMatches=1/0,this.matches=0,this._occ=new Array(256).fill(e),this._lookbehind_size=0,this._needle=A,this._bufpos=0,this._lookbehind=Buffer.alloc(e);for(var t=0;t<e-1;++t)this._occ[A[t]]=e-1-t}return(0,h.inherits)(e,A),e.prototype.reset=function(){this._lookbehind_size=0,this.matches=0,this._bufpos=0},e.prototype.push=function(A,e){Buffer.isBuffer(A)||(A=Buffer.from(A,"binary"));const t=A.length;let r;for(this._bufpos=e||0;r!==t&&this.matches<this.maxMatches;)r=this._sbmh_feed(A);return r},e.prototype._sbmh_feed=function(A){const e=A.length,t=this._needle,r=t.length,o=t[r-1];let n,s=-this._lookbehind_size;if(s<0){for(;s<0&&s<=e-r;){if(n=this._sbmh_lookup_char(A,s+r-1),n===o&&this._sbmh_memcmp(A,s,r-1))return this._lookbehind_size=0,++this.matches,this.emit("info",!0),this._bufpos=s+r;s+=this._occ[n]}if(s<0)for(;s<0&&!this._sbmh_memcmp(A,s,e-s);)++s;if(!(s>=0)){const t=this._lookbehind_size+s;return t>0&&this.emit("info",!1,this._lookbehind,0,t),this._lookbehind.copy(this._lookbehind,0,t,this._lookbehind_size-t),this._lookbehind_size-=t,A.copy(this._lookbehind,this._lookbehind_size),this._lookbehind_size+=e,this._bufpos=e,e}this.emit("info",!1,this._lookbehind,0,this._lookbehind_size),this._lookbehind_size=0}if(s+=(s>=0)*this._bufpos,-1!==A.indexOf(t,s))return s=A.indexOf(t,s),++this.matches,s>0?this.emit("info",!0,A,this._bufpos,s):this.emit("info",!0),this._bufpos=s+r;for(s=e-r;s<e&&(A[s]!==t[0]||0!==Buffer.compare(A.subarray(s,s+e-s),t.subarray(0,e-s)));)++s;return s<e&&(A.copy(this._lookbehind,0,s,s+(e-s)),this._lookbehind_size=e-s),s>0&&this.emit("info",!1,A,this._bufpos,s<e?s:e),this._bufpos=e,e},e.prototype._sbmh_lookup_char=function(A,e){return e<0?this._lookbehind[this._lookbehind_size+e]:A[e]},e.prototype._sbmh_memcmp=function(A,e,t){for(var r=0;r<t;++r)if(this._sbmh_lookup_char(A,e+r)!==this._needle[r])return!1;return!0},QA=e}function Ee(){return hA?IA:(hA=1,IA=function(A,e,t){if(!A||void 0===A[e]||null===A[e])return t;if("number"!=typeof A[e]||isNaN(A[e]))throw new TypeError("Limit "+e+" is not a valid number");return A[e]})}function ge(){if(fA)return dA;fA=1;const A=I.Writable,e=h.inherits,t=ie(),r=function(){if(cA)return BA;cA=1;const A=h.inherits,e=I.Readable;function t(A){e.call(this,A)}return A(t,e),t.prototype._read=function(A){},BA=t}(),o=function(){if(uA)return lA;uA=1;const A=l.EventEmitter,e=h.inherits,t=Ee(),r=ie(),o=Buffer.from("\r\n\r\n"),n=/\r\n/g,s=/^([^:]+):[ \t]?([\x00-\xFF]+)?$/;function i(e){A.call(this),e=e||{};const n=this;this.nread=0,this.maxed=!1,this.npairs=0,this.maxHeaderPairs=t(e,"maxHeaderPairs",2e3),this.maxHeaderSize=t(e,"maxHeaderSize",81920),this.buffer="",this.header={},this.finished=!1,this.ss=new r(o),this.ss.on("info",function(A,e,t,r){e&&!n.maxed&&(n.nread+r-t>=n.maxHeaderSize?(r=n.maxHeaderSize-n.nread+t,n.nread=n.maxHeaderSize,n.maxed=!0):n.nread+=r-t,n.buffer+=e.toString("binary",t,r)),A&&n._finish()})}return e(i,A),i.prototype.push=function(A){const e=this.ss.push(A);if(this.finished)return e},i.prototype.reset=function(){this.finished=!1,this.buffer="",this.header={},this.ss.reset()},i.prototype._finish=function(){this.buffer&&this._parseHeader(),this.ss.matches=this.ss.maxMatches;const A=this.header;this.header={},this.buffer="",this.finished=!0,this.nread=this.npairs=0,this.maxed=!1,this.emit("header",A)},i.prototype._parseHeader=function(){if(this.npairs===this.maxHeaderPairs)return;const A=this.buffer.split(n),e=A.length;let t,r;for(var o=0;o<e;++o){if(0===A[o].length)continue;if(("\t"===A[o][0]||" "===A[o][0])&&r){this.header[r][this.header[r].length-1]+=A[o];continue}const e=A[o].indexOf(":");if(-1===e||0===e)return;if(t=s.exec(A[o]),r=t[1].toLowerCase(),this.header[r]=this.header[r]||[],this.header[r].push(t[2]||""),++this.npairs===this.maxHeaderPairs)break}},lA=i}(),n=Buffer.from("-"),s=Buffer.from("\r\n"),i=function(){};function E(e){if(!(this instanceof E))return new E(e);if(A.call(this,e),!e||!e.headerFirst&&"string"!=typeof e.boundary)throw new TypeError("Boundary required");"string"==typeof e.boundary?this.setBoundary(e.boundary):this._bparser=void 0,this._headerFirst=e.headerFirst,this._dashes=0,this._parts=0,this._finished=!1,this._realFinish=!1,this._isPreamble=!0,this._justMatched=!1,this._firstWrite=!0,this._inHeader=!0,this._part=void 0,this._cb=void 0,this._ignoreData=!1,this._partOpts={highWaterMark:e.partHwm},this._pause=!1;const t=this;this._hparser=new o(e),this._hparser.on("header",function(A){t._inHeader=!1,t._part.emit("header",A)})}return e(E,A),E.prototype.emit=function(e){if("finish"!==e||this._realFinish)A.prototype.emit.apply(this,arguments);else if(!this._finished){const A=this;process.nextTick(function(){if(A.emit("error",new Error("Unexpected end of multipart data")),A._part&&!A._ignoreData){const e=A._isPreamble?"Preamble":"Part";return A._part.emit("error",new Error(e+" terminated early due to unexpected end of multipart data")),A._part.push(null),void process.nextTick(function(){A._realFinish=!0,A.emit("finish"),A._realFinish=!1})}A._realFinish=!0,A.emit("finish"),A._realFinish=!1})}},E.prototype._write=function(A,e,t){if(!this._hparser&&!this._bparser)return t();if(this._headerFirst&&this._isPreamble){this._part||(this._part=new r(this._partOpts),0!==this.listenerCount("preamble")?this.emit("preamble",this._part):this._ignore());const e=this._hparser.push(A);if(this._inHeader||void 0===e||!(e<A.length))return t();A=A.slice(e)}this._firstWrite&&(this._bparser.push(s),this._firstWrite=!1),this._bparser.push(A),this._pause?this._cb=t:t()},E.prototype.reset=function(){this._part=void 0,this._bparser=void 0,this._hparser=void 0},E.prototype.setBoundary=function(A){const e=this;this._bparser=new t("\r\n--"+A),this._bparser.on("info",function(A,t,r,o){e._oninfo(A,t,r,o)})},E.prototype._ignore=function(){this._part&&!this._ignoreData&&(this._ignoreData=!0,this._part.on("error",i),this._part.resume())},E.prototype._oninfo=function(A,e,t,o){let s;const i=this;let E,g=0,a=!0;if(!this._part&&this._justMatched&&e){for(;this._dashes<2&&t+g<o;){if(45!==e[t+g]){this._dashes&&(s=n),this._dashes=0;break}++g,++this._dashes}if(2===this._dashes&&(t+g<o&&0!==this.listenerCount("trailer")&&this.emit("trailer",e.slice(t+g,o)),this.reset(),this._finished=!0,0===i._parts&&(i._realFinish=!0,i.emit("finish"),i._realFinish=!1)),this._dashes)return}this._justMatched&&(this._justMatched=!1),this._part||(this._part=new r(this._partOpts),this._part._read=function(A){i._unpause()},this._isPreamble&&0!==this.listenerCount("preamble")?this.emit("preamble",this._part):!0!==this._isPreamble&&0!==this.listenerCount("part")?this.emit("part",this._part):this._ignore(),this._isPreamble||(this._inHeader=!0)),e&&t<o&&!this._ignoreData&&(this._isPreamble||!this._inHeader?(s&&(a=this._part.push(s)),a=this._part.push(e.slice(t,o)),a||(this._pause=!0)):!this._isPreamble&&this._inHeader&&(s&&this._hparser.push(s),E=this._hparser.push(e.slice(t,o)),!this._inHeader&&void 0!==E&&E<o&&this._oninfo(!1,e,t+E,o))),A&&(this._hparser.reset(),this._isPreamble?this._isPreamble=!1:t!==o&&(++this._parts,this._part.on("end",function(){0===--i._parts&&(i._finished?(i._realFinish=!0,i.emit("finish"),i._realFinish=!1):i._unpause())})),this._part.push(null),this._part=void 0,this._ignoreData=!1,this._justMatched=!0,this._dashes=0)},E.prototype._unpause=function(){if(this._pause&&(this._pause=!1,this._cb)){const A=this._cb;this._cb=void 0,A()}},dA=E}function ae(){if(pA)return yA;pA=1;const A=new TextDecoder("utf-8"),e=new Map([["utf-8",A],["utf8",A]]);const t={utf8:(A,e)=>0===A.length?"":("string"==typeof A&&(A=Buffer.from(A,e)),A.utf8Slice(0,A.length)),latin1:(A,e)=>0===A.length?"":"string"==typeof A?A:A.latin1Slice(0,A.length),utf16le:(A,e)=>0===A.length?"":("string"==typeof A&&(A=Buffer.from(A,e)),A.ucs2Slice(0,A.length)),base64:(A,e)=>0===A.length?"":("string"==typeof A&&(A=Buffer.from(A,e)),A.base64Slice(0,A.length)),other:(A,t)=>{if(0===A.length)return"";if("string"==typeof A&&(A=Buffer.from(A,t)),e.has(this.toString()))try{return e.get(this).decode(A)}catch{}return"string"==typeof A?A:A.toString()}};return yA=function(A,e,r){return A?function(A){let e;for(;;)switch(A){case"utf-8":case"utf8":return t.utf8;case"latin1":case"ascii":case"us-ascii":case"iso-8859-1":case"iso8859-1":case"iso88591":case"iso_8859-1":case"windows-1252":case"iso_8859-1:1987":case"cp1252":case"x-cp1252":return t.latin1;case"utf16le":case"utf-16le":case"ucs2":case"ucs-2":return t.utf16le;case"base64":return t.base64;default:if(void 0===e){e=!0,A=A.toLowerCase();continue}return t.other.bind(A)}}(r)(A,e):A}}function Qe(){if(DA)return wA;DA=1;const A=ae(),e=/%[a-fA-F0-9][a-fA-F0-9]/g,t={"%00":"\0","%01":"","%02":"","%03":"","%04":"","%05":"","%06":"","%07":"","%08":"\b","%09":"\t","%0a":"\n","%0A":"\n","%0b":"\v","%0B":"\v","%0c":"\f","%0C":"\f","%0d":"\r","%0D":"\r","%0e":"","%0E":"","%0f":"","%0F":"","%10":"","%11":"","%12":"","%13":"","%14":"","%15":"","%16":"","%17":"","%18":"","%19":"","%1a":"","%1A":"","%1b":"","%1B":"","%1c":"","%1C":"","%1d":"","%1D":"","%1e":"","%1E":"","%1f":"","%1F":"","%20":" ","%21":"!","%22":'"',"%23":"#","%24":"$","%25":"%","%26":"&","%27":"'","%28":"(","%29":")","%2a":"*","%2A":"*","%2b":"+","%2B":"+","%2c":",","%2C":",","%2d":"-","%2D":"-","%2e":".","%2E":".","%2f":"/","%2F":"/","%30":"0","%31":"1","%32":"2","%33":"3","%34":"4","%35":"5","%36":"6","%37":"7","%38":"8","%39":"9","%3a":":","%3A":":","%3b":";","%3B":";","%3c":"<","%3C":"<","%3d":"=","%3D":"=","%3e":">","%3E":">","%3f":"?","%3F":"?","%40":"@","%41":"A","%42":"B","%43":"C","%44":"D","%45":"E","%46":"F","%47":"G","%48":"H","%49":"I","%4a":"J","%4A":"J","%4b":"K","%4B":"K","%4c":"L","%4C":"L","%4d":"M","%4D":"M","%4e":"N","%4E":"N","%4f":"O","%4F":"O","%50":"P","%51":"Q","%52":"R","%53":"S","%54":"T","%55":"U","%56":"V","%57":"W","%58":"X","%59":"Y","%5a":"Z","%5A":"Z","%5b":"[","%5B":"[","%5c":"\\","%5C":"\\","%5d":"]","%5D":"]","%5e":"^","%5E":"^","%5f":"_","%5F":"_","%60":"`","%61":"a","%62":"b","%63":"c","%64":"d","%65":"e","%66":"f","%67":"g","%68":"h","%69":"i","%6a":"j","%6A":"j","%6b":"k","%6B":"k","%6c":"l","%6C":"l","%6d":"m","%6D":"m","%6e":"n","%6E":"n","%6f":"o","%6F":"o","%70":"p","%71":"q","%72":"r","%73":"s","%74":"t","%75":"u","%76":"v","%77":"w","%78":"x","%79":"y","%7a":"z","%7A":"z","%7b":"{","%7B":"{","%7c":"|","%7C":"|","%7d":"}","%7D":"}","%7e":"~","%7E":"~","%7f":"","%7F":"","%80":"","%81":"","%82":"","%83":"","%84":"","%85":"","%86":"","%87":"","%88":"","%89":"","%8a":"","%8A":"","%8b":"","%8B":"","%8c":"","%8C":"","%8d":"","%8D":"","%8e":"","%8E":"","%8f":"","%8F":"","%90":"","%91":"","%92":"","%93":"","%94":"","%95":"","%96":"","%97":"","%98":"","%99":"","%9a":"","%9A":"","%9b":"","%9B":"","%9c":"","%9C":"","%9d":"","%9D":"","%9e":"","%9E":"","%9f":"","%9F":"","%a0":" ","%A0":" ","%a1":"¡","%A1":"¡","%a2":"¢","%A2":"¢","%a3":"£","%A3":"£","%a4":"¤","%A4":"¤","%a5":"¥","%A5":"¥","%a6":"¦","%A6":"¦","%a7":"§","%A7":"§","%a8":"¨","%A8":"¨","%a9":"©","%A9":"©","%aa":"ª","%Aa":"ª","%aA":"ª","%AA":"ª","%ab":"«","%Ab":"«","%aB":"«","%AB":"«","%ac":"¬","%Ac":"¬","%aC":"¬","%AC":"¬","%ad":"­","%Ad":"­","%aD":"­","%AD":"­","%ae":"®","%Ae":"®","%aE":"®","%AE":"®","%af":"¯","%Af":"¯","%aF":"¯","%AF":"¯","%b0":"°","%B0":"°","%b1":"±","%B1":"±","%b2":"²","%B2":"²","%b3":"³","%B3":"³","%b4":"´","%B4":"´","%b5":"µ","%B5":"µ","%b6":"¶","%B6":"¶","%b7":"·","%B7":"·","%b8":"¸","%B8":"¸","%b9":"¹","%B9":"¹","%ba":"º","%Ba":"º","%bA":"º","%BA":"º","%bb":"»","%Bb":"»","%bB":"»","%BB":"»","%bc":"¼","%Bc":"¼","%bC":"¼","%BC":"¼","%bd":"½","%Bd":"½","%bD":"½","%BD":"½","%be":"¾","%Be":"¾","%bE":"¾","%BE":"¾","%bf":"¿","%Bf":"¿","%bF":"¿","%BF":"¿","%c0":"À","%C0":"À","%c1":"Á","%C1":"Á","%c2":"Â","%C2":"Â","%c3":"Ã","%C3":"Ã","%c4":"Ä","%C4":"Ä","%c5":"Å","%C5":"Å","%c6":"Æ","%C6":"Æ","%c7":"Ç","%C7":"Ç","%c8":"È","%C8":"È","%c9":"É","%C9":"É","%ca":"Ê","%Ca":"Ê","%cA":"Ê","%CA":"Ê","%cb":"Ë","%Cb":"Ë","%cB":"Ë","%CB":"Ë","%cc":"Ì","%Cc":"Ì","%cC":"Ì","%CC":"Ì","%cd":"Í","%Cd":"Í","%cD":"Í","%CD":"Í","%ce":"Î","%Ce":"Î","%cE":"Î","%CE":"Î","%cf":"Ï","%Cf":"Ï","%cF":"Ï","%CF":"Ï","%d0":"Ð","%D0":"Ð","%d1":"Ñ","%D1":"Ñ","%d2":"Ò","%D2":"Ò","%d3":"Ó","%D3":"Ó","%d4":"Ô","%D4":"Ô","%d5":"Õ","%D5":"Õ","%d6":"Ö","%D6":"Ö","%d7":"×","%D7":"×","%d8":"Ø","%D8":"Ø","%d9":"Ù","%D9":"Ù","%da":"Ú","%Da":"Ú","%dA":"Ú","%DA":"Ú","%db":"Û","%Db":"Û","%dB":"Û","%DB":"Û","%dc":"Ü","%Dc":"Ü","%dC":"Ü","%DC":"Ü","%dd":"Ý","%Dd":"Ý","%dD":"Ý","%DD":"Ý","%de":"Þ","%De":"Þ","%dE":"Þ","%DE":"Þ","%df":"ß","%Df":"ß","%dF":"ß","%DF":"ß","%e0":"à","%E0":"à","%e1":"á","%E1":"á","%e2":"â","%E2":"â","%e3":"ã","%E3":"ã","%e4":"ä","%E4":"ä","%e5":"å","%E5":"å","%e6":"æ","%E6":"æ","%e7":"ç","%E7":"ç","%e8":"è","%E8":"è","%e9":"é","%E9":"é","%ea":"ê","%Ea":"ê","%eA":"ê","%EA":"ê","%eb":"ë","%Eb":"ë","%eB":"ë","%EB":"ë","%ec":"ì","%Ec":"ì","%eC":"ì","%EC":"ì","%ed":"í","%Ed":"í","%eD":"í","%ED":"í","%ee":"î","%Ee":"î","%eE":"î","%EE":"î","%ef":"ï","%Ef":"ï","%eF":"ï","%EF":"ï","%f0":"ð","%F0":"ð","%f1":"ñ","%F1":"ñ","%f2":"ò","%F2":"ò","%f3":"ó","%F3":"ó","%f4":"ô","%F4":"ô","%f5":"õ","%F5":"õ","%f6":"ö","%F6":"ö","%f7":"÷","%F7":"÷","%f8":"ø","%F8":"ø","%f9":"ù","%F9":"ù","%fa":"ú","%Fa":"ú","%fA":"ú","%FA":"ú","%fb":"û","%Fb":"û","%fB":"û","%FB":"û","%fc":"ü","%Fc":"ü","%fC":"ü","%FC":"ü","%fd":"ý","%Fd":"ý","%fD":"ý","%FD":"ý","%fe":"þ","%Fe":"þ","%fE":"þ","%FE":"þ","%ff":"ÿ","%Ff":"ÿ","%fF":"ÿ","%FF":"ÿ"};function r(A){return t[A]}return wA=function(t){const o=[];let n=0,s="",i=!1,E=!1,g=0,a="";const Q=t.length;for(var C=0;C<Q;++C){const Q=t[C];if("\\"===Q&&i){if(!E){E=!0;continue}E=!1}else if('"'===Q){if(!E){i?(i=!1,n=0):i=!0;continue}E=!1}else{if(E&&i&&(a+="\\"),E=!1,(2===n||3===n)&&"'"===Q){2===n?(n=3,s=a.substring(1)):n=1,a="";continue}if(0===n&&("*"===Q||"="===Q)&&o.length){n="*"===Q?2:1,o[g]=[a,void 0],a="";continue}if(!i&&";"===Q){n=0,s?(a.length&&(a=A(a.replace(e,r),"binary",s)),s=""):a.length&&(a=A(a,"binary","utf8")),void 0===o[g]?o[g]=a:o[g][1]=a,a="",++g;continue}if(!i&&(" "===Q||"\t"===Q))continue}a+=Q}return s&&a.length?a=A(a.replace(e,r),"binary",s):a&&(a=A(a,"binary","utf8")),void 0===o[g]?a&&(o[g]=a):o[g][1]=a,o}}function Ce(){return mA?RA:(mA=1,RA=function(A){if("string"!=typeof A)return"";for(var e=A.length-1;e>=0;--e)switch(A.charCodeAt(e)){case 47:case 92:return".."===(A=A.slice(e+1))||"."===A?"":A}return".."===A||"."===A?"":A})}function Be(){if(UA)return SA;UA=1;const A=function(){if(FA)return NA;FA=1;const A=/\+/g,e=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];function t(){this.buffer=void 0}return t.prototype.write=function(t){let r="",o=0,n=0;const s=(t=t.replace(A," ")).length;for(;o<s;++o)void 0!==this.buffer?e[t.charCodeAt(o)]?(this.buffer+=t[o],++n,2===this.buffer.length&&(r+=String.fromCharCode(parseInt(this.buffer,16)),this.buffer=void 0)):(r+="%"+this.buffer,this.buffer=void 0,--o):"%"===t[o]&&(o>n&&(r+=t.substring(n,o),n=o),this.buffer="",++n);return n<s&&void 0===this.buffer&&(r+=t.substring(n)),r},t.prototype.reset=function(){this.buffer=void 0},NA=t}(),e=ae(),t=Ee(),r=/^charset$/i;function o(e,o){const n=o.limits,s=o.parsedConType;let i;this.boy=e,this.fieldSizeLimit=t(n,"fieldSize",1048576),this.fieldNameSizeLimit=t(n,"fieldNameSize",100),this.fieldsLimit=t(n,"fields",1/0);for(var E=0,g=s.length;E<g;++E)if(Array.isArray(s[E])&&r.test(s[E][0])){i=s[E][1].toLowerCase();break}void 0===i&&(i=o.defCharset||"utf8"),this.decoder=new A,this.charset=i,this._fields=0,this._state="key",this._checkingBytes=!0,this._bytesKey=0,this._bytesVal=0,this._key="",this._val="",this._keyTrunc=!1,this._valTrunc=!1,this._hitLimit=!1}return o.detect=/^application\/x-www-form-urlencoded/i,o.prototype.write=function(A,t){if(this._fields===this.fieldsLimit)return this.boy.hitFieldsLimit||(this.boy.hitFieldsLimit=!0,this.boy.emit("fieldsLimit")),t();let r,o,n,s=0;const i=A.length;for(;s<i;)if("key"===this._state){for(r=o=void 0,n=s;n<i;++n){if(this._checkingBytes||++s,61===A[n]){r=n;break}if(38===A[n]){o=n;break}if(this._checkingBytes&&this._bytesKey===this.fieldNameSizeLimit){this._hitLimit=!0;break}this._checkingBytes&&++this._bytesKey}if(void 0!==r)r>s&&(this._key+=this.decoder.write(A.toString("binary",s,r))),this._state="val",this._hitLimit=!1,this._checkingBytes=!0,this._val="",this._bytesVal=0,this._valTrunc=!1,this.decoder.reset(),s=r+1;else if(void 0!==o){let r;++this._fields;const n=this._keyTrunc;if(r=o>s?this._key+=this.decoder.write(A.toString("binary",s,o)):this._key,this._hitLimit=!1,this._checkingBytes=!0,this._key="",this._bytesKey=0,this._keyTrunc=!1,this.decoder.reset(),r.length&&this.boy.emit("field",e(r,"binary",this.charset),"",n,!1),s=o+1,this._fields===this.fieldsLimit)return t()}else this._hitLimit?(n>s&&(this._key+=this.decoder.write(A.toString("binary",s,n))),s=n,(this._bytesKey=this._key.length)===this.fieldNameSizeLimit&&(this._checkingBytes=!1,this._keyTrunc=!0)):(s<i&&(this._key+=this.decoder.write(A.toString("binary",s))),s=i)}else{for(o=void 0,n=s;n<i;++n){if(this._checkingBytes||++s,38===A[n]){o=n;break}if(this._checkingBytes&&this._bytesVal===this.fieldSizeLimit){this._hitLimit=!0;break}this._checkingBytes&&++this._bytesVal}if(void 0!==o){if(++this._fields,o>s&&(this._val+=this.decoder.write(A.toString("binary",s,o))),this.boy.emit("field",e(this._key,"binary",this.charset),e(this._val,"binary",this.charset),this._keyTrunc,this._valTrunc),this._state="key",this._hitLimit=!1,this._checkingBytes=!0,this._key="",this._bytesKey=0,this._keyTrunc=!1,this.decoder.reset(),s=o+1,this._fields===this.fieldsLimit)return t()}else this._hitLimit?(n>s&&(this._val+=this.decoder.write(A.toString("binary",s,n))),s=n,(""===this._val&&0===this.fieldSizeLimit||(this._bytesVal=this._val.length)===this.fieldSizeLimit)&&(this._checkingBytes=!1,this._valTrunc=!0)):(s<i&&(this._val+=this.decoder.write(A.toString("binary",s))),s=i)}t()},o.prototype.end=function(){this.boy._done||("key"===this._state&&this._key.length>0?this.boy.emit("field",e(this._key,"binary",this.charset),"",this._keyTrunc,!1):"val"===this._state&&this.boy.emit("field",e(this._key,"binary",this.charset),e(this._val,"binary",this.charset),this._keyTrunc,this._valTrunc),this.boy._done=!0,this.boy.emit("finish"))},SA=o}function ce(){if(LA)return se.exports;LA=1;const A=I.Writable,{inherits:e}=h,t=ge(),r=function(){if(bA)return kA;bA=1;const{Readable:A}=I,{inherits:e}=h,t=ge(),r=Qe(),o=ae(),n=Ce(),s=Ee(),i=/^boundary$/i,E=/^form-data$/i,g=/^charset$/i,a=/^filename$/i,Q=/^name$/i;function C(A,e){let C,I;const h=this;let l;const u=e.limits,d=e.isPartAFile||((A,e,t)=>"application/octet-stream"===e||void 0!==t),f=e.parsedConType||[],y=e.defCharset||"utf8",p=e.preservePath,w={highWaterMark:e.fileHwm};for(C=0,I=f.length;C<I;++C)if(Array.isArray(f[C])&&i.test(f[C][0])){l=f[C][1];break}function D(){0===v&&T&&!A._done&&(T=!1,h.end())}if("string"!=typeof l)throw new Error("Multipart: Boundary not found");const R=s(u,"fieldSize",1048576),m=s(u,"fileSize",1/0),k=s(u,"files",1/0),b=s(u,"fields",1/0),N=s(u,"parts",1/0),F=s(u,"headerPairs",2e3),S=s(u,"headerSize",81920);let U,L,M=0,Y=0,v=0,T=!1;this._needDrain=!1,this._pause=!1,this._cb=void 0,this._nparts=0,this._boy=A;const J={boundary:l,maxHeaderPairs:F,maxHeaderSize:S,partHwm:w.highWaterMark,highWaterMark:e.highWaterMark};this.parser=new t(J),this.parser.on("drain",function(){if(h._needDrain=!1,h._cb&&!h._pause){const A=h._cb;h._cb=void 0,A()}}).on("part",function e(t){if(++h._nparts>N)return h.parser.removeListener("part",e),h.parser.on("part",B),A.hitPartsLimit=!0,A.emit("partsLimit"),B(t);if(L){const A=L;A.emit("end"),A.removeAllListeners("end")}t.on("header",function(e){let s,i,l,u,f,N,F,S,T=0;if(e["content-type"]&&(l=r(e["content-type"][0]),l[0]))for(s=l[0].toLowerCase(),C=0,I=l.length;C<I;++C)if(g.test(l[C][0])){u=l[C][1].toLowerCase();break}if(void 0===s&&(s="text/plain"),void 0===u&&(u=y),!e["content-disposition"])return B(t);if(l=r(e["content-disposition"][0]),!E.test(l[0]))return B(t);for(C=0,I=l.length;C<I;++C)Q.test(l[C][0])?i=l[C][1]:a.test(l[C][0])&&(N=l[C][1],p||(N=n(N)));if(f=e["content-transfer-encoding"]?e["content-transfer-encoding"][0].toLowerCase():"7bit",d(i,s,N)){if(M===k)return A.hitFilesLimit||(A.hitFilesLimit=!0,A.emit("filesLimit")),B(t);if(++M,0===A.listenerCount("file"))return void h.parser._ignore();++v;const e=new c(w);U=e,e.on("end",function(){if(--v,h._pause=!1,D(),h._cb&&!h._needDrain){const A=h._cb;h._cb=void 0,A()}}),e._read=function(A){if(h._pause&&(h._pause=!1,h._cb&&!h._needDrain)){const A=h._cb;h._cb=void 0,A()}},A.emit("file",i,e,N,f,s),F=function(A){if((T+=A.length)>m){const r=m-T+A.length;return r>0&&e.push(A.slice(0,r)),e.truncated=!0,e.bytesRead=m,t.removeAllListeners("data"),void e.emit("limit")}e.push(A)||(h._pause=!0),e.bytesRead=T},S=function(){U=void 0,e.push(null)}}else{if(Y===b)return A.hitFieldsLimit||(A.hitFieldsLimit=!0,A.emit("fieldsLimit")),B(t);++Y,++v;let e="",r=!1;L=t,F=function(A){if((T+=A.length)>R){const o=R-(T-A.length);e+=A.toString("binary",0,o),r=!0,t.removeAllListeners("data")}else e+=A.toString("binary")},S=function(){L=void 0,e.length&&(e=o(e,"binary",u)),A.emit("field",i,e,!1,r,f,s),--v,D()}}t._readableState.sync=!1,t.on("data",F),t.on("end",S)}).on("error",function(A){U&&U.emit("error",A)})}).on("error",function(e){A.emit("error",e)}).on("finish",function(){T=!0,D()})}function B(A){A.resume()}function c(e){A.call(this,e),this.bytesRead=0,this.truncated=!1}return C.detect=/^multipart\/form-data/i,C.prototype.write=function(A,e){const t=this.parser.write(A);t&&!this._pause?e():(this._needDrain=!t,this._cb=e)},C.prototype.end=function(){const A=this;A.parser.writable?A.parser.end():A._boy._done||process.nextTick(function(){A._boy._done=!0,A._boy.emit("finish")})},e(c,A),c.prototype._read=function(A){},kA=C}(),o=Be(),n=Qe();function s(e){if(!(this instanceof s))return new s(e);if("object"!=typeof e)throw new TypeError("Busboy expected an options-Object.");if("object"!=typeof e.headers)throw new TypeError("Busboy expected an options-Object with headers-attribute.");if("string"!=typeof e.headers["content-type"])throw new TypeError("Missing Content-Type-header.");const{headers:t,...r}=e;this.opts={autoDestroy:!1,...r},A.call(this,this.opts),this._done=!1,this._parser=this.getParserByHeaders(t),this._finished=!1}return e(s,A),s.prototype.emit=function(e){if("finish"===e){if(!this._done)return void this._parser?.end();if(this._finished)return;this._finished=!0}A.prototype.emit.apply(this,arguments)},s.prototype.getParserByHeaders=function(A){const e=n(A["content-type"]),t={defCharset:this.opts.defCharset,fileHwm:this.opts.fileHwm,headers:A,highWaterMark:this.opts.highWaterMark,isPartAFile:this.opts.isPartAFile,limits:this.opts.limits,parsedConType:e,preservePath:this.opts.preservePath};if(r.detect.test(e[0]))return new r(this,t);if(o.detect.test(e[0]))return new o(this,t);throw new Error("Unsupported Content-Type.")},s.prototype._write=function(A,e,t){this._parser.write(A,t)},se.exports=s,se.exports.default=s,se.exports.Busboy=s,se.exports.Dicer=t,se.exports}function Ie(){if(YA)return MA;YA=1;const{MessageChannel:A,receiveMessageOnPort:e}=u,t=["GET","HEAD","POST"],r=new Set(t),o=[301,302,303,307,308],n=new Set(o),s=["1","7","9","11","13","15","17","19","20","21","22","23","25","37","42","43","53","69","77","79","87","95","101","102","103","104","109","110","111","113","115","117","119","123","135","137","139","143","161","179","389","427","465","512","513","514","515","526","530","531","532","540","548","554","556","563","587","601","636","989","990","993","995","1719","1720","1723","2049","3659","4045","5060","5061","6000","6566","6665","6666","6667","6668","6669","6697","10080"],i=new Set(s),E=["","no-referrer","no-referrer-when-downgrade","same-origin","origin","strict-origin","origin-when-cross-origin","strict-origin-when-cross-origin","unsafe-url"],g=new Set(E),a=["GET","HEAD","OPTIONS","TRACE"],Q=new Set(a),C=["CONNECT","TRACE","TRACK"],B=new Set(C),c=["audio","audioworklet","font","image","manifest","paintworklet","script","style","track","video","xslt",""],I=new Set(c),h=globalThis.DOMException??(()=>{try{atob("~")}catch(A){return Object.getPrototypeOf(A).constructor}})();let l;const d=globalThis.structuredClone??function(t,r=void 0){if(0===arguments.length)throw new TypeError("missing argument");return l||(l=new A),l.port1.unref(),l.port2.unref(),l.port1.postMessage(t,r?.transfer),e(l.port2).message};return MA={DOMException:h,structuredClone:d,subresource:c,forbiddenMethods:C,requestBodyHeader:["content-encoding","content-language","content-location","content-type","content-length"],referrerPolicy:E,requestRedirect:["follow","manual","error"],requestMode:["navigate","same-origin","no-cors","cors"],requestCredentials:["omit","same-origin","include"],requestCache:["default","no-store","reload","no-cache","force-cache","only-if-cached"],redirectStatus:o,corsSafeListedMethods:t,nullBodyStatus:[101,204,205,304],safeMethods:a,badPorts:s,requestDuplex:["half"],subresourceSet:I,badPortsSet:i,redirectStatusSet:n,corsSafeListedMethodsSet:r,safeMethodsSet:Q,forbiddenMethodsSet:B,referrerPolicySet:g}}function he(){if(TA)return vA;TA=1;const A=Symbol.for("undici.globalOrigin.1");return vA={getGlobalOrigin:function(){return globalThis[A]},setGlobalOrigin:function(e){if(void 0===e)return void Object.defineProperty(globalThis,A,{value:void 0,writable:!0,enumerable:!1,configurable:!1});const t=new URL(e);if("http:"!==t.protocol&&"https:"!==t.protocol)throw new TypeError(`Only http & https urls are allowed, received ${t.protocol}`);Object.defineProperty(globalThis,A,{value:t,writable:!0,enumerable:!1,configurable:!1})}}}function le(){if(GA)return JA;GA=1;const{redirectStatusSet:A,referrerPolicySet:e,badPortsSet:t}=Ie(),{getGlobalOrigin:r}=he(),{performance:o}=d,{isBlobLike:n,toUSVString:s,ReadableStreamFrom:i}=gA(),E=g,{isUint8Array:a}=f;let Q,C=[];try{Q=require("crypto");const A=["sha256","sha384","sha512"];C=Q.getHashes().filter(e=>A.includes(e))}catch{}function B(A){const e=A.urlList,t=e.length;return 0===t?null:e[t-1].toString()}function I(A){return A.urlList[A.urlList.length-1]}function h(A){switch(A){case 34:case 40:case 41:case 44:case 47:case 58:case 59:case 60:case 61:case 62:case 63:case 64:case 91:case 92:case 93:case 123:case 125:return!1;default:return A>=33&&A<=126}}function l(A){if(0===A.length)return!1;for(let e=0;e<A.length;++e)if(!h(A.charCodeAt(e)))return!1;return!0}function u(A){return!(A.startsWith("\t")||A.startsWith(" ")||A.endsWith("\t")||A.endsWith(" "))&&!(A.includes("\0")||A.includes("\r")||A.includes("\n"))}function y(A,e){return E(A instanceof URL),"file:"===A.protocol||"about:"===A.protocol||"blank:"===A.protocol?"no-referrer":(A.username="",A.password="",A.hash="",e&&(A.pathname="",A.search=""),A)}function p(A){return A instanceof URL&&("about:blank"===A.href||"about:srcdoc"===A.href||("data:"===A.protocol||("file:"===A.protocol||function(A){if(null==A||"null"===A)return!1;const e=new URL(A);if("https:"===e.protocol||"wss:"===e.protocol)return!0;if(/^127(?:\.[0-9]+){0,2}\.[0-9]+$|^\[(?:0*:)*?:?0*1\]$/.test(e.hostname)||"localhost"===e.hostname||e.hostname.includes("localhost.")||e.hostname.endsWith(".localhost"))return!0;return!1}(A.origin))))}const w=/(?<algo>sha256|sha384|sha512)-((?<hash>[A-Za-z0-9+/]+|[A-Za-z0-9_-]+)={0,2}(?:\s|$)( +[!-~]*)?)?/i;function D(A){const e=[];let t=!0;for(const r of A.split(" ")){t=!1;const A=w.exec(r);if(null===A||void 0===A.groups||void 0===A.groups.algo)continue;const o=A.groups.algo.toLowerCase();C.includes(o)&&e.push(A.groups)}return!0===t?"no metadata":e}function R(A,e){if(A.length!==e.length)return!1;for(let t=0;t<A.length;++t)if(A[t]!==e[t]){if("+"===A[t]&&"-"===e[t]||"/"===A[t]&&"_"===e[t])continue;return!1}return!0}function m(A,e){return A.origin===e.origin&&"null"===A.origin||A.protocol===e.protocol&&A.hostname===e.hostname&&A.port===e.port}const k={delete:"DELETE",DELETE:"DELETE",get:"GET",GET:"GET",head:"HEAD",HEAD:"HEAD",options:"OPTIONS",OPTIONS:"OPTIONS",post:"POST",POST:"POST",put:"PUT",PUT:"PUT"};Object.setPrototypeOf(k,null);const b=Object.getPrototypeOf(Object.getPrototypeOf([][Symbol.iterator]()));let N=globalThis.ReadableStream;async function F(A){const e=[];let t=0;for(;;){const{done:r,value:o}=await A.read();if(r)return Buffer.concat(e,t);if(!a(o))throw new TypeError("Received non-Uint8Array chunk");e.push(o),t+=o.length}}function S(A){return"string"==typeof A?A.startsWith("https:"):"https:"===A.protocol}function U(A){E("protocol"in A);const e=A.protocol;return"http:"===e||"https:"===e}const L=Object.hasOwn||((A,e)=>Object.prototype.hasOwnProperty.call(A,e));return JA={isAborted:function(A){return"aborted"===A.controller.state},isCancelled:function(A){return"aborted"===A.controller.state||"terminated"===A.controller.state},createDeferredPromise:function(){let A,e;return{promise:new Promise((t,r)=>{A=t,e=r}),resolve:A,reject:e}},ReadableStreamFrom:i,toUSVString:s,tryUpgradeRequestToAPotentiallyTrustworthyURL:function(A){},coarsenedSharedCurrentTime:function(A){return o.now()},determineRequestsReferrer:function(A){const e=A.referrerPolicy;E(e);let t=null;if("client"===A.referrer){const A=r();if(!A||"null"===A.origin)return"no-referrer";t=new URL(A)}else A.referrer instanceof URL&&(t=A.referrer);let o=y(t);const n=y(t,!0);o.toString().length>4096&&(o=n);const s=m(A,o),i=p(o)&&!p(A.url);switch(e){case"origin":return null!=n?n:y(t,!0);case"unsafe-url":return o;case"same-origin":return s?n:"no-referrer";case"origin-when-cross-origin":return s?o:n;case"strict-origin-when-cross-origin":{const e=I(A);return m(o,e)?o:p(o)&&!p(e)?"no-referrer":n}default:return i?"no-referrer":n}},makePolicyContainer:function(){return{referrerPolicy:"strict-origin-when-cross-origin"}},clonePolicyContainer:function(A){return{referrerPolicy:A.referrerPolicy}},appendFetchMetadata:function(A){let e=null;e=A.mode,A.headersList.set("sec-fetch-mode",e)},appendRequestOriginHeader:function(A){let e=A.origin;if("cors"===A.responseTainting||"websocket"===A.mode)e&&A.headersList.append("origin",e);else if("GET"!==A.method&&"HEAD"!==A.method){switch(A.referrerPolicy){case"no-referrer":e=null;break;case"no-referrer-when-downgrade":case"strict-origin":case"strict-origin-when-cross-origin":A.origin&&S(A.origin)&&!S(I(A))&&(e=null);break;case"same-origin":m(A,I(A))||(e=null)}e&&A.headersList.append("origin",e)}},TAOCheck:function(){return"success"},corsCheck:function(){return"success"},crossOriginResourcePolicyCheck:function(){return"allowed"},createOpaqueTimingInfo:function(A){return{startTime:A.startTime??0,redirectStartTime:0,redirectEndTime:0,postRedirectStartTime:A.startTime??0,finalServiceWorkerStartTime:0,finalNetworkResponseStartTime:0,finalNetworkRequestStartTime:0,endTime:0,encodedBodySize:0,decodedBodySize:0,finalConnectionTimingInfo:null}},setRequestReferrerPolicyOnRedirect:function(A,t){const{headersList:r}=t,o=(r.get("referrer-policy")??"").split(",");let n="";if(o.length>0)for(let A=o.length;0!==A;A--){const t=o[A-1].trim();if(e.has(t)){n=t;break}}""!==n&&(A.referrerPolicy=n)},isValidHTTPToken:l,requestBadPort:function(A){const e=I(A);return U(e)&&t.has(e.port)?"blocked":"allowed"},requestCurrentURL:I,responseURL:B,responseLocationURL:function(e,t){if(!A.has(e.status))return null;let r=e.headersList.get("location");return null!==r&&u(r)&&(r=new URL(r,B(e))),r&&!r.hash&&(r.hash=t),r},isBlobLike:n,isURLPotentiallyTrustworthy:p,isValidReasonPhrase:function(A){for(let e=0;e<A.length;++e){const t=A.charCodeAt(e);if(!(9===t||t>=32&&t<=126||t>=128&&t<=255))return!1}return!0},sameOrigin:m,normalizeMethod:function(A){return k[A.toLowerCase()]??A},serializeJavascriptValueToJSONString:function(A){const e=JSON.stringify(A);if(void 0===e)throw new TypeError("Value is not JSON serializable");return E("string"==typeof e),e},makeIterator:function(A,e,t){const r={index:0,kind:t,target:A},o={next(){if(Object.getPrototypeOf(this)!==o)throw new TypeError(`'next' called on an object that does not implement interface ${e} Iterator.`);const{index:A,kind:t,target:n}=r,s=n();if(A>=s.length)return{value:void 0,done:!0};const i=s[A];return r.index=A+1,function(A,e){let t;switch(e){case"key":t=A[0];break;case"value":t=A[1];break;case"key+value":t=A}return{value:t,done:!1}}(i,t)},[Symbol.toStringTag]:`${e} Iterator`};return Object.setPrototypeOf(o,b),Object.setPrototypeOf({},o)},isValidHeaderName:function(A){return l(A)},isValidHeaderValue:u,hasOwn:L,isErrorLike:function(A){return A instanceof Error||"Error"===A?.constructor?.name||"DOMException"===A?.constructor?.name},fullyReadBody:async function(A,e,t){const r=e,o=t;let n;try{n=A.stream.getReader()}catch(A){return void o(A)}try{r(await F(n))}catch(A){o(A)}},bytesMatch:function(A,e){if(void 0===Q)return!0;const t=D(e);if("no metadata"===t)return!0;if(0===t.length)return!0;const r=function(A){let e=A[0].algo;if("5"===e[3])return e;for(let t=1;t<A.length;++t){const r=A[t];if("5"===r.algo[3]){e="sha512";break}"3"!==e[3]&&("3"===r.algo[3]&&(e="sha384"))}return e}(t),o=function(A,e){if(1===A.length)return A;let t=0;for(let r=0;r<A.length;++r)A[r].algo===e&&(A[t++]=A[r]);return A.length=t,A}(t,r);for(const e of o){const t=e.algo,r=e.hash;let o=Q.createHash(t).update(A).digest("base64");if("="===o[o.length-1]&&(o="="===o[o.length-2]?o.slice(0,-2):o.slice(0,-1)),R(o,r))return!0}return!1},isReadableStreamLike:function(A){return N||(N=c.ReadableStream),A instanceof N||"ReadableStream"===A[Symbol.toStringTag]&&"function"==typeof A.tee},readableStreamClose:function(A){try{A.close()}catch(A){if(!A.message.includes("Controller is already closed"))throw A}},isomorphicEncode:function(A){for(let e=0;e<A.length;e++)E(A.charCodeAt(e)<=255);return A},isomorphicDecode:function(A){return A.length<65535?String.fromCharCode(...A):A.reduce((A,e)=>A+String.fromCharCode(e),"")},urlIsLocal:function(A){E("protocol"in A);const e=A.protocol;return"about:"===e||"blob:"===e||"data:"===e},urlHasHttpsScheme:S,urlIsHttpHttpsScheme:U,readAllBytes:F,normalizeMethodRecord:k,parseMetadata:D},JA}function ue(){return VA?HA:(VA=1,HA={kUrl:Symbol("url"),kHeaders:Symbol("headers"),kSignal:Symbol("signal"),kState:Symbol("state"),kGuard:Symbol("guard"),kRealm:Symbol("realm")})}function de(){if(xA)return OA;xA=1;const{types:A}=a,{hasOwn:e,toUSVString:t}=le(),r={converters:{},util:{},errors:{}};return r.errors.exception=function(A){return new TypeError(`${A.header}: ${A.message}`)},r.errors.conversionFailed=function(A){const e=1===A.types.length?"":" one of",t=`${A.argument} could not be converted to${e}: ${A.types.join(", ")}.`;return r.errors.exception({header:A.prefix,message:t})},r.errors.invalidArgument=function(A){return r.errors.exception({header:A.prefix,message:`"${A.value}" is an invalid ${A.type}.`})},r.brandCheck=function(A,e,t=void 0){if(!1===t?.strict||A instanceof e)return A?.[Symbol.toStringTag]===e.prototype[Symbol.toStringTag];throw new TypeError("Illegal invocation")},r.argumentLengthCheck=function({length:A},e,t){if(A<e)throw r.errors.exception({message:`${e} argument${1!==e?"s":""} required, but${A?" only":""} ${A} found.`,...t})},r.illegalConstructor=function(){throw r.errors.exception({header:"TypeError",message:"Illegal constructor"})},r.util.Type=function(A){switch(typeof A){case"undefined":return"Undefined";case"boolean":return"Boolean";case"string":return"String";case"symbol":return"Symbol";case"number":return"Number";case"bigint":return"BigInt";case"function":case"object":return null===A?"Null":"Object"}},r.util.ConvertToInt=function(A,e,t,o={}){let n,s;64===e?(n=Math.pow(2,53)-1,s="unsigned"===t?0:Math.pow(-2,53)+1):"unsigned"===t?(s=0,n=Math.pow(2,e)-1):(s=Math.pow(-2,e)-1,n=Math.pow(2,e-1)-1);let i=Number(A);if(0===i&&(i=0),!0===o.enforceRange){if(Number.isNaN(i)||i===Number.POSITIVE_INFINITY||i===Number.NEGATIVE_INFINITY)throw r.errors.exception({header:"Integer conversion",message:`Could not convert ${A} to an integer.`});if(i=r.util.IntegerPart(i),i<s||i>n)throw r.errors.exception({header:"Integer conversion",message:`Value must be between ${s}-${n}, got ${i}.`});return i}return Number.isNaN(i)||!0!==o.clamp?Number.isNaN(i)||0===i&&Object.is(0,i)||i===Number.POSITIVE_INFINITY||i===Number.NEGATIVE_INFINITY?0:(i=r.util.IntegerPart(i),i%=Math.pow(2,e),"signed"===t&&i>=Math.pow(2,e)-1?i-Math.pow(2,e):i):(i=Math.min(Math.max(i,s),n),i=Math.floor(i)%2==0?Math.floor(i):Math.ceil(i),i)},r.util.IntegerPart=function(A){const e=Math.floor(Math.abs(A));return A<0?-1*e:e},r.sequenceConverter=function(A){return e=>{if("Object"!==r.util.Type(e))throw r.errors.exception({header:"Sequence",message:`Value of type ${r.util.Type(e)} is not an Object.`});const t=e?.[Symbol.iterator]?.(),o=[];if(void 0===t||"function"!=typeof t.next)throw r.errors.exception({header:"Sequence",message:"Object is not an iterator."});for(;;){const{done:e,value:r}=t.next();if(e)break;o.push(A(r))}return o}},r.recordConverter=function(e,t){return o=>{if("Object"!==r.util.Type(o))throw r.errors.exception({header:"Record",message:`Value of type ${r.util.Type(o)} is not an Object.`});const n={};if(!A.isProxy(o)){const A=Object.keys(o);for(const r of A){const A=e(r),s=t(o[r]);n[A]=s}return n}const s=Reflect.ownKeys(o);for(const A of s){const r=Reflect.getOwnPropertyDescriptor(o,A);if(r?.enumerable){const r=e(A),s=t(o[A]);n[r]=s}}return n}},r.interfaceConverter=function(A){return(e,t={})=>{if(!1!==t.strict&&!(e instanceof A))throw r.errors.exception({header:A.name,message:`Expected ${e} to be an instance of ${A.name}.`});return e}},r.dictionaryConverter=function(A){return t=>{const o=r.util.Type(t),n={};if("Null"===o||"Undefined"===o)return n;if("Object"!==o)throw r.errors.exception({header:"Dictionary",message:`Expected ${t} to be one of: Null, Undefined, Object.`});for(const o of A){const{key:A,defaultValue:s,required:i,converter:E}=o;if(!0===i&&!e(t,A))throw r.errors.exception({header:"Dictionary",message:`Missing required key "${A}".`});let g=t[A];const a=e(o,"defaultValue");if(a&&null!==g&&(g=g??s),i||a||void 0!==g){if(g=E(g),o.allowedValues&&!o.allowedValues.includes(g))throw r.errors.exception({header:"Dictionary",message:`${g} is not an accepted type. Expected one of ${o.allowedValues.join(", ")}.`});n[A]=g}}return n}},r.nullableConverter=function(A){return e=>null===e?e:A(e)},r.converters.DOMString=function(A,e={}){if(null===A&&e.legacyNullToEmptyString)return"";if("symbol"==typeof A)throw new TypeError("Could not convert argument of type symbol to string.");return String(A)},r.converters.ByteString=function(A){const e=r.converters.DOMString(A);for(let A=0;A<e.length;A++)if(e.charCodeAt(A)>255)throw new TypeError(`Cannot convert argument to a ByteString because the character at index ${A} has a value of ${e.charCodeAt(A)} which is greater than 255.`);return e},r.converters.USVString=t,r.converters.boolean=function(A){return Boolean(A)},r.converters.any=function(A){return A},r.converters["long long"]=function(A){return r.util.ConvertToInt(A,64,"signed")},r.converters["unsigned long long"]=function(A){return r.util.ConvertToInt(A,64,"unsigned")},r.converters["unsigned long"]=function(A){return r.util.ConvertToInt(A,32,"unsigned")},r.converters["unsigned short"]=function(A,e){return r.util.ConvertToInt(A,16,"unsigned",e)},r.converters.ArrayBuffer=function(e,t={}){if("Object"!==r.util.Type(e)||!A.isAnyArrayBuffer(e))throw r.errors.conversionFailed({prefix:`${e}`,argument:`${e}`,types:["ArrayBuffer"]});if(!1===t.allowShared&&A.isSharedArrayBuffer(e))throw r.errors.exception({header:"ArrayBuffer",message:"SharedArrayBuffer is not allowed."});return e},r.converters.TypedArray=function(e,t,o={}){if("Object"!==r.util.Type(e)||!A.isTypedArray(e)||e.constructor.name!==t.name)throw r.errors.conversionFailed({prefix:`${t.name}`,argument:`${e}`,types:[t.name]});if(!1===o.allowShared&&A.isSharedArrayBuffer(e.buffer))throw r.errors.exception({header:"ArrayBuffer",message:"SharedArrayBuffer is not allowed."});return e},r.converters.DataView=function(e,t={}){if("Object"!==r.util.Type(e)||!A.isDataView(e))throw r.errors.exception({header:"DataView",message:"Object is not a DataView."});if(!1===t.allowShared&&A.isSharedArrayBuffer(e.buffer))throw r.errors.exception({header:"ArrayBuffer",message:"SharedArrayBuffer is not allowed."});return e},r.converters.BufferSource=function(e,t={}){if(A.isAnyArrayBuffer(e))return r.converters.ArrayBuffer(e,t);if(A.isTypedArray(e))return r.converters.TypedArray(e,e.constructor);if(A.isDataView(e))return r.converters.DataView(e,t);throw new TypeError(`Could not convert ${e} to a BufferSource.`)},r.converters["sequence<ByteString>"]=r.sequenceConverter(r.converters.ByteString),r.converters["sequence<sequence<ByteString>>"]=r.sequenceConverter(r.converters["sequence<ByteString>"]),r.converters["record<ByteString, ByteString>"]=r.recordConverter(r.converters.ByteString,r.converters.ByteString),OA={webidl:r}}function fe(){if(qA)return WA;qA=1;const A=g,{atob:e}=C,{isomorphicDecode:t}=le(),r=new TextEncoder,o=/^[!#$%&'*+-.^_|~A-Za-z0-9]+$/,n=/(\u000A|\u000D|\u0009|\u0020)/,s=/[\u0009|\u0020-\u007E|\u0080-\u00FF]/;function i(A,e=!1){if(!e)return A.href;const t=A.href,r=A.hash.length;return 0===r?t:t.substring(0,t.length-r)}function E(A,e,t){let r="";for(;t.position<e.length&&A(e[t.position]);)r+=e[t.position],t.position++;return r}function a(A,e,t){const r=e.indexOf(A,t.position),o=t.position;return-1===r?(t.position=e.length,e.slice(o)):(t.position=r,e.slice(o,t.position))}function Q(A){return function(A){const e=[];for(let t=0;t<A.length;t++){const r=A[t];if(37!==r)e.push(r);else if(37!==r||/^[0-9A-Fa-f]{2}$/i.test(String.fromCharCode(A[t+1],A[t+2]))){const r=String.fromCharCode(A[t+1],A[t+2]),o=Number.parseInt(r,16);e.push(o),t+=2}else e.push(37)}return Uint8Array.from(e)}(r.encode(A))}function B(A){const e={position:0},t=a("/",A=h(A,!0,!0),e);if(0===t.length||!o.test(t))return"failure";if(e.position>A.length)return"failure";e.position++;let r=a(";",A,e);if(r=h(r,!1,!0),0===r.length||!o.test(r))return"failure";const i=t.toLowerCase(),g=r.toLowerCase(),Q={type:i,subtype:g,parameters:new Map,essence:`${i}/${g}`};for(;e.position<A.length;){e.position++,E(A=>n.test(A),A,e);let t=E(A=>";"!==A&&"="!==A,A,e);if(t=t.toLowerCase(),e.position<A.length){if(";"===A[e.position])continue;e.position++}if(e.position>A.length)break;let r=null;if('"'===A[e.position])r=c(A,e,!0),a(";",A,e);else if(r=a(";",A,e),r=h(r,!1,!0),0===r.length)continue;0===t.length||!o.test(t)||0!==r.length&&!s.test(r)||Q.parameters.has(t)||Q.parameters.set(t,r)}return Q}function c(e,t,r){const o=t.position;let n="";for(A('"'===e[t.position]),t.position++;n+=E(A=>'"'!==A&&"\\"!==A,e,t),!(t.position>=e.length);){const r=e[t.position];if(t.position++,"\\"!==r){A('"'===r);break}if(t.position>=e.length){n+="\\";break}n+=e[t.position],t.position++}return r?n:e.slice(o,t.position)}function I(A){return"\r"===A||"\n"===A||"\t"===A||" "===A}function h(A,e=!0,t=!0){let r=0,o=A.length-1;if(e)for(;r<A.length&&I(A[r]);r++);if(t)for(;o>0&&I(A[o]);o--);return A.slice(r,o+1)}function l(A){return"\r"===A||"\n"===A||"\t"===A||"\f"===A||" "===A}return WA={dataURLProcessor:function(r){A("data:"===r.protocol);let o=i(r,!0);o=o.slice(5);const n={position:0};let s=a(",",o,n);const E=s.length;if(s=function(A,e=!0,t=!0){let r=0,o=A.length-1;if(e)for(;r<A.length&&l(A[r]);r++);if(t)for(;o>0&&l(A[o]);o--);return A.slice(r,o+1)}(s,!0,!0),n.position>=o.length)return"failure";n.position++;let g=Q(o.slice(E+1));if(/;(\u0020){0,}base64$/i.test(s)){if(g=function(A){(A=A.replace(/[\u0009\u000A\u000C\u000D\u0020]/g,"")).length%4==0&&(A=A.replace(/=?=$/,""));if(A.length%4==1)return"failure";if(/[^+/0-9A-Za-z]/.test(A))return"failure";const t=e(A),r=new Uint8Array(t.length);for(let A=0;A<t.length;A++)r[A]=t.charCodeAt(A);return r}(t(g)),"failure"===g)return"failure";s=s.slice(0,-6),s=s.replace(/(\u0020)+$/,""),s=s.slice(0,-1)}s.startsWith(";")&&(s="text/plain"+s);let C=B(s);return"failure"===C&&(C=B("text/plain;charset=US-ASCII")),{mimeType:C,body:g}},URLSerializer:i,collectASequenceOfCodePoints:E,collectASequenceOfCodePointsFast:a,stringPercentDecode:Q,parseMIMEType:B,collectAnHTTPQuotedString:c,serializeAMimeType:function(e){A("failure"!==e);const{parameters:t,essence:r}=e;let n=r;for(let[A,e]of t.entries())n+=";",n+=A,n+="=",o.test(e)||(e=e.replace(/(\\|")/g,"\\$1"),e='"'+e,e+='"'),n+=e;return n}},WA}function ye(){if(_A)return PA;_A=1;const{Blob:A,File:e}=C,{types:t}=a,{kState:r}=ue(),{isBlobLike:o}=le(),{webidl:n}=de(),{parseMIMEType:s,serializeAMimeType:i}=fe(),{kEnumerableProperty:E}=gA(),g=new TextEncoder;class Q extends A{constructor(A,e,E={}){n.argumentLengthCheck(arguments,2,{header:"File constructor"}),A=n.converters["sequence<BlobPart>"](A);const a=e=n.converters.USVString(e);let Q,C=(E=n.converters.FilePropertyBag(E)).type;A:{if(C){if(C=s(C),"failure"===C){C="";break A}C=i(C).toLowerCase()}Q=E.lastModified}super(function(A,e){const r=[];for(const n of A)if("string"==typeof n){let A=n;"native"===e.endings&&(A=c(A)),r.push(g.encode(A))}else t.isAnyArrayBuffer(n)||t.isTypedArray(n)?n.buffer?r.push(new Uint8Array(n.buffer,n.byteOffset,n.byteLength)):r.push(new Uint8Array(n)):o(n)&&r.push(n);return r}(A,E),{type:C}),this[r]={name:a,lastModified:Q,type:C}}get name(){return n.brandCheck(this,Q),this[r].name}get lastModified(){return n.brandCheck(this,Q),this[r].lastModified}get type(){return n.brandCheck(this,Q),this[r].type}}class B{constructor(A,e,t={}){const o=e,n=t.type,s=t.lastModified??Date.now();this[r]={blobLike:A,name:o,type:n,lastModified:s}}stream(...A){return n.brandCheck(this,B),this[r].blobLike.stream(...A)}arrayBuffer(...A){return n.brandCheck(this,B),this[r].blobLike.arrayBuffer(...A)}slice(...A){return n.brandCheck(this,B),this[r].blobLike.slice(...A)}text(...A){return n.brandCheck(this,B),this[r].blobLike.text(...A)}get size(){return n.brandCheck(this,B),this[r].blobLike.size}get type(){return n.brandCheck(this,B),this[r].blobLike.type}get name(){return n.brandCheck(this,B),this[r].name}get lastModified(){return n.brandCheck(this,B),this[r].lastModified}get[Symbol.toStringTag](){return"File"}}function c(A){let e="\n";return"win32"===process.platform&&(e="\r\n"),A.replace(/\r?\n/g,e)}return Object.defineProperties(Q.prototype,{[Symbol.toStringTag]:{value:"File",configurable:!0},name:E,lastModified:E}),n.converters.Blob=n.interfaceConverter(A),n.converters.BlobPart=function(A,e){if("Object"===n.util.Type(A)){if(o(A))return n.converters.Blob(A,{strict:!1});if(ArrayBuffer.isView(A)||t.isAnyArrayBuffer(A))return n.converters.BufferSource(A,e)}return n.converters.USVString(A,e)},n.converters["sequence<BlobPart>"]=n.sequenceConverter(n.converters.BlobPart),n.converters.FilePropertyBag=n.dictionaryConverter([{key:"lastModified",converter:n.converters["long long"],get defaultValue(){return Date.now()}},{key:"type",converter:n.converters.DOMString,defaultValue:""},{key:"endings",converter:A=>("native"!==(A=(A=n.converters.DOMString(A)).toLowerCase())&&(A="transparent"),A),defaultValue:"transparent"}]),PA={File:Q,FileLike:B,isFileLike:function(A){return e&&A instanceof e||A instanceof Q||A&&("function"==typeof A.stream||"function"==typeof A.arrayBuffer)&&"File"===A[Symbol.toStringTag]}}}function pe(){if(jA)return ZA;jA=1;const{isBlobLike:A,toUSVString:e,makeIterator:t}=le(),{kState:r}=ue(),{File:o,FileLike:n,isFileLike:s}=ye(),{webidl:i}=de(),{Blob:E,File:g}=C,a=g??o;class Q{constructor(A){if(void 0!==A)throw i.errors.conversionFailed({prefix:"FormData constructor",argument:"Argument 1",types:["undefined"]});this[r]=[]}append(e,t,o=void 0){if(i.brandCheck(this,Q),i.argumentLengthCheck(arguments,2,{header:"FormData.append"}),3===arguments.length&&!A(t))throw new TypeError("Failed to execute 'append' on 'FormData': parameter 2 is not of type 'Blob'");const n=B(e=i.converters.USVString(e),t=A(t)?i.converters.Blob(t,{strict:!1}):i.converters.USVString(t),o=3===arguments.length?i.converters.USVString(o):void 0);this[r].push(n)}delete(A){i.brandCheck(this,Q),i.argumentLengthCheck(arguments,1,{header:"FormData.delete"}),A=i.converters.USVString(A),this[r]=this[r].filter(e=>e.name!==A)}get(A){i.brandCheck(this,Q),i.argumentLengthCheck(arguments,1,{header:"FormData.get"}),A=i.converters.USVString(A);const e=this[r].findIndex(e=>e.name===A);return-1===e?null:this[r][e].value}getAll(A){return i.brandCheck(this,Q),i.argumentLengthCheck(arguments,1,{header:"FormData.getAll"}),A=i.converters.USVString(A),this[r].filter(e=>e.name===A).map(A=>A.value)}has(A){return i.brandCheck(this,Q),i.argumentLengthCheck(arguments,1,{header:"FormData.has"}),A=i.converters.USVString(A),-1!==this[r].findIndex(e=>e.name===A)}set(t,o,n=void 0){if(i.brandCheck(this,Q),i.argumentLengthCheck(arguments,2,{header:"FormData.set"}),3===arguments.length&&!A(o))throw new TypeError("Failed to execute 'set' on 'FormData': parameter 2 is not of type 'Blob'");t=i.converters.USVString(t),o=A(o)?i.converters.Blob(o,{strict:!1}):i.converters.USVString(o),n=3===arguments.length?e(n):void 0;const s=B(t,o,n),E=this[r].findIndex(A=>A.name===t);-1!==E?this[r]=[...this[r].slice(0,E),s,...this[r].slice(E+1).filter(A=>A.name!==t)]:this[r].push(s)}entries(){return i.brandCheck(this,Q),t(()=>this[r].map(A=>[A.name,A.value]),"FormData","key+value")}keys(){return i.brandCheck(this,Q),t(()=>this[r].map(A=>[A.name,A.value]),"FormData","key")}values(){return i.brandCheck(this,Q),t(()=>this[r].map(A=>[A.name,A.value]),"FormData","value")}forEach(A,e=globalThis){if(i.brandCheck(this,Q),i.argumentLengthCheck(arguments,1,{header:"FormData.forEach"}),"function"!=typeof A)throw new TypeError("Failed to execute 'forEach' on 'FormData': parameter 1 is not of type 'Function'.");for(const[t,r]of this)A.apply(e,[r,t,this])}}function B(A,e,t){if(A=Buffer.from(A).toString("utf8"),"string"==typeof e)e=Buffer.from(e).toString("utf8");else if(s(e)||(e=e instanceof E?new a([e],"blob",{type:e.type}):new n(e,"blob",{type:e.type})),void 0!==t){const A={type:e.type,lastModified:e.lastModified};e=g&&e instanceof g||e instanceof o?new a([e],t,A):new n(e,t,A)}return{name:A,value:e}}return Q.prototype[Symbol.iterator]=Q.prototype.entries,Object.defineProperties(Q.prototype,{[Symbol.toStringTag]:{value:"FormData",configurable:!0}}),ZA={FormData:Q}}function we(){if(KA)return XA;KA=1;const A=ce(),e=gA(),{ReadableStreamFrom:t,isBlobLike:r,isReadableStreamLike:o,readableStreamClose:n,createDeferredPromise:s,fullyReadBody:i}=le(),{FormData:E}=pe(),{kState:a}=ue(),{webidl:Q}=de(),{DOMException:B,structuredClone:I}=Ie(),{Blob:h,File:l}=C,{kBodyUsed:u}=iA(),d=g,{isErrored:y}=gA(),{isUint8Array:p,isArrayBuffer:w}=f,{File:D}=ye(),{parseMIMEType:R,serializeAMimeType:m}=fe();let k;try{const A=require("node:crypto");k=e=>A.randomInt(0,e)}catch{k=A=>Math.floor(Math.random(A))}let b=globalThis.ReadableStream;const N=l??D,F=new TextEncoder,S=new TextDecoder;function U(A,s=!1){b||(b=c.ReadableStream);let i=null;i=A instanceof b?A:r(A)?A.stream():new b({async pull(A){A.enqueue("string"==typeof g?F.encode(g):g),queueMicrotask(()=>n(A))},start(){},type:void 0}),d(o(i));let E=null,g=null,a=null,Q=null;if("string"==typeof A)g=A,Q="text/plain;charset=UTF-8";else if(A instanceof URLSearchParams)g=A.toString(),Q="application/x-www-form-urlencoded;charset=UTF-8";else if(w(A))g=new Uint8Array(A.slice());else if(ArrayBuffer.isView(A))g=new Uint8Array(A.buffer.slice(A.byteOffset,A.byteOffset+A.byteLength));else if(e.isFormDataLike(A)){const e=`----formdata-undici-0${`${k(1e11)}`.padStart(11,"0")}`,t=`--${e}\r\nContent-Disposition: form-data`
-/*! formdata-polyfill. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */,r=A=>A.replace(/\n/g,"%0A").replace(/\r/g,"%0D").replace(/"/g,"%22"),o=A=>A.replace(/\r?\n|\r/g,"\r\n"),n=[],s=new Uint8Array([13,10]);a=0;let i=!1;for(const[e,E]of A)if("string"==typeof E){const A=F.encode(t+`; name="${r(o(e))}"`+`\r\n\r\n${o(E)}\r\n`);n.push(A),a+=A.byteLength}else{const A=F.encode(`${t}; name="${r(o(e))}"`+(E.name?`; filename="${r(E.name)}"`:"")+"\r\n"+`Content-Type: ${E.type||"application/octet-stream"}\r\n\r\n`);n.push(A,E,s),"number"==typeof E.size?a+=A.byteLength+E.size+s.byteLength:i=!0}const C=F.encode(`--${e}--`);n.push(C),a+=C.byteLength,i&&(a=null),g=A,E=async function*(){for(const A of n)A.stream?yield*A.stream():yield A},Q="multipart/form-data; boundary="+e}else if(r(A))g=A,a=A.size,A.type&&(Q=A.type);else if("function"==typeof A[Symbol.asyncIterator]){if(s)throw new TypeError("keepalive");if(e.isDisturbed(A)||A.locked)throw new TypeError("Response body object should not be disturbed or locked");i=A instanceof b?A:t(A)}if(("string"==typeof g||e.isBuffer(g))&&(a=Buffer.byteLength(g)),null!=E){let e;i=new b({async start(){e=E(A)[Symbol.asyncIterator]()},async pull(A){const{value:t,done:r}=await e.next();return r?queueMicrotask(()=>{A.close()}):y(i)||A.enqueue(new Uint8Array(t)),A.desiredSize>0},async cancel(A){await e.return()},type:void 0})}return[{stream:i,source:g,length:a},Q]}async function*L(A){if(A)if(p(A))yield A;else{const t=A.stream;if(e.isDisturbed(t))throw new TypeError("The body has already been consumed.");if(t.locked)throw new TypeError("The stream is locked.");t[u]=!0,yield*t}}function M(A){if(A.aborted)throw new B("The operation was aborted.","AbortError")}function Y(e){const t={blob(){return v(this,A=>{let e=function(A){const{headersList:e}=A[a],t=e.get("content-type");if(null===t)return"failure";return R(t)}(this);return"failure"===e?e="":e&&(e=m(e)),new h([A],{type:e})},e)},arrayBuffer(){return v(this,A=>new Uint8Array(A).buffer,e)},text(){return v(this,T,e)},json(){return v(this,J,e)},async formData(){Q.brandCheck(this,e),M(this[a]);const t=this.headers.get("Content-Type");if(/multipart\/form-data/.test(t)){const e={};for(const[A,t]of this.headers)e[A.toLowerCase()]=t;const t=new E;let r;try{r=new A({headers:e,preservePath:!0})}catch(A){throw new B(`${A}`,"AbortError")}r.on("field",(A,e)=>{t.append(A,e)}),r.on("file",(A,e,r,o,n)=>{const s=[];if("base64"===o||"base64"===o.toLowerCase()){let o="";e.on("data",A=>{o+=A.toString().replace(/[\r\n]/gm,"");const e=o.length-o.length%4;s.push(Buffer.from(o.slice(0,e),"base64")),o=o.slice(e)}),e.on("end",()=>{s.push(Buffer.from(o,"base64")),t.append(A,new N(s,r,{type:n}))})}else e.on("data",A=>{s.push(A)}),e.on("end",()=>{t.append(A,new N(s,r,{type:n}))})});const o=new Promise((A,e)=>{r.on("finish",A),r.on("error",A=>e(new TypeError(A)))});if(null!==this.body)for await(const A of L(this[a].body))r.write(A);return r.end(),await o,t}if(/application\/x-www-form-urlencoded/.test(t)){let A;try{let e="";const t=new TextDecoder("utf-8",{ignoreBOM:!0});for await(const A of L(this[a].body)){if(!p(A))throw new TypeError("Expected Uint8Array chunk");e+=t.decode(A,{stream:!0})}e+=t.decode(),A=new URLSearchParams(e)}catch(A){throw Object.assign(new TypeError,{cause:A})}const e=new E;for(const[t,r]of A)e.append(t,r);return e}throw await Promise.resolve(),M(this[a]),Q.errors.exception({header:`${e.name}.formData`,message:"Could not parse content as FormData."})}};return t}async function v(A,t,r){if(Q.brandCheck(A,r),M(A[a]),function(A){return null!=A&&(A.stream.locked||e.isDisturbed(A.stream))}(A[a].body))throw new TypeError("Body is unusable");const o=s(),n=A=>o.reject(A),E=A=>{try{o.resolve(t(A))}catch(A){n(A)}};return null==A[a].body?(E(new Uint8Array),o.promise):(await i(A[a].body,E,n),o.promise)}function T(A){if(0===A.length)return"";239===A[0]&&187===A[1]&&191===A[2]&&(A=A.subarray(3));return S.decode(A)}function J(A){return JSON.parse(T(A))}return XA={extractBody:U,safelyExtractBody:function(A,t=!1){return b||(b=c.ReadableStream),A instanceof b&&(d(!e.isDisturbed(A),"The body has already been consumed."),d(!A.locked,"The stream is locked.")),U(A,t)},cloneBody:function(A){const[e,t]=A.stream.tee(),r=I(t,{transfer:[t]}),[,o]=r.tee();return A.stream=e,{stream:o,length:A.length,source:A.source}},mixinBody:function(A){Object.assign(A.prototype,Y(A))}}}function De(){if(ee)return Ae;ee=1;const A=E;return Ae=class extends A{dispatch(){throw new Error("not implemented")}close(){throw new Error("not implemented")}destroy(){throw new Error("not implemented")}}}function Re(){if(re)return te;re=1;const A=De(),{ClientDestroyedError:e,ClientClosedError:t,InvalidArgumentError:r}=EA(),{kDestroy:o,kClose:n,kDispatch:s,kInterceptors:i}=iA(),E=Symbol("destroyed"),g=Symbol("closed"),a=Symbol("onDestroyed"),Q=Symbol("onClosed"),C=Symbol("Intercepted Dispatch");return te=class extends A{constructor(){super(),this[E]=!1,this[a]=null,this[g]=!1,this[Q]=[]}get destroyed(){return this[E]}get closed(){return this[g]}get interceptors(){return this[i]}set interceptors(A){if(A)for(let e=A.length-1;e>=0;e--){if("function"!=typeof this[i][e])throw new r("interceptor must be an function")}this[i]=A}close(A){if(void 0===A)return new Promise((A,e)=>{this.close((t,r)=>t?e(t):A(r))});if("function"!=typeof A)throw new r("invalid callback");if(this[E])return void queueMicrotask(()=>A(new e,null));if(this[g])return void(this[Q]?this[Q].push(A):queueMicrotask(()=>A(null,null)));this[g]=!0,this[Q].push(A);const t=()=>{const A=this[Q];this[Q]=null;for(let e=0;e<A.length;e++)A[e](null,null)};this[n]().then(()=>this.destroy()).then(()=>{queueMicrotask(t)})}destroy(A,t){if("function"==typeof A&&(t=A,A=null),void 0===t)return new Promise((e,t)=>{this.destroy(A,(A,r)=>A?t(A):e(r))});if("function"!=typeof t)throw new r("invalid callback");if(this[E])return void(this[a]?this[a].push(t):queueMicrotask(()=>t(null,null)));A||(A=new e),this[E]=!0,this[a]=this[a]||[],this[a].push(t);const n=()=>{const A=this[a];this[a]=null;for(let e=0;e<A.length;e++)A[e](null,null)};this[o](A).then(()=>{queueMicrotask(n)})}[C](A,e){if(!this[i]||0===this[i].length)return this[C]=this[s],this[s](A,e);let t=this[s].bind(this);for(let A=this[i].length-1;A>=0;A--)t=this[i][A](t);return this[C]=t,t(A,e)}dispatch(A,o){if(!o||"object"!=typeof o)throw new r("handler must be an object");try{if(!A||"object"!=typeof A)throw new r("opts must be an object.");if(this[E]||this[a])throw new e;if(this[g])throw new t;return this[C](A,o)}catch(A){if("function"!=typeof o.onError)throw new r("invalid onError method");return o.onError(A),!1}}}}function me(){if(ne)return oe;ne=1;const A=s,e=g,t=gA(),{InvalidArgumentError:r,ConnectTimeoutError:o}=EA();let n,E;return E=F.FinalizationRegistry&&!process.env.NODE_V8_COVERAGE?class{constructor(A){this._maxCachedSessions=A,this._sessionCache=new Map,this._sessionRegistry=new F.FinalizationRegistry(A=>{if(this._sessionCache.size<this._maxCachedSessions)return;const e=this._sessionCache.get(A);void 0!==e&&void 0===e.deref()&&this._sessionCache.delete(A)})}get(A){const e=this._sessionCache.get(A);return e?e.deref():null}set(A,e){0!==this._maxCachedSessions&&(this._sessionCache.set(A,new WeakRef(e)),this._sessionRegistry.register(e,A))}}:class{constructor(A){this._maxCachedSessions=A,this._sessionCache=new Map}get(A){return this._sessionCache.get(A)}set(A,e){if(0!==this._maxCachedSessions){if(this._sessionCache.size>=this._maxCachedSessions){const{value:A}=this._sessionCache.keys().next();this._sessionCache.delete(A)}this._sessionCache.set(A,e)}}},oe=function({allowH2:s,maxCachedSessions:g,socketPath:a,timeout:Q,...C}){if(null!=g&&(!Number.isInteger(g)||g<0))throw new r("maxCachedSessions must be a positive integer or zero");const B={path:a,...C},c=new E(null==g?100:g);return Q=null==Q?1e4:Q,s=null!=s&&s,function({hostname:r,host:E,protocol:g,port:a,servername:C,localAddress:I,httpSocket:h},l){let u;if("https:"===g){n||(n=i);const A=(C=C||B.servername||t.getServerName(E)||null)||r,o=c.get(A)||null;e(A),u=n.connect({highWaterMark:16384,...B,servername:C,session:o,localAddress:I,ALPNProtocols:s?["http/1.1","h2"]:["http/1.1"],socket:h,port:a||443,host:r}),u.on("session",function(e){c.set(A,e)})}else e(!h,"httpSocket can only be sent on TLS update"),u=A.connect({highWaterMark:65536,...B,localAddress:I,port:a||80,host:r});if(null==B.keepAlive||B.keepAlive){const A=void 0===B.keepAliveInitialDelay?6e4:B.keepAliveInitialDelay;u.setKeepAlive(!0,A)}const d=function(A,e){if(!e)return()=>{};let t=null,r=null;const o=setTimeout(()=>{t=setImmediate(()=>{"win32"===process.platform?r=setImmediate(()=>A()):A()})},e);return()=>{clearTimeout(o),clearImmediate(t),clearImmediate(r)}}(()=>function(A){t.destroy(A,new o)}(u),Q);return u.setNoDelay(!0).once("https:"===g?"secureConnect":"connect",function(){if(d(),l){const A=l;l=null,A(null,this)}}).on("error",function(A){if(d(),l){const e=l;l=null,e(A)}}),u}},oe}var ke,be,Ne,Fe,Se,Ue,Le,Me,Ye,ve,Te,Je,Ge,He,Ve,Oe,xe,We,qe,Pe,_e,Ze,je,Xe,Ke,ze,$e={},At={};function et(){return be||(be=1,function(A){Object.defineProperty(A,"__esModule",{value:!0}),A.SPECIAL_HEADERS=A.HEADER_STATE=A.MINOR=A.MAJOR=A.CONNECTION_TOKEN_CHARS=A.HEADER_CHARS=A.TOKEN=A.STRICT_TOKEN=A.HEX=A.URL_CHAR=A.STRICT_URL_CHAR=A.USERINFO_CHARS=A.MARK=A.ALPHANUM=A.NUM=A.HEX_MAP=A.NUM_MAP=A.ALPHA=A.FINISH=A.H_METHOD_MAP=A.METHOD_MAP=A.METHODS_RTSP=A.METHODS_ICE=A.METHODS_HTTP=A.METHODS=A.LENIENT_FLAGS=A.FLAGS=A.TYPE=A.ERROR=void 0;const e=(ke||(ke=1,Object.defineProperty(At,"__esModule",{value:!0}),At.enumToMap=void 0,At.enumToMap=function(A){const e={};return Object.keys(A).forEach(t=>{const r=A[t];"number"==typeof r&&(e[t]=r)}),e}),At);var t,r,o,n,s,i,E;(t=A.ERROR||(A.ERROR={}))[t.OK=0]="OK",t[t.INTERNAL=1]="INTERNAL",t[t.STRICT=2]="STRICT",t[t.LF_EXPECTED=3]="LF_EXPECTED",t[t.UNEXPECTED_CONTENT_LENGTH=4]="UNEXPECTED_CONTENT_LENGTH",t[t.CLOSED_CONNECTION=5]="CLOSED_CONNECTION",t[t.INVALID_METHOD=6]="INVALID_METHOD",t[t.INVALID_URL=7]="INVALID_URL",t[t.INVALID_CONSTANT=8]="INVALID_CONSTANT",t[t.INVALID_VERSION=9]="INVALID_VERSION",t[t.INVALID_HEADER_TOKEN=10]="INVALID_HEADER_TOKEN",t[t.INVALID_CONTENT_LENGTH=11]="INVALID_CONTENT_LENGTH",t[t.INVALID_CHUNK_SIZE=12]="INVALID_CHUNK_SIZE",t[t.INVALID_STATUS=13]="INVALID_STATUS",t[t.INVALID_EOF_STATE=14]="INVALID_EOF_STATE",t[t.INVALID_TRANSFER_ENCODING=15]="INVALID_TRANSFER_ENCODING",t[t.CB_MESSAGE_BEGIN=16]="CB_MESSAGE_BEGIN",t[t.CB_HEADERS_COMPLETE=17]="CB_HEADERS_COMPLETE",t[t.CB_MESSAGE_COMPLETE=18]="CB_MESSAGE_COMPLETE",t[t.CB_CHUNK_HEADER=19]="CB_CHUNK_HEADER",t[t.CB_CHUNK_COMPLETE=20]="CB_CHUNK_COMPLETE",t[t.PAUSED=21]="PAUSED",t[t.PAUSED_UPGRADE=22]="PAUSED_UPGRADE",t[t.PAUSED_H2_UPGRADE=23]="PAUSED_H2_UPGRADE",t[t.USER=24]="USER",(r=A.TYPE||(A.TYPE={}))[r.BOTH=0]="BOTH",r[r.REQUEST=1]="REQUEST",r[r.RESPONSE=2]="RESPONSE",(o=A.FLAGS||(A.FLAGS={}))[o.CONNECTION_KEEP_ALIVE=1]="CONNECTION_KEEP_ALIVE",o[o.CONNECTION_CLOSE=2]="CONNECTION_CLOSE",o[o.CONNECTION_UPGRADE=4]="CONNECTION_UPGRADE",o[o.CHUNKED=8]="CHUNKED",o[o.UPGRADE=16]="UPGRADE",o[o.CONTENT_LENGTH=32]="CONTENT_LENGTH",o[o.SKIPBODY=64]="SKIPBODY",o[o.TRAILING=128]="TRAILING",o[o.TRANSFER_ENCODING=512]="TRANSFER_ENCODING",(n=A.LENIENT_FLAGS||(A.LENIENT_FLAGS={}))[n.HEADERS=1]="HEADERS",n[n.CHUNKED_LENGTH=2]="CHUNKED_LENGTH",n[n.KEEP_ALIVE=4]="KEEP_ALIVE",function(A){A[A.DELETE=0]="DELETE",A[A.GET=1]="GET",A[A.HEAD=2]="HEAD",A[A.POST=3]="POST",A[A.PUT=4]="PUT",A[A.CONNECT=5]="CONNECT",A[A.OPTIONS=6]="OPTIONS",A[A.TRACE=7]="TRACE",A[A.COPY=8]="COPY",A[A.LOCK=9]="LOCK",A[A.MKCOL=10]="MKCOL",A[A.MOVE=11]="MOVE",A[A.PROPFIND=12]="PROPFIND",A[A.PROPPATCH=13]="PROPPATCH",A[A.SEARCH=14]="SEARCH",A[A.UNLOCK=15]="UNLOCK",A[A.BIND=16]="BIND",A[A.REBIND=17]="REBIND",A[A.UNBIND=18]="UNBIND",A[A.ACL=19]="ACL",A[A.REPORT=20]="REPORT",A[A.MKACTIVITY=21]="MKACTIVITY",A[A.CHECKOUT=22]="CHECKOUT",A[A.MERGE=23]="MERGE",A[A["M-SEARCH"]=24]="M-SEARCH",A[A.NOTIFY=25]="NOTIFY",A[A.SUBSCRIBE=26]="SUBSCRIBE",A[A.UNSUBSCRIBE=27]="UNSUBSCRIBE",A[A.PATCH=28]="PATCH",A[A.PURGE=29]="PURGE",A[A.MKCALENDAR=30]="MKCALENDAR",A[A.LINK=31]="LINK",A[A.UNLINK=32]="UNLINK",A[A.SOURCE=33]="SOURCE",A[A.PRI=34]="PRI",A[A.DESCRIBE=35]="DESCRIBE",A[A.ANNOUNCE=36]="ANNOUNCE",A[A.SETUP=37]="SETUP",A[A.PLAY=38]="PLAY",A[A.PAUSE=39]="PAUSE",A[A.TEARDOWN=40]="TEARDOWN",A[A.GET_PARAMETER=41]="GET_PARAMETER",A[A.SET_PARAMETER=42]="SET_PARAMETER",A[A.REDIRECT=43]="REDIRECT",A[A.RECORD=44]="RECORD",A[A.FLUSH=45]="FLUSH"}(s=A.METHODS||(A.METHODS={})),A.METHODS_HTTP=[s.DELETE,s.GET,s.HEAD,s.POST,s.PUT,s.CONNECT,s.OPTIONS,s.TRACE,s.COPY,s.LOCK,s.MKCOL,s.MOVE,s.PROPFIND,s.PROPPATCH,s.SEARCH,s.UNLOCK,s.BIND,s.REBIND,s.UNBIND,s.ACL,s.REPORT,s.MKACTIVITY,s.CHECKOUT,s.MERGE,s["M-SEARCH"],s.NOTIFY,s.SUBSCRIBE,s.UNSUBSCRIBE,s.PATCH,s.PURGE,s.MKCALENDAR,s.LINK,s.UNLINK,s.PRI,s.SOURCE],A.METHODS_ICE=[s.SOURCE],A.METHODS_RTSP=[s.OPTIONS,s.DESCRIBE,s.ANNOUNCE,s.SETUP,s.PLAY,s.PAUSE,s.TEARDOWN,s.GET_PARAMETER,s.SET_PARAMETER,s.REDIRECT,s.RECORD,s.FLUSH,s.GET,s.POST],A.METHOD_MAP=e.enumToMap(s),A.H_METHOD_MAP={},Object.keys(A.METHOD_MAP).forEach(e=>{/^H/.test(e)&&(A.H_METHOD_MAP[e]=A.METHOD_MAP[e])}),(i=A.FINISH||(A.FINISH={}))[i.SAFE=0]="SAFE",i[i.SAFE_WITH_CB=1]="SAFE_WITH_CB",i[i.UNSAFE=2]="UNSAFE",A.ALPHA=[];for(let e="A".charCodeAt(0);e<="Z".charCodeAt(0);e++)A.ALPHA.push(String.fromCharCode(e)),A.ALPHA.push(String.fromCharCode(e+32));A.NUM_MAP={0:0,1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9},A.HEX_MAP={0:0,1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,A:10,B:11,C:12,D:13,E:14,F:15,a:10,b:11,c:12,d:13,e:14,f:15},A.NUM=["0","1","2","3","4","5","6","7","8","9"],A.ALPHANUM=A.ALPHA.concat(A.NUM),A.MARK=["-","_",".","!","~","*","'","(",")"],A.USERINFO_CHARS=A.ALPHANUM.concat(A.MARK).concat(["%",";",":","&","=","+","$",","]),A.STRICT_URL_CHAR=["!",'"',"$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","@","[","\\","]","^","_","`","{","|","}","~"].concat(A.ALPHANUM),A.URL_CHAR=A.STRICT_URL_CHAR.concat(["\t","\f"]);for(let e=128;e<=255;e++)A.URL_CHAR.push(e);A.HEX=A.NUM.concat(["a","b","c","d","e","f","A","B","C","D","E","F"]),A.STRICT_TOKEN=["!","#","$","%","&","'","*","+","-",".","^","_","`","|","~"].concat(A.ALPHANUM),A.TOKEN=A.STRICT_TOKEN.concat([" "]),A.HEADER_CHARS=["\t"];for(let e=32;e<=255;e++)127!==e&&A.HEADER_CHARS.push(e);A.CONNECTION_TOKEN_CHARS=A.HEADER_CHARS.filter(A=>44!==A),A.MAJOR=A.NUM_MAP,A.MINOR=A.MAJOR,function(A){A[A.GENERAL=0]="GENERAL",A[A.CONNECTION=1]="CONNECTION",A[A.CONTENT_LENGTH=2]="CONTENT_LENGTH",A[A.TRANSFER_ENCODING=3]="TRANSFER_ENCODING",A[A.UPGRADE=4]="UPGRADE",A[A.CONNECTION_KEEP_ALIVE=5]="CONNECTION_KEEP_ALIVE",A[A.CONNECTION_CLOSE=6]="CONNECTION_CLOSE",A[A.CONNECTION_UPGRADE=7]="CONNECTION_UPGRADE",A[A.TRANSFER_ENCODING_CHUNKED=8]="TRANSFER_ENCODING_CHUNKED"}(E=A.HEADER_STATE||(A.HEADER_STATE={})),A.SPECIAL_HEADERS={connection:E.CONNECTION,"content-length":E.CONTENT_LENGTH,"proxy-connection":E.CONNECTION,"transfer-encoding":E.TRANSFER_ENCODING,upgrade:E.UPGRADE}}($e)),$e}function tt(){if(Fe)return Ne;Fe=1;const A=gA(),{kBodyUsed:e}=iA(),t=g,{InvalidArgumentError:r}=EA(),o=E,n=[300,301,302,303,307,308],s=Symbol("body");class i{constructor(A){this[s]=A,this[e]=!1}async*[Symbol.asyncIterator](){t(!this[e],"disturbed"),this[e]=!0,yield*this[s]}}function a(e,t,r){if(4===e.length)return"host"===A.headerNameToString(e);if(t&&A.headerNameToString(e).startsWith("content-"))return!0;if(r&&(13===e.length||6===e.length||19===e.length)){const t=A.headerNameToString(e);return"authorization"===t||"cookie"===t||"proxy-authorization"===t}return!1}return Ne=class{constructor(n,s,E,g){if(null!=s&&(!Number.isInteger(s)||s<0))throw new r("maxRedirections must be a positive number");A.validateHandler(g,E.method,E.upgrade),this.dispatch=n,this.location=null,this.abort=null,this.opts={...E,maxRedirections:0},this.maxRedirections=s,this.handler=g,this.history=[],A.isStream(this.opts.body)?(0===A.bodyLength(this.opts.body)&&this.opts.body.on("data",function(){t(!1)}),"boolean"!=typeof this.opts.body.readableDidRead&&(this.opts.body[e]=!1,o.prototype.on.call(this.opts.body,"data",function(){this[e]=!0}))):(this.opts.body&&"function"==typeof this.opts.body.pipeTo||this.opts.body&&"string"!=typeof this.opts.body&&!ArrayBuffer.isView(this.opts.body)&&A.isIterable(this.opts.body))&&(this.opts.body=new i(this.opts.body))}onConnect(A){this.abort=A,this.handler.onConnect(A,{history:this.history})}onUpgrade(A,e,t){this.handler.onUpgrade(A,e,t)}onError(A){this.handler.onError(A)}onHeaders(e,r,o,s){if(this.location=this.history.length>=this.maxRedirections||A.isDisturbed(this.opts.body)?null:function(A,e){if(-1===n.indexOf(A))return null;for(let A=0;A<e.length;A+=2)if("location"===e[A].toString().toLowerCase())return e[A+1]}(e,r),this.opts.origin&&this.history.push(new URL(this.opts.path,this.opts.origin)),!this.location)return this.handler.onHeaders(e,r,o,s);const{origin:i,pathname:E,search:g}=A.parseURL(new URL(this.location,this.opts.origin&&new URL(this.opts.path,this.opts.origin))),Q=g?`${E}${g}`:E;this.opts.headers=function(A,e,r){const o=[];if(Array.isArray(A))for(let t=0;t<A.length;t+=2)a(A[t],e,r)||o.push(A[t],A[t+1]);else if(A&&"object"==typeof A)for(const t of Object.keys(A))a(t,e,r)||o.push(t,A[t]);else t(null==A,"headers must be an object or an array");return o}(this.opts.headers,303===e,this.opts.origin!==i),this.opts.path=Q,this.opts.origin=i,this.opts.maxRedirections=0,this.opts.query=null,303===e&&"HEAD"!==this.opts.method&&(this.opts.method="GET",this.opts.body=null)}onData(A){if(!this.location)return this.handler.onData(A)}onComplete(A){this.location?(this.location=null,this.abort=null,this.dispatch(this.opts,this)):this.handler.onComplete(A)}onBodySent(A){this.handler.onBodySent&&this.handler.onBodySent(A)}},Ne}function rt(){if(Ue)return Se;Ue=1;const A=tt();return Se=function({maxRedirections:e}){return t=>function(r,o){const{maxRedirections:n=e}=r;if(!n)return t(r,o);const s=new A(t,n,r,o);return r={...r,maxRedirections:0},t(r,s)}}}function ot(){return Me?Le:(Me=1,Le="AGFzbQEAAAABMAhgAX8Bf2ADf39/AX9gBH9/f38Bf2AAAGADf39/AGABfwBgAn9/AGAGf39/f39/AALLAQgDZW52GHdhc21fb25faGVhZGVyc19jb21wbGV0ZQACA2VudhV3YXNtX29uX21lc3NhZ2VfYmVnaW4AAANlbnYLd2FzbV9vbl91cmwAAQNlbnYOd2FzbV9vbl9zdGF0dXMAAQNlbnYUd2FzbV9vbl9oZWFkZXJfZmllbGQAAQNlbnYUd2FzbV9vbl9oZWFkZXJfdmFsdWUAAQNlbnYMd2FzbV9vbl9ib2R5AAEDZW52GHdhc21fb25fbWVzc2FnZV9jb21wbGV0ZQAAA0ZFAwMEAAAFAAAAAAAABQEFAAUFBQAABgAAAAAGBgYGAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAAABAQcAAAUFAwABBAUBcAESEgUDAQACBggBfwFBgNQECwfRBSIGbWVtb3J5AgALX2luaXRpYWxpemUACRlfX2luZGlyZWN0X2Z1bmN0aW9uX3RhYmxlAQALbGxodHRwX2luaXQAChhsbGh0dHBfc2hvdWxkX2tlZXBfYWxpdmUAQQxsbGh0dHBfYWxsb2MADAZtYWxsb2MARgtsbGh0dHBfZnJlZQANBGZyZWUASA9sbGh0dHBfZ2V0X3R5cGUADhVsbGh0dHBfZ2V0X2h0dHBfbWFqb3IADxVsbGh0dHBfZ2V0X2h0dHBfbWlub3IAEBFsbGh0dHBfZ2V0X21ldGhvZAARFmxsaHR0cF9nZXRfc3RhdHVzX2NvZGUAEhJsbGh0dHBfZ2V0X3VwZ3JhZGUAEwxsbGh0dHBfcmVzZXQAFA5sbGh0dHBfZXhlY3V0ZQAVFGxsaHR0cF9zZXR0aW5nc19pbml0ABYNbGxodHRwX2ZpbmlzaAAXDGxsaHR0cF9wYXVzZQAYDWxsaHR0cF9yZXN1bWUAGRtsbGh0dHBfcmVzdW1lX2FmdGVyX3VwZ3JhZGUAGhBsbGh0dHBfZ2V0X2Vycm5vABsXbGxodHRwX2dldF9lcnJvcl9yZWFzb24AHBdsbGh0dHBfc2V0X2Vycm9yX3JlYXNvbgAdFGxsaHR0cF9nZXRfZXJyb3JfcG9zAB4RbGxodHRwX2Vycm5vX25hbWUAHxJsbGh0dHBfbWV0aG9kX25hbWUAIBJs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ADcDACAAQShqQgA3AwAgAEEgakIANwMAIABBEGpCADcDACAAQQhqQgA3AwAgAEHdATYCHEEAC3sBAX8CQCAAKAIMIgMNAAJAIAAoAgRFDQAgACABNgIECwJAIAAgASACEMSAgIAAIgMNACAAKAIMDwsgACADNgIcQQAhAyAAKAIEIgFFDQAgACABIAIgACgCCBGBgICAAAAiAUUNACAAIAI2AhQgACABNgIMIAEhAwsgAwvk8wEDDn8DfgR/I4CAgIAAQRBrIgMkgICAgAAgASEEIAEhBSABIQYgASEHIAEhCCABIQkgASEKIAEhCyABIQwgASENIAEhDiABIQ8CQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkAgACgCHCIQQX9qDt0B2gEB2QECAwQFBgcICQoLDA0O2AEPENcBERLWARMUFRYXGBkaG+AB3wEcHR7VAR8gISIjJCXUASYnKCkqKyzTAdIBLS7RAdABLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVG2wFHSElKzwHOAUvNAUzMAU1OT1BRUlNUVVZXWFlaW1xdXl9gYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXp7fH1+f4ABgQGCAYMBhAGFAYYBhwGIAYkB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QAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkAC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FCAAIBA2AgxBACEQDLIBCyAAKAIEIRAgAEEANgIEAkAgACAQIAEQp4CAgAAiEA0AIAEhAQxNCyAAQdMANgIcIAAgATYCFCAAIBA2AgxBACEQDLEBCyAAKAIEIRAgAEEANgIEAkAgACAQIAEQp4CAgAAiEA0AIAEhAQxRCyAAQeUANgIcIAAgATYCFCAAIBA2AgxBACEQDLABCyAAQQA2AhwgACABNgIUIABBxoqAgAA2AhAgAEEHNgIMQQAhEAyvAQsgACgCBCEQIABBADYCBAJAIAAgECABEKeAgIAAIhANACABIQEMSQsgAEHSADYCHCAAIAE2AhQgACAQNgIMQQAhEAyuAQsgACgCBCEQIABBADYCBAJAIAAgECABEKeAgIAAIhANACABIQEMSQsgAEHTADYCHCAAIAE2AhQgACAQNgIMQQAhEAytAQsgACgCBCEQIABBADYCBAJAIAAgECABEKeAgIAAIhANACABIQEMTQsgAEHlADYCHCAAIAE2AhQgACAQNgIMQQAhEAysAQsgAEEANgIcIAAgATYCFCAAQdyIgIAANgIQIABBBzYCDEEAIRAMqwELIBBBP0cNASABQQFqIQELQQUhEAyQAQtBACEQIABBADYCHCAAIAE2AhQgAEH9koCAADYCECAAQQc2AgwMqAELIAAoAgQhECAAQQA2AgQCQCAAIBAgARCngICAACIQDQAgASEBDEILIABB0gA2AhwgACABNgIUIAAgEDYCDEEAIRAMpwELIAAoAgQhECAAQQA2AgQCQCAAIBAgARCngICAACIQDQAgASEBDEILIABB0wA2AhwgACABNgIUIAAgEDYCDEEAIRAMpgELIAAoAgQhECAAQQA2AgQCQCAAIBAgARCngICAACIQDQAgASEBDEYLIABB5QA2AhwgACABNgIUIAAgEDYCDEEAIRAMpQELIAAoAgQhASAAQQA2AgQCQCAAIAEgFBCngICAACIBDQAgFCEBDD8LIABB0gA2AhwgACAUNgIUIAAgATYCDEEAIRAMpAELIAAoAgQhASAAQQA2AgQCQCAAIAEgFBCngICAACIBDQAgFCEBDD8LIABB0wA2AhwgACAUNgIUIAAgATYCDEEAIRAMowELIAAoAgQhASAAQQA2AgQCQCAAIAEgFBCngICAACIBDQAgFCEBDEMLIABB5QA2AhwgACAUNgIUIAAgATYCDEEAIRAMogELIABBADYCHCAAIBQ2AhQgAEHDj4CAADYCECAAQQc2AgxBACEQDKEBCyAAQQA2AhwgACABNgIUIABBw4+AgAA2AhAgAEEHNgIMQQAhEAygAQtBACEQIABBADYCHCAAIBQ2AhQgAEGMnICAADYCECAAQQc2AgwMnwELIABBADYCHCAAIBQ2AhQgAEGMnICAADYCECAAQQc2AgxBACEQDJ4BCyAAQQA2AhwgACAUNgIUIABB/pGAgAA2AhAgAEEHNgIMQQAhEAydAQsgAEEANgIcIAAgATYCFCAAQY6bgIAANgIQIABBBjYCDEEAIRAMnAELIBBBFUYNVyAAQQA2AhwgACABNgIUIABBzI6AgAA2AhAgAEEgNgIMQQAhEAybAQsgAEEANgIAIBBBAWohAUEkIRALIAAgEDoAKSAAKAIEIRAgAEEANgIEIAAgECABEKuAgIAAIhANVCABIQEMPgsgAEEANgIAC0EAIRAgAEEANgIcIAAgBDYCFCAAQfGbgIAANgIQIABBBjYCDAyXAQsgAUEVRg1QIABBADYCHCAAIAU2AhQgAEHwjICAADYCECAAQRs2AgxBACEQDJYBCyAAKAIEIQUgAEEANgIEIAAgBSAQEKmAgIAAIgUNASAQQQFqIQULQa0BIRAMewsgAEHBATYCHCAAIAU2AgwgACAQQQFqNgIUQQAhEAyTAQsgACgCBCEGIABBADYCBCAAIAYgEBCpgICAACIGDQEgEEEBaiEGC0GuASEQDHgLIABBwgE2AhwgACAGNgIMIAAgEEEBajYCFEEAIRAMkAELIABBADYCHCAAIAc2AhQgAEGXi4CAADYCECAAQQ02AgxBACEQDI8BCyAAQQA2AhwgACAINgIUIABB45CAgAA2AhAgAEEJNgIMQQAhEAyOAQsgAEEANgIcIAAgCDYCFCAAQZSNgIAANgIQIABBITYCDEEAIRAMjQELQQEhFkEAIRdBACEUQQEhEAsgACAQOgArIAlBAWohCAJAAkAgAC0ALUEQcQ0AAkACQAJAIAAtACoOAwEAAgQLIBZFDQMMAgsgFA0BDAILIBdFDQELIAAoAgQhECAAQQA2AgQgACAQIAgQrYCAgAAiEEUNPSAAQckBNgIcIAAgCDYCFCAAIBA2AgxBACEQDIwBCyAAKAIEIQQgAEEANgIEIAAgBCAIEK2AgIAAIgRFDXYgAEHKATYCHCAAIAg2AhQgACAENgIMQQAhEAyLAQsgACgCBCEEIABBADYCBCAAIAQgCRCtgICAACIERQ10IABBywE2AhwgACAJNgIUIAAgBDYCDEEAIRAMigELIAAoAgQhBCAAQQA2AgQgACAEIAoQrYCAgAAiBEUNciAAQc0BNgIcIAAgCjYCFCAAIAQ2AgxBACEQDIkBCwJAIAstAABBUGoiEEH/AXFBCk8NACAAIBA6ACogC0EBaiEKQbYBIRAMcAsgACgCBCEEIABBADYCBCAAIAQgCxCtgICAACIERQ1wIABBzwE2AhwgACALNgIUIAAgBDYCDEEAIRAMiAELIABBADYCHCAAIAQ2AhQgAEGQs4CAADYCECAAQQg2AgwgAEEANgIAQQAhEAyHAQsgAUEVRg0/IABBADYCHCAAIAw2AhQgAEHMjoCAADYCECAAQSA2AgxBACEQDIYBCyAAQYEEOwEoIAAoAgQhECAAQgA3AwAgACAQIAxBAWoiDBCrgICAACIQRQ04IABB0wE2AhwgACAMNgIUIAAgEDYCDEEAIRAMhQELIABBADYCAAtBACEQIABBADYCHCAAIAQ2AhQgAEHYm4CAADYCECAAQQg2AgwMgwELIAAoAgQhECAAQgA3AwAgACAQIAtBAWoiCxCrgICAACIQDQFBxgEhEAxpCyAAQQI6ACgMVQsgAEHVATYCHCAAIAs2AhQgACAQNgIMQQAhEAyAAQsgEEEVRg03IABBADYCHCAAIAQ2AhQgAEGkjICAADYCECAAQRA2AgxBACEQDH8LIAAtADRBAUcNNCAAIAQgAhC8gICAACIQRQ00IBBBFUcNNSAAQdwBNgIcIAAgBDYCFCAAQdWWgIAANgIQIABBFTYCDEEAIRAMfgtBACEQIABBADYCHCAAQa+LgIAANgIQIABBAjYCDCAAIBRBAWo2AhQMfQtBACEQDGMLQQIhEAxiC0ENIRAMYQtBDyEQDGALQSUhEAxfC0ETIRAMXgtBFSEQDF0LQRYhEAxcC0EXIRAMWwtBGCEQDFoLQRkhEAxZC0EaIRAMWAtBGyEQDFcLQRwhEAxWC0EdIRAMVQtBHyEQDFQLQSEhEAxTC0EjIRAMUgtBxgAhEAxRC0EuIRAMUAtBLyEQDE8LQTshEAxOC0E9IRAMTQtByAAhEAxMC0HJACEQDEsLQcsAIRAMSgtBzAAhEAxJC0HOACEQDEgLQdEAIRAMRwtB1QAhEAxGC0HYACEQDEULQdkAIRAMRAtB2wAhEAxDC0HkACEQDEILQeUAIRAMQQtB8QAhEAxAC0H0ACEQDD8LQY0BIRAMPgtBlwEhEAw9C0GpASEQDDwLQawBIRAMOwtBwAEhEAw6C0G5ASEQDDkLQa8BIRAMOAtBsQEhEAw3C0GyASEQDDYLQbQBIRAMNQtBtQEhEAw0C0G6ASEQDDMLQb0BIRAMMgtBvwEhEAwxC0HBASEQDDALIABBADYCHCAAIAQ2AhQgAEHpi4CAADYCECAAQR82AgxBACEQDEgLIABB2wE2AhwgACAENgIUIABB+paAgAA2AhAgAEEVNgIMQQAhEAxHCyAAQfgANgIcIAAgDDYCFCAAQcqYgIAANgIQIABBFTYCDEEAIRAMRgsgAEHRADYCHCAAIAU2AhQgAEGwl4CAADYCECAAQRU2AgxBACEQDEULIABB+QA2AhwgACABNgIUIAAgEDYCDEEAIRAMRAsgAEH4ADYCHCAAIAE2AhQgAEHKmICAADYCECAAQRU2AgxBACEQDEMLIABB5AA2AhwgACABNgIUIABB45eAgAA2AhAgAEEVNgIMQQAhEAxCCyAAQdcANgIcIAAgATYCFCAAQcmXgIAANgIQIABBFTYCDEEAIRAMQQsgAEEANgIcIAAgATYCFCAAQbmNgIAANgIQIABBGjYCDEEAIRAMQAsgAEHCADYCHCAAIAE2AhQgAEHjmICAADYCECAAQRU2AgxBACEQDD8LIABBADYCBCAAIA8gDxCxgICAACIERQ0BIABBOjYCHCAAIAQ2AgwgACAPQQFqNgIUQQAhEAw+CyAAKAIEIQQgAEEANgIEAkAgACAEIAEQsYCAgAAiBEUNACAAQTs2AhwgACAENgIMIAAgAUEBajYCFEEAIRAMPgsgAUEBaiEBDC0LIA9BAWohAQwtCyAAQQA2AhwgACAPNgIUIABB5JKAgAA2AhAgAEEENgIMQQAhEAw7CyAAQTY2AhwgACAENgIUIAAgAjYCDEEAIRAMOgsgAEEuNgIcIAAgDjYCFCAAIAQ2AgxBACEQDDkLIABB0AA2AhwgACABNgIUIABBkZiAgAA2AhAgAEEVNgIMQQAhEAw4CyANQQFqIQEMLAsgAEEVNgIcIAAgATYCFCAAQYKZgIAANgIQIABBFTYCDEEAIRAMNgsgAEEbNgIcIAAgATYCFCAAQZGXgIAANgIQIABBFTYCDEEAIRAMNQsgAEEPNgIcIAAgATYCFCAAQZGXgIAANgIQIABBFTYCDEEAIRAMNAsgAEELNgIcIAAgATYCFCAAQZGXgIAANgIQIABBFTYCDEEAIRAMMwsgAEEaNgIcIAAgATYCFCAAQYKZgIAANgIQIABBFTYCDEEAIRAMMgsgAEELNgIcIAAgATYCFCAAQYKZgIAANgIQIABBFTYCDEEAIRAMMQsgAEEKNgIcIAAgATYCFCAAQeSWgIAANgIQIABBFTYCDEEAIRAMMAsgAEEeNgIcIAAgATYCFCAAQfmXgIAANgIQIABBFTYCDEEAIRAMLwsgAEEANgIcIAAgEDYCFCAAQdqNgIAANgIQIABBFDYCDEEAIRAMLgsgAEEENgIcIAAgATYCFCAAQbCYgIAANgIQIABBFTYCDEEAIRAMLQsgAEEANgIAIAtBAWohCwtBuAEhEAwSCyAAQQA2AgAgEEEBaiEBQfUAIRAMEQsgASEBAkAgAC0AKUEFRw0AQeMAIRAMEQtB4gAhEAwQC0EAIRAgAEEANgIcIABB5JGAgAA2AhAgAEEHNgIMIAAgFEEBajYCFAwoCyAAQQA2AgAgF0EBaiEBQcAAIRAMDgtBASEBCyAAIAE6ACwgAEEANgIAIBdBAWohAQtBKCEQDAsLIAEhAQtBOCEQDAkLAkAgASIPIAJGDQADQAJAIA8tAABBgL6AgABqLQAAIgFBAUYNACABQQJHDQMgD0EBaiEBDAQLIA9BAWoiDyACRw0AC0E+IRAMIgtBPiEQDCELIABBADoALCAPIQEMAQtBCyEQDAYLQTohEAwFCyABQQFqIQFBLSEQDAQLIAAgAToALCAAQQA2AgAgFkEBaiEBQQwhEAwDCyAAQQA2AgAgF0EBaiEBQQohEAwCCyAAQQA2AgALIABBADoALCANIQFBCSEQDAALC0EAIRAgAEEANgIcIAAgCzYCFCAAQc2QgIAANgIQIABBCTYCDAwXC0EAIRAgAEEANgIcIAAgCjYCFCAAQemKgIAANgIQIABBCTYCDAwWC0EAIRAgAEEANgIcIAAgCTYCFCAAQbeQgIAANgIQIABBCTYCDAwVC0EAIRAgAEEANgIcIAAgCDYCFCAAQZyRgIAANgIQIABBCTYCDAwUC0EAIRAgAEEANgIcIAAgATYCFCAAQc2QgIAANgIQIABBCTYCDAwTC0EAIRAgAEEANgIcIAAgATYCFCAAQemKgIAANgIQIABBCTYCDAwSC0EAIRAgAEEANgIcIAAgATYCFCAAQbeQgIAANgIQIABBCTYCDAwRC0EAIRAgAEEANgIcIAAgATYCFCAAQZyRgIAANgIQIABBCTYCDAwQC0EAIRAgAEEANgIcIAAgATYCFCAAQZeVgIAANgIQIABBDzYCDAwPC0EAIRAgAEEANgIcIAAgATYCFCAAQZeVgIAANgIQIABBDzYCDAwOC0EAIRAgAEEANgIcIAAgATYCFCAAQcCSgIAANgIQIABBCzYCDAwNC0EAIRAgAEEANgIcIAAgATYCFCAAQZWJgIAANgIQIABBCzYCDAwMC0EAIRAgAEEANgIcIAAgATYCFCAAQeGPgIAANgIQIABBCjYCDAwLC0EAIRAgAEEANgIcIAAgATYCFCAAQfuPgIAANgIQIABBCjYCDAwKC0EAIRAgAEEANgIcIAAgATYCFCAAQfGZgIAANgIQIABBAjYCDAwJC0EAIRAgAEEANgIcIAAgATYCFCAAQcSUgIAANgIQIABBAjYCDAwIC0EAIRAgAEEANgIcIAAgATYCFCAAQfKVgIAANgIQIABBAjYCDAwHCyAAQQI2AhwgACABNgIUIABBnJqAgAA2AhAgAEEWNgIMQQAhEAwGC0EBIRAMBQtB1AAhECABIgQgAkYNBCADQQhqIAAgBCACQdjCgIAAQQoQxYCAgAAgAygCDCEEIAMoAggOAwEEAgALEMqAgIAAAAsgAEEANgIcIABBtZqAgAA2AhAgAEEXNgIMIAAgBEEBajYCFEEAIRAMAgsgAEEANgIcIAAgBDYCFCAAQcqagIAANgIQIABBCTYCDEEAIRAMAQsCQCABIgQgAkcNAEEiIRAMAQsgAEGJgICAADYCCCAAIAQ2AgRBISEQCyADQRBqJICAgIAAIBALrwEBAn8gASgCACEGAkACQCACIANGDQAgBCAGaiEEIAYgA2ogAmshByACIAZBf3MgBWoiBmohBQNAAkAgAi0AACAELQAARg0AQQIhBAwDCwJAIAYNAEEAIQQgBSECDAMLIAZBf2ohBiAEQQFqIQQgAkEBaiICIANHDQALIAchBiADIQILIABBATYCACABIAY2AgAgACACNgIEDwsgAUEANgIAIAAgBDYCACAAIAI2AgQLCgAgABDHgICAAAvyNgELfyOAgICAAEEQayIBJICAgIAAAkBBACgCoNCAgAANAEEAEMuAgIAAQYDUhIAAayICQdkASQ0AQQAhAwJAQQAoAuDTgIAAIgQNAEEAQn83AuzTgIAAQQBCgICEgICAwAA3AuTTgIAAQQAgAUEIakFwcUHYqtWqBXMiBDYC4NOAgABBAEEANgL004CAAEEAQQA2AsTTgIAAC0EAIAI2AszTgIAAQQBBgNSEgAA2AsjTgIAAQQBBgNSEgAA2ApjQgIAAQQAgBDYCrNCAgABBAEF/NgKo0ICAAANAIANBxNCAgABqIANBuNCAgABqIgQ2AgAgBCADQbDQgIAAaiIFNgIAIANBvNCAgABqIAU2AgAgA0HM0ICAAGogA0HA0ICAAGoiBTYCACAFIAQ2AgAgA0HU0ICAAGogA0HI0ICAAGoiBDYCACAEIAU2AgAgA0HQ0ICAAGogBDYCACADQSBqIgNBgAJHDQALQYDUhIAAQXhBgNSEgABrQQ9xQQBBgNSEgABBCGpBD3EbIgNqIgRBBGogAkFIaiIFIANrIgNBAXI2AgBBAEEAKALw04CAADYCpNCAgABBACADNgKU0ICAAEEAIAQ2AqDQgIAAQYDUhIAAIAVqQTg2AgQLAkACQAJAAkACQAJAAkACQAJAAkACQAJAIABB7AFLDQACQEEAKAKI0ICAACIGQRAgAEETakFwcSAAQQtJGyICQQN2IgR2IgNBA3FFDQACQAJAIANBAXEgBHJBAXMiBUEDdCIEQbDQgIAAaiIDIARBuNCAgABqKAIAIgQoAggiAkcNAEEAIAZBfiAFd3E2AojQgIAADAELIAMgAjYCCCACIAM2AgwLIARBCGohAyAEIAVBA3QiBUEDcjYCBCAEIAVqIgQgBCgCBEEBcjYCBAwMCyACQQAoApDQgIAAIgdNDQECQCADRQ0AAkACQCADIAR0QQIgBHQiA0EAIANrcnEiA0EAIANrcUF/aiIDIANBDHZBEHEiA3YiBEEFdkEIcSIFIANyIAQgBXYiA0ECdkEEcSIEciADIAR2IgNBAXZBAnEiBHIgAyAEdiIDQQF2QQFxIgRyIAMgBHZqIgRBA3QiA0Gw0ICAAGoiBSADQbjQgIAAaigCACIDKAIIIgBHDQBBACAGQX4gBHdxIgY2AojQgIAADAELIAUgADYCCCAAIAU2AgwLIAMgAkEDcjYCBCADIARBA3QiBGogBCACayIFNgIAIAMgAmoiACAFQQFyNgIEAkAgB0UNACAHQXhxQbDQgIAAaiECQQAoApzQgIAAIQQCQAJAIAZBASAHQQN2dCIIcQ0AQQAgBiAIcjYCiNCAgAAgAiEIDAELIAIoAgghCAsgCCAENgIMIAIgBDYCCCAEIAI2AgwgBCAINgIICyADQQhqIQNBACAANgKc0ICAAEEAIAU2ApDQgIAADAwLQQAoAozQgIAAIglFDQEgCUEAIAlrcUF/aiIDIANBDHZBEHEiA3YiBEEFdkEIcSIFIANyIAQgBXYiA0ECdkEEcSIEciADIAR2IgNBAXZBAnEiBHIgAyAEdiIDQQF2QQFxIgRyIAMgBHZqQQJ0QbjSgIAAaigCACIAKAIEQXhxIAJrIQQgACEFAkADQAJAIAUoAhAiAw0AIAVBFGooAgAiA0UNAgsgAygCBEF4cSACayIFIAQgBSAESSIFGyEEIAMgACAFGyEAIAMhBQwACwsgACgCGCEKAkAgACgCDCIIIABGDQAgACgCCCIDQQAoApjQgIAASRogCCADNgIIIAMgCDYCDAwLCwJAIABBFGoiBSgCACIDDQAgACgCECIDRQ0DIABBEGohBQsDQCAFIQsgAyIIQRRqIgUoAgAiAw0AIAhBEGohBSAIKAIQIgMNAAsgC0EANgIADAoLQX8hAiAAQb9/Sw0AIABBE2oiA0FwcSECQQAoAozQgIAAIgdFDQBBACELAkAgAkGAAkkNAEEfIQsgAkH///8HSw0AIANBCHYiAyADQYD+P2pBEHZBCHEiA3QiBCAEQYDgH2pBEHZBBHEiBHQiBSAFQYCAD2pBEHZBAnEiBXRBD3YgAyAEciAFcmsiA0EBdCACIANBFWp2QQFxckEcaiELC0EAIAJrIQQCQAJAAkACQCALQQJ0QbjSgIAAaigCACIFDQBBACEDQQAhCAwBC0EAIQMgAkEAQRkgC0EBdmsgC0EfRht0IQBBACEIA0ACQCAFKAIEQXhxIAJrIgYgBE8NACAGIQQgBSEIIAYNAEEAIQQgBSEIIAUhAwwDCyADIAVBFGooAgAiBiAGIAUgAEEddkEEcWpBEGooAgAiBUYbIAMgBhshAyAAQQF0IQAgBQ0ACwsCQCADIAhyDQBBACEIQQIgC3QiA0EAIANrciAHcSIDRQ0DIANBACADa3FBf2oiAyADQQx2QRBxIgN2IgVBBXZBCHEiACADciAFIAB2IgNBAnZBBHEiBXIgAyAFdiIDQQF2QQJxIgVyIAMgBXYiA0EBdkEBcSIFciADIAV2akECdEG40oCAAGooAgAhAwsgA0UNAQsDQCADKAIEQXhxIAJrIgYgBEkhAAJAIAMoAhAiBQ0AIANBFGooAgAhBQsgBiAEIAAbIQQgAyAIIAAbIQggBSEDIAUNAAsLIAhFDQAgBEEAKAKQ0ICAACACa08NACAIKAIYIQsCQCAIKAIMIgAgCEYNACAIKAIIIgNBACgCmNCAgABJGiAAIAM2AgggAyAANgIMDAkLAkAgCEEUaiIFKAIAIgMNACAIKAIQIgNFDQMgCEEQaiEFCwNAIAUhBiADIgBBFGoiBSgCACIDDQAgAEEQaiEFIAAoAhAiAw0ACyAGQQA2AgAMCAsCQEEAKAKQ0ICAACIDIAJJDQBBACgCnNCAgAAhBAJAAkAgAyACayIFQRBJDQAgBCACaiIAIAVBAXI2AgRBACAFNgKQ0ICAAEEAIAA2ApzQgIAAIAQgA2ogBTYCACAEIAJBA3I2AgQMAQsgBCADQQNyNgIEIAQgA2oiAyADKAIEQQFyNgIEQQBBADYCnNCAgABBAEEANgKQ0ICAAAsgBEEIaiEDDAoLAkBBACgClNCAgAAiACACTQ0AQQAoAqDQgIAAIgMgAmoiBCAAIAJrIgVBAXI2AgRBACAFNgKU0ICAAEEAIAQ2AqDQgIAAIAMgAkEDcjYCBCADQQhqIQMMCgsCQAJAQQAoAuDTgIAARQ0AQQAoAujTgIAAIQQMAQtBAEJ/NwLs04CAAEEAQoCAhICAgMAANwLk04CAAEEAIAFBDGpBcHFB2KrVqgVzNgLg04CAAEEAQQA2AvTTgIAAQQBBADYCxNOAgABBgIAEIQQLQQAhAwJAIAQgAkHHAGoiB2oiBkEAIARrIgtxIgggAksNAEEAQTA2AvjTgIAADAoLAkBBACgCwNOAgAAiA0UNAAJAQQAoArjTgIAAIgQgCGoiBSAETQ0AIAUgA00NAQtBACEDQQBBMDYC+NOAgAAMCgtBAC0AxNOAgABBBHENBAJAAkACQEEAKAKg0ICAACIERQ0AQcjTgIAAIQMDQAJAIAMoAgAiBSAESw0AIAUgAygCBGogBEsNAwsgAygCCCIDDQALC0EAEMuAgIAAIgBBf0YNBSAIIQYCQEEAKALk04CAACIDQX9qIgQgAHFFDQAgCCAAayAEIABqQQAgA2txaiEGCyAGIAJNDQUgBkH+////B0sNBQJAQQAoAsDTgIAAIgNFDQBBACgCuNOAgAAiBCAGaiIFIARNDQYgBSADSw0GCyAGEMuAgIAAIgMgAEcNAQwHCyAGIABrIAtxIgZB/v///wdLDQQgBhDLgICAACIAIAMoAgAgAygCBGpGDQMgACEDCwJAIANBf0YNACACQcgAaiAGTQ0AAkAgByAGa0EAKALo04CAACIEakEAIARrcSIEQf7///8HTQ0AIAMhAAwHCwJAIAQQy4CAgABBf0YNACAEIAZqIQYgAyEADAcLQQAgBmsQy4CAgAAaDAQLIAMhACADQX9HDQUMAwtBACEIDAcLQQAhAAwFCyAAQX9HDQILQQBBACgCxNOAgABBBHI2AsTTgIAACyAIQf7///8HSw0BIAgQy4CAgAAhAEEAEMuAgIAAIQMgAEF/Rg0BIANBf0YNASAAIANPDQEgAyAAayIGIAJBOGpNDQELQQBBACgCuNOAgAAgBmoiAzYCuNOAgAACQCADQQAoArzTgIAATQ0AQQAgAzYCvNOAgAALAkACQAJAAkBBACgCoNCAgAAiBEUNAEHI04CAACEDA0AgACADKAIAIgUgAygCBCIIakYNAiADKAIIIgMNAAwDCwsCQAJAQQAoApjQgIAAIgNFDQAgACADTw0BC0EAIAA2ApjQgIAAC0EAIQNBACAGNgLM04CAAEEAIAA2AsjTgIAAQQBBfzYCqNCAgABBAEEAKALg04CAADYCrNCAgABBAEEANgLU04CAAANAIANBxNCAgABqIANBuNCAgABqIgQ2AgAgBCADQbDQgIAAaiIFNgIAIANBvNCAgABqIAU2AgAgA0HM0ICAAGogA0HA0ICAAGoiBTYCACAFIAQ2AgAgA0HU0ICAAGogA0HI0ICAAGoiBDYCACAEIAU2AgAgA0HQ0ICAAGogBDYCACADQSBqIgNBgAJHDQALIABBeCAAa0EPcUEAIABBCGpBD3EbIgNqIgQgBkFIaiIFIANrIgNBAXI2AgRBAEEAKALw04CAADYCpNCAgABBACADNgKU0ICAAEEAIAQ2AqDQgIAAIAAgBWpBODYCBAwCCyADLQAMQQhxDQAgBCAFSQ0AIAQgAE8NACAEQXggBGtBD3FBACAEQQhqQQ9xGyIFaiIAQQAoApTQgIAAIAZqIgsgBWsiBUEBcjYCBCADIAggBmo2AgRBAEEAKALw04CAADYCpNCAgABBACAFNgKU0ICAAEEAIAA2AqDQgIAAIAQgC2pBODYCBAwBCwJAIABBACgCmNCAgAAiCE8NAEEAIAA2ApjQgIAAIAAhCAsgACAGaiEFQcjTgIAAIQMCQAJAAkACQAJAAkACQANAIAMoAgAgBUYNASADKAIIIgMNAAwCCwsgAy0ADEEIcUUNAQtByNOAgAAhAwNAAkAgAygCACIFIARLDQAgBSADKAIEaiIFIARLDQMLIAMoAgghAwwACwsgAyAANgIAIAMgAygCBCAGajYCBCAAQXggAGtBD3FBACAAQQhqQQ9xG2oiCyACQQNyNgIEIAVBeCAFa0EPcUEAIAVBCGpBD3EbaiIGIAsgAmoiAmshAwJAIAYgBEcNAEEAIAI2AqDQgIAAQQBBACgClNCAgAAgA2oiAzYClNCAgAAgAiADQQFyNgIEDAMLAkAgBkEAKAKc0ICAAEcNAEEAIAI2ApzQgIAAQQBBACgCkNCAgAAgA2oiAzYCkNCAgAAgAiADQQFyNgIEIAIgA2ogAzYCAAwDCwJAIAYoAgQiBEEDcUEBRw0AIARBeHEhBwJAAkAgBEH/AUsNACAGKAIIIgUgBEEDdiIIQQN0QbDQgIAAaiIARhoCQCAGKAIMIgQgBUcNAEEAQQAoAojQgIAAQX4gCHdxNgKI0ICAAAwCCyAEIABGGiAEIAU2AgggBSAENgIMDAELIAYoAhghCQJAAkAgBigCDCIAIAZGDQAgBigCCCIEIAhJGiAAIAQ2AgggBCAANgIMDAELAkAgBkEUaiIEKAIAIgUNACAGQRBqIgQoAgAiBQ0AQQAhAAwBCwNAIAQhCCAFIgBBFGoiBCgCACIFDQAgAEEQaiEEIAAoAhAiBQ0ACyAIQQA2AgALIAlFDQACQAJAIAYgBigCHCIFQQJ0QbjSgIAAaiIEKAIARw0AIAQgADYCACAADQFBAEEAKAKM0ICAAEF+IAV3cTYCjNCAgAAMAgsgCUEQQRQgCSgCECAGRhtqIAA2AgAgAEUNAQsgACAJNgIYAkAgBigCECIERQ0AIAAgBDYCECAEIAA2AhgLIAYoAhQiBEUNACAAQRRqIAQ2AgAgBCAANgIYCyAHIANqIQMgBiAHaiIGKAIEIQQLIAYgBEF+cTYCBCACIANqIAM2AgAgAiADQQFyNgIEAkAgA0H/AUsNACADQXhxQbDQgIAAaiEEAkACQEEAKAKI0ICAACIFQQEgA0EDdnQiA3ENAEEAIAUgA3I2AojQgIAAIAQhAwwBCyAEKAIIIQMLIAMgAjYCDCAEIAI2AgggAiAENgIMIAIgAzYCCAwDC0EfIQQCQCADQf///wdLDQAgA0EIdiIEIARBgP4/akEQdkEIcSIEdCIFIAVBgOAfakEQdkEEcSIFdCIAIABBgIAPakEQdkECcSIAdEEPdiAEIAVyIAByayIEQQF0IAMgBEEVanZBAXFyQRxqIQQLIAIgBDYCHCACQgA3AhAgBEECdEG40oCAAGohBQJAQQAoAozQgIAAIgBBASAEdCIIcQ0AIAUgAjYCAEEAIAAgCHI2AozQgIAAIAIgBTYCGCACIAI2AgggAiACNgIMDAMLIANBAEEZIARBAXZrIARBH0YbdCEEIAUoAgAhAANAIAAiBSgCBEF4cSADRg0CIARBHXYhACAEQQF0IQQgBSAAQQRxakEQaiIIKAIAIgANAAsgCCACNgIAIAIgBTYCGCACIAI2AgwgAiACNgIIDAILIABBeCAAa0EPcUEAIABBCGpBD3EbIgNqIgsgBkFIaiIIIANrIgNBAXI2AgQgACAIakE4NgIEIAQgBUE3IAVrQQ9xQQAgBUFJakEPcRtqQUFqIgggCCAEQRBqSRsiCEEjNgIEQQBBACgC8NOAgAA2AqTQgIAAQQAgAzYClNCAgABBACALNgKg0ICAACAIQRBqQQApAtDTgIAANwIAIAhBACkCyNOAgAA3AghBACAIQQhqNgLQ04CAAEEAIAY2AszTgIAAQQAgADYCyNOAgABBAEEANgLU04CAACAIQSRqIQMDQCADQQc2AgAgA0EEaiIDIAVJDQALIAggBEYNAyAIIAgoAgRBfnE2AgQgCCAIIARrIgA2AgAgBCAAQQFyNgIEAkAgAEH/AUsNACAAQXhxQbDQgIAAaiEDAkACQEEAKAKI0ICAACIFQQEgAEEDdnQiAHENAEEAIAUgAHI2AojQgIAAIAMhBQwBCyADKAIIIQULIAUgBDYCDCADIAQ2AgggBCADNgIMIAQgBTYCCAwEC0EfIQMCQCAAQf///wdLDQAgAEEIdiIDIANBgP4/akEQdkEIcSIDdCIFIAVBgOAfakEQdkEEcSIFdCIIIAhBgIAPakEQdkECcSIIdEEPdiADIAVyIAhyayIDQQF0IAAgA0EVanZBAXFyQRxqIQMLIAQgAzYCHCAEQgA3AhAgA0ECdEG40oCAAGohBQJAQQAoAozQgIAAIghBASADdCIGcQ0AIAUgBDYCAEEAIAggBnI2AozQgIAAIAQgBTYCGCAEIAQ2AgggBCAENgIMDAQLIABBAEEZIANBAXZrIANBH0YbdCEDIAUoAgAhCANAIAgiBSgCBEF4cSAARg0DIANBHXYhCCADQQF0IQMgBSAIQQRxakEQaiIGKAIAIggNAAsgBiAENgIAIAQgBTYCGCAEIAQ2AgwgBCAENgIIDAMLIAUoAggiAyACNgIMIAUgAjYCCCACQQA2AhggAiAFNgIMIAIgAzYCCAsgC0EIaiEDDAULIAUoAggiAyAENgIMIAUgBDYCCCAEQQA2AhggBCAFNgIMIAQgAzYCCAtBACgClNCAgAAiAyACTQ0AQQAoAqDQgIAAIgQgAmoiBSADIAJrIgNBAXI2AgRBACADNgKU0ICAAEEAIAU2AqDQgIAAIAQgAkEDcjYCBCAEQQhqIQMMAwtBACEDQQBBMDYC+NOAgAAMAgsCQCALRQ0AAkACQCAIIAgoAhwiBUECdEG40oCAAGoiAygCAEcNACADIAA2AgAgAA0BQQAgB0F+IAV3cSIHNgKM0ICAAAwCCyALQRBBFCALKAIQIAhGG2ogADYCACAARQ0BCyAAIAs2AhgCQCAIKAIQIgNFDQAgACADNgIQIAMgADYCGAsgCEEUaigCACIDRQ0AIABBFGogAzYCACADIAA2AhgLAkACQCAEQQ9LDQAgCCAEIAJqIgNBA3I2AgQgCCADaiIDIAMoAgRBAXI2AgQMAQsgCCACaiIAIARBAXI2AgQgCCACQQNyNgIEIAAgBGogBDYCAAJAIARB/wFLDQAgBEF4cUGw0ICAAGohAwJAAkBBACgCiNCAgAAiBUEBIARBA3Z0IgRxDQBBACAFIARyNgKI0ICAACADIQQMAQsgAygCCCEECyAEIAA2AgwgAyAANgIIIAAgAzYCDCAAIAQ2AggMAQtBHyEDAkAgBEH///8HSw0AIARBCHYiAyADQYD+P2pBEHZBCHEiA3QiBSAFQYDgH2pBEHZBBHEiBXQiAiACQYCAD2pBEHZBAnEiAnRBD3YgAyAFciACcmsiA0EBdCAEIANBFWp2QQFxckEcaiEDCyAAIAM2AhwgAEIANwIQIANBAnRBuNKAgABqIQUCQCAHQQEgA3QiAnENACAFIAA2AgBBACAHIAJyNgKM0ICAACAAIAU2AhggACAANgIIIAAgADYCDAwBCyAEQQBBGSADQQF2ayADQR9GG3QhAyAFKAIAIQICQANAIAIiBSgCBEF4cSAERg0BIANBHXYhAiADQQF0IQMgBSACQQRxakEQaiIGKAIAIgINAAsgBiAANgIAIAAgBTYCGCAAIAA2AgwgACAANgIIDAELIAUoAggiAyAANgIMIAUgADYCCCAAQQA2AhggACAFNgIMIAAgAzYCCAsgCEEIaiEDDAELAkAgCkUNAAJAAkAgACAAKAIcIgVBAnRBuNKAgABqIgMoAgBHDQAgAyAINgIAIAgNAUEAIAlBfiAFd3E2AozQgIAADAILIApBEEEUIAooAhAgAEYbaiAINgIAIAhFDQELIAggCjYCGAJAIAAoAhAiA0UNACAIIAM2AhAgAyAINgIYCyAAQRRqKAIAIgNFDQAgCEEUaiADNgIAIAMgCDYCGAsCQAJAIARBD0sNACAAIAQgAmoiA0EDcjYCBCAAIANqIgMgAygCBEEBcjYCBAwBCyAAIAJqIgUgBEEBcjYCBCAAIAJBA3I2AgQgBSAEaiAENgIAAkAgB0UNACAHQXhxQbDQgIAAaiECQQAoApzQgIAAIQMCQAJAQQEgB0EDdnQiCCAGcQ0AQQAgCCAGcjYCiNCAgAAgAiEIDAELIAIoAgghCAsgCCADNgIMIAIgAzYCCCADIAI2AgwgAyAINgIIC0EAIAU2ApzQgIAAQQAgBDYCkNCAgAALIABBCGohAwsgAUEQaiSAgICAACADCwoAIAAQyYCAgAAL4g0BB38CQCAARQ0AIABBeGoiASAAQXxqKAIAIgJBeHEiAGohAwJAIAJBAXENACACQQNxRQ0BIAEgASgCACICayIBQQAoApjQgIAAIgRJDQEgAiAAaiEAAkAgAUEAKAKc0ICAAEYNAAJAIAJB/wFLDQAgASgCCCIEIAJBA3YiBUEDdEGw0ICAAGoiBkYaAkAgASgCDCICIARHDQBBAEEAKAKI0ICAAEF+IAV3cTYCiNCAgAAMAwsgAiAGRhogAiAENgIIIAQgAjYCDAwCCyABKAIYIQcCQAJAIAEoAgwiBiABRg0AIAEoAggiAiAESRogBiACNgIIIAIgBjYCDAwBCwJAIAFBFGoiAigCACIEDQAgAUEQaiICKAIAIgQNAEEAIQYMAQsDQCACIQUgBCIGQRRqIgIoAgAiBA0AIAZBEGohAiAGKAIQIgQNAAsgBUEANgIACyAHRQ0BAkACQCABIAEoAhwiBEECdEG40oCAAGoiAigCAEcNACACIAY2AgAgBg0BQQBBACgCjNCAgABBfiAEd3E2AozQgIAADAMLIAdBEEEUIAcoAhAgAUYbaiAGNgIAIAZFDQILIAYgBzYCGAJAIAEoAhAiAkUNACAGIAI2AhAgAiAGNgIYCyABKAIUIgJFDQEgBkEUaiACNgIAIAIgBjYCGAwBCyADKAIEIgJBA3FBA0cNACADIAJBfnE2AgRBACAANgKQ0ICAACABIABqIAA2AgAgASAAQQFyNgIEDwsgASADTw0AIAMoAgQiAkEBcUUNAAJAAkAgAkECcQ0AAkAgA0EAKAKg0ICAAEcNAEEAIAE2AqDQgIAAQQBBACgClNCAgAAgAGoiADYClNCAgAAgASAAQQFyNgIEIAFBACgCnNCAgABHDQNBAEEANgKQ0ICAAEEAQQA2ApzQgIAADwsCQCADQQAoApzQgIAARw0AQQAgATYCnNCAgABBAEEAKAKQ0ICAACAAaiIANgKQ0ICAACABIABBAXI2AgQgASAAaiAANgIADwsgAkF4cSAAaiEAAkACQCACQf8BSw0AIAMoAggiBCACQQN2IgVBA3RBsNCAgABqIgZGGgJAIAMoAgwiAiAERw0AQQBBACgCiNCAgABBfiAFd3E2AojQgIAADAILIAIgBkYaIAIgBDYCCCAEIAI2AgwMAQsgAygCGCEHAkACQCADKAIMIgYgA0YNACADKAIIIgJBACgCmNCAgABJGiAGIAI2AgggAiAGNgIMDAELAkAgA0EUaiICKAIAIgQNACADQRBqIgIoAgAiBA0AQQAhBgwBCwNAIAIhBSAEIgZBFGoiAigCACIEDQAgBkEQaiECIAYoAhAiBA0ACyAFQQA2AgALIAdFDQACQAJAIAMgAygCHCIEQQJ0QbjSgIAAaiICKAIARw0AIAIgBjYCACAGDQFBAEEAKAKM0ICAAEF+IAR3cTYCjNCAgAAMAgsgB0EQQRQgBygCECADRhtqIAY2AgAgBkUNAQsgBiAHNgIYAkAgAygCECICRQ0AIAYgAjYCECACIAY2AhgLIAMoAhQiAkUNACAGQRRqIAI2AgAgAiAGNgIYCyABIABqIAA2AgAgASAAQQFyNgIEIAFBACgCnNCAgABHDQFBACAANgKQ0ICAAA8LIAMgAkF+cTYCBCABIABqIAA2AgAgASAAQQFyNgIECwJAIABB/wFLDQAgAEF4cUGw0ICAAGohAgJAAkBBACgCiNCAgAAiBEEBIABBA3Z0IgBxDQBBACAEIAByNgKI0ICAACACIQAMAQsgAigCCCEACyAAIAE2AgwgAiABNgIIIAEgAjYCDCABIAA2AggPC0EfIQICQCAAQf///wdLDQAgAEEIdiICIAJBgP4/akEQdkEIcSICdCIEIARBgOAfakEQdkEEcSIEdCIGIAZBgIAPakEQdkECcSIGdEEPdiACIARyIAZyayICQQF0IAAgAkEVanZBAXFyQRxqIQILIAEgAjYCHCABQgA3AhAgAkECdEG40oCAAGohBAJAAkBBACgCjNCAgAAiBkEBIAJ0IgNxDQAgBCABNgIAQQAgBiADcjYCjNCAgAAgASAENgIYIAEgATYCCCABIAE2AgwMAQsgAEEAQRkgAkEBdmsgAkEfRht0IQIgBCgCACEGAkADQCAGIgQoAgRBeHEgAEYNASACQR12IQYgAkEBdCECIAQgBkEEcWpBEGoiAygCACIGDQALIAMgATYCACABIAQ2AhggASABNgIMIAEgATYCCAwBCyAEKAIIIgAgATYCDCAEIAE2AgggAUEANgIYIAEgBDYCDCABIAA2AggLQQBBACgCqNCAgABBf2oiAUF/IAEbNgKo0ICAAAsLBAAAAAtOAAJAIAANAD8AQRB0DwsCQCAAQf//A3ENACAAQX9MDQACQCAAQRB2QAAiAEF/Rw0AQQBBMDYC+NOAgABBfw8LIABBEHQPCxDKgICAAAAL8gICA38BfgJAIAJFDQAgACABOgAAIAIgAGoiA0F/aiABOgAAIAJBA0kNACAAIAE6AAIgACABOgABIANBfWogAToAACADQX5qIAE6AAAgAkEHSQ0AIAAgAToAAyADQXxqIAE6AAAgAkEJSQ0AIABBACAAa0EDcSIEaiIDIAFB/wFxQYGChAhsIgE2AgAgAyACIARrQXxxIgRqIgJBfGogATYCACAEQQlJDQAgAyABNgIIIAMgATYCBCACQXhqIAE2AgAgAkF0aiABNgIAIARBGUkNACADIAE2AhggAyABNgIUIAMgATYCECADIAE2AgwgAkFwaiABNgIAIAJBbGogATYCACACQWhqIAE2AgAgAkFkaiABNgIAIAQgA0EEcUEYciIFayICQSBJDQAgAa1CgYCAgBB+IQYgAyAFaiEBA0AgASAGNwMYIAEgBjcDECABIAY3AwggASAGNwMAIAFBIGohASACQWBqIgJBH0sNAAsLIAALC45IAQBBgAgLhkgBAAAAAgAAAAMAAAAAAAAAAAAAAAQAAAAFAAAAAAAAAAAAAAAGAAAABwAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEludmFsaWQgY2hhciBpbiB1cmwgcXVlcnkAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9ib2R5AENvbnRlbnQtTGVuZ3RoIG92ZXJmbG93AENodW5rIHNpemUgb3ZlcmZsb3cAUmVzcG9uc2Ugb3ZlcmZsb3cASW52YWxpZCBtZXRob2QgZm9yIEhUVFAveC54IHJlcXVlc3QASW52YWxpZCBtZXRob2QgZm9yIFJUU1AveC54IHJlcXVlc3QARXhwZWN0ZWQgU09VUkNFIG1ldGhvZCBmb3IgSUNFL3gueCByZXF1ZXN0AEludmFsaWQgY2hhciBpbiB1cmwgZnJhZ21lbnQgc3RhcnQARXhwZWN0ZWQgZG90AFNwYW4gY2FsbGJhY2sgZXJyb3IgaW4gb25fc3RhdHVzAEludmFsaWQgcmVzcG9uc2Ugc3RhdHVzAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIGV4dGVuc2lvbnMAVXNlciBjYWxsYmFjayBlcnJvcgBgb25fcmVzZXRgIGNhbGxiYWNrIGVycm9yAGBvbl9jaHVua19oZWFkZXJgIGNhbGxiYWNrIGVycm9yAGBvbl9tZXNzYWdlX2JlZ2luYCBjYWxsYmFjayBlcnJvcgBgb25fY2h1bmtfZXh0ZW5zaW9uX3ZhbHVlYCBjYWxsYmFjayBlcnJvcgBgb25fc3RhdHVzX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fdmVyc2lvbl9jb21wbGV0ZWAgY2FsbGJhY2sgZXJyb3IAYG9uX3VybF9jb21wbGV0ZWAgY2FsbGJhY2sgZXJyb3IAYG9uX2NodW5rX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25faGVhZGVyX3ZhbHVlX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fbWVzc2FnZV9jb21wbGV0ZWAgY2FsbGJhY2sgZXJyb3IAYG9uX21ldGhvZF9jb21wbGV0ZWAgY2FsbGJhY2sgZXJyb3IAYG9uX2hlYWRlcl9maWVsZF9jb21wbGV0ZWAgY2FsbGJhY2sgZXJyb3IAYG9uX2NodW5rX2V4dGVuc2lvbl9uYW1lYCBjYWxsYmFjayBlcnJvcgBVbmV4cGVjdGVkIGNoYXIgaW4gdXJsIHNlcnZlcgBJbnZhbGlkIGhlYWRlciB2YWx1ZSBjaGFyAEludmFsaWQgaGVhZGVyIGZpZWxkIGNoYXIAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl92ZXJzaW9uAEludmFsaWQgbWlub3IgdmVyc2lvbgBJbnZhbGlkIG1ham9yIHZlcnNpb24ARXhwZWN0ZWQgc3BhY2UgYWZ0ZXIgdmVyc2lvbgBFeHBlY3RlZCBDUkxGIGFmdGVyIHZlcnNpb24ASW52YWxpZCBIVFRQIHZlcnNpb24ASW52YWxpZCBoZWFkZXIgdG9rZW4AU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl91cmwASW52YWxpZCBjaGFyYWN0ZXJzIGluIHVybABVbmV4cGVjdGVkIHN0YXJ0IGNoYXIgaW4gdXJsAERvdWJsZSBAIGluIHVybABFbXB0eSBDb250ZW50LUxlbmd0aABJbnZhbGlkIGNoYXJhY3RlciBpbiBDb250ZW50LUxlbmd0aABEdXBsaWNhdGUgQ29udGVudC1MZW5ndGgASW52YWxpZCBjaGFyIGluIHVybCBwYXRoAENvbnRlbnQtTGVuZ3RoIGNhbid0IGJlIHByZXNlbnQgd2l0aCBUcmFuc2Zlci1FbmNvZGluZwBJbnZhbGlkIGNoYXJhY3RlciBpbiBjaHVuayBzaXplAFNwYW4gY2FsbGJhY2sgZXJyb3IgaW4gb25faGVhZGVyX3ZhbHVlAFNwYW4gY2FsbGJhY2sgZXJyb3IgaW4gb25fY2h1bmtfZXh0ZW5zaW9uX3ZhbHVlAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIGV4dGVuc2lvbnMgdmFsdWUATWlzc2luZyBleHBlY3RlZCBMRiBhZnRlciBoZWFkZXIgdmFsdWUASW52YWxpZCBgVHJhbnNmZXItRW5jb2RpbmdgIGhlYWRlciB2YWx1ZQBJbnZhbGlkIGNoYXJhY3RlciBpbiBjaHVuayBleHRlbnNpb25zIHF1b3RlIHZhbHVlAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIGV4dGVuc2lvbnMgcXVvdGVkIHZhbHVlAFBhdXNlZCBieSBvbl9oZWFkZXJzX2NvbXBsZXRlAEludmFsaWQgRU9GIHN0YXRlAG9uX3Jlc2V0IHBhdXNlAG9uX2NodW5rX2hlYWRlciBwYXVzZQBvbl9tZXNzYWdlX2JlZ2luIHBhdXNlAG9uX2NodW5rX2V4dGVuc2lvbl92YWx1ZSBwYXVzZQBvbl9zdGF0dXNfY29tcGxldGUgcGF1c2UAb25fdmVyc2lvbl9jb21wbGV0ZSBwYXVzZQBvbl91cmxfY29tcGxldGUgcGF1c2UAb25fY2h1bmtfY29tcGxldGUgcGF1c2UAb25faGVhZGVyX3ZhbHVlX2NvbXBsZXRlIHBhdXNlAG9uX21lc3NhZ2VfY29tcGxldGUgcGF1c2UAb25fbWV0aG9kX2NvbXBsZXRlIHBhdXNlAG9uX2hlYWRlcl9maWVsZF9jb21wbGV0ZSBwYXVzZQBvbl9jaHVua19leHRlbnNpb25fbmFtZSBwYXVzZQBVbmV4cGVjdGVkIHNwYWNlIGFmdGVyIHN0YXJ0IGxpbmUAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9jaHVua19leHRlbnNpb25fbmFtZQBJbnZhbGlkIGNoYXJhY3RlciBpbiBjaHVuayBleHRlbnNpb25zIG5hbWUAUGF1c2Ugb24gQ09OTkVDVC9VcGdyYWRlAFBhdXNlIG9uIFBSSS9VcGdyYWRlAEV4cGVjdGVkIEhUVFAvMiBDb25uZWN0aW9uIFByZWZhY2UAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9tZXRob2QARXhwZWN0ZWQgc3BhY2UgYWZ0ZXIgbWV0aG9kAFNwYW4gY2FsbGJhY2sgZXJyb3IgaW4gb25faGVhZGVyX2ZpZWxkAFBhdXNlZABJbnZhbGlkIHdvcmQgZW5jb3VudGVyZWQASW52YWxpZCBtZXRob2QgZW5jb3VudGVyZWQAVW5leHBlY3RlZCBjaGFyIGluIHVybCBzY2hlbWEAUmVxdWVzdCBoYXMgaW52YWxpZCBgVHJhbnNmZXItRW5jb2RpbmdgAFNXSVRDSF9QUk9YWQBVU0VfUFJPWFkATUtBQ1RJVklUWQBVTlBST0NFU1NBQkxFX0VOVElUWQBDT1BZAE1PVkVEX1BFUk1BTkVOVExZAFRPT19FQVJMWQBOT1RJRlkARkFJTEVEX0RFUEVOREVOQ1kAQkFEX0dBVEVXQVkAUExBWQBQVVQAQ0hFQ0tPVVQAR0FURVdBWV9USU1FT1VUAFJFUVVFU1RfVElNRU9VVABORVRXT1JLX0NPTk5FQ1RfVElNRU9VVABDT05ORUNUSU9OX1RJTUVPVVQATE9HSU5fVElNRU9VVABORVRXT1JLX1JFQURfVElNRU9VVABQT1NUAE1JU0RJUkVDVEVEX1JFUVVFU1QAQ0xJRU5UX0NMT1NFRF9SRVFVRVNUAENMSUVOVF9DTE9TRURfTE9BRF9CQUxBTkNFRF9SRVFVRVNUAEJBRF9SRVFVRVNUAEhUVFBfUkVRVUVTVF9TRU5UX1RPX0hUVFBTX1BPUlQAUkVQT1JUAElNX0FfVEVBUE9UAFJFU0VUX0NPTlRFTlQATk9fQ09OVEVOVABQQVJUSUFMX0NPTlRFTlQASFBFX0lOVkFMSURfQ09OU1RBTlQASFBFX0NCX1JFU0VUAEdFVABIUEVfU1RSSUNUAENPTkZMSUNUAFRFTVBPUkFSWV9SRURJUkVDVABQRVJNQU5FTlRfUkVESVJFQ1QAQ09OTkVDVABNVUxUSV9TVEFUVVMASFBFX0lOVkFMSURfU1RBVFVTAFRPT19NQU5ZX1JFUVVFU1RTAEVBUkxZX0hJTlRTAFVOQVZBSUxBQkxFX0ZPUl9MRUdBTF9SRUFTT05TAE9QVElPTlMAU1dJVENISU5HX1BST1RPQ09MUwBWQVJJQU5UX0FMU09fTkVHT1RJQVRFUwBNVUxUSVBMRV9DSE9JQ0VTAElOVEVSTkFMX1NFUlZFUl9FUlJPUgBXRUJfU0VSVkVSX1VOS05PV05fRVJST1IAUkFJTEdVTl9FUlJPUgBJREVOVElUWV9QUk9WSURFUl9BVVRIRU5USUNBVElPTl9FUlJPUgBTU0xfQ0VSVElGSUNBVEVfRVJST1IASU5WQUxJRF9YX0ZPUldBUkRFRF9GT1IAU0VUX1BBUkFNRVRFUgBHRVRfUEFSQU1FVEVSAEhQRV9VU0VSAFNFRV9PVEhFUgBIUEVfQ0JfQ0hVTktfSEVBREVSAE1LQ0FMRU5EQVIAU0VUVVAAV0VCX1NFUlZFUl9JU19ET1dOAFRFQVJET1dOAEhQRV9DTE9TRURfQ09OTkVDVElPTgBIRVVSSVNUSUNfRVhQSVJBVElPTgBESVNDT05ORUNURURfT1BFUkFUSU9OAE5PTl9BVVRIT1JJVEFUSVZFX0lORk9STUFUSU9OAEhQRV9JTlZBTElEX1ZFUlNJT04ASFBFX0NCX01FU1NBR0VfQkVHSU4AU0lURV9JU19GUk9aRU4ASFBFX0lOVkFMSURfSEVBREVSX1RPS0VOAElOVkFMSURfVE9LRU4ARk9SQklEREVOAEVOSEFOQ0VfWU9VUl9DQUxNAEhQRV9JTlZBTElEX1VSTABCTE9DS0VEX0JZX1BBUkVOVEFMX0NPTlRST0wATUtDT0wAQUNMAEhQRV9JTlRFUk5BTABSRVFVRVNUX0hFQURFUl9GSUVMRFNfVE9PX0xBUkdFX1VOT0ZGSUNJQUwASFBFX09LAFVOTElOSwBVTkxPQ0sAUFJJAFJFVFJZX1dJVEgASFBFX0lOVkFMSURfQ09OVEVOVF9MRU5HVEgASFBFX1VORVhQRUNURURfQ09OVEVOVF9MRU5HVEgARkxVU0gAUFJPUFBBVENIAE0tU0VBUkNIAFVSSV9UT09fTE9ORwBQUk9DRVNTSU5HAE1JU0NFTExBTkVPVVNfUEVSU0lTVEVOVF9XQVJOSU5HAE1JU0NFTExBTkVPVVNfV0FSTklORwBIUEVfSU5WQUxJRF9UUkFOU0ZFUl9FTkNPRElORwBFeHBlY3RlZCBDUkxGAEhQRV9JTlZBTElEX0NIVU5LX1NJWkUATU9WRQBDT05USU5VRQBIUEVfQ0JfU1RBVFVTX0NPTVBMRVRFAEhQRV9DQl9IRUFERVJTX0NPTVBMRVRFAEhQRV9DQl9WRVJTSU9OX0NPTVBMRVRFAEhQRV9DQl9VUkxfQ09NUExFVEUASFBFX0NCX0NIVU5LX0NPTVBMRVRFAEhQRV9DQl9IRUFERVJfVkFMVUVfQ09NUExFVEUASFBFX0NCX0NIVU5LX0VYVEVOU0lPTl9WQUxVRV9DT01QTEVURQBIUEVfQ0JfQ0hVTktfRVhURU5TSU9OX05BTUVfQ09NUExFVEUASFBFX0NCX01FU1NBR0VfQ09NUExFVEUASFBFX0NCX01FVEhPRF9DT01QTEVURQBIUEVfQ0JfSEVBREVSX0ZJRUxEX0NPTVBMRVRFAERFTEVURQBIUEVfSU5WQUxJRF9FT0ZfU1RBVEUASU5WQUxJRF9TU0xfQ0VSVElGSUNBVEUAUEFVU0UATk9fUkVTUE9OU0UAVU5TVVBQT1JURURfTUVESUFfVFlQRQBHT05FAE5PVF9BQ0NFUFRBQkxFAFNFUlZJQ0VfVU5BVkFJTEFCTEUAUkFOR0VfTk9UX1NBVElTRklBQkxFAE9SSUdJTl9JU19VTlJFQUNIQUJMRQBSRVNQT05TRV9JU19TVEFMRQBQVVJHRQBNRVJHRQBSRVFVRVNUX0hFQURFUl9GSUVMRFNfVE9PX0xBUkdFAFJFUVVFU1RfSEVBREVSX1RPT19MQVJHRQBQQVlMT0FEX1RPT19MQVJHRQBJTlNVRkZJQ0lFTlRfU1RPUkFHRQBIUEVfUEFVU0VEX1VQR1JBREUASFBFX1BBVVNFRF9IMl9VUEdSQURFAFNPVVJDRQBBTk5PVU5DRQBUUkFDRQBIUEVfVU5FWFBFQ1RFRF9TUEFDRQBERVNDUklCRQBVTlNVQlNDUklCRQBSRUNPUkQASFBFX0lOVkFMSURfTUVUSE9EAE5PVF9GT1VORABQUk9QRklORABVTkJJTkQAUkVCSU5EAFVOQVVUSE9SSVpFRABNRVRIT0RfTk9UX0FMTE9XRUQASFRUUF9WRVJTSU9OX05PVF9TVVBQT1JURUQAQUxSRUFEWV9SRVBPUlRFRABBQ0NFUFRFRABOT1RfSU1QTEVNRU5URUQATE9PUF9ERVRFQ1RFRABIUEVfQ1JfRVhQRUNURUQASFBFX0xGX0VYUEVDVEVEAENSRUFURUQASU1fVVNFRABIUEVfUEFVU0VEAFRJTUVPVVRfT0NDVVJFRABQQVlNRU5UX1JFUVVJUkVEAFBSRUNPTkRJVElPTl9SRVFVSVJFRABQUk9YWV9BVVRIRU5USUNBVElPTl9SRVFVSVJFRABORVRXT1JLX0FVVEhFTlRJQ0FUSU9OX1JFUVVJUkVEAExFTkdUSF9SRVFVSVJFRABTU0xfQ0VSVElGSUNBVEVfUkVRVUlSRUQAVVBHUkFERV9SRVFVSVJFRABQQUdFX0VYUElSRUQAUFJFQ09ORElUSU9OX0ZBSUxFRABFWFBFQ1RBVElPTl9GQUlMRUQAUkVWQUxJREFUSU9OX0ZBSUxFRABTU0xfSEFORFNIQUtFX0ZBSUxFRABMT0NLRUQAVFJBTlNGT1JNQVRJT05fQVBQTElFRABOT1RfTU9ESUZJRUQATk9UX0VYVEVOREVEAEJBTkRXSURUSF9MSU1JVF9FWENFRURFRABTSVRFX0lTX09WRVJMT0FERUQASEVBRABFeHBlY3RlZCBIVFRQLwAAXhMAACYTAAAwEAAA8BcAAJ0TAAAVEgAAORcAAPASAAAKEAAAdRIAAK0SAACCEwAATxQAAH8QAACgFQAAIxQAAIkSAACLFAAATRUAANQRAADPFAAAEBgAAMkWAADcFgAAwREAAOAXAAC7FAAAdBQAAHwVAADlFAAACBcAAB8QAABlFQAAoxQAACgVAAACFQAAmRUAACwQAACLGQAATw8AANQOAABqEAAAzhAAAAIXAACJDgAAbhMAABwTAABmFAAAVhcAAMETAADNEwAAbBMAAGgXAABmFwAAXxcAACITAADODwAAaQ4AANgOAABjFgAAyxMAAKoOAAAoFwAAJhcAAMUTAABdFgAA6BEAAGcTAABlEwAA8hYAAHMTAAAdFwAA+RYAAPMRAADPDgAAzhUAAAwSAACzEQAApREAAGEQAAAyFwAAuxMAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQIBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAIDAgICAgIAAAICAAICAAICAgICAgICAgIABAAAAAAAAgICAgICAgICAgICAgICAgICAgICAgICAgIAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACAAICAgICAAACAgACAgACAgICAgICAgICAAMABAAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAAAAAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbG9zZWVlcC1hbGl2ZQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAQEBAQEBAQEBAQIBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBY2h1bmtlZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAQEBAQEAAAEBAAEBAAEBAQEBAQEBAQEAAAAAAAAAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABlY3Rpb25lbnQtbGVuZ3Rob25yb3h5LWNvbm5lY3Rpb24AAAAAAAAAAAAAAAAAAAByYW5zZmVyLWVuY29kaW5ncGdyYWRlDQoNCg0KU00NCg0KVFRQL0NFL1RTUC8AAAAAAAAAAAAAAAABAgABAwAAAAAAAAAAAAAAAAAAAAAAAAQBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAQIAAQMAAAAAAAAAAAAAAAAAAAAAAAAEAQEFAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAAAAAAMEAAAEBAQEBAQEBAQEBAUEBAQEBAQEBAQEBAQABAAGBwQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEAAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABOT1VOQ0VFQ0tPVVRORUNURVRFQ1JJQkVMVVNIRVRFQURTRUFSQ0hSR0VDVElWSVRZTEVOREFSVkVPVElGWVBUSU9OU0NIU0VBWVNUQVRDSEdFT1JESVJFQ1RPUlRSQ0hQQVJBTUVURVJVUkNFQlNDUklCRUFSRE9XTkFDRUlORE5LQ0tVQlNDUklCRUhUVFAvQURUUC8=")}function nt(){if(Je)return Te;Je=1;const A=g,e=s,t=o,{pipeline:r}=Q,n=gA(),i=aA(),E=function(){if($A)return zA;$A=1;const{InvalidArgumentError:A,NotSupportedError:e}=EA(),t=g,{kHTTP2BuildRequest:r,kHTTP2CopyHeaders:o,kHTTP1BuildRequest:n}=iA(),s=gA(),i=/^[\^_`a-zA-Z\-0-9!#$%&'*+.|~]+$/,E=/[^\t\x20-\x7e\x80-\xff]/,a=/[^\u0021-\u00ff]/,Q=Symbol("handler"),C={};let B;try{const A=require("diagnostics_channel");C.create=A.channel("undici:request:create"),C.bodySent=A.channel("undici:request:bodySent"),C.headers=A.channel("undici:request:headers"),C.trailers=A.channel("undici:request:trailers"),C.error=A.channel("undici:request:error")}catch{C.create={hasSubscribers:!1},C.bodySent={hasSubscribers:!1},C.headers={hasSubscribers:!1},C.trailers={hasSubscribers:!1},C.error={hasSubscribers:!1}}class c{constructor(e,{path:t,method:r,body:o,headers:n,query:E,idempotent:g,blocking:c,upgrade:I,headersTimeout:l,bodyTimeout:u,reset:d,throwOnError:f,expectContinue:y},p){if("string"!=typeof t)throw new A("path must be a string");if("/"!==t[0]&&!t.startsWith("http://")&&!t.startsWith("https://")&&"CONNECT"!==r)throw new A("path must be an absolute URL or start with a slash");if(null!==a.exec(t))throw new A("invalid request path");if("string"!=typeof r)throw new A("method must be a string");if(null===i.exec(r))throw new A("invalid request method");if(I&&"string"!=typeof I)throw new A("upgrade must be a string");if(null!=l&&(!Number.isFinite(l)||l<0))throw new A("invalid headersTimeout");if(null!=u&&(!Number.isFinite(u)||u<0))throw new A("invalid bodyTimeout");if(null!=d&&"boolean"!=typeof d)throw new A("invalid reset");if(null!=y&&"boolean"!=typeof y)throw new A("invalid expectContinue");if(this.headersTimeout=l,this.bodyTimeout=u,this.throwOnError=!0===f,this.method=r,this.abort=null,null==o)this.body=null;else if(s.isStream(o)){this.body=o;const A=this.body._readableState;A&&A.autoDestroy||(this.endHandler=function(){s.destroy(this)},this.body.on("end",this.endHandler)),this.errorHandler=A=>{this.abort?this.abort(A):this.error=A},this.body.on("error",this.errorHandler)}else if(s.isBuffer(o))this.body=o.byteLength?o:null;else if(ArrayBuffer.isView(o))this.body=o.buffer.byteLength?Buffer.from(o.buffer,o.byteOffset,o.byteLength):null;else if(o instanceof ArrayBuffer)this.body=o.byteLength?Buffer.from(o):null;else if("string"==typeof o)this.body=o.length?Buffer.from(o):null;else{if(!(s.isFormDataLike(o)||s.isIterable(o)||s.isBlobLike(o)))throw new A("body must be a string, a Buffer, a Readable stream, an iterable, or an async iterable");this.body=o}if(this.completed=!1,this.aborted=!1,this.upgrade=I||null,this.path=E?s.buildURL(t,E):t,this.origin=e,this.idempotent=null==g?"HEAD"===r||"GET"===r:g,this.blocking=null!=c&&c,this.reset=null==d?null:d,this.host=null,this.contentLength=null,this.contentType=null,this.headers="",this.expectContinue=null!=y&&y,Array.isArray(n)){if(n.length%2!=0)throw new A("headers array must be even");for(let A=0;A<n.length;A+=2)h(this,n[A],n[A+1])}else if(n&&"object"==typeof n){const A=Object.keys(n);for(let e=0;e<A.length;e++){const t=A[e];h(this,t,n[t])}}else if(null!=n)throw new A("headers must be an object or an array");if(s.isFormDataLike(this.body)){if(s.nodeMajor<16||16===s.nodeMajor&&s.nodeMinor<8)throw new A("Form-Data bodies are only supported in node v16.8 and newer.");B||(B=we().extractBody);const[e,t]=B(o);null==this.contentType&&(this.contentType=t,this.headers+=`content-type: ${t}\r\n`),this.body=e.stream,this.contentLength=e.length}else s.isBlobLike(o)&&null==this.contentType&&o.type&&(this.contentType=o.type,this.headers+=`content-type: ${o.type}\r\n`);s.validateHandler(p,r,I),this.servername=s.getServerName(this.host),this[Q]=p,C.create.hasSubscribers&&C.create.publish({request:this})}onBodySent(A){if(this[Q].onBodySent)try{return this[Q].onBodySent(A)}catch(A){this.abort(A)}}onRequestSent(){if(C.bodySent.hasSubscribers&&C.bodySent.publish({request:this}),this[Q].onRequestSent)try{return this[Q].onRequestSent()}catch(A){this.abort(A)}}onConnect(A){if(t(!this.aborted),t(!this.completed),!this.error)return this.abort=A,this[Q].onConnect(A);A(this.error)}onHeaders(A,e,r,o){t(!this.aborted),t(!this.completed),C.headers.hasSubscribers&&C.headers.publish({request:this,response:{statusCode:A,headers:e,statusText:o}});try{return this[Q].onHeaders(A,e,r,o)}catch(A){this.abort(A)}}onData(A){t(!this.aborted),t(!this.completed);try{return this[Q].onData(A)}catch(A){return this.abort(A),!1}}onUpgrade(A,e,r){return t(!this.aborted),t(!this.completed),this[Q].onUpgrade(A,e,r)}onComplete(A){this.onFinally(),t(!this.aborted),this.completed=!0,C.trailers.hasSubscribers&&C.trailers.publish({request:this,trailers:A});try{return this[Q].onComplete(A)}catch(A){this.onError(A)}}onError(A){if(this.onFinally(),C.error.hasSubscribers&&C.error.publish({request:this,error:A}),!this.aborted)return this.aborted=!0,this[Q].onError(A)}onFinally(){this.errorHandler&&(this.body.off("error",this.errorHandler),this.errorHandler=null),this.endHandler&&(this.body.off("end",this.endHandler),this.endHandler=null)}addHeader(A,e){return h(this,A,e),this}static[n](A,e,t){return new c(A,e,t)}static[r](e,t,r){const o=t.headers;t={...t,headers:null};const n=new c(e,t,r);if(n.headers={},Array.isArray(o)){if(o.length%2!=0)throw new A("headers array must be even");for(let A=0;A<o.length;A+=2)h(n,o[A],o[A+1],!0)}else if(o&&"object"==typeof o){const A=Object.keys(o);for(let e=0;e<A.length;e++){const t=A[e];h(n,t,o[t],!0)}}else if(null!=o)throw new A("headers must be an object or an array");return n}static[o](A){const e=A.split("\r\n"),t={};for(const A of e){const[e,r]=A.split(": ");null!=r&&0!==r.length&&(t[e]?t[e]+=`,${r}`:t[e]=r)}return t}}function I(e,t,r){if(t&&"object"==typeof t)throw new A(`invalid ${e} header`);if(t=null!=t?`${t}`:"",null!==E.exec(t))throw new A(`invalid ${e} header`);return r?t:`${e}: ${t}\r\n`}function h(t,r,o,n=!1){if(o&&"object"==typeof o&&!Array.isArray(o))throw new A(`invalid ${r} header`);if(void 0!==o)if(null===t.host&&4===r.length&&"host"===r.toLowerCase()){if(null!==E.exec(o))throw new A(`invalid ${r} header`);t.host=o}else if(null===t.contentLength&&14===r.length&&"content-length"===r.toLowerCase()){if(t.contentLength=parseInt(o,10),!Number.isFinite(t.contentLength))throw new A("invalid content-length header")}else if(null===t.contentType&&12===r.length&&"content-type"===r.toLowerCase())t.contentType=o,n?t.headers[r]=I(r,o,n):t.headers+=I(r,o);else{if(17===r.length&&"transfer-encoding"===r.toLowerCase())throw new A("invalid transfer-encoding header");if(10===r.length&&"connection"===r.toLowerCase()){const e="string"==typeof o?o.toLowerCase():null;if("close"!==e&&"keep-alive"!==e)throw new A("invalid connection header");"close"===e&&(t.reset=!0)}else{if(10===r.length&&"keep-alive"===r.toLowerCase())throw new A("invalid keep-alive header");if(7===r.length&&"upgrade"===r.toLowerCase())throw new A("invalid upgrade header");if(6===r.length&&"expect"===r.toLowerCase())throw new e("expect header not supported");if(null===i.exec(r))throw new A("invalid header key");if(Array.isArray(o))for(let A=0;A<o.length;A++)n?t.headers[r]?t.headers[r]+=`,${I(r,o[A],n)}`:t.headers[r]=I(r,o[A],n):t.headers+=I(r,o[A]);else n?t.headers[r]=I(r,o,n):t.headers+=I(r,o)}}}return zA=c}(),a=Re(),{RequestContentLengthMismatchError:C,ResponseContentLengthMismatchError:B,InvalidArgumentError:c,RequestAbortedError:I,HeadersTimeoutError:h,HeadersOverflowError:l,SocketError:u,InformationalError:d,BodyTimeoutError:f,HTTPParserError:y,ResponseExceededMaxSizeError:p,ClientDestroyedError:w}=EA(),D=me(),{kUrl:R,kReset:m,kServerName:k,kClient:b,kBusy:N,kParser:F,kConnect:S,kBlocking:U,kResuming:L,kRunning:M,kPending:Y,kSize:v,kWriting:T,kQueue:J,kConnected:G,kConnecting:H,kNeedDrain:V,kNoRef:O,kKeepAliveDefaultTimeout:x,kHostHeader:W,kPendingIdx:q,kRunningIdx:P,kError:_,kPipelining:Z,kSocket:j,kKeepAliveTimeoutValue:X,kMaxHeadersSize:K,kKeepAliveMaxTimeout:z,kKeepAliveTimeoutThreshold:$,kHeadersTimeout:AA,kBodyTimeout:eA,kStrictContentLength:tA,kConnector:rA,kMaxRedirections:oA,kMaxRequests:nA,kCounter:sA,kClose:QA,kDestroy:CA,kDispatch:BA,kInterceptors:cA,kLocalAddress:IA,kMaxResponseSize:hA,kHTTPConnVersion:lA,kHost:uA,kHTTP2Session:dA,kHTTP2SessionState:fA,kHTTP2BuildRequest:yA,kHTTP2CopyHeaders:pA,kHTTP1BuildRequest:wA}=iA();let DA;try{DA=require("http2")}catch{DA={constants:{}}}const{constants:{HTTP2_HEADER_AUTHORITY:RA,HTTP2_HEADER_METHOD:mA,HTTP2_HEADER_PATH:kA,HTTP2_HEADER_SCHEME:bA,HTTP2_HEADER_CONTENT_LENGTH:NA,HTTP2_HEADER_EXPECT:FA,HTTP2_HEADER_STATUS:SA}}=DA;let UA=!1;const LA=Buffer[Symbol.species],MA=Symbol("kClosedResolve"),YA={};try{const A=require("diagnostics_channel");YA.sendHeaders=A.channel("undici:client:sendHeaders"),YA.beforeConnect=A.channel("undici:client:beforeConnect"),YA.connectError=A.channel("undici:client:connectError"),YA.connected=A.channel("undici:client:connected")}catch{YA.sendHeaders={hasSubscribers:!1},YA.beforeConnect={hasSubscribers:!1},YA.connectError={hasSubscribers:!1},YA.connected={hasSubscribers:!1}}function vA(e){A("ERR_TLS_CERT_ALTNAME_INVALID"!==e.code),this[j][_]=e,re(this[b],e)}function TA(A,e,t){const r=new d(`HTTP/2: "frameError" received - type ${A}, code ${e}`);0===t&&(this[j][_]=r,re(this[b],r))}function JA(){n.destroy(this,new u("other side closed")),n.destroy(this[j],new u("other side closed"))}function GA(e){const t=this[b],r=new d(`HTTP/2: "GOAWAY" frame received with code ${e}`);if(t[j]=null,t[dA]=null,t.destroyed){A(0===this[Y]);const e=t[J].splice(t[P]);for(let A=0;A<e.length;A++){Ie(this,e[A],r)}}else if(t[M]>0){const A=t[J][t[P]];t[J][t[P]++]=null,Ie(t,A,r)}t[q]=t[P],A(0===t[M]),t.emit("disconnect",t[R],[t],r),Ee(t)}const HA=et(),VA=rt(),OA=Buffer.alloc(0);let xA=null,WA=async function(){const e=process.env.JEST_WORKER_ID?ot():void 0;let t;try{t=await WebAssembly.compile(Buffer.from(ve?Ye:(ve=1,Ye="AGFzbQEAAAABMAhgAX8Bf2ADf39/AX9gBH9/f38Bf2AAAGADf39/AGABfwBgAn9/AGAGf39/f39/AALLAQgDZW52GHdhc21fb25faGVhZGVyc19jb21wbGV0ZQACA2VudhV3YXNtX29uX21lc3NhZ2VfYmVnaW4AAANlbnYLd2FzbV9vbl91cmwAAQNlbnYOd2FzbV9vbl9zdGF0dXMAAQNlbnYUd2FzbV9vbl9oZWFkZXJfZmllbGQAAQNlbnYUd2FzbV9vbl9oZWFkZXJfdmFsdWUAAQNlbnYMd2FzbV9vbl9ib2R5AAEDZW52GHdhc21fb25fbWVzc2FnZV9jb21wbGV0ZQAAA0ZFAwMEAAAFAAAAAAAABQEFAAUFBQAABgAAAAAGBgYGAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAAABAQcAAAUFAwABBAUBcAESEgUDAQACBggBfwFBgNQECwfRBSIGbWVtb3J5AgALX2luaXRpYWxpemUACRlfX2luZGlyZWN0X2Z1bmN0aW9uX3RhYmxlAQALbGxodHRwX2luaXQAChhsbGh0dHBfc2hvdWxkX2tlZXBfYWxpdmUAQQxsbGh0dHBfYWxsb2MADAZtYWxsb2MARgtsbGh0dHBfZnJlZQANBGZyZWUASA9sbGh0dHBfZ2V0X3R5cGUADhVsbGh0dHBfZ2V0X2h0dHBfbWFqb3IADxVsbGh0dHBfZ2V0X2h0dHBfbWlub3IAEBFsbGh0dHBfZ2V0X21ldGhvZAARFmxsaHR0cF9nZXRfc3RhdHVzX2NvZGUAEhJsbGh0dHBfZ2V0X3VwZ3JhZGUAEwxsbGh0dHBfcmVzZXQAFA5sbGh0dHBfZXhlY3V0ZQAVFGxsaHR0cF9zZXR0aW5nc19pbml0ABYNbGxodHRwX2ZpbmlzaAAXDGxsaHR0cF9wYXVzZQAYDWxsaHR0cF9yZXN1bWUAGRtsbGh0dHBfcmVzdW1lX2FmdGVyX3VwZ3JhZGUAGhBsbGh0dHBfZ2V0X2Vycm5vABsXbGxodHRwX2dldF9lcnJvcl9yZWFzb24AHBdsbGh0dHBfc2V0X2Vycm9yX3JlYXNvbgAdFGxsaHR0cF9nZXRfZXJyb3JfcG9zAB4RbGxodHRwX2Vycm5vX25hbWUAHxJsbGh0dHBfbWV0aG9kX25hbWUAIBJs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IAH9CwMAIABBMGogAf0LAwAgAEEgaiAB/QsDACAAQd0BNgIcQQALewEBfwJAIAAoAgwiAw0AAkAgACgCBEUNACAAIAE2AgQLAkAgACABIAIQxICAgAAiAw0AIAAoAgwPCyAAIAM2AhxBACEDIAAoAgQiAUUNACAAIAEgAiAAKAIIEYGAgIAAACIBRQ0AIAAgAjYCFCAAIAE2AgwgASEDCyADC+TzAQMOfwN+BH8jgICAgABBEGsiAySAgICAACABIQQgASEFIAEhBiABIQcgASEIIAEhCSABIQogASELIAEhDCABIQ0gASEOIAEhDwJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQCAAKAIcIhBBf2oO3QHaAQHZAQIDBAUGBwgJCgsMDQ7YAQ8Q1wEREtYBExQVFhcYGRob4AHfARwdHtUBHyAhIiMkJdQBJicoKSorLNMB0gEtLtEB0AEvMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUbbAUdISUrPAc4BS80BTMwBTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gAGBAYIBgwGEAYUBhgGHAYgBiQGKAYsBjAGNAY4BjwGQAZEB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QAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAIBAOxwEAAQID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YWNrIGVycm9yAGBvbl9jaHVua19leHRlbnNpb25fdmFsdWVgIGNhbGxiYWNrIGVycm9yAGBvbl9zdGF0dXNfY29tcGxldGVgIGNhbGxiYWNrIGVycm9yAGBvbl92ZXJzaW9uX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fdXJsX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fY2h1bmtfY29tcGxldGVgIGNhbGxiYWNrIGVycm9yAGBvbl9oZWFkZXJfdmFsdWVfY29tcGxldGVgIGNhbGxiYWNrIGVycm9yAGBvbl9tZXNzYWdlX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fbWV0aG9kX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25faGVhZGVyX2ZpZWxkX2NvbXBsZXRlYCBjYWxsYmFjayBlcnJvcgBgb25fY2h1bmtfZXh0ZW5zaW9uX25hbWVgIGNhbGxiYWNrIGVycm9yAFVuZXhwZWN0ZWQgY2hhciBpbiB1cmwgc2VydmVyAEludmFsaWQgaGVhZGVyIHZhbHVlIGNoYXIASW52YWxpZCBoZWFkZXIgZmllbGQgY2hhcgBTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX3ZlcnNpb24ASW52YWxpZCBtaW5vciB2ZXJzaW9uAEludmFsaWQgbWFqb3IgdmVyc2lvbgBFeHBlY3RlZCBzcGFjZSBhZnRlciB2ZXJzaW9uAEV4cGVjdGVkIENSTEYgYWZ0ZXIgdmVyc2lvbgBJbnZhbGlkIEhUVFAgdmVyc2lvbgBJbnZhbGlkIGhlYWRlciB0b2tlbgBTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX3VybABJbnZhbGlkIGNoYXJhY3RlcnMgaW4gdXJsAFVuZXhwZWN0ZWQgc3RhcnQgY2hhciBpbiB1cmwARG91YmxlIEAgaW4gdXJsAEVtcHR5IENvbnRlbnQtTGVuZ3RoAEludmFsaWQgY2hhcmFjdGVyIGluIENvbnRlbnQtTGVuZ3RoAER1cGxpY2F0ZSBDb250ZW50LUxlbmd0aABJbnZhbGlkIGNoYXIgaW4gdXJsIHBhdGgAQ29udGVudC1MZW5ndGggY2FuJ3QgYmUgcHJlc2VudCB3aXRoIFRyYW5zZmVyLUVuY29kaW5nAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIHNpemUAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9oZWFkZXJfdmFsdWUAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9jaHVua19leHRlbnNpb25fdmFsdWUASW52YWxpZCBjaGFyYWN0ZXIgaW4gY2h1bmsgZXh0ZW5zaW9ucyB2YWx1ZQBNaXNzaW5nIGV4cGVjdGVkIExGIGFmdGVyIGhlYWRlciB2YWx1ZQBJbnZhbGlkIGBUcmFuc2Zlci1FbmNvZGluZ2AgaGVhZGVyIHZhbHVlAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIGV4dGVuc2lvbnMgcXVvdGUgdmFsdWUASW52YWxpZCBjaGFyYWN0ZXIgaW4gY2h1bmsgZXh0ZW5zaW9ucyBxdW90ZWQgdmFsdWUAUGF1c2VkIGJ5IG9uX2hlYWRlcnNfY29tcGxldGUASW52YWxpZCBFT0Ygc3RhdGUAb25fcmVzZXQgcGF1c2UAb25fY2h1bmtfaGVhZGVyIHBhdXNlAG9uX21lc3NhZ2VfYmVnaW4gcGF1c2UAb25fY2h1bmtfZXh0ZW5zaW9uX3ZhbHVlIHBhdXNlAG9uX3N0YXR1c19jb21wbGV0ZSBwYXVzZQBvbl92ZXJzaW9uX2NvbXBsZXRlIHBhdXNlAG9uX3VybF9jb21wbGV0ZSBwYXVzZQBvbl9jaHVua19jb21wbGV0ZSBwYXVzZQBvbl9oZWFkZXJfdmFsdWVfY29tcGxldGUgcGF1c2UAb25fbWVzc2FnZV9jb21wbGV0ZSBwYXVzZQBvbl9tZXRob2RfY29tcGxldGUgcGF1c2UAb25faGVhZGVyX2ZpZWxkX2NvbXBsZXRlIHBhdXNlAG9uX2NodW5rX2V4dGVuc2lvbl9uYW1lIHBhdXNlAFVuZXhwZWN0ZWQgc3BhY2UgYWZ0ZXIgc3RhcnQgbGluZQBTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX2NodW5rX2V4dGVuc2lvbl9uYW1lAEludmFsaWQgY2hhcmFjdGVyIGluIGNodW5rIGV4dGVuc2lvbnMgbmFtZQBQYXVzZSBvbiBDT05ORUNUL1VwZ3JhZGUAUGF1c2Ugb24gUFJJL1VwZ3JhZGUARXhwZWN0ZWQgSFRUUC8yIENvbm5lY3Rpb24gUHJlZmFjZQBTcGFuIGNhbGxiYWNrIGVycm9yIGluIG9uX21ldGhvZABFeHBlY3RlZCBzcGFjZSBhZnRlciBtZXRob2QAU3BhbiBjYWxsYmFjayBlcnJvciBpbiBvbl9oZWFkZXJfZmllbGQAUGF1c2VkAEludmFsaWQgd29yZCBlbmNvdW50ZXJlZABJbnZhbGlkIG1ldGhvZCBlbmNvdW50ZXJlZABVbmV4cGVjdGVkIGNoYXIgaW4gdXJsIHNjaGVtYQBSZXF1ZXN0IGhhcyBpbnZhbGlkIGBUcmFuc2Zlci1FbmNvZGluZ2AAU1dJVENIX1BST1hZAFVTRV9QUk9YWQBNS0FDVElWSVRZAFVOUFJPQ0VTU0FCTEVfRU5USVRZAENPUFkATU9WRURfUEVSTUFORU5UTFkAVE9PX0VBUkxZAE5PVElGWQBGQUlMRURfREVQRU5ERU5DWQBCQURfR0FURVdBWQBQTEFZAFBVVABDSEVDS09VVABHQVRFV0FZX1RJTUVPVVQAUkVRVUVTVF9USU1FT1VUAE5FVFdPUktfQ09OTkVDVF9USU1FT1VUAENPTk5FQ1RJT05fVElNRU9VVABMT0dJTl9USU1FT1VUAE5FVFdPUktfUkVBRF9USU1FT1VUAFBPU1QATUlTRElSRUNURURfUkVRVUVTVABDTElFTlRfQ0xPU0VEX1JFUVVFU1QAQ0xJRU5UX0NMT1NFRF9MT0FEX0JBTEFOQ0VEX1JFUVVFU1QAQkFEX1JFUVVFU1QASFRUUF9SRVFVRVNUX1NFTlRfVE9fSFRUUFNfUE9SVABSRVBPUlQASU1fQV9URUFQT1QAUkVTRVRfQ09OVEVOVABOT19DT05URU5UAFBBUlRJQUxfQ09OVEVOVABIUEVfSU5WQUxJRF9DT05TVEFOVABIUEVfQ0JfUkVTRVQAR0VUAEhQRV9TVFJJQ1QAQ09ORkxJQ1QAVEVNUE9SQVJZX1JFRElSRUNUAFBFUk1BTkVOVF9SRURJUkVDVABDT05ORUNUAE1VTFRJX1NUQVRVUwBIUEVfSU5WQUxJRF9TVEFUVVMAVE9PX01BTllfUkVRVUVTVFMARUFSTFlfSElOVFMAVU5BVkFJTEFCTEVfRk9SX0xFR0FMX1JFQVNPTlMAT1BUSU9OUwBTV0lUQ0hJTkdfUFJPVE9DT0xTAFZBUklBTlRfQUxTT19ORUdPVElBVEVTAE1VTFRJUExFX0NIT0lDRVMASU5URVJOQUxfU0VSVkVSX0VSUk9SAFdFQl9TRVJWRVJfVU5LTk9XTl9FUlJPUgBSQUlMR1VOX0VSUk9SAElERU5USVRZX1BST1ZJREVSX0FVVEhFTlRJQ0FUSU9OX0VSUk9SAFNTTF9DRVJUSUZJQ0FURV9FUlJPUgBJTlZBTElEX1hfRk9SV0FSREVEX0ZPUgBTRVRfUEFSQU1FVEVSAEdFVF9QQVJBTUVURVIASFBFX1VTRVIAU0VFX09USEVSAEhQRV9DQl9DSFVOS19IRUFERVIATUtDQUxFTkRBUgBTRVRVUABXRUJfU0VSVkVSX0lTX0RPV04AVEVBUkRPV04ASFBFX0NMT1NFRF9DT05ORUNUSU9OAEhFVVJJU1RJQ19FWFBJUkFUSU9OAERJU0NPTk5FQ1RFRF9PUEVSQVRJT04ATk9OX0FVVEhPUklUQVRJVkVfSU5GT1JNQVRJT04ASFBFX0lOVkFMSURfVkVSU0lPTgBIUEVfQ0JfTUVTU0FHRV9CRUdJTgBTSVRFX0lTX0ZST1pFTgBIUEVfSU5WQUxJRF9IRUFERVJfVE9LRU4ASU5WQUxJRF9UT0tFTgBGT1JCSURERU4ARU5IQU5DRV9ZT1VSX0NBTE0ASFBFX0lOVkFMSURfVVJMAEJMT0NLRURfQllfUEFSRU5UQUxfQ09OVFJPTABNS0NPTABBQ0wASFBFX0lOVEVSTkFMAFJFUVVFU1RfSEVBREVSX0ZJRUxEU19UT09fTEFSR0VfVU5PRkZJQ0lBTABIUEVfT0sAVU5MSU5LAFVOTE9DSwBQUkkAUkVUUllfV0lUSABIUEVfSU5WQUxJRF9DT05URU5UX0xFTkdUSABIUEVfVU5FWFBFQ1RFRF9DT05URU5UX0xFTkdUSABGTFVTSABQUk9QUEFUQ0gATS1TRUFSQ0gAVVJJX1RPT19MT05HAFBST0NFU1NJTkcATUlTQ0VMTEFORU9VU19QRVJTSVNURU5UX1dBUk5JTkcATUlTQ0VMTEFORU9VU19XQVJOSU5HAEhQRV9JTlZBTElEX1RSQU5TRkVSX0VOQ09ESU5HAEV4cGVjdGVkIENSTEYASFBFX0lOVkFMSURfQ0hVTktfU0laRQBNT1ZFAENPTlRJTlVFAEhQRV9DQl9TVEFUVVNfQ09NUExFVEUASFBFX0NCX0hFQURFUlNfQ09NUExFVEUASFBFX0NCX1ZFUlNJT05fQ09NUExFVEUASFBFX0NCX1VSTF9DT01QTEVURQBIUEVfQ0JfQ0hVTktfQ09NUExFVEUASFBFX0NCX0hFQURFUl9WQUxVRV9DT01QTEVURQBIUEVfQ0JfQ0hVTktfRVhURU5TSU9OX1ZBTFVFX0NPTVBMRVRFAEhQRV9DQl9DSFVOS19FWFRFTlNJT05fTkFNRV9DT01QTEVURQBIUEVfQ0JfTUVTU0FHRV9DT01QTEVURQBIUEVfQ0JfTUVUSE9EX0NPTVBMRVRFAEhQRV9DQl9IRUFERVJfRklFTERfQ09NUExFVEUAREVMRVRFAEhQRV9JTlZBTElEX0VPRl9TVEFURQBJTlZBTElEX1NTTF9DRVJUSUZJQ0FURQBQQVVTRQBOT19SRVNQT05TRQBVTlNVUFBPUlRFRF9NRURJQV9UWVBFAEdPTkUATk9UX0FDQ0VQVEFCTEUAU0VSVklDRV9VTkFWQUlMQUJMRQBSQU5HRV9OT1RfU0FUSVNGSUFCTEUAT1JJR0lOX0lTX1VOUkVBQ0hBQkxFAFJFU1BPTlNFX0lTX1NUQUxFAFBVUkdFAE1FUkdFAFJFUVVFU1RfSEVBREVSX0ZJRUxEU19UT09fTEFSR0UAUkVRVUVTVF9IRUFERVJfVE9PX0xBUkdFAFBBWUxPQURfVE9PX0xBUkdFAElOU1VGRklDSUVOVF9TVE9SQUdFAEhQRV9QQVVTRURfVVBHUkFERQBIUEVfUEFVU0VEX0gyX1VQR1JBREUAU09VUkNFAEFOTk9VTkNFAFRSQUNFAEhQRV9VTkVYUEVDVEVEX1NQQUNFAERFU0NSSUJFAFVOU1VCU0NSSUJFAFJFQ09SRABIUEVfSU5WQUxJRF9NRVRIT0QATk9UX0ZPVU5EAFBST1BGSU5EAFVOQklORABSRUJJTkQAVU5BVVRIT1JJWkVEAE1FVEhPRF9OT1RfQUxMT1dFRABIVFRQX1ZFUlNJT05fTk9UX1NVUFBPUlRFRABBTFJFQURZX1JFUE9SVEVEAEFDQ0VQVEVEAE5PVF9JTVBMRU1FTlRFRABMT09QX0RFVEVDVEVEAEhQRV9DUl9FWFBFQ1RFRABIUEVfTEZfRVhQRUNURUQAQ1JFQVRFRABJTV9VU0VEAEhQRV9QQVVTRUQAVElNRU9VVF9PQ0NVUkVEAFBBWU1FTlRfUkVRVUlSRUQAUFJFQ09ORElUSU9OX1JFUVVJUkVEAFBST1hZX0FVVEhFTlRJQ0FUSU9OX1JFUVVJUkVEAE5FVFdPUktfQVVUSEVOVElDQVRJT05fUkVRVUlSRUQATEVOR1RIX1JFUVVJUkVEAFNTTF9DRVJUSUZJQ0FURV9SRVFVSVJFRABVUEdSQURFX1JFUVVJUkVEAFBBR0VfRVhQSVJFRABQUkVDT05ESVRJT05fRkFJTEVEAEVYUEVDVEFUSU9OX0ZBSUxFRABSRVZBTElEQVRJT05fRkFJTEVEAFNTTF9IQU5EU0hBS0VfRkFJTEVEAExPQ0tFRABUUkFOU0ZPUk1BVElPTl9BUFBMSUVEAE5PVF9NT0RJRklFRABOT1RfRVhURU5ERUQAQkFORFdJRFRIX0xJTUlUX0VYQ0VFREVEAFNJVEVfSVNfT1ZFUkxPQURFRABIRUFEAEV4cGVjdGVkIEhUVFAvAABeEwAAJhMAADAQAADwFwAAnRMAABUSAAA5FwAA8BIAAAoQAAB1EgAArRIAAIITAABPFAAAfxAAAKAVAAAjFAAAiRIAAIsUAABNFQAA1BEAAM8UAAAQGAAAyRYAANwWAADBEQAA4BcAALsUAAB0FAAAfBUAAOUUAAAIFwAAHxAAAGUVAACjFAAAKBUAAAIVAACZFQAALBAAAIsZAABPDwAA1A4AAGoQAADOEAAAAhcAAIkOAABuEwAAHBMAAGYUAABWFwAAwRMAAM0TAABsEwAAaBcAAGYXAABfFwAAIhMAAM4PAABpDgAA2A4AAGMWAADLEwAAqg4AACgXAAAmFwAAxRMAAF0WAADoEQAAZxMAAGUTAADyFgAAcxMAAB0XAAD5FgAA8xEAAM8OAADOFQAADBIAALMRAAClEQAAYRAAADIXAAC7EwAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAgEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgMCAgICAgAAAgIAAgIAAgICAgICAgICAgAEAAAAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgAAAAICAgICAgICAgICAgICAgICAgICAgICAgICAgICAAIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgICAgIAAAICAAICAAICAgICAgICAgIAAwAEAAAAAgICAgICAgICAgICAgICAgICAgICAgICAgIAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgACAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABsb3NlZWVwLWFsaXZlAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAQEBAQEBAQEBAgEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQFjaHVua2VkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQABAQEBAQAAAQEAAQEAAQEBAQEBAQEBAQAAAAAAAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGVjdGlvbmVudC1sZW5ndGhvbnJveHktY29ubmVjdGlvbgAAAAAAAAAAAAAAAAAAAHJhbnNmZXItZW5jb2RpbmdwZ3JhZGUNCg0KDQpTTQ0KDQpUVFAvQ0UvVFNQLwAAAAAAAAAAAAAAAAECAAEDAAAAAAAAAAAAAAAAAAAAAAAABAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAAAAAAAAAAABAgABAwAAAAAAAAAAAAAAAAAAAAAAAAQBAQUBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAQEAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQAAAAAAAAAAAAABAAACAAAAAAAAAAAAAAAAAAAAAAAAAwQAAAQEBAQEBAQEBAQEBQQEBAQEBAQEBAQEBAAEAAYHBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAAQABAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAAAACAAAAAAAAAAAAAAAAAAAAAAADAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwAAAAAAAAMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE5PVU5DRUVDS09VVE5FQ1RFVEVDUklCRUxVU0hFVEVBRFNFQVJDSFJHRUNUSVZJVFlMRU5EQVJWRU9USUZZUFRJT05TQ0hTRUFZU1RBVENIR0VPUkRJUkVDVE9SVFJDSFBBUkFNRVRFUlVSQ0VCU0NSSUJFQVJET1dOQUNFSU5ETktDS1VCU0NSSUJFSFRUUC9BRFRQLw=="),"base64"))}catch(A){t=await WebAssembly.compile(Buffer.from(e||ot(),"base64"))}return await WebAssembly.instantiate(t,{env:{wasm_on_url:(A,e,t)=>0,wasm_on_status:(e,t,r)=>{A.strictEqual(qA.ptr,e);const o=t-ZA+PA.byteOffset;return qA.onStatus(new LA(PA.buffer,o,r))||0},wasm_on_message_begin:e=>(A.strictEqual(qA.ptr,e),qA.onMessageBegin()||0),wasm_on_header_field:(e,t,r)=>{A.strictEqual(qA.ptr,e);const o=t-ZA+PA.byteOffset;return qA.onHeaderField(new LA(PA.buffer,o,r))||0},wasm_on_header_value:(e,t,r)=>{A.strictEqual(qA.ptr,e);const o=t-ZA+PA.byteOffset;return qA.onHeaderValue(new LA(PA.buffer,o,r))||0},wasm_on_headers_complete:(e,t,r,o)=>(A.strictEqual(qA.ptr,e),qA.onHeadersComplete(t,Boolean(r),Boolean(o))||0),wasm_on_body:(e,t,r)=>{A.strictEqual(qA.ptr,e);const o=t-ZA+PA.byteOffset;return qA.onBody(new LA(PA.buffer,o,r))||0},wasm_on_message_complete:e=>(A.strictEqual(qA.ptr,e),qA.onMessageComplete()||0)}})}();WA.catch();let qA=null,PA=null,_A=0,ZA=null;const jA=1,XA=3;class KA{constructor(e,t,{exports:r}){A(Number.isFinite(e[K])&&e[K]>0),this.llhttp=r,this.ptr=this.llhttp.llhttp_alloc(HA.TYPE.RESPONSE),this.client=e,this.socket=t,this.timeout=null,this.timeoutValue=null,this.timeoutType=null,this.statusCode=null,this.statusText="",this.upgrade=!1,this.headers=[],this.headersSize=0,this.headersMaxSize=e[K],this.shouldKeepAlive=!1,this.paused=!1,this.resume=this.resume.bind(this),this.bytesRead=0,this.keepAlive="",this.contentLength="",this.connection="",this.maxResponseSize=e[hA]}setTimeout(A,e){this.timeoutType=e,A!==this.timeoutValue?(i.clearTimeout(this.timeout),A?(this.timeout=i.setTimeout(Ae,A,this),this.timeout.unref&&this.timeout.unref()):this.timeout=null,this.timeoutValue=A):this.timeout&&this.timeout.refresh&&this.timeout.refresh()}resume(){!this.socket.destroyed&&this.paused&&(A(null!=this.ptr),A(null==qA),this.llhttp.llhttp_resume(this.ptr),A(2===this.timeoutType),this.timeout&&this.timeout.refresh&&this.timeout.refresh(),this.paused=!1,this.execute(this.socket.read()||OA),this.readMore())}readMore(){for(;!this.paused&&this.ptr;){const A=this.socket.read();if(null===A)break;this.execute(A)}}execute(e){A(null!=this.ptr),A(null==qA),A(!this.paused);const{socket:t,llhttp:r}=this;e.length>_A&&(ZA&&r.free(ZA),_A=4096*Math.ceil(e.length/4096),ZA=r.malloc(_A)),new Uint8Array(r.memory.buffer,ZA,_A).set(e);try{let A;try{PA=e,qA=this,A=r.llhttp_execute(this.ptr,ZA,e.length)}catch(A){throw A}finally{qA=null,PA=null}const o=r.llhttp_get_error_pos(this.ptr)-ZA;if(A===HA.ERROR.PAUSED_UPGRADE)this.onUpgrade(e.slice(o));else if(A===HA.ERROR.PAUSED)this.paused=!0,t.unshift(e.slice(o));else if(A!==HA.ERROR.OK){const t=r.llhttp_get_error_reason(this.ptr);let n="";if(t){const A=new Uint8Array(r.memory.buffer,t).indexOf(0);n="Response does not match the HTTP/1.1 protocol ("+Buffer.from(r.memory.buffer,t,A).toString()+")"}throw new y(n,HA.ERROR[A],e.slice(o))}}catch(A){n.destroy(t,A)}}destroy(){A(null!=this.ptr),A(null==qA),this.llhttp.llhttp_free(this.ptr),this.ptr=null,i.clearTimeout(this.timeout),this.timeout=null,this.timeoutValue=null,this.timeoutType=null,this.paused=!1}onStatus(A){this.statusText=A.toString()}onMessageBegin(){const{socket:A,client:e}=this;if(A.destroyed)return-1;return e[J][e[P]]?void 0:-1}onHeaderField(A){const e=this.headers.length;1&e?this.headers[e-1]=Buffer.concat([this.headers[e-1],A]):this.headers.push(A),this.trackHeader(A.length)}onHeaderValue(A){let e=this.headers.length;1&~e?this.headers[e-1]=Buffer.concat([this.headers[e-1],A]):(this.headers.push(A),e+=1);const t=this.headers[e-2];10===t.length&&"keep-alive"===t.toString().toLowerCase()?this.keepAlive+=A.toString():10===t.length&&"connection"===t.toString().toLowerCase()?this.connection+=A.toString():14===t.length&&"content-length"===t.toString().toLowerCase()&&(this.contentLength+=A.toString()),this.trackHeader(A.length)}trackHeader(A){this.headersSize+=A,this.headersSize>=this.headersMaxSize&&n.destroy(this.socket,new l)}onUpgrade(e){const{upgrade:t,client:r,socket:o,headers:s,statusCode:i}=this;A(t);const E=r[J][r[P]];A(E),A(!o.destroyed),A(o===r[j]),A(!this.paused),A(E.upgrade||"CONNECT"===E.method),this.statusCode=null,this.statusText="",this.shouldKeepAlive=null,A(this.headers.length%2==0),this.headers=[],this.headersSize=0,o.unshift(e),o[F].destroy(),o[F]=null,o[b]=null,o[_]=null,o.removeListener("error",te).removeListener("readable",ee).removeListener("end",oe).removeListener("close",ne),r[j]=null,r[J][r[P]++]=null,r.emit("disconnect",r[R],[r],new d("upgrade"));try{E.onUpgrade(i,s,o)}catch(A){n.destroy(o,A)}Ee(r)}onHeadersComplete(e,t,r){const{client:o,socket:s,headers:i,statusText:E}=this;if(s.destroyed)return-1;const g=o[J][o[P]];if(!g)return-1;if(A(!this.upgrade),A(this.statusCode<200),100===e)return n.destroy(s,new u("bad response",n.getSocketInfo(s))),-1;if(t&&!g.upgrade)return n.destroy(s,new u("bad upgrade",n.getSocketInfo(s))),-1;if(A.strictEqual(this.timeoutType,jA),this.statusCode=e,this.shouldKeepAlive=r||"HEAD"===g.method&&!s[m]&&"keep-alive"===this.connection.toLowerCase(),this.statusCode>=200){const A=null!=g.bodyTimeout?g.bodyTimeout:o[eA];this.setTimeout(A,2)}else this.timeout&&this.timeout.refresh&&this.timeout.refresh();if("CONNECT"===g.method)return A(1===o[M]),this.upgrade=!0,2;if(t)return A(1===o[M]),this.upgrade=!0,2;if(A(this.headers.length%2==0),this.headers=[],this.headersSize=0,this.shouldKeepAlive&&o[Z]){const A=this.keepAlive?n.parseKeepAliveTimeout(this.keepAlive):null;if(null!=A){const e=Math.min(A-o[$],o[z]);e<=0?s[m]=!0:o[X]=e}else o[X]=o[x]}else s[m]=!0;const a=!1===g.onHeaders(e,i,this.resume,E);return g.aborted?-1:"HEAD"===g.method||e<200?1:(s[U]&&(s[U]=!1,Ee(o)),a?HA.ERROR.PAUSED:0)}onBody(e){const{client:t,socket:r,statusCode:o,maxResponseSize:s}=this;if(r.destroyed)return-1;const i=t[J][t[P]];return A(i),A.strictEqual(this.timeoutType,2),this.timeout&&this.timeout.refresh&&this.timeout.refresh(),A(o>=200),s>-1&&this.bytesRead+e.length>s?(n.destroy(r,new p),-1):(this.bytesRead+=e.length,!1===i.onData(e)?HA.ERROR.PAUSED:void 0)}onMessageComplete(){const{client:e,socket:t,statusCode:r,upgrade:o,headers:s,contentLength:i,bytesRead:E,shouldKeepAlive:g}=this;if(t.destroyed&&(!r||g))return-1;if(o)return;const a=e[J][e[P]];return A(a),A(r>=100),this.statusCode=null,this.statusText="",this.bytesRead=0,this.contentLength="",this.keepAlive="",this.connection="",A(this.headers.length%2==0),this.headers=[],this.headersSize=0,r<200?void 0:"HEAD"!==a.method&&i&&E!==parseInt(i,10)?(n.destroy(t,new B),-1):(a.onComplete(s),e[J][e[P]++]=null,t[T]?(A.strictEqual(e[M],0),n.destroy(t,new d("reset")),HA.ERROR.PAUSED):g?t[m]&&0===e[M]?(n.destroy(t,new d("reset")),HA.ERROR.PAUSED):void(1===e[Z]?setImmediate(Ee,e):Ee(e)):(n.destroy(t,new d("reset")),HA.ERROR.PAUSED))}}function Ae(e){const{socket:t,timeoutType:r,client:o}=e;r===jA?(!t[T]||t.writableNeedDrain||o[M]>1)&&(A(!e.paused,"cannot be paused while waiting for headers"),n.destroy(t,new h)):2===r?e.paused||n.destroy(t,new f):r===XA&&(A(0===o[M]&&o[X]),n.destroy(t,new d("socket idle timeout")))}function ee(){const{[F]:A}=this;A&&A.readMore()}function te(e){const{[b]:t,[F]:r}=this;A("ERR_TLS_CERT_ALTNAME_INVALID"!==e.code),"h2"===t[lA]||"ECONNRESET"!==e.code||!r.statusCode||r.shouldKeepAlive?(this[_]=e,re(this[b],e)):r.onMessageComplete()}function re(e,t){if(0===e[M]&&"UND_ERR_INFO"!==t.code&&"UND_ERR_SOCKET"!==t.code){A(e[q]===e[P]);const r=e[J].splice(e[P]);for(let A=0;A<r.length;A++){Ie(e,r[A],t)}A(0===e[v])}}function oe(){const{[F]:A,[b]:e}=this;"h2"===e[lA]||!A.statusCode||A.shouldKeepAlive?n.destroy(this,new u("other side closed",n.getSocketInfo(this))):A.onMessageComplete()}function ne(){const{[b]:e,[F]:t}=this;"h1"===e[lA]&&t&&(this[_]||!t.statusCode||t.shouldKeepAlive||t.onMessageComplete(),this[F].destroy(),this[F]=null);const r=this[_]||new u("closed",n.getSocketInfo(this));if(e[j]=null,e.destroyed){A(0===e[Y]);const t=e[J].splice(e[P]);for(let A=0;A<t.length;A++){Ie(e,t[A],r)}}else if(e[M]>0&&"UND_ERR_INFO"!==r.code){const A=e[J][e[P]];e[J][e[P]++]=null,Ie(e,A,r)}e[q]=e[P],A(0===e[M]),e.emit("disconnect",e[R],[e],r),Ee(e)}async function se(t){A(!t[H]),A(!t[j]);let{host:r,hostname:o,protocol:s,port:i}=t[R];if("["===o[0]){const t=o.indexOf("]");A(-1!==t);const r=o.substring(1,t);A(e.isIP(r)),o=r}t[H]=!0,YA.beforeConnect.hasSubscribers&&YA.beforeConnect.publish({connectParams:{host:r,hostname:o,protocol:s,port:i,servername:t[k],localAddress:t[IA]},connector:t[rA]});try{const e=await new Promise((A,e)=>{t[rA]({host:r,hostname:o,protocol:s,port:i,servername:t[k],localAddress:t[IA]},(t,r)=>{t?e(t):A(r)})});if(t.destroyed)return void n.destroy(e.on("error",()=>{}),new w);t[H]=!1,A(e);if("h2"===e.alpnProtocol){UA||(UA=!0,process.emitWarning("H2 support is experimental, expect them to change at any time.",{code:"UNDICI-H2"}));const A=DA.connect(t[R],{createConnection:()=>e,peerMaxConcurrentStreams:t[fA].maxConcurrentStreams});t[lA]="h2",A[b]=t,A[j]=e,A.on("error",vA),A.on("frameError",TA),A.on("end",JA),A.on("goaway",GA),A.on("close",ne),A.unref(),t[dA]=A,e[dA]=A}else xA||(xA=await WA,WA=null),e[O]=!1,e[T]=!1,e[m]=!1,e[U]=!1,e[F]=new KA(t,e,xA);e[sA]=0,e[nA]=t[nA],e[b]=t,e[_]=null,e.on("error",te).on("readable",ee).on("end",oe).on("close",ne),t[j]=e,YA.connected.hasSubscribers&&YA.connected.publish({connectParams:{host:r,hostname:o,protocol:s,port:i,servername:t[k],localAddress:t[IA]},connector:t[rA],socket:e}),t.emit("connect",t[R],[t])}catch(e){if(t.destroyed)return;if(t[H]=!1,YA.connectError.hasSubscribers&&YA.connectError.publish({connectParams:{host:r,hostname:o,protocol:s,port:i,servername:t[k],localAddress:t[IA]},connector:t[rA],error:e}),"ERR_TLS_CERT_ALTNAME_INVALID"===e.code)for(A(0===t[M]);t[Y]>0&&t[J][t[q]].servername===t[k];){const A=t[J][t[q]++];Ie(t,A,e)}else re(t,e);t.emit("connectionError",t[R],[t],e)}Ee(t)}function ie(A){A[V]=0,A.emit("drain",A[R],[A])}function Ee(e,t){2!==e[L]&&(e[L]=2,function(e,t){for(;;){if(e.destroyed)return void A(0===e[Y]);if(e[MA]&&!e[v])return e[MA](),void(e[MA]=null);const r=e[j];if(r&&!r.destroyed&&"h2"!==r.alpnProtocol)if(0===e[v]?!r[O]&&r.unref&&(r.unref(),r[O]=!0):r[O]&&r.ref&&(r.ref(),r[O]=!1),0===e[v])r[F].timeoutType!==XA&&r[F].setTimeout(e[X],XA);else if(e[M]>0&&r[F].statusCode<200&&r[F].timeoutType!==jA){const A=e[J][e[P]],t=null!=A.headersTimeout?A.headersTimeout:e[AA];r[F].setTimeout(t,jA)}if(e[N])e[V]=2;else if(2===e[V]){t?(e[V]=1,process.nextTick(ie,e)):ie(e);continue}if(0===e[Y])return;if(e[M]>=(e[Z]||1))return;const o=e[J][e[q]];if("https:"===e[R].protocol&&e[k]!==o.servername){if(e[M]>0)return;if(e[k]=o.servername,r&&r.servername!==o.servername)return void n.destroy(r,new d("servername changed"))}if(e[H])return;if(!r&&!e[dA])return void se(e);if(r.destroyed||r[T]||r[m]||r[U])return;if(e[M]>0&&!o.idempotent)return;if(e[M]>0&&(o.upgrade||"CONNECT"===o.method))return;if(e[M]>0&&0!==n.bodyLength(o.body)&&(n.isStream(o.body)||n.isAsyncIterable(o.body)))return;!o.aborted&&ae(e,o)?e[q]++:e[J].splice(e[q],1)}}(e,t),e[L]=0,e[P]>256&&(e[J].splice(0,e[P]),e[q]-=e[P],e[P]=0))}function ge(A){return"GET"!==A&&"HEAD"!==A&&"OPTIONS"!==A&&"TRACE"!==A&&"CONNECT"!==A}function ae(e,t){if("h2"===e[lA])return void function(e,t,r){const{body:o,method:s,path:i,host:g,upgrade:a,expectContinue:Q,signal:B,headers:c}=r;let h,l;h="string"==typeof c?E[pA](c.trim()):c;if(a)return Ie(e,r,new Error("Upgrade not supported for H2")),!1;try{r.onConnect(A=>{r.aborted||r.completed||Ie(e,r,A||new I)})}catch(A){Ie(e,r,A)}if(r.aborted)return!1;const u=e[fA];if(h[RA]=g||e[uA],h[mA]=s,"CONNECT"===s)return t.ref(),l=t.request(h,{endStream:!1,signal:B}),l.id&&!l.pending?(r.onUpgrade(null,null,l),++u.openStreams):l.once("ready",()=>{r.onUpgrade(null,null,l),++u.openStreams}),l.once("close",()=>{u.openStreams-=1,0===u.openStreams&&t.unref()}),!0;h[kA]=i,h[bA]="https";const f="PUT"===s||"POST"===s||"PATCH"===s;o&&"function"==typeof o.read&&o.read(0);let y=n.bodyLength(o);null==y&&(y=r.contentLength);0!==y&&f||(y=null);if(ge(s)&&y>0&&null!=r.contentLength&&r.contentLength!==y){if(e[tA])return Ie(e,r,new C),!1;process.emitWarning(new C)}null!=y&&(A(o,"no body must not have content length"),h[NA]=`${y}`);t.ref();const p="GET"===s||"HEAD"===s;Q?(h[FA]="100-continue",l=t.request(h,{endStream:p,signal:B}),l.once("continue",w)):(l=t.request(h,{endStream:p,signal:B}),w());return++u.openStreams,l.once("response",A=>{const{[SA]:e,...t}=A;!1===r.onHeaders(Number(e),t,l.resume.bind(l),"")&&l.pause()}),l.once("end",()=>{r.onComplete([])}),l.on("data",A=>{!1===r.onData(A)&&l.pause()}),l.once("close",()=>{u.openStreams-=1,0===u.openStreams&&t.unref()}),l.once("error",function(A){!e[dA]||e[dA].destroyed||this.closed||this.destroyed||(u.streams-=1,n.destroy(l,A))}),l.once("frameError",(A,t)=>{const o=new d(`HTTP/2: "frameError" received - type ${A}, code ${t}`);Ie(e,r,o),!e[dA]||e[dA].destroyed||this.closed||this.destroyed||(u.streams-=1,n.destroy(l,o))}),!0;function w(){o?n.isBuffer(o)?(A(y===o.byteLength,"buffer body must have content length"),l.cork(),l.write(o),l.uncork(),l.end(),r.onBodySent(o),r.onRequestSent()):n.isBlobLike(o)?"function"==typeof o.stream?Be({client:e,request:r,contentLength:y,h2stream:l,expectsPayload:f,body:o.stream(),socket:e[j],header:""}):Ce({body:o,client:e,request:r,contentLength:y,expectsPayload:f,h2stream:l,header:"",socket:e[j]}):n.isStream(o)?Qe({body:o,client:e,request:r,contentLength:y,expectsPayload:f,socket:e[j],h2stream:l,header:""}):n.isIterable(o)?Be({body:o,client:e,request:r,contentLength:y,expectsPayload:f,header:"",h2stream:l,socket:e[j]}):A(!1):r.onRequestSent()}}(e,e[dA],t);const{body:r,method:o,path:s,host:i,upgrade:g,headers:a,blocking:Q,reset:B}=t,c="PUT"===o||"POST"===o||"PATCH"===o;r&&"function"==typeof r.read&&r.read(0);const h=n.bodyLength(r);let l=h;if(null===l&&(l=t.contentLength),0!==l||c||(l=null),ge(o)&&l>0&&null!==t.contentLength&&t.contentLength!==l){if(e[tA])return Ie(e,t,new C),!1;process.emitWarning(new C)}const u=e[j];try{t.onConnect(A=>{t.aborted||t.completed||(Ie(e,t,A||new I),n.destroy(u,new d("aborted")))})}catch(A){Ie(e,t,A)}if(t.aborted)return!1;"HEAD"===o&&(u[m]=!0),(g||"CONNECT"===o)&&(u[m]=!0),null!=B&&(u[m]=B),e[nA]&&u[sA]++>=e[nA]&&(u[m]=!0),Q&&(u[U]=!0);let f=`${o} ${s} HTTP/1.1\r\n`;return f+="string"==typeof i?`host: ${i}\r\n`:e[W],g?f+=`connection: upgrade\r\nupgrade: ${g}\r\n`:e[Z]&&!u[m]?f+="connection: keep-alive\r\n":f+="connection: close\r\n",a&&(f+=a),YA.sendHeaders.hasSubscribers&&YA.sendHeaders.publish({request:t,headers:f,socket:u}),r&&0!==h?n.isBuffer(r)?(A(l===r.byteLength,"buffer body must have content length"),u.cork(),u.write(`${f}content-length: ${l}\r\n\r\n`,"latin1"),u.write(r),u.uncork(),t.onBodySent(r),t.onRequestSent(),c||(u[m]=!0)):n.isBlobLike(r)?"function"==typeof r.stream?Be({body:r.stream(),client:e,request:t,socket:u,contentLength:l,header:f,expectsPayload:c}):Ce({body:r,client:e,request:t,socket:u,contentLength:l,header:f,expectsPayload:c}):n.isStream(r)?Qe({body:r,client:e,request:t,socket:u,contentLength:l,header:f,expectsPayload:c}):n.isIterable(r)?Be({body:r,client:e,request:t,socket:u,contentLength:l,header:f,expectsPayload:c}):A(!1):(0===l?u.write(`${f}content-length: 0\r\n\r\n`,"latin1"):(A(null===l,"no body must not have content length"),u.write(`${f}\r\n`,"latin1")),t.onRequestSent()),!0}function Qe({h2stream:e,body:t,client:o,request:s,socket:i,contentLength:E,header:g,expectsPayload:a}){if(A(0!==E||0===o[M],"stream body cannot be pipelined"),"h2"===o[lA]){const u=r(t,e,A=>{A?(n.destroy(t,A),n.destroy(e,A)):s.onRequestSent()});function d(A){s.onBodySent(A)}return u.on("data",d),void u.once("end",()=>{u.removeListener("data",d),n.destroy(u)})}let Q=!1;const C=new ce({socket:i,request:s,contentLength:E,client:o,expectsPayload:a,header:g}),B=function(A){if(!Q)try{!C.write(A)&&this.pause&&this.pause()}catch(A){n.destroy(this,A)}},c=function(){Q||t.resume&&t.resume()},h=function(){if(Q)return;const A=new I;queueMicrotask(()=>l(A))},l=function(e){if(!Q){if(Q=!0,A(i.destroyed||i[T]&&o[M]<=1),i.off("drain",c).off("error",l),t.removeListener("data",B).removeListener("end",l).removeListener("error",l).removeListener("close",h),!e)try{C.end()}catch(A){e=A}C.destroy(e),!e||"UND_ERR_INFO"===e.code&&"reset"===e.message?n.destroy(t):n.destroy(t,e)}};t.on("data",B).on("end",l).on("error",l).on("close",h),t.resume&&t.resume(),i.on("drain",c).on("error",l)}async function Ce({h2stream:e,body:t,client:r,request:o,socket:s,contentLength:i,header:E,expectsPayload:g}){A(i===t.size,"blob body must have content length");const a="h2"===r[lA];try{if(null!=i&&i!==t.size)throw new C;const A=Buffer.from(await t.arrayBuffer());a?(e.cork(),e.write(A),e.uncork()):(s.cork(),s.write(`${E}content-length: ${i}\r\n\r\n`,"latin1"),s.write(A),s.uncork()),o.onBodySent(A),o.onRequestSent(),g||(s[m]=!0),Ee(r)}catch(A){n.destroy(a?e:s,A)}}async function Be({h2stream:e,body:t,client:r,request:o,socket:n,contentLength:s,header:i,expectsPayload:E}){A(0!==s||0===r[M],"iterator body cannot be pipelined");let g=null;function a(){if(g){const A=g;g=null,A()}}const Q=()=>new Promise((e,t)=>{A(null===g),n[_]?t(n[_]):g=e});if("h2"===r[lA]){e.on("close",a).on("drain",a);try{for await(const A of t){if(n[_])throw n[_];const t=e.write(A);o.onBodySent(A),t||await Q()}}catch(A){e.destroy(A)}finally{o.onRequestSent(),e.end(),e.off("close",a).off("drain",a)}return}n.on("close",a).on("drain",a);const C=new ce({socket:n,request:o,contentLength:s,client:r,expectsPayload:E,header:i});try{for await(const A of t){if(n[_])throw n[_];C.write(A)||await Q()}C.end()}catch(A){C.destroy(A)}finally{n.off("close",a).off("drain",a)}}class ce{constructor({socket:A,request:e,contentLength:t,client:r,expectsPayload:o,header:n}){this.socket=A,this.request=e,this.contentLength=t,this.client=r,this.bytesWritten=0,this.expectsPayload=o,this.header=n,A[T]=!0}write(A){const{socket:e,request:t,contentLength:r,client:o,bytesWritten:n,expectsPayload:s,header:i}=this;if(e[_])throw e[_];if(e.destroyed)return!1;const E=Buffer.byteLength(A);if(!E)return!0;if(null!==r&&n+E>r){if(o[tA])throw new C;process.emitWarning(new C)}e.cork(),0===n&&(s||(e[m]=!0),null===r?e.write(`${i}transfer-encoding: chunked\r\n`,"latin1"):e.write(`${i}content-length: ${r}\r\n\r\n`,"latin1")),null===r&&e.write(`\r\n${E.toString(16)}\r\n`,"latin1"),this.bytesWritten+=E;const g=e.write(A);return e.uncork(),t.onBodySent(A),g||e[F].timeout&&e[F].timeoutType===jA&&e[F].timeout.refresh&&e[F].timeout.refresh(),g}end(){const{socket:A,contentLength:e,client:t,bytesWritten:r,expectsPayload:o,header:n,request:s}=this;if(s.onRequestSent(),A[T]=!1,A[_])throw A[_];if(!A.destroyed){if(0===r?o?A.write(`${n}content-length: 0\r\n\r\n`,"latin1"):A.write(`${n}\r\n`,"latin1"):null===e&&A.write("\r\n0\r\n\r\n","latin1"),null!==e&&r!==e){if(t[tA])throw new C;process.emitWarning(new C)}A[F].timeout&&A[F].timeoutType===jA&&A[F].timeout.refresh&&A[F].timeout.refresh(),Ee(t)}}destroy(e){const{socket:t,client:r}=this;t[T]=!1,e&&(A(r[M]<=1,"pipeline should only contain this request"),n.destroy(t,e))}}function Ie(e,t,r){try{t.onError(r),A(t.aborted)}catch(r){e.emit("error",r)}}return Te=class extends a{constructor(A,{interceptors:r,maxHeaderSize:o,headersTimeout:s,socketTimeout:i,requestTimeout:E,connectTimeout:g,bodyTimeout:a,idleTimeout:Q,keepAlive:C,keepAliveTimeout:B,maxKeepAliveTimeout:I,keepAliveMaxTimeout:h,keepAliveTimeoutThreshold:l,socketPath:u,pipelining:d,tls:f,strictContentLength:y,maxCachedSessions:p,maxRedirections:w,connect:m,maxRequestsPerClient:b,localAddress:N,maxResponseSize:F,autoSelectFamily:S,autoSelectFamilyAttemptTimeout:U,allowH2:M,maxConcurrentStreams:Y}={}){if(super(),void 0!==C)throw new c("unsupported keepAlive, use pipelining=0 instead");if(void 0!==i)throw new c("unsupported socketTimeout, use headersTimeout & bodyTimeout instead");if(void 0!==E)throw new c("unsupported requestTimeout, use headersTimeout & bodyTimeout instead");if(void 0!==Q)throw new c("unsupported idleTimeout, use keepAliveTimeout instead");if(void 0!==I)throw new c("unsupported maxKeepAliveTimeout, use keepAliveMaxTimeout instead");if(null!=o&&!Number.isFinite(o))throw new c("invalid maxHeaderSize");if(null!=u&&"string"!=typeof u)throw new c("invalid socketPath");if(null!=g&&(!Number.isFinite(g)||g<0))throw new c("invalid connectTimeout");if(null!=B&&(!Number.isFinite(B)||B<=0))throw new c("invalid keepAliveTimeout");if(null!=h&&(!Number.isFinite(h)||h<=0))throw new c("invalid keepAliveMaxTimeout");if(null!=l&&!Number.isFinite(l))throw new c("invalid keepAliveTimeoutThreshold");if(null!=s&&(!Number.isInteger(s)||s<0))throw new c("headersTimeout must be a positive integer or zero");if(null!=a&&(!Number.isInteger(a)||a<0))throw new c("bodyTimeout must be a positive integer or zero");if(null!=m&&"function"!=typeof m&&"object"!=typeof m)throw new c("connect must be a function or an object");if(null!=w&&(!Number.isInteger(w)||w<0))throw new c("maxRedirections must be a positive number");if(null!=b&&(!Number.isInteger(b)||b<0))throw new c("maxRequestsPerClient must be a positive number");if(null!=N&&("string"!=typeof N||0===e.isIP(N)))throw new c("localAddress must be valid string IP address");if(null!=F&&(!Number.isInteger(F)||F<-1))throw new c("maxResponseSize must be a positive number");if(null!=U&&(!Number.isInteger(U)||U<-1))throw new c("autoSelectFamilyAttemptTimeout must be a positive number");if(null!=M&&"boolean"!=typeof M)throw new c("allowH2 must be a valid boolean value");if(null!=Y&&("number"!=typeof Y||Y<1))throw new c("maxConcurrentStreams must be a possitive integer, greater than 0");"function"!=typeof m&&(m=D({...f,maxCachedSessions:p,allowH2:M,socketPath:u,timeout:g,...n.nodeHasAutoSelectFamily&&S?{autoSelectFamily:S,autoSelectFamilyAttemptTimeout:U}:void 0,...m})),this[cA]=r&&r.Client&&Array.isArray(r.Client)?r.Client:[VA({maxRedirections:w})],this[R]=n.parseOrigin(A),this[rA]=m,this[j]=null,this[Z]=null!=d?d:1,this[K]=o||t.maxHeaderSize,this[x]=null==B?4e3:B,this[z]=null==h?6e5:h,this[$]=null==l?1e3:l,this[X]=this[x],this[k]=null,this[IA]=null!=N?N:null,this[L]=0,this[V]=0,this[W]=`host: ${this[R].hostname}${this[R].port?`:${this[R].port}`:""}\r\n`,this[eA]=null!=a?a:3e5,this[AA]=null!=s?s:3e5,this[tA]=null==y||y,this[oA]=w,this[nA]=b,this[MA]=null,this[hA]=F>-1?F:-1,this[lA]="h1",this[dA]=null,this[fA]=M?{openStreams:0,maxConcurrentStreams:null!=Y?Y:100}:null,this[uA]=`${this[R].hostname}${this[R].port?`:${this[R].port}`:""}`,this[J]=[],this[P]=0,this[q]=0}get pipelining(){return this[Z]}set pipelining(A){this[Z]=A,Ee(this,!0)}get[Y](){return this[J].length-this[q]}get[M](){return this[q]-this[P]}get[v](){return this[J].length-this[P]}get[G](){return!!this[j]&&!this[H]&&!this[j].destroyed}get[N](){const A=this[j];return A&&(A[m]||A[T]||A[U])||this[v]>=(this[Z]||1)||this[Y]>0}[S](A){se(this),this.once("connect",A)}[BA](A,e){const t=A.origin||this[R].origin,r="h2"===this[lA]?E[yA](t,A,e):E[wA](t,A,e);return this[J].push(r),this[L]||(null==n.bodyLength(r.body)&&n.isIterable(r.body)?(this[L]=1,process.nextTick(Ee,this)):Ee(this,!0)),this[L]&&2!==this[V]&&this[N]&&(this[V]=2),this[V]<2}async[QA](){return new Promise(A=>{this[v]?this[MA]=A:A(null)})}async[CA](A){return new Promise(e=>{const t=this[J].splice(this[q]);for(let e=0;e<t.length;e++){Ie(this,t[e],A)}const r=()=>{this[MA]&&(this[MA](),this[MA]=null),e()};null!=this[dA]&&(n.destroy(this[dA],A),this[dA]=null,this[fA]=null),this[j]?n.destroy(this[j].on("close",r),A):queueMicrotask(r),Ee(this)})}},Te}function st(){if(We)return xe;We=1;const A=Re(),e=function(){if(He)return Ge;He=1;const A=2047;class e{constructor(){this.bottom=0,this.top=0,this.list=new Array(2048),this.next=null}isEmpty(){return this.top===this.bottom}isFull(){return(this.top+1&A)===this.bottom}push(e){this.list[this.top]=e,this.top=this.top+1&A}shift(){const e=this.list[this.bottom];return void 0===e?null:(this.list[this.bottom]=void 0,this.bottom=this.bottom+1&A,e)}}return Ge=class{constructor(){this.head=this.tail=new e}isEmpty(){return this.head.isEmpty()}push(A){this.head.isFull()&&(this.head=this.head.next=new e),this.head.push(A)}shift(){const A=this.tail,e=A.shift();return A.isEmpty()&&null!==A.next&&(this.tail=A.next),e}}}(),{kConnected:t,kSize:r,kRunning:o,kPending:n,kQueued:s,kBusy:i,kFree:E,kUrl:g,kClose:a,kDestroy:Q,kDispatch:C}=iA(),B=function(){if(Oe)return Ve;Oe=1;const{kFree:A,kConnected:e,kPending:t,kQueued:r,kRunning:o,kSize:n}=iA(),s=Symbol("pool");return Ve=class{constructor(A){this[s]=A}get connected(){return this[s][e]}get free(){return this[s][A]}get pending(){return this[s][t]}get queued(){return this[s][r]}get running(){return this[s][o]}get size(){return this[s][n]}},Ve}(),c=Symbol("clients"),I=Symbol("needDrain"),h=Symbol("queue"),l=Symbol("closed resolve"),u=Symbol("onDrain"),d=Symbol("onConnect"),f=Symbol("onDisconnect"),y=Symbol("onConnectionError"),p=Symbol("get dispatcher"),w=Symbol("add client"),D=Symbol("remove client"),R=Symbol("stats");return xe={PoolBase:class extends A{constructor(){super(),this[h]=new e,this[c]=[],this[s]=0;const A=this;this[u]=function(e,t){const r=A[h];let o=!1;for(;!o;){const e=r.shift();if(!e)break;A[s]--,o=!this.dispatch(e.opts,e.handler)}this[I]=o,!this[I]&&A[I]&&(A[I]=!1,A.emit("drain",e,[A,...t])),A[l]&&r.isEmpty()&&Promise.all(A[c].map(A=>A.close())).then(A[l])},this[d]=(e,t)=>{A.emit("connect",e,[A,...t])},this[f]=(e,t,r)=>{A.emit("disconnect",e,[A,...t],r)},this[y]=(e,t,r)=>{A.emit("connectionError",e,[A,...t],r)},this[R]=new B(this)}get[i](){return this[I]}get[t](){return this[c].filter(A=>A[t]).length}get[E](){return this[c].filter(A=>A[t]&&!A[I]).length}get[n](){let A=this[s];for(const{[n]:e}of this[c])A+=e;return A}get[o](){let A=0;for(const{[o]:e}of this[c])A+=e;return A}get[r](){let A=this[s];for(const{[r]:e}of this[c])A+=e;return A}get stats(){return this[R]}async[a](){return this[h].isEmpty()?Promise.all(this[c].map(A=>A.close())):new Promise(A=>{this[l]=A})}async[Q](A){for(;;){const e=this[h].shift();if(!e)break;e.handler.onError(A)}return Promise.all(this[c].map(e=>e.destroy(A)))}[C](A,e){const t=this[p]();return t?t.dispatch(A,e)||(t[I]=!0,this[I]=!this[p]()):(this[I]=!0,this[h].push({opts:A,handler:e}),this[s]++),!this[I]}[w](A){return A.on("drain",this[u]).on("connect",this[d]).on("disconnect",this[f]).on("connectionError",this[y]),this[c].push(A),this[I]&&process.nextTick(()=>{this[I]&&this[u](A[g],[this,A])}),this}[D](A){A.close(()=>{const e=this[c].indexOf(A);-1!==e&&this[c].splice(e,1)}),this[I]=this[c].some(A=>!A[I]&&!0!==A.closed&&!0!==A.destroyed)}},kClients:c,kNeedDrain:I,kAddClient:w,kRemoveClient:D,kGetDispatcher:p},xe}function it(){if(Pe)return qe;Pe=1;const{PoolBase:A,kClients:e,kNeedDrain:t,kAddClient:r,kGetDispatcher:o}=st(),n=nt(),{InvalidArgumentError:s}=EA(),i=gA(),{kUrl:E,kInterceptors:g}=iA(),a=me(),Q=Symbol("options"),C=Symbol("connections"),B=Symbol("factory");function c(A,e){return new n(A,e)}return qe=class extends A{constructor(A,{connections:t,factory:r=c,connect:o,connectTimeout:n,tls:I,maxCachedSessions:h,socketPath:l,autoSelectFamily:u,autoSelectFamilyAttemptTimeout:d,allowH2:f,...y}={}){if(super(),null!=t&&(!Number.isFinite(t)||t<0))throw new s("invalid connections");if("function"!=typeof r)throw new s("factory must be a function.");if(null!=o&&"function"!=typeof o&&"object"!=typeof o)throw new s("connect must be a function or an object");"function"!=typeof o&&(o=a({...I,maxCachedSessions:h,allowH2:f,socketPath:l,timeout:n,...i.nodeHasAutoSelectFamily&&u?{autoSelectFamily:u,autoSelectFamilyAttemptTimeout:d}:void 0,...o})),this[g]=y.interceptors&&y.interceptors.Pool&&Array.isArray(y.interceptors.Pool)?y.interceptors.Pool:[],this[C]=t||null,this[E]=i.parseOrigin(A),this[Q]={...i.deepClone(y),connect:o,allowH2:f},this[Q].interceptors=y.interceptors?{...y.interceptors}:void 0,this[B]=r,this.on("connectionError",(A,t,r)=>{for(const A of t){const t=this[e].indexOf(A);-1!==t&&this[e].splice(t,1)}})}[o](){let A=this[e].find(A=>!A[t]);return A||((!this[C]||this[e].length<this[C])&&(A=this[B](this[E],this[Q]),this[r](A)),A)}},qe}function Et(){if(Xe)return je;Xe=1;const{kConnected:A,kSize:e}=iA();class t{constructor(A){this.value=A}deref(){return 0===this.value[A]&&0===this.value[e]?void 0:this.value}}class r{constructor(A){this.finalizer=A}register(t,r){t.on&&t.on("disconnect",()=>{0===t[A]&&0===t[e]&&this.finalizer(r)})}}return je=function(){return process.env.NODE_V8_COVERAGE?{WeakRef:t,FinalizationRegistry:r}:{WeakRef:F.WeakRef||t,FinalizationRegistry:F.FinalizationRegistry||r}}}function gt(){if(ze)return Ke;ze=1;const{InvalidArgumentError:A}=EA(),{kClients:e,kRunning:t,kClose:r,kDestroy:o,kDispatch:n,kInterceptors:s}=iA(),i=Re(),E=it(),g=nt(),a=gA(),Q=rt(),{WeakRef:C,FinalizationRegistry:B}=Et()(),c=Symbol("onConnect"),I=Symbol("onDisconnect"),h=Symbol("onConnectionError"),l=Symbol("maxRedirections"),u=Symbol("onDrain"),d=Symbol("factory"),f=Symbol("finalizer"),y=Symbol("options");function p(A,e){return e&&1===e.connections?new g(A,e):new E(A,e)}return Ke=class extends i{constructor({factory:t=p,maxRedirections:r=0,connect:o,...n}={}){if(super(),"function"!=typeof t)throw new A("factory must be a function.");if(null!=o&&"function"!=typeof o&&"object"!=typeof o)throw new A("connect must be a function or an object");if(!Number.isInteger(r)||r<0)throw new A("maxRedirections must be a positive number");o&&"function"!=typeof o&&(o={...o}),this[s]=n.interceptors&&n.interceptors.Agent&&Array.isArray(n.interceptors.Agent)?n.interceptors.Agent:[Q({maxRedirections:r})],this[y]={...a.deepClone(n),connect:o},this[y].interceptors=n.interceptors?{...n.interceptors}:void 0,this[l]=r,this[d]=t,this[e]=new Map,this[f]=new B(A=>{const t=this[e].get(A);void 0!==t&&void 0===t.deref()&&this[e].delete(A)});const i=this;this[u]=(A,e)=>{i.emit("drain",A,[i,...e])},this[c]=(A,e)=>{i.emit("connect",A,[i,...e])},this[I]=(A,e,t)=>{i.emit("disconnect",A,[i,...e],t)},this[h]=(A,e,t)=>{i.emit("connectionError",A,[i,...e],t)}}get[t](){let A=0;for(const r of this[e].values()){const e=r.deref();e&&(A+=e[t])}return A}[n](t,r){let o;if(!t.origin||!("string"==typeof t.origin||t.origin instanceof URL))throw new A("opts.origin must be a non-empty string or URL.");o=String(t.origin);const n=this[e].get(o);let s=n?n.deref():null;return s||(s=this[d](t.origin,this[y]).on("drain",this[u]).on("connect",this[c]).on("disconnect",this[I]).on("connectionError",this[h]),this[e].set(o,new C(s)),this[f].register(s,o)),s.dispatch(t,r)}async[r](){const A=[];for(const t of this[e].values()){const e=t.deref();e&&A.push(e.close())}await Promise.all(A)}async[o](A){const t=[];for(const r of this[e].values()){const e=r.deref();e&&t.push(e.destroy(A))}await Promise.all(t)}},Ke}var at,Qt,Ct,Bt,ct,It,ht,lt,ut,dt,ft,yt,pt,wt,Dt,Rt,mt,kt,bt,Nt,Ft,St,Ut={},Lt={exports:{}};function Mt(){if(Qt)return at;Qt=1;const A=g,{Readable:e}=Q,{RequestAbortedError:t,NotSupportedError:r,InvalidArgumentError:o}=EA(),n=gA(),{ReadableStreamFrom:s,toUSVString:i}=gA();let E;const a=Symbol("kConsume"),C=Symbol("kReading"),B=Symbol("kBody"),c=Symbol("abort"),I=Symbol("kContentType"),h=()=>{};function l(A){return n.isDisturbed(A)||function(A){return A[B]&&!0===A[B].locked||A[a]}(A)}async function u(e,r){if(l(e))throw new TypeError("unusable");return A(!e[a]),new Promise((A,o)=>{e[a]={type:r,stream:e,resolve:A,reject:o,length:0,body:[]},e.on("error",function(A){p(this[a],A)}).on("close",function(){null!==this[a].body&&p(this[a],new t)}),process.nextTick(d,e[a])})}function d(A){if(null===A.body)return;const{_readableState:e}=A.stream;for(const t of e.buffer)y(A,t);for(e.endEmitted?f(this[a]):A.stream.on("end",function(){f(this[a])}),A.stream.resume();null!=A.stream.read(););}function f(A){const{type:e,body:t,resolve:r,stream:o,length:n}=A;try{if("text"===e)r(i(Buffer.concat(t)));else if("json"===e)r(JSON.parse(Buffer.concat(t)));else if("arrayBuffer"===e){const A=new Uint8Array(n);let e=0;for(const r of t)A.set(r,e),e+=r.byteLength;r(A.buffer)}else"blob"===e&&(E||(E=require("buffer").Blob),r(new E(t,{type:o[I]})));p(A)}catch(A){o.destroy(A)}}function y(A,e){A.length+=e.length,A.body.push(e)}function p(A,e){null!==A.body&&(e?A.reject(e):A.resolve(),A.type=null,A.stream=null,A.resolve=null,A.reject=null,A.length=0,A.body=null)}return at=class extends e{constructor({resume:A,abort:e,contentType:t="",highWaterMark:r=65536}){super({autoDestroy:!0,read:A,highWaterMark:r}),this._readableState.dataEmitted=!1,this[c]=e,this[a]=null,this[B]=null,this[I]=t,this[C]=!1}destroy(A){return this.destroyed?this:(A||this._readableState.endEmitted||(A=new t),A&&this[c](),super.destroy(A))}emit(A,...e){return"data"===A?this._readableState.dataEmitted=!0:"error"===A&&(this._readableState.errorEmitted=!0),super.emit(A,...e)}on(A,...e){return"data"!==A&&"readable"!==A||(this[C]=!0),super.on(A,...e)}addListener(A,...e){return this.on(A,...e)}off(A,...e){const t=super.off(A,...e);return"data"!==A&&"readable"!==A||(this[C]=this.listenerCount("data")>0||this.listenerCount("readable")>0),t}removeListener(A,...e){return this.off(A,...e)}push(A){return this[a]&&null!==A&&0===this.readableLength?(y(this[a],A),!this[C]||super.push(A)):super.push(A)}async text(){return u(this,"text")}async json(){return u(this,"json")}async blob(){return u(this,"blob")}async arrayBuffer(){return u(this,"arrayBuffer")}async formData(){throw new r}get bodyUsed(){return n.isDisturbed(this)}get body(){return this[B]||(this[B]=s(this),this[a]&&(this[B].getReader(),A(this[B].locked))),this[B]}dump(A){let e=A&&Number.isFinite(A.limit)?A.limit:262144;const t=A&&A.signal;if(t)try{if("object"!=typeof t||!("aborted"in t))throw new o("signal must be an AbortSignal");n.throwIfAborted(t)}catch(A){return Promise.reject(A)}return this.closed?Promise.resolve(null):new Promise((A,r)=>{const o=t?n.addAbortListener(t,()=>{this.destroy()}):h;this.on("close",function(){o(),t&&t.aborted?r(t.reason||Object.assign(new Error("The operation was aborted"),{name:"AbortError"})):A(null)}).on("error",h).on("data",function(A){e-=A.length,e<=0&&this.destroy()}).resume()})}}}function Yt(){if(Bt)return Ct;Bt=1;const A=g,{ResponseStatusCodeError:e}=EA(),{toUSVString:t}=gA();return Ct={getResolveErrorBodyCallback:async function({callback:r,body:o,contentType:n,statusCode:s,statusMessage:i,headers:E}){A(o);let g=[],a=0;for await(const A of o)if(g.push(A),a+=A.length,a>131072){g=null;break}if(204!==s&&n&&g){try{if(n.startsWith("application/json")){const A=JSON.parse(t(Buffer.concat(g)));return void process.nextTick(r,new e(`Response status code ${s}${i?`: ${i}`:""}`,s,E,A))}if(n.startsWith("text/")){const A=t(Buffer.concat(g));return void process.nextTick(r,new e(`Response status code ${s}${i?`: ${i}`:""}`,s,E,A))}}catch(A){}process.nextTick(r,new e(`Response status code ${s}${i?`: ${i}`:""}`,s,E))}else process.nextTick(r,new e(`Response status code ${s}${i?`: ${i}`:""}`,s,E))}},Ct}function vt(){if(It)return ct;It=1;const{addAbortListener:A}=gA(),{RequestAbortedError:e}=EA(),t=Symbol("kListener"),r=Symbol("kSignal");function o(A){A.abort?A.abort():A.onError(new e)}return ct={addSignal:function(e,n){e[r]=null,e[t]=null,n&&(n.aborted?o(e):(e[r]=n,e[t]=()=>{o(e)},A(e[r],e[t])))},removeSignal:function(A){A[r]&&("removeEventListener"in A[r]?A[r].removeEventListener("abort",A[t]):A[r].removeListener("abort",A[t]),A[r]=null,A[t]=null)}}}function Tt(){return Rt||(Rt=1,Ut.request=function(){if(ht)return Lt.exports;ht=1;const A=Mt(),{InvalidArgumentError:e,RequestAbortedError:t}=EA(),r=gA(),{getResolveErrorBodyCallback:o}=Yt(),{AsyncResource:n}=y,{addSignal:s,removeSignal:i}=vt();class E extends n{constructor(A,t){if(!A||"object"!=typeof A)throw new e("invalid opts");const{signal:o,method:n,opaque:i,body:E,onInfo:g,responseHeaders:a,throwOnError:Q,highWaterMark:C}=A;try{if("function"!=typeof t)throw new e("invalid callback");if(C&&("number"!=typeof C||C<0))throw new e("invalid highWaterMark");if(o&&"function"!=typeof o.on&&"function"!=typeof o.addEventListener)throw new e("signal must be an EventEmitter or EventTarget");if("CONNECT"===n)throw new e("invalid method");if(g&&"function"!=typeof g)throw new e("invalid onInfo callback");super("UNDICI_REQUEST")}catch(A){throw r.isStream(E)&&r.destroy(E.on("error",r.nop),A),A}this.responseHeaders=a||null,this.opaque=i||null,this.callback=t,this.res=null,this.abort=null,this.body=E,this.trailers={},this.context=null,this.onInfo=g||null,this.throwOnError=Q,this.highWaterMark=C,r.isStream(E)&&E.on("error",A=>{this.onError(A)}),s(this,o)}onConnect(A,e){if(!this.callback)throw new t;this.abort=A,this.context=e}onHeaders(e,t,n,s){const{callback:i,opaque:E,abort:g,context:a,responseHeaders:Q,highWaterMark:C}=this,B="raw"===Q?r.parseRawHeaders(t):r.parseHeaders(t);if(e<200)return void(this.onInfo&&this.onInfo({statusCode:e,headers:B}));const c=("raw"===Q?r.parseHeaders(t):B)["content-type"],I=new A({resume:n,abort:g,contentType:c,highWaterMark:C});this.callback=null,this.res=I,null!==i&&(this.throwOnError&&e>=400?this.runInAsyncScope(o,null,{callback:i,body:I,contentType:c,statusCode:e,statusMessage:s,headers:B}):this.runInAsyncScope(i,null,null,{statusCode:e,headers:B,trailers:this.trailers,opaque:E,body:I,context:a}))}onData(A){const{res:e}=this;return e.push(A)}onComplete(A){const{res:e}=this;i(this),r.parseHeaders(A,this.trailers),e.push(null)}onError(A){const{res:e,callback:t,body:o,opaque:n}=this;i(this),t&&(this.callback=null,queueMicrotask(()=>{this.runInAsyncScope(t,null,A,{opaque:n})})),e&&(this.res=null,queueMicrotask(()=>{r.destroy(e,A)})),o&&(this.body=null,r.destroy(o,A))}}return Lt.exports=function A(e,t){if(void 0===t)return new Promise((t,r)=>{A.call(this,e,(A,e)=>A?r(A):t(e))});try{this.dispatch(e,new E(e,t))}catch(A){if("function"!=typeof t)throw A;const r=e&&e.opaque;queueMicrotask(()=>t(A,{opaque:r}))}},Lt.exports.RequestHandler=E,Lt.exports}(),Ut.stream=function(){if(ut)return lt;ut=1;const{finished:A,PassThrough:e}=Q,{InvalidArgumentError:t,InvalidReturnValueError:r,RequestAbortedError:o}=EA(),n=gA(),{getResolveErrorBodyCallback:s}=Yt(),{AsyncResource:i}=y,{addSignal:E,removeSignal:g}=vt();class a extends i{constructor(A,e,r){if(!A||"object"!=typeof A)throw new t("invalid opts");const{signal:o,method:s,opaque:i,body:g,onInfo:a,responseHeaders:Q,throwOnError:C}=A;try{if("function"!=typeof r)throw new t("invalid callback");if("function"!=typeof e)throw new t("invalid factory");if(o&&"function"!=typeof o.on&&"function"!=typeof o.addEventListener)throw new t("signal must be an EventEmitter or EventTarget");if("CONNECT"===s)throw new t("invalid method");if(a&&"function"!=typeof a)throw new t("invalid onInfo callback");super("UNDICI_STREAM")}catch(A){throw n.isStream(g)&&n.destroy(g.on("error",n.nop),A),A}this.responseHeaders=Q||null,this.opaque=i||null,this.factory=e,this.callback=r,this.res=null,this.abort=null,this.context=null,this.trailers=null,this.body=g,this.onInfo=a||null,this.throwOnError=C||!1,n.isStream(g)&&g.on("error",A=>{this.onError(A)}),E(this,o)}onConnect(A,e){if(!this.callback)throw new o;this.abort=A,this.context=e}onHeaders(t,o,i,E){const{factory:g,opaque:a,context:Q,callback:C,responseHeaders:B}=this,c="raw"===B?n.parseRawHeaders(o):n.parseHeaders(o);if(t<200)return void(this.onInfo&&this.onInfo({statusCode:t,headers:c}));let I;if(this.factory=null,this.throwOnError&&t>=400){const A=("raw"===B?n.parseHeaders(o):c)["content-type"];I=new e,this.callback=null,this.runInAsyncScope(s,null,{callback:C,body:I,contentType:A,statusCode:t,statusMessage:E,headers:c})}else{if(null===g)return;if(I=this.runInAsyncScope(g,null,{statusCode:t,headers:c,opaque:a,context:Q}),!I||"function"!=typeof I.write||"function"!=typeof I.end||"function"!=typeof I.on)throw new r("expected Writable");A(I,{readable:!1},A=>{const{callback:e,res:t,opaque:r,trailers:o,abort:s}=this;this.res=null,!A&&t.readable||n.destroy(t,A),this.callback=null,this.runInAsyncScope(e,null,A||null,{opaque:r,trailers:o}),A&&s()})}return I.on("drain",i),this.res=I,!0!==(void 0!==I.writableNeedDrain?I.writableNeedDrain:I._writableState&&I._writableState.needDrain)}onData(A){const{res:e}=this;return!e||e.write(A)}onComplete(A){const{res:e}=this;g(this),e&&(this.trailers=n.parseHeaders(A),e.end())}onError(A){const{res:e,callback:t,opaque:r,body:o}=this;g(this),this.factory=null,e?(this.res=null,n.destroy(e,A)):t&&(this.callback=null,queueMicrotask(()=>{this.runInAsyncScope(t,null,A,{opaque:r})})),o&&(this.body=null,n.destroy(o,A))}}return lt=function A(e,t,r){if(void 0===r)return new Promise((r,o)=>{A.call(this,e,t,(A,e)=>A?o(A):r(e))});try{this.dispatch(e,new a(e,t,r))}catch(A){if("function"!=typeof r)throw A;const t=e&&e.opaque;queueMicrotask(()=>r(A,{opaque:t}))}}}(),Ut.pipeline=function(){if(ft)return dt;ft=1;const{Readable:A,Duplex:e,PassThrough:t}=Q,{InvalidArgumentError:r,InvalidReturnValueError:o,RequestAbortedError:n}=EA(),s=gA(),{AsyncResource:i}=y,{addSignal:E,removeSignal:a}=vt(),C=g,B=Symbol("resume");class c extends A{constructor(){super({autoDestroy:!0}),this[B]=null}_read(){const{[B]:A}=this;A&&(this[B]=null,A())}_destroy(A,e){this._read(),e(A)}}class I extends A{constructor(A){super({autoDestroy:!0}),this[B]=A}_read(){this[B]()}_destroy(A,e){A||this._readableState.endEmitted||(A=new n),e(A)}}class h extends i{constructor(A,t){if(!A||"object"!=typeof A)throw new r("invalid opts");if("function"!=typeof t)throw new r("invalid handler");const{signal:o,method:i,opaque:g,onInfo:Q,responseHeaders:C}=A;if(o&&"function"!=typeof o.on&&"function"!=typeof o.addEventListener)throw new r("signal must be an EventEmitter or EventTarget");if("CONNECT"===i)throw new r("invalid method");if(Q&&"function"!=typeof Q)throw new r("invalid onInfo callback");super("UNDICI_PIPELINE"),this.opaque=g||null,this.responseHeaders=C||null,this.handler=t,this.abort=null,this.context=null,this.onInfo=Q||null,this.req=(new c).on("error",s.nop),this.ret=new e({readableObjectMode:A.objectMode,autoDestroy:!0,read:()=>{const{body:A}=this;A&&A.resume&&A.resume()},write:(A,e,t)=>{const{req:r}=this;r.push(A,e)||r._readableState.destroyed?t():r[B]=t},destroy:(A,e)=>{const{body:t,req:r,res:o,ret:i,abort:E}=this;A||i._readableState.endEmitted||(A=new n),E&&A&&E(),s.destroy(t,A),s.destroy(r,A),s.destroy(o,A),a(this),e(A)}}).on("prefinish",()=>{const{req:A}=this;A.push(null)}),this.res=null,E(this,o)}onConnect(A,e){const{ret:t,res:r}=this;if(C(!r,"pipeline cannot be retried"),t.destroyed)throw new n;this.abort=A,this.context=e}onHeaders(A,e,t){const{opaque:r,handler:i,context:E}=this;if(A<200){if(this.onInfo){const t="raw"===this.responseHeaders?s.parseRawHeaders(e):s.parseHeaders(e);this.onInfo({statusCode:A,headers:t})}return}let g;this.res=new I(t);try{this.handler=null;const t="raw"===this.responseHeaders?s.parseRawHeaders(e):s.parseHeaders(e);g=this.runInAsyncScope(i,null,{statusCode:A,headers:t,opaque:r,body:this.res,context:E})}catch(A){throw this.res.on("error",s.nop),A}if(!g||"function"!=typeof g.on)throw new o("expected Readable");g.on("data",A=>{const{ret:e,body:t}=this;!e.push(A)&&t.pause&&t.pause()}).on("error",A=>{const{ret:e}=this;s.destroy(e,A)}).on("end",()=>{const{ret:A}=this;A.push(null)}).on("close",()=>{const{ret:A}=this;A._readableState.ended||s.destroy(A,new n)}),this.body=g}onData(A){const{res:e}=this;return e.push(A)}onComplete(A){const{res:e}=this;e.push(null)}onError(A){const{ret:e}=this;this.handler=null,s.destroy(e,A)}}return dt=function(A,e){try{const t=new h(A,e);return this.dispatch({...A,body:t.req},t),t.ret}catch(A){return(new t).destroy(A)}}}(),Ut.upgrade=function(){if(pt)return yt;pt=1;const{InvalidArgumentError:A,RequestAbortedError:e,SocketError:t}=EA(),{AsyncResource:r}=y,o=gA(),{addSignal:n,removeSignal:s}=vt(),i=g;class E extends r{constructor(e,t){if(!e||"object"!=typeof e)throw new A("invalid opts");if("function"!=typeof t)throw new A("invalid callback");const{signal:r,opaque:o,responseHeaders:s}=e;if(r&&"function"!=typeof r.on&&"function"!=typeof r.addEventListener)throw new A("signal must be an EventEmitter or EventTarget");super("UNDICI_UPGRADE"),this.responseHeaders=s||null,this.opaque=o||null,this.callback=t,this.abort=null,this.context=null,n(this,r)}onConnect(A,t){if(!this.callback)throw new e;this.abort=A,this.context=null}onHeaders(){throw new t("bad upgrade",null)}onUpgrade(A,e,t){const{callback:r,opaque:n,context:E}=this;i.strictEqual(A,101),s(this),this.callback=null;const g="raw"===this.responseHeaders?o.parseRawHeaders(e):o.parseHeaders(e);this.runInAsyncScope(r,null,null,{headers:g,socket:t,opaque:n,context:E})}onError(A){const{callback:e,opaque:t}=this;s(this),e&&(this.callback=null,queueMicrotask(()=>{this.runInAsyncScope(e,null,A,{opaque:t})}))}}return yt=function A(e,t){if(void 0===t)return new Promise((t,r)=>{A.call(this,e,(A,e)=>A?r(A):t(e))});try{const A=new E(e,t);this.dispatch({...e,method:e.method||"GET",upgrade:e.protocol||"Websocket"},A)}catch(A){if("function"!=typeof t)throw A;const r=e&&e.opaque;queueMicrotask(()=>t(A,{opaque:r}))}}}(),Ut.connect=function(){if(Dt)return wt;Dt=1;const{AsyncResource:A}=y,{InvalidArgumentError:e,RequestAbortedError:t,SocketError:r}=EA(),o=gA(),{addSignal:n,removeSignal:s}=vt();class i extends A{constructor(A,t){if(!A||"object"!=typeof A)throw new e("invalid opts");if("function"!=typeof t)throw new e("invalid callback");const{signal:r,opaque:o,responseHeaders:s}=A;if(r&&"function"!=typeof r.on&&"function"!=typeof r.addEventListener)throw new e("signal must be an EventEmitter or EventTarget");super("UNDICI_CONNECT"),this.opaque=o||null,this.responseHeaders=s||null,this.callback=t,this.abort=null,n(this,r)}onConnect(A,e){if(!this.callback)throw new t;this.abort=A,this.context=e}onHeaders(){throw new r("bad connect",null)}onUpgrade(A,e,t){const{callback:r,opaque:n,context:i}=this;s(this),this.callback=null;let E=e;null!=E&&(E="raw"===this.responseHeaders?o.parseRawHeaders(e):o.parseHeaders(e)),this.runInAsyncScope(r,null,null,{statusCode:A,headers:E,socket:t,opaque:n,context:i})}onError(A){const{callback:e,opaque:t}=this;s(this),e&&(this.callback=null,queueMicrotask(()=>{this.runInAsyncScope(e,null,A,{opaque:t})}))}}return wt=function A(e,t){if(void 0===t)return new Promise((t,r)=>{A.call(this,e,(A,e)=>A?r(A):t(e))});try{const A=new i(e,t);this.dispatch({...e,method:"CONNECT"},A)}catch(A){if("function"!=typeof t)throw A;const r=e&&e.opaque;queueMicrotask(()=>t(A,{opaque:r}))}},wt}()),Ut}function Jt(){if(kt)return mt;kt=1;const{UndiciError:A}=EA();class e extends A{constructor(A){super(A),Error.captureStackTrace(this,e),this.name="MockNotMatchedError",this.message=A||"The request does not match any registered mock dispatches",this.code="UND_MOCK_ERR_MOCK_NOT_MATCHED"}}return mt={MockNotMatchedError:e}}function Gt(){return Nt?bt:(Nt=1,bt={kAgent:Symbol("agent"),kOptions:Symbol("options"),kFactory:Symbol("factory"),kDispatches:Symbol("dispatches"),kDispatchKey:Symbol("dispatch key"),kDefaultHeaders:Symbol("default headers"),kDefaultTrailers:Symbol("default trailers"),kContentLength:Symbol("content length"),kMockAgent:Symbol("mock agent"),kMockAgentSet:Symbol("mock agent set"),kMockAgentGet:Symbol("mock agent get"),kMockDispatch:Symbol("mock dispatch"),kClose:Symbol("close"),kOriginalClose:Symbol("original agent close"),kOrigin:Symbol("origin"),kIsMockActive:Symbol("is mock active"),kNetConnect:Symbol("net connect"),kGetNetConnect:Symbol("get net connect"),kConnected:Symbol("connected")})}function Ht(){if(St)return Ft;St=1;const{MockNotMatchedError:A}=Jt(),{kDispatches:e,kMockAgent:t,kOriginalDispatch:r,kOrigin:n,kGetNetConnect:s}=Gt(),{buildURL:i,nop:E}=gA(),{STATUS_CODES:g}=o,{types:{isPromise:Q}}=a;function C(A,e){return"string"==typeof A?A===e:A instanceof RegExp?A.test(e):"function"==typeof A&&!0===A(e)}function B(A){return Object.fromEntries(Object.entries(A).map(([A,e])=>[A.toLocaleLowerCase(),e]))}function c(A,e){if(!Array.isArray(A))return"function"==typeof A.get?A.get(e):B(A)[e.toLocaleLowerCase()];for(let t=0;t<A.length;t+=2)if(A[t].toLocaleLowerCase()===e.toLocaleLowerCase())return A[t+1]}function I(A){const e=A.slice(),t=[];for(let A=0;A<e.length;A+=2)t.push([e[A],e[A+1]]);return Object.fromEntries(t)}function h(A,e){if("function"==typeof A.headers)return Array.isArray(e)&&(e=I(e)),A.headers(e?B(e):{});if(void 0===A.headers)return!0;if("object"!=typeof e||"object"!=typeof A.headers)return!1;for(const[t,r]of Object.entries(A.headers)){if(!C(r,c(e,t)))return!1}return!0}function l(A){if("string"!=typeof A)return A;const e=A.split("?");if(2!==e.length)return A;const t=new URLSearchParams(e.pop());return t.sort(),[...e,t.toString()].join("?")}function u(A){return Buffer.isBuffer(A)?A:"object"==typeof A?JSON.stringify(A):A.toString()}function d(e,t){const r=t.query?i(t.path,t.query):t.path,o="string"==typeof r?l(r):r;let n=e.filter(({consumed:A})=>!A).filter(({path:A})=>C(l(A),o));if(0===n.length)throw new A(`Mock dispatch not matched for path '${o}'`);if(n=n.filter(({method:A})=>C(A,t.method)),0===n.length)throw new A(`Mock dispatch not matched for method '${t.method}'`);if(n=n.filter(({body:A})=>void 0===A||C(A,t.body)),0===n.length)throw new A(`Mock dispatch not matched for body '${t.body}'`);if(n=n.filter(A=>h(A,t.headers)),0===n.length)throw new A(`Mock dispatch not matched for headers '${"object"==typeof t.headers?JSON.stringify(t.headers):t.headers}'`);return n[0]}function f(A,e){const t=A.findIndex(A=>!!A.consumed&&function(A,{path:e,method:t,body:r,headers:o}){const n=C(A.path,e),s=C(A.method,t),i=void 0===A.body||C(A.body,r),E=h(A,o);return n&&s&&i&&E}(A,e));-1!==t&&A.splice(t,1)}function y(A){const{path:e,method:t,body:r,headers:o,query:n}=A;return{path:e,method:t,body:r,headers:o,query:n}}function p(A){return Object.entries(A).reduce((A,[e,t])=>[...A,Buffer.from(`${e}`),Array.isArray(t)?t.map(A=>Buffer.from(`${A}`)):Buffer.from(`${t}`)],[])}function w(A){return g[A]||"unknown"}function D(A,t){const r=y(A),o=d(this[e],r);o.timesInvoked++,o.data.callback&&(o.data={...o.data,...o.data.callback(A)});const{data:{statusCode:n,data:s,headers:i,trailers:g,error:a},delay:C,persist:B}=o,{timesInvoked:c,times:h}=o;if(o.consumed=!B&&c>=h,o.pending=c<h,null!==a)return f(this[e],r),t.onError(a),!0;function l(e,o=s){const a=Array.isArray(A.headers)?I(A.headers):A.headers,C="function"==typeof o?o({...A,headers:a}):o;if(Q(C))return void C.then(A=>l(e,A));const B=u(C),c=p(i),h=p(g);t.abort=E,t.onHeaders(n,c,D,w(n)),t.onData(Buffer.from(B)),t.onComplete(h),f(e,r)}function D(){}return"number"==typeof C&&C>0?setTimeout(()=>{l(this[e])},C):l(this[e]),!0}function R(A,e){const t=new URL(e);return!0===A||!(!Array.isArray(A)||!A.some(A=>C(A,t.host)))}return Ft={getResponseData:u,getMockDispatch:d,addMockDispatch:function(A,e,t){const r={timesInvoked:0,times:1,persist:!1,consumed:!1,...e,pending:!0,data:{error:null,..."function"==typeof t?{callback:t}:{...t}}};return A.push(r),r},deleteMockDispatch:f,buildKey:y,generateKeyValues:p,matchValue:C,getResponse:async function(A){const e=[];for await(const t of A)e.push(t);return Buffer.concat(e).toString("utf8")},getStatusText:w,mockDispatch:D,buildMockDispatch:function(){const e=this[t],o=this[n],i=this[r];return function(t,r){if(e.isMockActive)try{D.call(this,t,r)}catch(n){if(!(n instanceof A))throw n;{const E=e[s]();if(!1===E)throw new A(`${n.message}: subsequent request to origin ${o} was not allowed (net.connect disabled)`);if(!R(E,o))throw new A(`${n.message}: subsequent request to origin ${o} was not allowed (net.connect is not enabled for this origin)`);i.call(this,t,r)}}else i.call(this,t,r)}},checkNetConnect:R,buildMockOptions:function(A){if(A){const{agent:e,...t}=A;return t}},getHeaderByName:c},Ft}var Vt,Ot,xt,Wt,qt,Pt,_t,Zt,jt,Xt,Kt,zt,$t,Ar,er,tr,rr,or,nr,sr,ir,Er,gr,ar,Qr,Cr,Br,cr,Ir,hr,lr,ur,dr,fr,yr,pr,wr,Dr,Rr,mr,kr,br,Nr,Fr,Sr,Ur,Lr,Mr,Yr,vr,Tr,Jr,Gr,Hr,Vr,Or,xr,Wr,qr,Pr,_r,Zr,jr,Xr,Kr,zr,$r,Ao,eo,to,ro,oo={};function no(){if(Vt)return oo;Vt=1;const{getResponseData:A,buildKey:e,addMockDispatch:t}=Ht(),{kDispatches:r,kDispatchKey:o,kDefaultHeaders:n,kDefaultTrailers:s,kContentLength:i,kMockDispatch:E}=Gt(),{InvalidArgumentError:g}=EA(),{buildURL:a}=gA();class Q{constructor(A){this[E]=A}delay(A){if("number"!=typeof A||!Number.isInteger(A)||A<=0)throw new g("waitInMs must be a valid integer > 0");return this[E].delay=A,this}persist(){return this[E].persist=!0,this}times(A){if("number"!=typeof A||!Number.isInteger(A)||A<=0)throw new g("repeatTimes must be a valid integer > 0");return this[E].times=A,this}}return oo.MockInterceptor=class{constructor(A,t){if("object"!=typeof A)throw new g("opts must be an object");if(void 0===A.path)throw new g("opts.path must be defined");if(void 0===A.method&&(A.method="GET"),"string"==typeof A.path)if(A.query)A.path=a(A.path,A.query);else{const e=new URL(A.path,"data://");A.path=e.pathname+e.search}"string"==typeof A.method&&(A.method=A.method.toUpperCase()),this[o]=e(A),this[r]=t,this[n]={},this[s]={},this[i]=!1}createMockScopeDispatchData(e,t,r={}){const o=A(t),E=this[i]?{"content-length":o.length}:{};return{statusCode:e,data:t,headers:{...this[n],...E,...r.headers},trailers:{...this[s],...r.trailers}}}validateReplyParameters(A,e,t){if(void 0===A)throw new g("statusCode must be defined");if(void 0===e)throw new g("data must be defined");if("object"!=typeof t)throw new g("responseOptions must be an object")}reply(A){if("function"==typeof A){const e=e=>{const t=A(e);if("object"!=typeof t)throw new g("reply options callback must return an object");const{statusCode:r,data:o="",responseOptions:n={}}=t;return this.validateReplyParameters(r,o,n),{...this.createMockScopeDispatchData(r,o,n)}},n=t(this[r],this[o],e);return new Q(n)}const[e,n="",s={}]=[...arguments];this.validateReplyParameters(e,n,s);const i=this.createMockScopeDispatchData(e,n,s),E=t(this[r],this[o],i);return new Q(E)}replyWithError(A){if(void 0===A)throw new g("error must be defined");const e=t(this[r],this[o],{error:A});return new Q(e)}defaultReplyHeaders(A){if(void 0===A)throw new g("headers must be defined");return this[n]=A,this}defaultReplyTrailers(A){if(void 0===A)throw new g("trailers must be defined");return this[s]=A,this}replyContentLength(){return this[i]=!0,this}},oo.MockScope=Q,oo}function so(){if(xt)return Ot;xt=1;const{promisify:A}=a,e=nt(),{buildMockDispatch:t}=Ht(),{kDispatches:r,kMockAgent:o,kClose:n,kOriginalClose:s,kOrigin:i,kOriginalDispatch:E,kConnected:g}=Gt(),{MockInterceptor:Q}=no(),C=iA(),{InvalidArgumentError:B}=EA();class c extends e{constructor(A,e){if(super(A,e),!e||!e.agent||"function"!=typeof e.agent.dispatch)throw new B("Argument opts.agent must implement Agent");this[o]=e.agent,this[i]=A,this[r]=[],this[g]=1,this[E]=this.dispatch,this[s]=this.close.bind(this),this.dispatch=t.call(this),this.close=this[n]}get[C.kConnected](){return this[g]}intercept(A){return new Q(A,this[r])}async[n](){await A(this[s])(),this[g]=0,this[o][C.kClients].delete(this[i])}}return Ot=c}function io(){if(qt)return Wt;qt=1;const{promisify:A}=a,e=it(),{buildMockDispatch:t}=Ht(),{kDispatches:r,kMockAgent:o,kClose:n,kOriginalClose:s,kOrigin:i,kOriginalDispatch:E,kConnected:g}=Gt(),{MockInterceptor:Q}=no(),C=iA(),{InvalidArgumentError:B}=EA();class c extends e{constructor(A,e){if(super(A,e),!e||!e.agent||"function"!=typeof e.agent.dispatch)throw new B("Argument opts.agent must implement Agent");this[o]=e.agent,this[i]=A,this[r]=[],this[g]=1,this[E]=this.dispatch,this[s]=this.close.bind(this),this.dispatch=t.call(this),this.close=this[n]}get[C.kConnected](){return this[g]}intercept(A){return new Q(A,this[r])}async[n](){await A(this[s])(),this[g]=0,this[o][C.kClients].delete(this[i])}}return Wt=c}function Eo(){if(Kt)return Xt;Kt=1;const{kClients:A}=iA(),e=gt(),{kAgent:t,kMockAgentSet:r,kMockAgentGet:o,kDispatches:n,kIsMockActive:s,kNetConnect:i,kGetNetConnect:E,kOptions:g,kFactory:a}=Gt(),C=so(),B=io(),{matchValue:c,buildMockOptions:I}=Ht(),{InvalidArgumentError:h,UndiciError:l}=EA(),u=De(),d=function(){if(_t)return Pt;_t=1;const A={pronoun:"it",is:"is",was:"was",this:"this"},e={pronoun:"they",is:"are",was:"were",this:"these"};return Pt=class{constructor(A,e){this.singular=A,this.plural=e}pluralize(t){const r=1===t;return{...r?A:e,count:t,noun:r?this.singular:this.plural}}}}(),f=function(){if(jt)return Zt;jt=1;const{Transform:A}=Q,{Console:e}=p;return Zt=class{constructor({disableColors:t}={}){this.transform=new A({transform(A,e,t){t(null,A)}}),this.logger=new e({stdout:this.transform,inspectOptions:{colors:!t&&!process.env.CI}})}format(A){const e=A.map(({method:A,path:e,data:{statusCode:t},persist:r,times:o,timesInvoked:n,origin:s})=>({Method:A,Origin:s,Path:e,"Status code":t,Persistent:r?"✅":"❌",Invocations:n,Remaining:r?1/0:o-n}));return this.logger.table(e),this.transform.read().toString()}}}();class y{constructor(A){this.value=A}deref(){return this.value}}return Xt=class extends u{constructor(r){if(super(r),this[i]=!0,this[s]=!0,r&&r.agent&&"function"!=typeof r.agent.dispatch)throw new h("Argument opts.agent must implement Agent");const o=r&&r.agent?r.agent:new e(r);this[t]=o,this[A]=o[A],this[g]=I(r)}get(A){let e=this[o](A);return e||(e=this[a](A),this[r](A,e)),e}dispatch(A,e){return this.get(A.origin),this[t].dispatch(A,e)}async close(){await this[t].close(),this[A].clear()}deactivate(){this[s]=!1}activate(){this[s]=!0}enableNetConnect(A){if("string"==typeof A||"function"==typeof A||A instanceof RegExp)Array.isArray(this[i])?this[i].push(A):this[i]=[A];else{if(void 0!==A)throw new h("Unsupported matcher. Must be one of String|Function|RegExp.");this[i]=!0}}disableNetConnect(){this[i]=!1}get isMockActive(){return this[s]}[r](e,t){this[A].set(e,new y(t))}[a](A){const e=Object.assign({agent:this},this[g]);return this[g]&&1===this[g].connections?new C(A,e):new B(A,e)}[o](e){const t=this[A].get(e);if(t)return t.deref();if("string"!=typeof e){const A=this[a]("http://localhost:9999");return this[r](e,A),A}for(const[t,o]of Array.from(this[A])){const A=o.deref();if(A&&"string"!=typeof t&&c(t,e)){const t=this[a](e);return this[r](e,t),t[n]=A[n],t}}}[E](){return this[i]}pendingInterceptors(){const e=this[A];return Array.from(e.entries()).flatMap(([A,e])=>e.deref()[n].map(e=>({...e,origin:A}))).filter(({pending:A})=>A)}assertNoPendingInterceptors({pendingInterceptorsFormatter:A=new f}={}){const e=this.pendingInterceptors();if(0===e.length)return;const t=new d("interceptor","interceptors").pluralize(e.length);throw new l(`\n${t.count} ${t.noun} ${t.is} pending:\n\n${A.format(e)}\n`.trim())}},Xt}function go(){if($t)return zt;$t=1;const{kProxy:A,kClose:e,kDestroy:t,kInterceptors:r}=iA(),{URL:o}=w,n=gt(),s=it(),i=Re(),{InvalidArgumentError:E,RequestAbortedError:g}=EA(),a=me(),Q=Symbol("proxy agent"),C=Symbol("proxy client"),B=Symbol("proxy headers"),c=Symbol("request tls settings"),I=Symbol("proxy tls settings"),h=Symbol("connect endpoint function");function l(A,e){return new s(A,e)}return zt=class extends i{constructor(e){if(super(e),this[A]=function(A){if("string"==typeof A&&(A={uri:A}),!A||!A.uri)throw new E("Proxy opts.uri is mandatory");return{uri:A.uri,protocol:A.protocol||"https"}}(e),this[Q]=new n(e),this[r]=e.interceptors&&e.interceptors.ProxyAgent&&Array.isArray(e.interceptors.ProxyAgent)?e.interceptors.ProxyAgent:[],"string"==typeof e&&(e={uri:e}),!e||!e.uri)throw new E("Proxy opts.uri is mandatory");const{clientFactory:t=l}=e;if("function"!=typeof t)throw new E("Proxy opts.clientFactory must be a function.");this[c]=e.requestTls,this[I]=e.proxyTls,this[B]=e.headers||{};const s=new o(e.uri),{origin:i,port:u,host:d,username:f,password:y}=s;if(e.auth&&e.token)throw new E("opts.auth cannot be used in combination with opts.token");e.auth?this[B]["proxy-authorization"]=`Basic ${e.auth}`:e.token?this[B]["proxy-authorization"]=e.token:f&&y&&(this[B]["proxy-authorization"]=`Basic ${Buffer.from(`${decodeURIComponent(f)}:${decodeURIComponent(y)}`).toString("base64")}`);const p=a({...e.proxyTls});this[h]=a({...e.requestTls}),this[C]=t(s,{connect:p}),this[Q]=new n({...e,connect:async(A,e)=>{let t=A.host;A.port||(t+=":"+("https:"===A.protocol?443:80));try{const{socket:r,statusCode:o}=await this[C].connect({origin:i,port:u,path:t,signal:A.signal,headers:{...this[B],host:d}});if(200!==o&&(r.on("error",()=>{}).destroy(),e(new g(`Proxy response (${o}) !== 200 when HTTP Tunneling`))),"https:"!==A.protocol)return void e(null,r);let n;n=this[c]?this[c].servername:A.servername,this[h]({...A,servername:n,httpSocket:r},e)}catch(A){e(A)}}})}dispatch(A,e){const{host:t}=new o(A.origin),r=function(A){if(Array.isArray(A)){const e={};for(let t=0;t<A.length;t+=2)e[A[t]]=A[t+1];return e}return A}(A.headers);return function(A){const e=A&&Object.keys(A).find(A=>"proxy-authorization"===A.toLowerCase());if(e)throw new E("Proxy-Authorization should be sent in ProxyAgent constructor")}(r),this[Q].dispatch({...A,headers:{...r,host:t}},e)}async[e](){await this[Q].close(),await this[C].close()}async[t](){await this[Q].destroy(),await this[C].destroy()}},zt}function ao(){if(er)return Ar;er=1;const A=g,{kRetryHandlerDefaultRetry:e}=iA(),{RequestRetryError:t}=EA(),{isDisturbed:r,parseHeaders:o,parseRangeHeader:n}=gA();class s{constructor(A,t){const{retryOptions:r,...o}=A,{retry:n,maxRetries:i,maxTimeout:E,minTimeout:g,timeoutFactor:a,methods:Q,errorCodes:C,retryAfter:B,statusCodes:c}=r??{};this.dispatch=t.dispatch,this.handler=t.handler,this.opts=o,this.abort=null,this.aborted=!1,this.retryOpts={retry:n??s[e],retryAfter:B??!0,maxTimeout:E??3e4,timeout:g??500,timeoutFactor:a??2,maxRetries:i??5,methods:Q??["GET","HEAD","OPTIONS","PUT","DELETE","TRACE"],statusCodes:c??[500,502,503,504,429],errorCodes:C??["ECONNRESET","ECONNREFUSED","ENOTFOUND","ENETDOWN","ENETUNREACH","EHOSTDOWN","EHOSTUNREACH","EPIPE"]},this.retryCount=0,this.start=0,this.end=null,this.etag=null,this.resume=null,this.handler.onConnect(A=>{this.aborted=!0,this.abort?this.abort(A):this.reason=A})}onRequestSent(){this.handler.onRequestSent&&this.handler.onRequestSent()}onUpgrade(A,e,t){this.handler.onUpgrade&&this.handler.onUpgrade(A,e,t)}onConnect(A){this.aborted?A(this.reason):this.abort=A}onBodySent(A){if(this.handler.onBodySent)return this.handler.onBodySent(A)}static[e](A,{state:e,opts:t},r){const{statusCode:o,code:n,headers:s}=A,{method:i,retryOptions:E}=t,{maxRetries:g,timeout:a,maxTimeout:Q,timeoutFactor:C,statusCodes:B,errorCodes:c,methods:I}=E;let{counter:h,currentTimeout:l}=e;if(l=null!=l&&l>0?l:a,n&&"UND_ERR_REQ_RETRY"!==n&&"UND_ERR_SOCKET"!==n&&!c.includes(n))return void r(A);if(Array.isArray(I)&&!I.includes(i))return void r(A);if(null!=o&&Array.isArray(B)&&!B.includes(o))return void r(A);if(h>g)return void r(A);let u=null!=s&&s["retry-after"];u&&(u=Number(u),u=isNaN(u)?function(A){const e=Date.now();return new Date(A).getTime()-e}(u):1e3*u);const d=u>0?Math.min(u,Q):Math.min(l*C**h,Q);e.currentTimeout=d,setTimeout(()=>r(null),d)}onHeaders(e,r,s,i){const E=o(r);if(this.retryCount+=1,e>=300)return this.abort(new t("Request failed",e,{headers:E,count:this.retryCount})),!1;if(null!=this.resume){if(this.resume=null,206!==e)return!0;const r=n(E["content-range"]);if(!r)return this.abort(new t("Content-Range mismatch",e,{headers:E,count:this.retryCount})),!1;if(null!=this.etag&&this.etag!==E.etag)return this.abort(new t("ETag mismatch",e,{headers:E,count:this.retryCount})),!1;const{start:o,size:i,end:g=i}=r;return A(this.start===o,"content-range mismatch"),A(null==this.end||this.end===g,"content-range mismatch"),this.resume=s,!0}if(null==this.end){if(206===e){const t=n(E["content-range"]);if(null==t)return this.handler.onHeaders(e,r,s,i);const{start:o,size:g,end:a=g}=t;A(null!=o&&Number.isFinite(o)&&this.start!==o,"content-range mismatch"),A(Number.isFinite(o)),A(null!=a&&Number.isFinite(a)&&this.end!==a,"invalid content-length"),this.start=o,this.end=a}if(null==this.end){const A=E["content-length"];this.end=null!=A?Number(A):null}return A(Number.isFinite(this.start)),A(null==this.end||Number.isFinite(this.end),"invalid content-length"),this.resume=s,this.etag=null!=E.etag?E.etag:null,this.handler.onHeaders(e,r,s,i)}const g=new t("Request failed",e,{headers:E,count:this.retryCount});return this.abort(g),!1}onData(A){return this.start+=A.length,this.handler.onData(A)}onComplete(A){return this.retryCount=0,this.handler.onComplete(A)}onError(A){if(this.aborted||r(this.opts.body))return this.handler.onError(A);this.retryOpts.retry(A,{state:{counter:this.retryCount++,currentTimeout:this.retryAfter},opts:{retryOptions:this.retryOpts,...this.opts}},function(A){if(null!=A||this.aborted||r(this.opts.body))return this.handler.onError(A);0!==this.start&&(this.opts={...this.opts,headers:{...this.opts.headers,range:`bytes=${this.start}-${this.end??""}`}});try{this.dispatch(this.opts,this)}catch(A){this.handler.onError(A)}}.bind(this))}}return Ar=s}function Qo(){if(rr)return tr;rr=1;const A=Symbol.for("undici.globalDispatcher.1"),{InvalidArgumentError:e}=EA(),t=gt();function r(t){if(!t||"function"!=typeof t.dispatch)throw new e("Argument agent must implement Agent");Object.defineProperty(globalThis,A,{value:t,writable:!0,enumerable:!1,configurable:!1})}function o(){return globalThis[A]}return void 0===o()&&r(new t),tr={setGlobalDispatcher:r,getGlobalDispatcher:o}}function Co(){if(ir)return sr;ir=1;const{kHeadersList:A,kConstruct:e}=iA(),{kGuard:t}=ue(),{kEnumerableProperty:r}=gA(),{makeIterator:o,isValidHeaderName:n,isValidHeaderValue:s}=le(),i=a,{webidl:E}=de(),Q=g,C=Symbol("headers map"),B=Symbol("headers map sorted");function c(A){return 10===A||13===A||9===A||32===A}function I(A){let e=0,t=A.length;for(;t>e&&c(A.charCodeAt(t-1));)--t;for(;t>e&&c(A.charCodeAt(e));)++e;return 0===e&&t===A.length?A:A.substring(e,t)}function h(A,e){if(Array.isArray(e))for(let t=0;t<e.length;++t){const r=e[t];if(2!==r.length)throw E.errors.exception({header:"Headers constructor",message:`expected name/value pair to be length 2, found ${r.length}.`});l(A,r[0],r[1])}else{if("object"!=typeof e||null===e)throw E.errors.conversionFailed({prefix:"Headers constructor",argument:"Argument 1",types:["sequence<sequence<ByteString>>","record<ByteString, ByteString>"]});{const t=Object.keys(e);for(let r=0;r<t.length;++r)l(A,t[r],e[t[r]])}}}function l(e,r,o){if(o=I(o),!n(r))throw E.errors.invalidArgument({prefix:"Headers.append",value:r,type:"header name"});if(!s(o))throw E.errors.invalidArgument({prefix:"Headers.append",value:o,type:"header value"});if("immutable"===e[t])throw new TypeError("immutable");return e[t],e[A].append(r,o)}class u{cookies=null;constructor(A){A instanceof u?(this[C]=new Map(A[C]),this[B]=A[B],this.cookies=null===A.cookies?null:[...A.cookies]):(this[C]=new Map(A),this[B]=null)}contains(A){return A=A.toLowerCase(),this[C].has(A)}clear(){this[C].clear(),this[B]=null,this.cookies=null}append(A,e){this[B]=null;const t=A.toLowerCase(),r=this[C].get(t);if(r){const A="cookie"===t?"; ":", ";this[C].set(t,{name:r.name,value:`${r.value}${A}${e}`})}else this[C].set(t,{name:A,value:e});"set-cookie"===t&&(this.cookies??=[],this.cookies.push(e))}set(A,e){this[B]=null;const t=A.toLowerCase();"set-cookie"===t&&(this.cookies=[e]),this[C].set(t,{name:A,value:e})}delete(A){this[B]=null,"set-cookie"===(A=A.toLowerCase())&&(this.cookies=null),this[C].delete(A)}get(A){const e=this[C].get(A.toLowerCase());return void 0===e?null:e.value}*[Symbol.iterator](){for(const[A,{value:e}]of this[C])yield[A,e]}get entries(){const A={};if(this[C].size)for(const{name:e,value:t}of this[C].values())A[e]=t;return A}}class d{constructor(r=void 0){r!==e&&(this[A]=new u,this[t]="none",void 0!==r&&h(this,r=E.converters.HeadersInit(r)))}append(A,e){return E.brandCheck(this,d),E.argumentLengthCheck(arguments,2,{header:"Headers.append"}),l(this,A=E.converters.ByteString(A),e=E.converters.ByteString(e))}delete(e){if(E.brandCheck(this,d),E.argumentLengthCheck(arguments,1,{header:"Headers.delete"}),e=E.converters.ByteString(e),!n(e))throw E.errors.invalidArgument({prefix:"Headers.delete",value:e,type:"header name"});if("immutable"===this[t])throw new TypeError("immutable");this[t],this[A].contains(e)&&this[A].delete(e)}get(e){if(E.brandCheck(this,d),E.argumentLengthCheck(arguments,1,{header:"Headers.get"}),e=E.converters.ByteString(e),!n(e))throw E.errors.invalidArgument({prefix:"Headers.get",value:e,type:"header name"});return this[A].get(e)}has(e){if(E.brandCheck(this,d),E.argumentLengthCheck(arguments,1,{header:"Headers.has"}),e=E.converters.ByteString(e),!n(e))throw E.errors.invalidArgument({prefix:"Headers.has",value:e,type:"header name"});return this[A].contains(e)}set(e,r){if(E.brandCheck(this,d),E.argumentLengthCheck(arguments,2,{header:"Headers.set"}),e=E.converters.ByteString(e),r=I(r=E.converters.ByteString(r)),!n(e))throw E.errors.invalidArgument({prefix:"Headers.set",value:e,type:"header name"});if(!s(r))throw E.errors.invalidArgument({prefix:"Headers.set",value:r,type:"header value"});if("immutable"===this[t])throw new TypeError("immutable");this[t],this[A].set(e,r)}getSetCookie(){E.brandCheck(this,d);const e=this[A].cookies;return e?[...e]:[]}get[B](){if(this[A][B])return this[A][B];const e=[],t=[...this[A]].sort((A,e)=>A[0]<e[0]?-1:1),r=this[A].cookies;for(let A=0;A<t.length;++A){const[o,n]=t[A];if("set-cookie"===o)for(let A=0;A<r.length;++A)e.push([o,r[A]]);else Q(null!==n),e.push([o,n])}return this[A][B]=e,e}keys(){if(E.brandCheck(this,d),"immutable"===this[t]){const A=this[B];return o(()=>A,"Headers","key")}return o(()=>[...this[B].values()],"Headers","key")}values(){if(E.brandCheck(this,d),"immutable"===this[t]){const A=this[B];return o(()=>A,"Headers","value")}return o(()=>[...this[B].values()],"Headers","value")}entries(){if(E.brandCheck(this,d),"immutable"===this[t]){const A=this[B];return o(()=>A,"Headers","key+value")}return o(()=>[...this[B].values()],"Headers","key+value")}forEach(A,e=globalThis){if(E.brandCheck(this,d),E.argumentLengthCheck(arguments,1,{header:"Headers.forEach"}),"function"!=typeof A)throw new TypeError("Failed to execute 'forEach' on 'Headers': parameter 1 is not of type 'Function'.");for(const[t,r]of this)A.apply(e,[r,t,this])}[Symbol.for("nodejs.util.inspect.custom")](){return E.brandCheck(this,d),this[A]}}return d.prototype[Symbol.iterator]=d.prototype.entries,Object.defineProperties(d.prototype,{append:r,delete:r,get:r,has:r,set:r,getSetCookie:r,keys:r,values:r,entries:r,forEach:r,[Symbol.iterator]:{enumerable:!1},[Symbol.toStringTag]:{value:"Headers",configurable:!0},[i.inspect.custom]:{enumerable:!1}}),E.converters.HeadersInit=function(A){if("Object"===E.util.Type(A))return A[Symbol.iterator]?E.converters["sequence<sequence<ByteString>>"](A):E.converters["record<ByteString, ByteString>"](A);throw E.errors.conversionFailed({prefix:"Headers constructor",argument:"Argument 1",types:["sequence<sequence<ByteString>>","record<ByteString, ByteString>"]})},sr={fill:h,Headers:d,HeadersList:u}}function Bo(){if(gr)return Er;gr=1;const{Headers:A,HeadersList:e,fill:t}=Co(),{extractBody:r,cloneBody:o,mixinBody:n}=we(),s=gA(),{kEnumerableProperty:i}=s,{isValidReasonPhrase:E,isCancelled:Q,isAborted:C,isBlobLike:B,serializeJavascriptValueToJSONString:I,isErrorLike:h,isomorphicEncode:l}=le(),{redirectStatusSet:u,nullBodyStatus:d,DOMException:f}=Ie(),{kState:y,kHeaders:p,kGuard:w,kRealm:D}=ue(),{webidl:R}=de(),{FormData:m}=pe(),{getGlobalOrigin:k}=he(),{URLSerializer:b}=fe(),{kHeadersList:N,kConstruct:F}=iA(),S=g,{types:U}=a,L=globalThis.ReadableStream||c.ReadableStream,M=new TextEncoder("utf-8");class Y{static error(){const A={settingsObject:{}},e=new Y;return e[y]=J(),e[D]=A,e[p][N]=e[y].headersList,e[p][w]="immutable",e[p][D]=A,e}static json(A,e={}){R.argumentLengthCheck(arguments,1,{header:"Response.json"}),null!==e&&(e=R.converters.ResponseInit(e));const t=M.encode(I(A)),o=r(t),n={settingsObject:{}},s=new Y;return s[D]=n,s[p][w]="response",s[p][D]=n,V(s,e,{body:o[0],type:"application/json"}),s}static redirect(A,e=302){const t={settingsObject:{}};let r;R.argumentLengthCheck(arguments,1,{header:"Response.redirect"}),A=R.converters.USVString(A),e=R.converters["unsigned short"](e);try{r=new URL(A,k())}catch(e){throw Object.assign(new TypeError("Failed to parse URL from "+A),{cause:e})}if(!u.has(e))throw new RangeError("Invalid status code "+e);const o=new Y;o[D]=t,o[p][w]="immutable",o[p][D]=t,o[y].status=e;const n=l(b(r));return o[y].headersList.append("location",n),o}constructor(e=null,t={}){null!==e&&(e=R.converters.BodyInit(e)),t=R.converters.ResponseInit(t),this[D]={settingsObject:{}},this[y]=T({}),this[p]=new A(F),this[p][w]="response",this[p][N]=this[y].headersList,this[p][D]=this[D];let o=null;if(null!=e){const[A,t]=r(e);o={body:A,type:t}}V(this,t,o)}get type(){return R.brandCheck(this,Y),this[y].type}get url(){R.brandCheck(this,Y);const A=this[y].urlList,e=A[A.length-1]??null;return null===e?"":b(e,!0)}get redirected(){return R.brandCheck(this,Y),this[y].urlList.length>1}get status(){return R.brandCheck(this,Y),this[y].status}get ok(){return R.brandCheck(this,Y),this[y].status>=200&&this[y].status<=299}get statusText(){return R.brandCheck(this,Y),this[y].statusText}get headers(){return R.brandCheck(this,Y),this[p]}get body(){return R.brandCheck(this,Y),this[y].body?this[y].body.stream:null}get bodyUsed(){return R.brandCheck(this,Y),!!this[y].body&&s.isDisturbed(this[y].body.stream)}clone(){if(R.brandCheck(this,Y),this.bodyUsed||this.body&&this.body.locked)throw R.errors.exception({header:"Response.clone",message:"Body has already been consumed."});const A=v(this[y]),e=new Y;return e[y]=A,e[D]=this[D],e[p][N]=A.headersList,e[p][w]=this[p][w],e[p][D]=this[p][D],e}}function v(A){if(A.internalResponse)return H(v(A.internalResponse),A.type);const e=T({...A,body:null});return null!=A.body&&(e.body=o(A.body)),e}function T(A){return{aborted:!1,rangeRequested:!1,timingAllowPassed:!1,requestIncludesCredentials:!1,type:"default",status:200,timingInfo:null,cacheState:"",statusText:"",...A,headersList:A.headersList?new e(A.headersList):new e,urlList:A.urlList?[...A.urlList]:[]}}function J(A){return T({type:"error",status:0,error:h(A)?A:new Error(A?String(A):A),aborted:A&&"AbortError"===A.name})}function G(A,e){return e={internalResponse:A,...e},new Proxy(A,{get:(A,t)=>t in e?e[t]:A[t],set:(A,t,r)=>(S(!(t in e)),A[t]=r,!0)})}function H(A,e){return"basic"===e?G(A,{type:"basic",headersList:A.headersList}):"cors"===e?G(A,{type:"cors",headersList:A.headersList}):"opaque"===e?G(A,{type:"opaque",urlList:Object.freeze([]),status:0,statusText:"",body:null}):"opaqueredirect"===e?G(A,{type:"opaqueredirect",status:0,statusText:"",headersList:[],body:null}):void S(!1)}function V(A,e,r){if(null!==e.status&&(e.status<200||e.status>599))throw new RangeError('init["status"] must be in the range of 200 to 599, inclusive.');if("statusText"in e&&null!=e.statusText&&!E(String(e.statusText)))throw new TypeError("Invalid statusText");if("status"in e&&null!=e.status&&(A[y].status=e.status),"statusText"in e&&null!=e.statusText&&(A[y].statusText=e.statusText),"headers"in e&&null!=e.headers&&t(A[p],e.headers),r){if(d.includes(A.status))throw R.errors.exception({header:"Response constructor",message:"Invalid response status code "+A.status});A[y].body=r.body,null==r.type||A[y].headersList.contains("Content-Type")||A[y].headersList.append("content-type",r.type)}}return n(Y),Object.defineProperties(Y.prototype,{type:i,url:i,status:i,ok:i,redirected:i,statusText:i,headers:i,clone:i,body:i,bodyUsed:i,[Symbol.toStringTag]:{value:"Response",configurable:!0}}),Object.defineProperties(Y,{json:i,redirect:i,error:i}),R.converters.ReadableStream=R.interfaceConverter(L),R.converters.FormData=R.interfaceConverter(m),R.converters.URLSearchParams=R.interfaceConverter(URLSearchParams),R.converters.XMLHttpRequestBodyInit=function(A){return"string"==typeof A?R.converters.USVString(A):B(A)?R.converters.Blob(A,{strict:!1}):U.isArrayBuffer(A)||U.isTypedArray(A)||U.isDataView(A)?R.converters.BufferSource(A):s.isFormDataLike(A)?R.converters.FormData(A,{strict:!1}):A instanceof URLSearchParams?R.converters.URLSearchParams(A):R.converters.DOMString(A)},R.converters.BodyInit=function(A){return A instanceof L?R.converters.ReadableStream(A):A?.[Symbol.asyncIterator]?A:R.converters.XMLHttpRequestBodyInit(A)},R.converters.ResponseInit=R.dictionaryConverter([{key:"status",converter:R.converters["unsigned short"],defaultValue:200},{key:"statusText",converter:R.converters.ByteString,defaultValue:""},{key:"headers",converter:R.converters.HeadersInit}]),Er={makeNetworkError:J,makeResponse:T,makeAppropriateNetworkError:function(A,e=null){return S(Q(A)),C(A)?J(Object.assign(new f("The operation was aborted.","AbortError"),{cause:e})):J(Object.assign(new f("Request was cancelled."),{cause:e}))},filterResponse:H,Response:Y,cloneResponse:v}}function co(){if(Qr)return ar;Qr=1;const{extractBody:A,mixinBody:e,cloneBody:t}=we(),{Headers:r,fill:o,HeadersList:n}=Co(),{FinalizationRegistry:s}=Et()(),i=gA(),{isValidHTTPToken:a,sameOrigin:Q,normalizeMethod:C,makePolicyContainer:B,normalizeMethodRecord:I}=le(),{forbiddenMethodsSet:h,corsSafeListedMethodsSet:l,referrerPolicy:u,requestRedirect:d,requestMode:f,requestCredentials:y,requestCache:p,requestDuplex:w}=Ie(),{kEnumerableProperty:D}=i,{kHeaders:R,kSignal:m,kState:k,kGuard:b,kRealm:N}=ue(),{webidl:F}=de(),{getGlobalOrigin:S}=he(),{URLSerializer:U}=fe(),{kHeadersList:L,kConstruct:M}=iA(),Y=g,{getMaxListeners:v,setMaxListeners:T,getEventListeners:J,defaultMaxListeners:G}=E;let H=globalThis.TransformStream;const V=Symbol("abortController"),O=new s(({signal:A,abort:e})=>{A.removeEventListener("abort",e)});class x{constructor(e,t={}){if(e===M)return;F.argumentLengthCheck(arguments,1,{header:"Request constructor"}),e=F.converters.RequestInfo(e),t=F.converters.RequestInit(t),this[N]={settingsObject:{baseUrl:S(),get origin(){return this.baseUrl?.origin},policyContainer:B()}};let s=null,E=null;const g=this[N].settingsObject.baseUrl;let u=null;if("string"==typeof e){let A;try{A=new URL(e,g)}catch(A){throw new TypeError("Failed to parse URL from "+e,{cause:A})}if(A.username||A.password)throw new TypeError("Request cannot be constructed from a URL that includes credentials: "+e);s=W({urlList:[A]}),E="cors"}else Y(e instanceof x),s=e[k],u=e[m];const d=this[N].settingsObject.origin;let f="client";if("EnvironmentSettingsObject"===s.window?.constructor?.name&&Q(s.window,d)&&(f=s.window),null!=t.window)throw new TypeError(`'window' option '${f}' must be null`);"window"in t&&(f="no-window"),s=W({method:s.method,headersList:s.headersList,unsafeRequest:s.unsafeRequest,client:this[N].settingsObject,window:f,priority:s.priority,origin:s.origin,referrer:s.referrer,referrerPolicy:s.referrerPolicy,mode:s.mode,credentials:s.credentials,cache:s.cache,redirect:s.redirect,integrity:s.integrity,keepalive:s.keepalive,reloadNavigation:s.reloadNavigation,historyNavigation:s.historyNavigation,urlList:[...s.urlList]});const y=0!==Object.keys(t).length;if(y&&("navigate"===s.mode&&(s.mode="same-origin"),s.reloadNavigation=!1,s.historyNavigation=!1,s.origin="client",s.referrer="client",s.referrerPolicy="",s.url=s.urlList[s.urlList.length-1],s.urlList=[s.url]),void 0!==t.referrer){const A=t.referrer;if(""===A)s.referrer="no-referrer";else{let e;try{e=new URL(A,g)}catch(e){throw new TypeError(`Referrer "${A}" is not a valid URL.`,{cause:e})}"about:"===e.protocol&&"client"===e.hostname||d&&!Q(e,this[N].settingsObject.baseUrl)?s.referrer="client":s.referrer=e}}let p;if(void 0!==t.referrerPolicy&&(s.referrerPolicy=t.referrerPolicy),p=void 0!==t.mode?t.mode:E,"navigate"===p)throw F.errors.exception({header:"Request constructor",message:"invalid request mode navigate."});if(null!=p&&(s.mode=p),void 0!==t.credentials&&(s.credentials=t.credentials),void 0!==t.cache&&(s.cache=t.cache),"only-if-cached"===s.cache&&"same-origin"!==s.mode)throw new TypeError("'only-if-cached' can be set only with 'same-origin' mode");if(void 0!==t.redirect&&(s.redirect=t.redirect),null!=t.integrity&&(s.integrity=String(t.integrity)),void 0!==t.keepalive&&(s.keepalive=Boolean(t.keepalive)),void 0!==t.method){let A=t.method;if(!a(A))throw new TypeError(`'${A}' is not a valid HTTP method.`);if(h.has(A.toUpperCase()))throw new TypeError(`'${A}' HTTP method is unsupported.`);A=I[A]??C(A),s.method=A}void 0!==t.signal&&(u=t.signal),this[k]=s;const w=new AbortController;if(this[m]=w.signal,this[m][N]=this[N],null!=u){if(!u||"boolean"!=typeof u.aborted||"function"!=typeof u.addEventListener)throw new TypeError("Failed to construct 'Request': member signal is not of type AbortSignal.");if(u.aborted)w.abort(u.reason);else{this[V]=w;const A=new WeakRef(w),e=function(){const e=A.deref();void 0!==e&&e.abort(this.reason)};try{("function"==typeof v&&v(u)===G||J(u,"abort").length>=G)&&T(100,u)}catch{}i.addAbortListener(u,e),O.register(w,{signal:u,abort:e})}}if(this[R]=new r(M),this[R][L]=s.headersList,this[R][b]="request",this[R][N]=this[N],"no-cors"===p){if(!l.has(s.method))throw new TypeError(`'${s.method} is unsupported in no-cors mode.`);this[R][b]="request-no-cors"}if(y){const A=this[R][L],e=void 0!==t.headers?t.headers:new n(A);if(A.clear(),e instanceof n){for(const[t,r]of e)A.append(t,r);A.cookies=e.cookies}else o(this[R],e)}const D=e instanceof x?e[k].body:null;if(!(null==t.body&&null==D||"GET"!==s.method&&"HEAD"!==s.method))throw new TypeError("Request with GET/HEAD method cannot have body.");let U=null;if(null!=t.body){const[e,r]=A(t.body,s.keepalive);U=e,r&&!this[R][L].contains("content-type")&&this[R].append("content-type",r)}const q=U??D;if(null!=q&&null==q.source){if(null!=U&&null==t.duplex)throw new TypeError("RequestInit: duplex option is required when sending a body.");if("same-origin"!==s.mode&&"cors"!==s.mode)throw new TypeError('If request is made from ReadableStream, mode should be "same-origin" or "cors"');s.useCORSPreflightFlag=!0}let P=q;if(null==U&&null!=D){if(i.isDisturbed(D.stream)||D.stream.locked)throw new TypeError("Cannot construct a Request with a Request object that has already been used.");H||(H=c.TransformStream);const A=new H;D.stream.pipeThrough(A),P={source:D.source,length:D.length,stream:A.readable}}this[k].body=P}get method(){return F.brandCheck(this,x),this[k].method}get url(){return F.brandCheck(this,x),U(this[k].url)}get headers(){return F.brandCheck(this,x),this[R]}get destination(){return F.brandCheck(this,x),this[k].destination}get referrer(){return F.brandCheck(this,x),"no-referrer"===this[k].referrer?"":"client"===this[k].referrer?"about:client":this[k].referrer.toString()}get referrerPolicy(){return F.brandCheck(this,x),this[k].referrerPolicy}get mode(){return F.brandCheck(this,x),this[k].mode}get credentials(){return this[k].credentials}get cache(){return F.brandCheck(this,x),this[k].cache}get redirect(){return F.brandCheck(this,x),this[k].redirect}get integrity(){return F.brandCheck(this,x),this[k].integrity}get keepalive(){return F.brandCheck(this,x),this[k].keepalive}get isReloadNavigation(){return F.brandCheck(this,x),this[k].reloadNavigation}get isHistoryNavigation(){return F.brandCheck(this,x),this[k].historyNavigation}get signal(){return F.brandCheck(this,x),this[m]}get body(){return F.brandCheck(this,x),this[k].body?this[k].body.stream:null}get bodyUsed(){return F.brandCheck(this,x),!!this[k].body&&i.isDisturbed(this[k].body.stream)}get duplex(){return F.brandCheck(this,x),"half"}clone(){if(F.brandCheck(this,x),this.bodyUsed||this.body?.locked)throw new TypeError("unusable");const A=function(A){const e=W({...A,body:null});null!=A.body&&(e.body=t(A.body));return e}(this[k]),e=new x(M);e[k]=A,e[N]=this[N],e[R]=new r(M),e[R][L]=A.headersList,e[R][b]=this[R][b],e[R][N]=this[R][N];const o=new AbortController;return this.signal.aborted?o.abort(this.signal.reason):i.addAbortListener(this.signal,()=>{o.abort(this.signal.reason)}),e[m]=o.signal,e}}function W(A){const e={method:"GET",localURLsOnly:!1,unsafeRequest:!1,body:null,client:null,reservedClient:null,replacesClientId:"",window:"client",keepalive:!1,serviceWorkers:"all",initiator:"",destination:"",priority:null,origin:"client",policyContainer:"client",referrer:"client",referrerPolicy:"",mode:"no-cors",useCORSPreflightFlag:!1,credentials:"same-origin",useCredentials:!1,cache:"default",redirect:"follow",integrity:"",cryptoGraphicsNonceMetadata:"",parserMetadata:"",reloadNavigation:!1,historyNavigation:!1,userActivation:!1,taintedOrigin:!1,redirectCount:0,responseTainting:"basic",preventNoCacheCacheControlHeaderModification:!1,done:!1,timingAllowFailed:!1,...A,headersList:A.headersList?new n(A.headersList):new n};return e.url=e.urlList[0],e}return e(x),Object.defineProperties(x.prototype,{method:D,url:D,headers:D,redirect:D,clone:D,signal:D,duplex:D,destination:D,body:D,bodyUsed:D,isHistoryNavigation:D,isReloadNavigation:D,keepalive:D,integrity:D,cache:D,credentials:D,attribute:D,referrerPolicy:D,referrer:D,mode:D,[Symbol.toStringTag]:{value:"Request",configurable:!0}}),F.converters.Request=F.interfaceConverter(x),F.converters.RequestInfo=function(A){return"string"==typeof A?F.converters.USVString(A):A instanceof x?F.converters.Request(A):F.converters.USVString(A)},F.converters.AbortSignal=F.interfaceConverter(AbortSignal),F.converters.RequestInit=F.dictionaryConverter([{key:"method",converter:F.converters.ByteString},{key:"headers",converter:F.converters.HeadersInit},{key:"body",converter:F.nullableConverter(F.converters.BodyInit)},{key:"referrer",converter:F.converters.USVString},{key:"referrerPolicy",converter:F.converters.DOMString,allowedValues:u},{key:"mode",converter:F.converters.DOMString,allowedValues:f},{key:"credentials",converter:F.converters.DOMString,allowedValues:y},{key:"cache",converter:F.converters.DOMString,allowedValues:p},{key:"redirect",converter:F.converters.DOMString,allowedValues:d},{key:"integrity",converter:F.converters.DOMString},{key:"keepalive",converter:F.converters.boolean},{key:"signal",converter:F.nullableConverter(A=>F.converters.AbortSignal(A,{strict:!1}))},{key:"window",converter:F.converters.any},{key:"duplex",converter:F.converters.DOMString,allowedValues:w}]),ar={Request:x,makeRequest:W}}function Io(){if(Br)return Cr;Br=1;const{Response:A,makeNetworkError:e,makeAppropriateNetworkError:t,filterResponse:r,makeResponse:n}=Bo(),{Headers:s}=Co(),{Request:i,makeRequest:a}=co(),B=D,{bytesMatch:I,makePolicyContainer:h,clonePolicyContainer:l,requestBadPort:u,TAOCheck:d,appendRequestOriginHeader:f,responseLocationURL:y,requestCurrentURL:p,setRequestReferrerPolicyOnRedirect:w,tryUpgradeRequestToAPotentiallyTrustworthyURL:R,createOpaqueTimingInfo:m,appendFetchMetadata:k,corsCheck:b,crossOriginResourcePolicyCheck:N,determineRequestsReferrer:F,coarsenedSharedCurrentTime:S,createDeferredPromise:U,isBlobLike:L,sameOrigin:M,isCancelled:Y,isAborted:v,isErrorLike:T,fullyReadBody:J,readableStreamClose:G,isomorphicEncode:H,urlIsLocal:V,urlIsHttpHttpsScheme:O,urlHasHttpsScheme:x}=le(),{kState:W,kHeaders:q,kGuard:P,kRealm:_}=ue(),Z=g,{safelyExtractBody:j}=we(),{redirectStatusSet:X,nullBodyStatus:K,safeMethodsSet:z,requestBodyHeader:$,subresourceSet:AA,DOMException:eA}=Ie(),{kHeadersList:tA}=iA(),rA=E,{Readable:oA,pipeline:nA}=Q,{addAbortListener:sA,isErrored:EA,isReadable:aA,nodeMajor:QA,nodeMinor:CA}=gA(),{dataURLProcessor:BA,serializeAMimeType:cA}=fe(),{TransformStream:IA}=c,{getGlobalDispatcher:hA}=Qo(),{webidl:lA}=de(),{STATUS_CODES:uA}=o,dA=["GET","HEAD"];let fA,yA=globalThis.ReadableStream;class pA extends rA{constructor(A){super(),this.dispatcher=A,this.connection=null,this.dump=!1,this.state="ongoing",this.setMaxListeners(21)}terminate(A){"ongoing"===this.state&&(this.state="terminated",this.connection?.destroy(A),this.emit("terminated",A))}abort(A){"ongoing"===this.state&&(this.state="aborted",A||(A=new eA("The operation was aborted.","AbortError")),this.serializedAbortReason=A,this.connection?.destroy(A),this.emit("terminated",A))}}function wA(A,e="other"){if("error"===A.type&&A.aborted)return;if(!A.urlList?.length)return;const t=A.urlList[0];let r=A.timingInfo,o=A.cacheState;O(t)&&null!==r&&(A.timingAllowPassed||(r=m({startTime:r.startTime}),o=""),r.endTime=S(),A.timingInfo=r,function(A,e,t,r,o){(QA>18||18===QA&&CA>=2)&&performance.markResourceTiming(A,e.href,t,r,o)}(r,t,e,globalThis,o))}function DA(A,e,t,r){if(r||(r=new eA("The operation was aborted.","AbortError")),A.reject(r),null!=e.body&&aA(e.body?.stream)&&e.body.stream.cancel(r).catch(A=>{if("ERR_INVALID_STATE"!==A.code)throw A}),null==t)return;const o=t[W];null!=o.body&&aA(o.body?.stream)&&o.body.stream.cancel(r).catch(A=>{if("ERR_INVALID_STATE"!==A.code)throw A})}function RA({request:A,processRequestBodyChunkLength:e,processRequestEndOfBody:t,processResponse:r,processResponseEndOfBody:o,processResponseConsumeBody:n,useParallelQueue:s=!1,dispatcher:i}){let E=null,g=!1;null!=A.client&&(E=A.client.globalObject,g=A.client.crossOriginIsolatedCapability);const a=S(g),Q=m({startTime:a}),C={controller:new pA(i),request:A,timingInfo:Q,processRequestBodyChunkLength:e,processRequestEndOfBody:t,processResponse:r,processResponseConsumeBody:n,processResponseEndOfBody:o,taskDestination:E,crossOriginIsolatedCapability:g};if(Z(!A.body||A.body.stream),"client"===A.window&&(A.window="Window"===A.client?.globalObject?.constructor?.name?A.client:"no-window"),"client"===A.origin&&(A.origin=A.client?.origin),"client"===A.policyContainer&&(null!=A.client?A.policyContainer=l(A.client.policyContainer):A.policyContainer=h()),!A.headersList.contains("accept")){const e="*/*";A.headersList.append("accept",e)}return A.headersList.contains("accept-language")||A.headersList.append("accept-language","*"),A.priority,AA.has(A.destination),mA(C).catch(A=>{C.controller.terminate(A)}),C.controller}async function mA(A,t=!1){const o=A.request;let n=null;if(o.localURLsOnly&&!V(p(o))&&(n=e("local URLs only")),R(o),"blocked"===u(o)&&(n=e("bad port")),""===o.referrerPolicy&&(o.referrerPolicy=o.policyContainer.referrerPolicy),"no-referrer"!==o.referrer&&(o.referrer=F(o)),null===n&&(n=await(async()=>{const t=p(o);return M(t,o.url)&&"basic"===o.responseTainting||"data:"===t.protocol||"navigate"===o.mode||"websocket"===o.mode?(o.responseTainting="basic",await kA(A)):"same-origin"===o.mode?e('request mode cannot be "same-origin"'):"no-cors"===o.mode?"follow"!==o.redirect?e('redirect mode cannot be "follow" for "no-cors" request'):(o.responseTainting="opaque",await kA(A)):O(p(o))?(o.responseTainting="cors",await FA(A)):e("URL scheme must be a HTTP(S) scheme")})()),t)return n;0===n.status||n.internalResponse||(o.responseTainting,"basic"===o.responseTainting?n=r(n,"basic"):"cors"===o.responseTainting?n=r(n,"cors"):"opaque"===o.responseTainting?n=r(n,"opaque"):Z(!1));let s=0===n.status?n:n.internalResponse;if(0===s.urlList.length&&s.urlList.push(...o.urlList),o.timingAllowFailed||(n.timingAllowPassed=!0),"opaque"===n.type&&206===s.status&&s.rangeRequested&&!o.headers.contains("range")&&(n=s=e()),0===n.status||"HEAD"!==o.method&&"CONNECT"!==o.method&&!K.includes(s.status)||(s.body=null,A.controller.dump=!0),o.integrity){const t=t=>NA(A,e(t));if("opaque"===o.responseTainting||null==n.body)return void t(n.error);const r=e=>{I(e,o.integrity)?(n.body=j(e)[0],NA(A,n)):t("integrity mismatch")};await J(n.body,r,t)}else NA(A,n)}function kA(A){if(Y(A)&&0===A.request.redirectCount)return Promise.resolve(t(A));const{request:r}=A,{protocol:o}=p(r);switch(o){case"about:":return Promise.resolve(e("about scheme is not supported"));case"blob:":{fA||(fA=C.resolveObjectURL);const A=p(r);if(0!==A.search.length)return Promise.resolve(e("NetworkError when attempting to fetch resource."));const t=fA(A.toString());if("GET"!==r.method||!L(t))return Promise.resolve(e("invalid method"));const o=j(t),s=o[0],i=H(`${s.length}`),E=o[1]??"",g=n({statusText:"OK",headersList:[["content-length",{name:"Content-Length",value:i}],["content-type",{name:"Content-Type",value:E}]]});return g.body=s,Promise.resolve(g)}case"data:":{const A=p(r),t=BA(A);if("failure"===t)return Promise.resolve(e("failed to fetch the data URL"));const o=cA(t.mimeType);return Promise.resolve(n({statusText:"OK",headersList:[["content-type",{name:"Content-Type",value:o}]],body:j(t.body)[0]}))}case"file:":return Promise.resolve(e("not implemented... yet..."));case"http:":case"https:":return FA(A).catch(A=>e(A));default:return Promise.resolve(e("unknown scheme"))}}function bA(A,e){A.request.done=!0,null!=A.processResponseDone&&queueMicrotask(()=>A.processResponseDone(e))}function NA(A,e){"error"===e.type&&(e.urlList=[A.request.urlList[0]],e.timingInfo=m({startTime:A.timingInfo.startTime}));const t=()=>{A.request.done=!0,null!=A.processResponseEndOfBody&&queueMicrotask(()=>A.processResponseEndOfBody(e))};if(null!=A.processResponse&&queueMicrotask(()=>A.processResponse(e)),null==e.body)t();else{const A=(A,e)=>{e.enqueue(A)},r=new IA({start(){},transform:A,flush:t},{size:()=>1},{size:()=>1});e.body={stream:e.body.stream.pipeThrough(r)}}if(null!=A.processResponseConsumeBody){const t=t=>A.processResponseConsumeBody(e,t),r=t=>A.processResponseConsumeBody(e,t);return null!=e.body?J(e.body,t,r):(queueMicrotask(()=>t(null)),Promise.resolve())}}async function FA(A){const t=A.request;let r=null,o=null;const n=A.timingInfo;if(t.serviceWorkers,null===r){if("follow"===t.redirect&&(t.serviceWorkers="none"),o=r=await SA(A),"cors"===t.responseTainting&&"failure"===b(t,r))return e("cors failure");"failure"===d(t,r)&&(t.timingAllowFailed=!0)}return"opaque"!==t.responseTainting&&"opaque"!==r.type||"blocked"!==N(t.origin,t.client,t.destination,o)?(X.has(o.status)&&("manual"!==t.redirect&&A.controller.connection.destroy(),"error"===t.redirect?r=e("unexpected redirect"):"manual"===t.redirect?r=o:"follow"===t.redirect?r=await function(A,t){const r=A.request,o=t.internalResponse?t.internalResponse:t;let n;try{if(n=y(o,p(r).hash),null==n)return t}catch(A){return Promise.resolve(e(A))}if(!O(n))return Promise.resolve(e("URL scheme must be a HTTP(S) scheme"));if(20===r.redirectCount)return Promise.resolve(e("redirect count exceeded"));if(r.redirectCount+=1,"cors"===r.mode&&(n.username||n.password)&&!M(r,n))return Promise.resolve(e('cross origin not allowed for request mode "cors"'));if("cors"===r.responseTainting&&(n.username||n.password))return Promise.resolve(e('URL cannot contain credentials for request mode "cors"'));if(303!==o.status&&null!=r.body&&null==r.body.source)return Promise.resolve(e());if([301,302].includes(o.status)&&"POST"===r.method||303===o.status&&!dA.includes(r.method)){r.method="GET",r.body=null;for(const A of $)r.headersList.delete(A)}M(p(r),n)||(r.headersList.delete("authorization"),r.headersList.delete("proxy-authorization",!0),r.headersList.delete("cookie"),r.headersList.delete("host"));null!=r.body&&(Z(null!=r.body.source),r.body=j(r.body.source)[0]);const s=A.timingInfo;s.redirectEndTime=s.postRedirectStartTime=S(A.crossOriginIsolatedCapability),0===s.redirectStartTime&&(s.redirectStartTime=s.startTime);return r.urlList.push(n),w(r,o),mA(A,!0)}(A,r):Z(!1)),r.timingInfo=n,r):e("blocked")}async function SA(A,r=!1,o=!1){const i=A.request;let E=null,g=null,Q=null;"no-window"===i.window&&"error"===i.redirect?(E=A,g=i):(g=a(i),E={...A},E.request=g);const C="include"===i.credentials||"same-origin"===i.credentials&&"basic"===i.responseTainting,I=g.body?g.body.length:null;let h=null;if(null==g.body&&["POST","PUT"].includes(g.method)&&(h="0"),null!=I&&(h=H(`${I}`)),null!=h&&g.headersList.append("content-length",h),null!=I&&g.keepalive,g.referrer instanceof URL&&g.headersList.append("referer",H(g.referrer.href)),f(g),k(g),g.headersList.contains("user-agent")||g.headersList.append("user-agent","undefined"==typeof esbuildDetection?"undici":"node"),"default"===g.cache&&(g.headersList.contains("if-modified-since")||g.headersList.contains("if-none-match")||g.headersList.contains("if-unmodified-since")||g.headersList.contains("if-match")||g.headersList.contains("if-range"))&&(g.cache="no-store"),"no-cache"!==g.cache||g.preventNoCacheCacheControlHeaderModification||g.headersList.contains("cache-control")||g.headersList.append("cache-control","max-age=0"),"no-store"!==g.cache&&"reload"!==g.cache||(g.headersList.contains("pragma")||g.headersList.append("pragma","no-cache"),g.headersList.contains("cache-control")||g.headersList.append("cache-control","no-cache")),g.headersList.contains("range")&&g.headersList.append("accept-encoding","identity"),g.headersList.contains("accept-encoding")||(x(p(g))?g.headersList.append("accept-encoding","br, gzip, deflate"):g.headersList.append("accept-encoding","gzip, deflate")),g.headersList.delete("host"),g.cache="no-store","no-store"!==g.mode&&g.mode,null==Q){if("only-if-cached"===g.mode)return e("only if cached");const A=await async function(A){Z(!A.controller.connection||A.controller.connection.destroyed),A.controller.connection={abort:null,destroyed:!1,destroy(A){this.destroyed||(this.destroyed=!0,this.abort?.(A??new eA("The operation was aborted.","AbortError")))}};const r=A.request;let o=null;const i=A.timingInfo;r.cache="no-store",r.mode;let E=null;if(null==r.body&&A.processRequestEndOfBody)queueMicrotask(()=>A.processRequestEndOfBody());else if(null!=r.body){const e=async function*(e){Y(A)||(yield e,A.processRequestBodyChunkLength?.(e.byteLength))},t=()=>{Y(A)||A.processRequestEndOfBody&&A.processRequestEndOfBody()},o=e=>{Y(A)||("AbortError"===e.name?A.controller.abort():A.controller.terminate(e))};E=async function*(){try{for await(const A of r.body.stream)yield*e(A);t()}catch(A){o(A)}}()}try{const{body:e,status:t,statusText:r,headersList:s,socket:i}=await I({body:E});if(i)o=n({status:t,statusText:r,headersList:s,socket:i});else{const i=e[Symbol.asyncIterator]();A.controller.next=()=>i.next(),o=n({status:t,statusText:r,headersList:s})}}catch(r){return"AbortError"===r.name?(A.controller.connection.destroy(),t(A,r)):e(r)}const g=()=>{A.controller.resume()},a=e=>{A.controller.abort(e)};yA||(yA=c.ReadableStream);const Q=new yA({async start(e){A.controller.controller=e},async pull(A){await g()},async cancel(A){await a(A)}},{highWaterMark:0,size:()=>1});function C(e){v(A)?(o.aborted=!0,aA(Q)&&A.controller.controller.error(A.controller.serializedAbortReason)):aA(Q)&&A.controller.controller.error(new TypeError("terminated",{cause:T(e)?e:void 0})),A.controller.connection.destroy()}return o.body={stream:Q},A.controller.on("terminated",C),A.controller.resume=async()=>{for(;;){let e,t;try{const{done:t,value:r}=await A.controller.next();if(v(A))break;e=t?void 0:r}catch(r){A.controller.ended&&!i.encodedBodySize?e=void 0:(e=r,t=!0)}if(void 0===e)return G(A.controller.controller),void bA(A,o);if(i.decodedBodySize+=e?.byteLength??0,t)return void A.controller.terminate(e);if(A.controller.controller.enqueue(new Uint8Array(e)),EA(Q))return void A.controller.terminate();if(!A.controller.controller.desiredSize)return}},o;async function I({body:e}){const t=p(r),o=A.controller.dispatcher;return new Promise((n,E)=>o.dispatch({path:t.pathname+t.search,origin:t.origin,method:r.method,body:A.controller.dispatcher.isMockActive?r.body&&(r.body.source||r.body.stream):e,headers:r.headersList.entries,maxRedirections:0,upgrade:"websocket"===r.mode?"websocket":void 0},{body:null,abort:null,onConnect(e){const{connection:t}=A.controller;t.destroyed?e(new eA("The operation was aborted.","AbortError")):(A.controller.on("terminated",e),this.abort=t.abort=e)},onHeaders(A,e,t,o){if(A<200)return;let i=[],E="";const g=new s;if(Array.isArray(e))for(let A=0;A<e.length;A+=2){const t=e[A+0].toString("latin1"),r=e[A+1].toString("latin1");"content-encoding"===t.toLowerCase()?i=r.toLowerCase().split(",").map(A=>A.trim()):"location"===t.toLowerCase()&&(E=r),g[tA].append(t,r)}else{const A=Object.keys(e);for(const t of A){const A=e[t];"content-encoding"===t.toLowerCase()?i=A.toLowerCase().split(",").map(A=>A.trim()).reverse():"location"===t.toLowerCase()&&(E=A),g[tA].append(t,A)}}this.body=new oA({read:t});const a=[],Q="follow"===r.redirect&&E&&X.has(A);if("HEAD"!==r.method&&"CONNECT"!==r.method&&!K.includes(A)&&!Q)for(const A of i)if("x-gzip"===A||"gzip"===A)a.push(B.createGunzip({flush:B.constants.Z_SYNC_FLUSH,finishFlush:B.constants.Z_SYNC_FLUSH}));else if("deflate"===A)a.push(B.createInflate());else{if("br"!==A){a.length=0;break}a.push(B.createBrotliDecompress())}return n({status:A,statusText:o,headersList:g[tA],body:a.length?nA(this.body,...a,()=>{}):this.body.on("error",()=>{})}),!0},onData(e){if(A.controller.dump)return;const t=e;return i.encodedBodySize+=t.byteLength,this.body.push(t)},onComplete(){this.abort&&A.controller.off("terminated",this.abort),A.controller.ended=!0,this.body.push(null)},onError(e){this.abort&&A.controller.off("terminated",this.abort),this.body?.destroy(e),A.controller.terminate(e),E(e)},onUpgrade(A,e,t){if(101!==A)return;const r=new s;for(let A=0;A<e.length;A+=2){const t=e[A+0].toString("latin1"),o=e[A+1].toString("latin1");r[tA].append(t,o)}return n({status:A,statusText:uA[A],headersList:r[tA],socket:t}),!0}}))}}(E,C,o);!z.has(g.method)&&A.status>=200&&A.status,null==Q&&(Q=A)}if(Q.urlList=[...g.urlList],g.headersList.contains("range")&&(Q.rangeRequested=!0),Q.requestIncludesCredentials=C,407===Q.status)return"no-window"===i.window?e():Y(A)?t(A):e("proxy authentication required");if(421===Q.status&&!o&&(null==i.body||null!=i.body.source)){if(Y(A))return t(A);A.controller.connection.destroy(),Q=await SA(A,r,!0)}return Q}return Cr={fetch:function(e,t={}){lA.argumentLengthCheck(arguments,1,{header:"globalThis.fetch"});const r=U();let o;try{o=new i(e,t)}catch(A){return r.reject(A),r.promise}const n=o[W];if(o.signal.aborted)return DA(r,n,null,o.signal.reason),r.promise;const s=n.client.globalObject;"ServiceWorkerGlobalScope"===s?.constructor?.name&&(n.serviceWorkers="none");let E=null,g=!1,a=null;return sA(o.signal,()=>{g=!0,Z(null!=a),a.abort(o.signal.reason),DA(r,n,E,o.signal.reason)}),a=RA({request:n,processResponseEndOfBody:A=>wA(A,"fetch"),processResponse:e=>g?Promise.resolve():e.aborted?(DA(r,n,E,a.serializedAbortReason),Promise.resolve()):"error"===e.type?(r.reject(Object.assign(new TypeError("fetch failed"),{cause:e.error})),Promise.resolve()):(E=new A,E[W]=e,E[_]=null,E[q][tA]=e.headersList,E[q][P]="immutable",E[q][_]=null,void r.resolve(E)),dispatcher:t.dispatcher??hA()}),r.promise},Fetch:pA,fetching:RA,finalizeAndReportTiming:wA},Cr}function ho(){return Ir?cr:(Ir=1,cr={kState:Symbol("FileReader state"),kResult:Symbol("FileReader result"),kError:Symbol("FileReader error"),kLastProgressEventFired:Symbol("FileReader last progress event fired timestamp"),kEvents:Symbol("FileReader events"),kAborted:Symbol("FileReader aborted")})}function lo(){if(yr)return fr;yr=1;const{kState:A,kError:e,kResult:t,kAborted:r,kLastProgressEventFired:o}=ho(),{ProgressEvent:n}=function(){if(lr)return hr;lr=1;const{webidl:A}=de(),e=Symbol("ProgressEvent state");class t extends Event{constructor(t,r={}){super(t=A.converters.DOMString(t),r=A.converters.ProgressEventInit(r??{})),this[e]={lengthComputable:r.lengthComputable,loaded:r.loaded,total:r.total}}get lengthComputable(){return A.brandCheck(this,t),this[e].lengthComputable}get loaded(){return A.brandCheck(this,t),this[e].loaded}get total(){return A.brandCheck(this,t),this[e].total}}return A.converters.ProgressEventInit=A.dictionaryConverter([{key:"lengthComputable",converter:A.converters.boolean,defaultValue:!1},{key:"loaded",converter:A.converters["unsigned long long"],defaultValue:0},{key:"total",converter:A.converters["unsigned long long"],defaultValue:0},{key:"bubbles",converter:A.converters.boolean,defaultValue:!1},{key:"cancelable",converter:A.converters.boolean,defaultValue:!1},{key:"composed",converter:A.converters.boolean,defaultValue:!1}]),hr={ProgressEvent:t}}(),{getEncoding:s}=dr?ur:(dr=1,ur={getEncoding:function(A){if(!A)return"failure";switch(A.trim().toLowerCase()){case"unicode-1-1-utf-8":case"unicode11utf8":case"unicode20utf8":case"utf-8":case"utf8":case"x-unicode20utf8":return"UTF-8";case"866":case"cp866":case"csibm866":case"ibm866":return"IBM866";case"csisolatin2":case"iso-8859-2":case"iso-ir-101":case"iso8859-2":case"iso88592":case"iso_8859-2":case"iso_8859-2:1987":case"l2":case"latin2":return"ISO-8859-2";case"csisolatin3":case"iso-8859-3":case"iso-ir-109":case"iso8859-3":case"iso88593":case"iso_8859-3":case"iso_8859-3:1988":case"l3":case"latin3":return"ISO-8859-3";case"csisolatin4":case"iso-8859-4":case"iso-ir-110":case"iso8859-4":case"iso88594":case"iso_8859-4":case"iso_8859-4:1988":case"l4":case"latin4":return"ISO-8859-4";case"csisolatincyrillic":case"cyrillic":case"iso-8859-5":case"iso-ir-144":case"iso8859-5":case"iso88595":case"iso_8859-5":case"iso_8859-5:1988":return"ISO-8859-5";case"arabic":case"asmo-708":case"csiso88596e":case"csiso88596i":case"csisolatinarabic":case"ecma-114":case"iso-8859-6":case"iso-8859-6-e":case"iso-8859-6-i":case"iso-ir-127":case"iso8859-6":case"iso88596":case"iso_8859-6":case"iso_8859-6:1987":return"ISO-8859-6";case"csisolatingreek":case"ecma-118":case"elot_928":case"greek":case"greek8":case"iso-8859-7":case"iso-ir-126":case"iso8859-7":case"iso88597":case"iso_8859-7":case"iso_8859-7:1987":case"sun_eu_greek":return"ISO-8859-7";case"csiso88598e":case"csisolatinhebrew":case"hebrew":case"iso-8859-8":case"iso-8859-8-e":case"iso-ir-138":case"iso8859-8":case"iso88598":case"iso_8859-8":case"iso_8859-8:1988":case"visual":return"ISO-8859-8";case"csiso88598i":case"iso-8859-8-i":case"logical":return"ISO-8859-8-I";case"csisolatin6":case"iso-8859-10":case"iso-ir-157":case"iso8859-10":case"iso885910":case"l6":case"latin6":return"ISO-8859-10";case"iso-8859-13":case"iso8859-13":case"iso885913":return"ISO-8859-13";case"iso-8859-14":case"iso8859-14":case"iso885914":return"ISO-8859-14";case"csisolatin9":case"iso-8859-15":case"iso8859-15":case"iso885915":case"iso_8859-15":case"l9":return"ISO-8859-15";case"iso-8859-16":return"ISO-8859-16";case"cskoi8r":case"koi":case"koi8":case"koi8-r":case"koi8_r":return"KOI8-R";case"koi8-ru":case"koi8-u":return"KOI8-U";case"csmacintosh":case"mac":case"macintosh":case"x-mac-roman":return"macintosh";case"iso-8859-11":case"iso8859-11":case"iso885911":case"tis-620":case"windows-874":return"windows-874";case"cp1250":case"windows-1250":case"x-cp1250":return"windows-1250";case"cp1251":case"windows-1251":case"x-cp1251":return"windows-1251";case"ansi_x3.4-1968":case"ascii":case"cp1252":case"cp819":case"csisolatin1":case"ibm819":case"iso-8859-1":case"iso-ir-100":case"iso8859-1":case"iso88591":case"iso_8859-1":case"iso_8859-1:1987":case"l1":case"latin1":case"us-ascii":case"windows-1252":case"x-cp1252":return"windows-1252";case"cp1253":case"windows-1253":case"x-cp1253":return"windows-1253";case"cp1254":case"csisolatin5":case"iso-8859-9":case"iso-ir-148":case"iso8859-9":case"iso88599":case"iso_8859-9":case"iso_8859-9:1989":case"l5":case"latin5":case"windows-1254":case"x-cp1254":return"windows-1254";case"cp1255":case"windows-1255":case"x-cp1255":return"windows-1255";case"cp1256":case"windows-1256":case"x-cp1256":return"windows-1256";case"cp1257":case"windows-1257":case"x-cp1257":return"windows-1257";case"cp1258":case"windows-1258":case"x-cp1258":return"windows-1258";case"x-mac-cyrillic":case"x-mac-ukrainian":return"x-mac-cyrillic";case"chinese":case"csgb2312":case"csiso58gb231280":case"gb2312":case"gb_2312":case"gb_2312-80":case"gbk":case"iso-ir-58":case"x-gbk":return"GBK";case"gb18030":return"gb18030";case"big5":case"big5-hkscs":case"cn-big5":case"csbig5":case"x-x-big5":return"Big5";case"cseucpkdfmtjapanese":case"euc-jp":case"x-euc-jp":return"EUC-JP";case"csiso2022jp":case"iso-2022-jp":return"ISO-2022-JP";case"csshiftjis":case"ms932":case"ms_kanji":case"shift-jis":case"shift_jis":case"sjis":case"windows-31j":case"x-sjis":return"Shift_JIS";case"cseuckr":case"csksc56011987":case"euc-kr":case"iso-ir-149":case"korean":case"ks_c_5601-1987":case"ks_c_5601-1989":case"ksc5601":case"ksc_5601":case"windows-949":return"EUC-KR";case"csiso2022kr":case"hz-gb-2312":case"iso-2022-cn":case"iso-2022-cn-ext":case"iso-2022-kr":case"replacement":return"replacement";case"unicodefffe":case"utf-16be":return"UTF-16BE";case"csunicode":case"iso-10646-ucs-2":case"ucs-2":case"unicode":case"unicodefeff":case"utf-16":case"utf-16le":return"UTF-16LE";case"x-user-defined":return"x-user-defined";default:return"failure"}}}),{DOMException:i}=Ie(),{serializeAMimeType:E,parseMIMEType:g}=fe(),{types:Q}=a,{StringDecoder:B}=R,{btoa:c}=C;function I(A,e){const t=new n(A,{bubbles:!1,cancelable:!1});e.dispatchEvent(t)}function h(A,e,t,r){switch(e){case"DataURL":{let e="data:";const r=g(t||"application/octet-stream");"failure"!==r&&(e+=E(r)),e+=";base64,";const o=new B("latin1");for(const t of A)e+=c(o.write(t));return e+=c(o.end()),e}case"Text":{let e="failure";if(r&&(e=s(r)),"failure"===e&&t){const A=g(t);"failure"!==A&&(e=s(A.parameters.get("charset")))}return"failure"===e&&(e="UTF-8"),function(A,e){const t=l(A),r=function(A){const[e,t,r]=A;if(239===e&&187===t&&191===r)return"UTF-8";if(254===e&&255===t)return"UTF-16BE";if(255===e&&254===t)return"UTF-16LE";return null}(t);let o=0;null!==r&&(e=r,o="UTF-8"===r?3:2);const n=t.slice(o);return new TextDecoder(e).decode(n)}(A,e)}case"ArrayBuffer":return l(A).buffer;case"BinaryString":{let e="";const t=new B("latin1");for(const r of A)e+=t.write(r);return e+=t.end(),e}}}function l(A){const e=A.reduce((A,e)=>A+e.byteLength,0);let t=0;return A.reduce((A,e)=>(A.set(e,t),t+=e.byteLength,A),new Uint8Array(e))}return fr={staticPropertyDescriptors:{enumerable:!0,writable:!1,configurable:!1},readOperation:function(n,s,E,g){if("loading"===n[A])throw new i("Invalid state","InvalidStateError");n[A]="loading",n[t]=null,n[e]=null;const a=s.stream().getReader(),C=[];let B=a.read(),c=!0;(async()=>{for(;!n[r];)try{const{done:i,value:l}=await B;if(c&&!n[r]&&queueMicrotask(()=>{I("loadstart",n)}),c=!1,!i&&Q.isUint8Array(l))C.push(l),(void 0===n[o]||Date.now()-n[o]>=50)&&!n[r]&&(n[o]=Date.now(),queueMicrotask(()=>{I("progress",n)})),B=a.read();else if(i){queueMicrotask(()=>{n[A]="done";try{const A=h(C,E,s.type,g);if(n[r])return;n[t]=A,I("load",n)}catch(A){n[e]=A,I("error",n)}"loading"!==n[A]&&I("loadend",n)});break}}catch(t){if(n[r])return;queueMicrotask(()=>{n[A]="done",n[e]=t,I("error",n),"loading"!==n[A]&&I("loadend",n)});break}})()},fireAProgressEvent:I},fr}function uo(){return Rr?Dr:(Rr=1,Dr={kConstruct:iA().kConstruct})}function fo(){if(Nr)return br;Nr=1;const{kConstruct:A}=uo(),{urlEquals:e,fieldValues:t}=function(){if(kr)return mr;kr=1;const A=g,{URLSerializer:e}=fe(),{isValidHeaderName:t}=le();return mr={urlEquals:function(A,t,r=!1){return e(A,r)===e(t,r)},fieldValues:function(e){A(null!==e);const r=[];for(let A of e.split(","))A=A.trim(),A.length&&t(A)&&r.push(A);return r}}}(),{kEnumerableProperty:r,isDisturbed:o}=gA(),{kHeadersList:n}=iA(),{webidl:s}=de(),{Response:i,cloneResponse:E}=Bo(),{Request:a}=co(),{kState:Q,kHeaders:C,kGuard:B,kRealm:c}=ue(),{fetching:I}=Io(),{urlIsHttpHttpsScheme:h,createDeferredPromise:l,readAllBytes:u}=le(),d=g,{getGlobalDispatcher:f}=Qo();class y{#A;constructor(){arguments[0]!==A&&s.illegalConstructor(),this.#A=arguments[1]}async match(A,e={}){s.brandCheck(this,y),s.argumentLengthCheck(arguments,1,{header:"Cache.match"}),A=s.converters.RequestInfo(A),e=s.converters.CacheQueryOptions(e);const t=await this.matchAll(A,e);if(0!==t.length)return t[0]}async matchAll(A=void 0,e={}){s.brandCheck(this,y),void 0!==A&&(A=s.converters.RequestInfo(A)),e=s.converters.CacheQueryOptions(e);let t=null;if(void 0!==A)if(A instanceof a){if(t=A[Q],"GET"!==t.method&&!e.ignoreMethod)return[]}else"string"==typeof A&&(t=new a(A)[Q]);const r=[];if(void 0===A)for(const A of this.#A)r.push(A[1]);else{const A=this.#e(t,e);for(const e of A)r.push(e[1])}const o=[];for(const A of r){const e=new i(A.body?.source??null),t=e[Q].body;e[Q]=A,e[Q].body=t,e[C][n]=A.headersList,e[C][B]="immutable",o.push(e)}return Object.freeze(o)}async add(A){s.brandCheck(this,y),s.argumentLengthCheck(arguments,1,{header:"Cache.add"});const e=[A=s.converters.RequestInfo(A)],t=this.addAll(e);return await t}async addAll(A){s.brandCheck(this,y),s.argumentLengthCheck(arguments,1,{header:"Cache.addAll"}),A=s.converters["sequence<RequestInfo>"](A);const e=[],r=[];for(const e of A){if("string"==typeof e)continue;const A=e[Q];if(!h(A.url)||"GET"!==A.method)throw s.errors.exception({header:"Cache.addAll",message:"Expected http/s scheme when method is not GET."})}const o=[];for(const n of A){const A=new a(n)[Q];if(!h(A.url))throw s.errors.exception({header:"Cache.addAll",message:"Expected http/s scheme."});A.initiator="fetch",A.destination="subresource",r.push(A);const i=l();o.push(I({request:A,dispatcher:f(),processResponse(A){if("error"===A.type||206===A.status||A.status<200||A.status>299)i.reject(s.errors.exception({header:"Cache.addAll",message:"Received an invalid status code or the request failed."}));else if(A.headersList.contains("vary")){const e=t(A.headersList.get("vary"));for(const A of e)if("*"===A){i.reject(s.errors.exception({header:"Cache.addAll",message:"invalid vary field value"}));for(const A of o)A.abort();return}}},processResponseEndOfBody(A){A.aborted?i.reject(new DOMException("aborted","AbortError")):i.resolve(A)}})),e.push(i.promise)}const n=Promise.all(e),i=await n,E=[];let g=0;for(const A of i){const e={type:"put",request:r[g],response:A};E.push(e),g++}const C=l();let B=null;try{this.#t(E)}catch(A){B=A}return queueMicrotask(()=>{null===B?C.resolve(void 0):C.reject(B)}),C.promise}async put(A,e){s.brandCheck(this,y),s.argumentLengthCheck(arguments,2,{header:"Cache.put"}),A=s.converters.RequestInfo(A),e=s.converters.Response(e);let r=null;if(r=A instanceof a?A[Q]:new a(A)[Q],!h(r.url)||"GET"!==r.method)throw s.errors.exception({header:"Cache.put",message:"Expected an http/s scheme when method is not GET"});const n=e[Q];if(206===n.status)throw s.errors.exception({header:"Cache.put",message:"Got 206 status"});if(n.headersList.contains("vary")){const A=t(n.headersList.get("vary"));for(const e of A)if("*"===e)throw s.errors.exception({header:"Cache.put",message:"Got * vary field value"})}if(n.body&&(o(n.body.stream)||n.body.stream.locked))throw s.errors.exception({header:"Cache.put",message:"Response body is locked or disturbed"});const i=E(n),g=l();if(null!=n.body){const A=n.body.stream.getReader();u(A).then(g.resolve,g.reject)}else g.resolve(void 0);const C=[],B={type:"put",request:r,response:i};C.push(B);const c=await g.promise;null!=i.body&&(i.body.source=c);const I=l();let d=null;try{this.#t(C)}catch(A){d=A}return queueMicrotask(()=>{null===d?I.resolve():I.reject(d)}),I.promise}async delete(A,e={}){s.brandCheck(this,y),s.argumentLengthCheck(arguments,1,{header:"Cache.delete"}),A=s.converters.RequestInfo(A),e=s.converters.CacheQueryOptions(e);let t=null;if(A instanceof a){if(t=A[Q],"GET"!==t.method&&!e.ignoreMethod)return!1}else d("string"==typeof A),t=new a(A)[Q];const r=[],o={type:"delete",request:t,options:e};r.push(o);const n=l();let i,E=null;try{i=this.#t(r)}catch(A){E=A}return queueMicrotask(()=>{null===E?n.resolve(!!i?.length):n.reject(E)}),n.promise}async keys(A=void 0,e={}){s.brandCheck(this,y),void 0!==A&&(A=s.converters.RequestInfo(A)),e=s.converters.CacheQueryOptions(e);let t=null;if(void 0!==A)if(A instanceof a){if(t=A[Q],"GET"!==t.method&&!e.ignoreMethod)return[]}else"string"==typeof A&&(t=new a(A)[Q]);const r=l(),o=[];if(void 0===A)for(const A of this.#A)o.push(A[0]);else{const A=this.#e(t,e);for(const e of A)o.push(e[0])}return queueMicrotask(()=>{const A=[];for(const e of o){const t=new a("https://a");t[Q]=e,t[C][n]=e.headersList,t[C][B]="immutable",t[c]=e.client,A.push(t)}r.resolve(Object.freeze(A))}),r.promise}#t(A){const e=this.#A,t=[...e],r=[],o=[];try{for(const t of A){if("delete"!==t.type&&"put"!==t.type)throw s.errors.exception({header:"Cache.#batchCacheOperations",message:'operation type does not match "delete" or "put"'});if("delete"===t.type&&null!=t.response)throw s.errors.exception({header:"Cache.#batchCacheOperations",message:"delete operation should not have an associated response"});if(this.#e(t.request,t.options,r).length)throw new DOMException("???","InvalidStateError");let A;if("delete"===t.type){if(A=this.#e(t.request,t.options),0===A.length)return[];for(const t of A){const A=e.indexOf(t);d(-1!==A),e.splice(A,1)}}else if("put"===t.type){if(null==t.response)throw s.errors.exception({header:"Cache.#batchCacheOperations",message:"put operation should have an associated response"});const o=t.request;if(!h(o.url))throw s.errors.exception({header:"Cache.#batchCacheOperations",message:"expected http or https scheme"});if("GET"!==o.method)throw s.errors.exception({header:"Cache.#batchCacheOperations",message:"not get method"});if(null!=t.options)throw s.errors.exception({header:"Cache.#batchCacheOperations",message:"options must not be defined"});A=this.#e(t.request);for(const t of A){const A=e.indexOf(t);d(-1!==A),e.splice(A,1)}e.push([t.request,t.response]),r.push([t.request,t.response])}o.push([t.request,t.response])}return o}catch(A){throw this.#A.length=0,this.#A=t,A}}#e(A,e,t){const r=[],o=t??this.#A;for(const t of o){const[o,n]=t;this.#r(A,o,n,e)&&r.push(t)}return r}#r(A,r,o=null,n){const s=new URL(A.url),i=new URL(r.url);if(n?.ignoreSearch&&(i.search="",s.search=""),!e(s,i,!0))return!1;if(null==o||n?.ignoreVary||!o.headersList.contains("vary"))return!0;const E=t(o.headersList.get("vary"));for(const e of E){if("*"===e)return!1;if(r.headersList.get(e)!==A.headersList.get(e))return!1}return!0}}Object.defineProperties(y.prototype,{[Symbol.toStringTag]:{value:"Cache",configurable:!0},match:r,matchAll:r,add:r,addAll:r,put:r,delete:r,keys:r});const p=[{key:"ignoreSearch",converter:s.converters.boolean,defaultValue:!1},{key:"ignoreMethod",converter:s.converters.boolean,defaultValue:!1},{key:"ignoreVary",converter:s.converters.boolean,defaultValue:!1}];return s.converters.CacheQueryOptions=s.dictionaryConverter(p),s.converters.MultiCacheQueryOptions=s.dictionaryConverter([...p,{key:"cacheName",converter:s.converters.DOMString}]),s.converters.Response=s.interfaceConverter(i),s.converters["sequence<RequestInfo>"]=s.sequenceConverter(s.converters.RequestInfo),br={Cache:y}}function yo(){if(Yr)return Mr;function A(A){for(const e of A){const A=e.charCodeAt(0);if(A<=32||A>127||"("===e||")"===e||">"===e||"<"===e||"@"===e||","===e||";"===e||":"===e||"\\"===e||'"'===e||"/"===e||"["===e||"]"===e||"?"===e||"="===e||"{"===e||"}"===e)throw new Error("Invalid cookie name")}}function e(A){for(const e of A){const A=e.charCodeAt(0);if(A<33||34===A||44===A||59===A||92===A||A>126)throw new Error("Invalid header value")}}function t(A){for(const e of A){if(e.charCodeAt(0)<33||";"===e)throw new Error("Invalid cookie path")}}function r(A){"number"==typeof A&&(A=new Date(A));return`${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][A.getUTCDay()]}, ${A.getUTCDate().toString().padStart(2,"0")} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][A.getUTCMonth()]} ${A.getUTCFullYear()} ${A.getUTCHours().toString().padStart(2,"0")}:${A.getUTCMinutes().toString().padStart(2,"0")}:${A.getUTCSeconds().toString().padStart(2,"0")} GMT`}return Yr=1,Mr={isCTLExcludingHtab:function(A){if(0===A.length)return!1;for(const e of A){const A=e.charCodeAt(0);if(A>=0||A<=8||A>=10||A<=31||127===A)return!1}},validateCookieName:A,validateCookiePath:t,validateCookieValue:e,toIMFDate:r,stringify:function(o){if(0===o.name.length)return null;A(o.name),e(o.value);const n=[`${o.name}=${o.value}`];o.name.startsWith("__Secure-")&&(o.secure=!0),o.name.startsWith("__Host-")&&(o.secure=!0,o.domain=null,o.path="/"),o.secure&&n.push("Secure"),o.httpOnly&&n.push("HttpOnly"),"number"==typeof o.maxAge&&(!function(A){if(A<0)throw new Error("Invalid cookie max-age")}(o.maxAge),n.push(`Max-Age=${o.maxAge}`)),o.domain&&(!function(A){if(A.startsWith("-")||A.endsWith(".")||A.endsWith("-"))throw new Error("Invalid cookie domain")}(o.domain),n.push(`Domain=${o.domain}`)),o.path&&(t(o.path),n.push(`Path=${o.path}`)),o.expires&&"Invalid Date"!==o.expires.toString()&&n.push(`Expires=${r(o.expires)}`),o.sameSite&&n.push(`SameSite=${o.sameSite}`);for(const A of o.unparsed){if(!A.includes("="))throw new Error("Invalid unparsed");const[e,...t]=A.split("=");n.push(`${e.trim()}=${t.join("=")}`)}return n.join("; ")}}}function po(){if(Tr)return vr;Tr=1;const{maxNameValuePairSize:A,maxAttributeValueSize:e}=Lr?Ur:(Lr=1,Ur={maxAttributeValueSize:1024,maxNameValuePairSize:4096}),{isCTLExcludingHtab:t}=yo(),{collectASequenceOfCodePointsFast:r}=fe(),o=g;function n(A,t={}){if(0===A.length)return t;o(";"===A[0]);let s="";(A=A.slice(1)).includes(";")?(s=r(";",A,{position:0}),A=A.slice(s.length)):(s=A,A="");let i="",E="";if(s.includes("=")){const A={position:0};i=r("=",s,A),E=s.slice(A.position+1)}else i=s;if(i=i.trim(),E=E.trim(),E.length>e)return n(A,t);const g=i.toLowerCase();if("expires"===g){const A=new Date(E);t.expires=A}else if("max-age"===g){const e=E.charCodeAt(0);if((e<48||e>57)&&"-"!==E[0])return n(A,t);if(!/^\d+$/.test(E))return n(A,t);const r=Number(E);t.maxAge=r}else if("domain"===g){let A=E;"."===A[0]&&(A=A.slice(1)),A=A.toLowerCase(),t.domain=A}else if("path"===g){let A="";A=0===E.length||"/"!==E[0]?"/":E,t.path=A}else if("secure"===g)t.secure=!0;else if("httponly"===g)t.httpOnly=!0;else if("samesite"===g){let A="Default";const e=E.toLowerCase();e.includes("none")&&(A="None"),e.includes("strict")&&(A="Strict"),e.includes("lax")&&(A="Lax"),t.sameSite=A}else t.unparsed??=[],t.unparsed.push(`${i}=${E}`);return n(A,t)}return vr={parseSetCookie:function(e){if(t(e))return null;let o="",s="",i="",E="";if(e.includes(";")){const A={position:0};o=r(";",e,A),s=e.slice(A.position)}else o=e;if(o.includes("=")){const A={position:0};i=r("=",o,A),E=o.slice(A.position+1)}else E=o;return i=i.trim(),E=E.trim(),i.length+E.length>A?null:{name:i,value:E,...n(s)}},parseUnparsedAttributes:n}}function wo(){if(Vr)return Hr;Vr=1;const A=Buffer.allocUnsafe(0);return Hr={uid:"258EAFA5-E914-47DA-95CA-C5AB0DC85B11",staticPropertyDescriptors:{enumerable:!0,writable:!1,configurable:!1},states:{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3},opcodes:{CONTINUATION:0,TEXT:1,BINARY:2,CLOSE:8,PING:9,PONG:10},maxUnsigned16Bit:65535,parserStates:{INFO:0,PAYLOADLENGTH_16:2,PAYLOADLENGTH_64:3,READ_DATA:4},emptyBuffer:A}}function Do(){return xr?Or:(xr=1,Or={kWebSocketURL:Symbol("url"),kReadyState:Symbol("ready state"),kController:Symbol("controller"),kResponse:Symbol("response"),kBinaryType:Symbol("binary type"),kSentClose:Symbol("sent close"),kReceivedClose:Symbol("received close"),kByteParser:Symbol("byte parser")})}function Ro(){if(qr)return Wr;qr=1;const{webidl:A}=de(),{kEnumerableProperty:e}=gA(),{MessagePort:t}=u;class r extends Event{#o;constructor(e,t={}){A.argumentLengthCheck(arguments,1,{header:"MessageEvent constructor"}),super(e=A.converters.DOMString(e),t=A.converters.MessageEventInit(t)),this.#o=t}get data(){return A.brandCheck(this,r),this.#o.data}get origin(){return A.brandCheck(this,r),this.#o.origin}get lastEventId(){return A.brandCheck(this,r),this.#o.lastEventId}get source(){return A.brandCheck(this,r),this.#o.source}get ports(){return A.brandCheck(this,r),Object.isFrozen(this.#o.ports)||Object.freeze(this.#o.ports),this.#o.ports}initMessageEvent(e,t=!1,o=!1,n=null,s="",i="",E=null,g=[]){return A.brandCheck(this,r),A.argumentLengthCheck(arguments,1,{header:"MessageEvent.initMessageEvent"}),new r(e,{bubbles:t,cancelable:o,data:n,origin:s,lastEventId:i,source:E,ports:g})}}class o extends Event{#o;constructor(e,t={}){A.argumentLengthCheck(arguments,1,{header:"CloseEvent constructor"}),super(e=A.converters.DOMString(e),t=A.converters.CloseEventInit(t)),this.#o=t}get wasClean(){return A.brandCheck(this,o),this.#o.wasClean}get code(){return A.brandCheck(this,o),this.#o.code}get reason(){return A.brandCheck(this,o),this.#o.reason}}class n extends Event{#o;constructor(e,t){A.argumentLengthCheck(arguments,1,{header:"ErrorEvent constructor"}),super(e,t),e=A.converters.DOMString(e),t=A.converters.ErrorEventInit(t??{}),this.#o=t}get message(){return A.brandCheck(this,n),this.#o.message}get filename(){return A.brandCheck(this,n),this.#o.filename}get lineno(){return A.brandCheck(this,n),this.#o.lineno}get colno(){return A.brandCheck(this,n),this.#o.colno}get error(){return A.brandCheck(this,n),this.#o.error}}Object.defineProperties(r.prototype,{[Symbol.toStringTag]:{value:"MessageEvent",configurable:!0},data:e,origin:e,lastEventId:e,source:e,ports:e,initMessageEvent:e}),Object.defineProperties(o.prototype,{[Symbol.toStringTag]:{value:"CloseEvent",configurable:!0},reason:e,code:e,wasClean:e}),Object.defineProperties(n.prototype,{[Symbol.toStringTag]:{value:"ErrorEvent",configurable:!0},message:e,filename:e,lineno:e,colno:e,error:e}),A.converters.MessagePort=A.interfaceConverter(t),A.converters["sequence<MessagePort>"]=A.sequenceConverter(A.converters.MessagePort);const s=[{key:"bubbles",converter:A.converters.boolean,defaultValue:!1},{key:"cancelable",converter:A.converters.boolean,defaultValue:!1},{key:"composed",converter:A.converters.boolean,defaultValue:!1}];return A.converters.MessageEventInit=A.dictionaryConverter([...s,{key:"data",converter:A.converters.any,defaultValue:null},{key:"origin",converter:A.converters.USVString,defaultValue:""},{key:"lastEventId",converter:A.converters.DOMString,defaultValue:""},{key:"source",converter:A.nullableConverter(A.converters.MessagePort),defaultValue:null},{key:"ports",converter:A.converters["sequence<MessagePort>"],get defaultValue(){return[]}}]),A.converters.CloseEventInit=A.dictionaryConverter([...s,{key:"wasClean",converter:A.converters.boolean,defaultValue:!1},{key:"code",converter:A.converters["unsigned short"],defaultValue:0},{key:"reason",converter:A.converters.USVString,defaultValue:""}]),A.converters.ErrorEventInit=A.dictionaryConverter([...s,{key:"message",converter:A.converters.DOMString,defaultValue:""},{key:"filename",converter:A.converters.USVString,defaultValue:""},{key:"lineno",converter:A.converters["unsigned long"],defaultValue:0},{key:"colno",converter:A.converters["unsigned long"],defaultValue:0},{key:"error",converter:A.converters.any}]),Wr={MessageEvent:r,CloseEvent:o,ErrorEvent:n}}function mo(){if(_r)return Pr;_r=1;const{kReadyState:A,kController:e,kResponse:t,kBinaryType:r,kWebSocketURL:o}=Do(),{states:n,opcodes:s}=wo(),{MessageEvent:i,ErrorEvent:E}=Ro();function g(A,e,t=Event,r){const o=new t(A,r);e.dispatchEvent(o)}function a(A,r){const{[e]:o,[t]:n}=A;o.abort(),n?.socket&&!n.socket.destroyed&&n.socket.destroy(),r&&g("error",A,E,{error:new Error(r)})}return Pr={isEstablished:function(e){return e[A]===n.OPEN},isClosing:function(e){return e[A]===n.CLOSING},isClosed:function(e){return e[A]===n.CLOSED},fireEvent:g,isValidSubprotocol:function(A){if(0===A.length)return!1;for(const e of A){const A=e.charCodeAt(0);if(A<33||A>126||"("===e||")"===e||"<"===e||">"===e||"@"===e||","===e||";"===e||":"===e||"\\"===e||'"'===e||"/"===e||"["===e||"]"===e||"?"===e||"="===e||"{"===e||"}"===e||32===A||9===A)return!1}return!0},isValidStatusCode:function(A){return A>=1e3&&A<1015?1004!==A&&1005!==A&&1006!==A:A>=3e3&&A<=4999},failWebsocketConnection:a,websocketMessageReceived:function(e,t,E){if(e[A]!==n.OPEN)return;let Q;if(t===s.TEXT)try{Q=new TextDecoder("utf-8",{fatal:!0}).decode(E)}catch{return void a(e,"Received invalid UTF-8 in text frame.")}else t===s.BINARY&&(Q="blob"===e[r]?new Blob([E]):new Uint8Array(E).buffer);g("message",e,i,{origin:e[o].origin,data:Q})}}}function ko(){if(Kr)return Xr;Kr=1;const{maxUnsigned16Bit:A}=wo();let e;try{e=require("crypto")}catch{}return Xr={WebsocketFrameSend:class{constructor(A){this.frameData=A,this.maskKey=e.randomBytes(4)}createFrame(e){const t=this.frameData?.byteLength??0;let r=t,o=6;t>A?(o+=8,r=127):t>125&&(o+=2,r=126);const n=Buffer.allocUnsafe(t+o);n[0]=n[1]=0,n[0]|=128,n[0]=(240&n[0])+e,
-/*! ws. MIT License. Einar Otto Stangvik <einaros@gmail.com> */
-n[o-4]=this.maskKey[0],n[o-3]=this.maskKey[1],n[o-2]=this.maskKey[2],n[o-1]=this.maskKey[3],n[1]=r,126===r?n.writeUInt16BE(t,2):127===r&&(n[2]=n[3]=0,n.writeUIntBE(t,4,6)),n[1]|=128;for(let A=0;A<t;A++)n[o+A]=this.frameData[A]^this.maskKey[A%4];return n}}}}function bo(){if(eo)return Ao;eo=1;const{webidl:A}=de(),{DOMException:e}=Ie(),{URLSerializer:t}=fe(),{getGlobalOrigin:r}=he(),{staticPropertyDescriptors:o,states:n,opcodes:s,emptyBuffer:i}=wo(),{kWebSocketURL:E,kReadyState:g,kController:C,kBinaryType:B,kResponse:c,kSentClose:I,kByteParser:h}=Do(),{isEstablished:l,isClosing:u,isValidSubprotocol:d,failWebsocketConnection:f,fireEvent:y}=mo(),{establishWebSocketConnection:p}=function(){if(jr)return Zr;jr=1;const A=m,{uid:e,states:t}=wo(),{kReadyState:r,kSentClose:o,kByteParser:n,kReceivedClose:s}=Do(),{fireEvent:i,failWebsocketConnection:E}=mo(),{CloseEvent:g}=Ro(),{makeRequest:a}=co(),{fetching:Q}=Io(),{Headers:C}=Co(),{getGlobalDispatcher:B}=Qo(),{kHeadersList:c}=iA(),I={};let h;I.open=A.channel("undici:websocket:open"),I.close=A.channel("undici:websocket:close"),I.socketError=A.channel("undici:websocket:socket_error");try{h=require("crypto")}catch{}function l(A){this.ws[n].write(A)||this.pause()}function u(){const{ws:A}=this,e=A[o]&&A[s];let E=1005,a="";const Q=A[n].closingInfo;Q?(E=Q.code??1005,a=Q.reason):A[o]||(E=1006),A[r]=t.CLOSED,i("close",A,g,{wasClean:e,code:E,reason:a}),I.close.hasSubscribers&&I.close.publish({websocket:A,code:E,reason:a})}function d(A){const{ws:e}=this;e[r]=t.CLOSING,I.socketError.hasSubscribers&&I.socketError.publish(A),this.destroy()}return Zr={establishWebSocketConnection:function(A,t,r,o,n){const s=A;s.protocol="ws:"===A.protocol?"http:":"https:";const i=a({urlList:[s],serviceWorkers:"none",referrer:"no-referrer",mode:"websocket",credentials:"include",cache:"no-store",redirect:"error"});if(n.headers){const A=new C(n.headers)[c];i.headersList=A}const g=h.randomBytes(16).toString("base64");i.headersList.append("sec-websocket-key",g),i.headersList.append("sec-websocket-version","13");for(const A of t)i.headersList.append("sec-websocket-protocol",A);const f=Q({request:i,useParallelQueue:!0,dispatcher:n.dispatcher??B(),processResponse(A){if("error"===A.type||101!==A.status)return void E(r,"Received network error or non-101 status code.");if(0!==t.length&&!A.headersList.get("Sec-WebSocket-Protocol"))return void E(r,"Server did not respond with sent protocols.");if("websocket"!==A.headersList.get("Upgrade")?.toLowerCase())return void E(r,'Server did not set Upgrade header to "websocket".');if("upgrade"!==A.headersList.get("Connection")?.toLowerCase())return void E(r,'Server did not set Connection header to "upgrade".');if(A.headersList.get("Sec-WebSocket-Accept")!==h.createHash("sha1").update(g+e).digest("base64"))return void E(r,"Incorrect hash received in Sec-WebSocket-Accept header.");const n=A.headersList.get("Sec-WebSocket-Extensions");if(null!==n&&""!==n)return void E(r,"Received different permessage-deflate than the one set.");const s=A.headersList.get("Sec-WebSocket-Protocol");null===s||s===i.headersList.get("Sec-WebSocket-Protocol")?(A.socket.on("data",l),A.socket.on("close",u),A.socket.on("error",d),I.open.hasSubscribers&&I.open.publish({address:A.socket.address(),protocol:s,extensions:n}),o(A)):E(r,"Protocol was not set in the opening handshake.")}});return f}},Zr}(),{WebsocketFrameSend:w}=ko(),{ByteParser:D}=function(){if($r)return zr;$r=1;const{Writable:A}=Q,e=m,{parserStates:t,opcodes:r,states:o,emptyBuffer:n}=wo(),{kReadyState:s,kSentClose:i,kResponse:E,kReceivedClose:g}=Do(),{isValidStatusCode:a,failWebsocketConnection:C,websocketMessageReceived:B}=mo(),{WebsocketFrameSend:c}=ko(),I={};return I.ping=e.channel("undici:websocket:ping"),I.pong=e.channel("undici:websocket:pong"),zr={ByteParser:class extends A{#n=[];#s=0;#i=t.INFO;#E={};#g=[];constructor(A){super(),this.ws=A}_write(A,e,t){this.#n.push(A),this.#s+=A.length,this.run(t)}run(A){for(;;){if(this.#i===t.INFO){if(this.#s<2)return A();const e=this.consume(2);if(this.#E.fin=!!(128&e[0]),this.#E.opcode=15&e[0],this.#E.originalOpcode??=this.#E.opcode,this.#E.fragmented=!this.#E.fin&&this.#E.opcode!==r.CONTINUATION,this.#E.fragmented&&this.#E.opcode!==r.BINARY&&this.#E.opcode!==r.TEXT)return void C(this.ws,"Invalid frame type was fragmented.");const n=127&e[1];if(n<=125?(this.#E.payloadLength=n,this.#i=t.READ_DATA):126===n?this.#i=t.PAYLOADLENGTH_16:127===n&&(this.#i=t.PAYLOADLENGTH_64),this.#E.fragmented&&n>125)return void C(this.ws,"Fragmented frame exceeded 125 bytes.");if((this.#E.opcode===r.PING||this.#E.opcode===r.PONG||this.#E.opcode===r.CLOSE)&&n>125)return void C(this.ws,"Payload length for control frame exceeded 125 bytes.");if(this.#E.opcode===r.CLOSE){if(1===n)return void C(this.ws,"Received close frame with a 1-byte body.");const A=this.consume(n);if(this.#E.closeInfo=this.parseCloseBody(!1,A),!this.ws[i]){const A=Buffer.allocUnsafe(2);A.writeUInt16BE(this.#E.closeInfo.code,0);const e=new c(A);this.ws[E].socket.write(e.createFrame(r.CLOSE),A=>{A||(this.ws[i]=!0)})}return this.ws[s]=o.CLOSING,this.ws[g]=!0,void this.end()}if(this.#E.opcode===r.PING){const e=this.consume(n);if(!this.ws[g]){const A=new c(e);this.ws[E].socket.write(A.createFrame(r.PONG)),I.ping.hasSubscribers&&I.ping.publish({payload:e})}if(this.#i=t.INFO,this.#s>0)continue;return void A()}if(this.#E.opcode===r.PONG){const e=this.consume(n);if(I.pong.hasSubscribers&&I.pong.publish({payload:e}),this.#s>0)continue;return void A()}}else if(this.#i===t.PAYLOADLENGTH_16){if(this.#s<2)return A();const e=this.consume(2);this.#E.payloadLength=e.readUInt16BE(0),this.#i=t.READ_DATA}else if(this.#i===t.PAYLOADLENGTH_64){if(this.#s<8)return A();const e=this.consume(8),r=e.readUInt32BE(0);if(r>2**31-1)return void C(this.ws,"Received payload length > 2^31 bytes.");const o=e.readUInt32BE(4);this.#E.payloadLength=(r<<8)+o,this.#i=t.READ_DATA}else if(this.#i===t.READ_DATA){if(this.#s<this.#E.payloadLength)return A();if(this.#s>=this.#E.payloadLength){const A=this.consume(this.#E.payloadLength);if(this.#g.push(A),!this.#E.fragmented||this.#E.fin&&this.#E.opcode===r.CONTINUATION){const A=Buffer.concat(this.#g);B(this.ws,this.#E.originalOpcode,A),this.#E={},this.#g.length=0}this.#i=t.INFO}}if(!(this.#s>0)){A();break}}}consume(A){if(A>this.#s)return null;if(0===A)return n;if(this.#n[0].length===A)return this.#s-=this.#n[0].length,this.#n.shift();const e=Buffer.allocUnsafe(A);let t=0;for(;t!==A;){const r=this.#n[0],{length:o}=r;if(o+t===A){e.set(this.#n.shift(),t);break}if(o+t>A){e.set(r.subarray(0,A-t),t),this.#n[0]=r.subarray(A-t);break}e.set(this.#n.shift(),t),t+=r.length}return this.#s-=A,e}parseCloseBody(A,e){let t;if(e.length>=2&&(t=e.readUInt16BE(0)),A)return a(t)?{code:t}:null;let r=e.subarray(2);if(239===r[0]&&187===r[1]&&191===r[2]&&(r=r.subarray(3)),void 0!==t&&!a(t))return null;try{r=new TextDecoder("utf-8",{fatal:!0}).decode(r)}catch{return null}return{code:t,reason:r}}get closingInfo(){return this.#E.closeInfo}}},zr}(),{kEnumerableProperty:R,isBlobLike:k}=gA(),{getGlobalDispatcher:b}=Qo(),{types:N}=a;let F=!1;class S extends EventTarget{#a={open:null,error:null,close:null,message:null};#Q=0;#C="";#B="";constructor(t,o=[]){super(),A.argumentLengthCheck(arguments,1,{header:"WebSocket constructor"}),F||(F=!0,process.emitWarning("WebSockets are experimental, expect them to change at any time.",{code:"UNDICI-WS"}));const n=A.converters["DOMString or sequence<DOMString> or WebSocketInit"](o);t=A.converters.USVString(t),o=n.protocols;const s=r();let i;try{i=new URL(t,s)}catch(A){throw new e(A,"SyntaxError")}if("http:"===i.protocol?i.protocol="ws:":"https:"===i.protocol&&(i.protocol="wss:"),"ws:"!==i.protocol&&"wss:"!==i.protocol)throw new e(`Expected a ws: or wss: protocol, got ${i.protocol}`,"SyntaxError");if(i.hash||i.href.endsWith("#"))throw new e("Got fragment","SyntaxError");if("string"==typeof o&&(o=[o]),o.length!==new Set(o.map(A=>A.toLowerCase())).size)throw new e("Invalid Sec-WebSocket-Protocol value","SyntaxError");if(o.length>0&&!o.every(A=>d(A)))throw new e("Invalid Sec-WebSocket-Protocol value","SyntaxError");this[E]=new URL(i.href),this[C]=p(i,o,this,A=>this.#c(A),n),this[g]=S.CONNECTING,this[B]="blob"}close(t=void 0,r=void 0){if(A.brandCheck(this,S),void 0!==t&&(t=A.converters["unsigned short"](t,{clamp:!0})),void 0!==r&&(r=A.converters.USVString(r)),void 0!==t&&1e3!==t&&(t<3e3||t>4999))throw new e("invalid code","InvalidAccessError");let o=0;if(void 0!==r&&(o=Buffer.byteLength(r),o>123))throw new e(`Reason must be less than 123 bytes; received ${o}`,"SyntaxError");if(this[g]===S.CLOSING||this[g]===S.CLOSED);else if(l(this))if(u(this))this[g]=S.CLOSING;else{const A=new w;void 0!==t&&void 0===r?(A.frameData=Buffer.allocUnsafe(2),A.frameData.writeUInt16BE(t,0)):void 0!==t&&void 0!==r?(A.frameData=Buffer.allocUnsafe(2+o),A.frameData.writeUInt16BE(t,0),A.frameData.write(r,2,"utf-8")):A.frameData=i;this[c].socket.write(A.createFrame(s.CLOSE),A=>{A||(this[I]=!0)}),this[g]=n.CLOSING}else f(this,"Connection was closed before it was established."),this[g]=S.CLOSING}send(t){if(A.brandCheck(this,S),A.argumentLengthCheck(arguments,1,{header:"WebSocket.send"}),t=A.converters.WebSocketSendData(t),this[g]===S.CONNECTING)throw new e("Sent before connected.","InvalidStateError");if(!l(this)||u(this))return;const r=this[c].socket;if("string"==typeof t){const A=Buffer.from(t),e=new w(A).createFrame(s.TEXT);this.#Q+=A.byteLength,r.write(e,()=>{this.#Q-=A.byteLength})}else if(N.isArrayBuffer(t)){const A=Buffer.from(t),e=new w(A).createFrame(s.BINARY);this.#Q+=A.byteLength,r.write(e,()=>{this.#Q-=A.byteLength})}else if(ArrayBuffer.isView(t)){const A=Buffer.from(t,t.byteOffset,t.byteLength),e=new w(A).createFrame(s.BINARY);this.#Q+=A.byteLength,r.write(e,()=>{this.#Q-=A.byteLength})}else if(k(t)){const A=new w;t.arrayBuffer().then(e=>{const t=Buffer.from(e);A.frameData=t;const o=A.createFrame(s.BINARY);this.#Q+=t.byteLength,r.write(o,()=>{this.#Q-=t.byteLength})})}}get readyState(){return A.brandCheck(this,S),this[g]}get bufferedAmount(){return A.brandCheck(this,S),this.#Q}get url(){return A.brandCheck(this,S),t(this[E])}get extensions(){return A.brandCheck(this,S),this.#B}get protocol(){return A.brandCheck(this,S),this.#C}get onopen(){return A.brandCheck(this,S),this.#a.open}set onopen(e){A.brandCheck(this,S),this.#a.open&&this.removeEventListener("open",this.#a.open),"function"==typeof e?(this.#a.open=e,this.addEventListener("open",e)):this.#a.open=null}get onerror(){return A.brandCheck(this,S),this.#a.error}set onerror(e){A.brandCheck(this,S),this.#a.error&&this.removeEventListener("error",this.#a.error),"function"==typeof e?(this.#a.error=e,this.addEventListener("error",e)):this.#a.error=null}get onclose(){return A.brandCheck(this,S),this.#a.close}set onclose(e){A.brandCheck(this,S),this.#a.close&&this.removeEventListener("close",this.#a.close),"function"==typeof e?(this.#a.close=e,this.addEventListener("close",e)):this.#a.close=null}get onmessage(){return A.brandCheck(this,S),this.#a.message}set onmessage(e){A.brandCheck(this,S),this.#a.message&&this.removeEventListener("message",this.#a.message),"function"==typeof e?(this.#a.message=e,this.addEventListener("message",e)):this.#a.message=null}get binaryType(){return A.brandCheck(this,S),this[B]}set binaryType(e){A.brandCheck(this,S),this[B]="blob"!==e&&"arraybuffer"!==e?"blob":e}#c(A){this[c]=A;const e=new D(this);e.on("drain",function(){this.ws[c].socket.resume()}),A.socket.ws=this,this[h]=e,this[g]=n.OPEN;const t=A.headersList.get("sec-websocket-extensions");null!==t&&(this.#B=t);const r=A.headersList.get("sec-websocket-protocol");null!==r&&(this.#C=r),y("open",this)}}return S.CONNECTING=S.prototype.CONNECTING=n.CONNECTING,S.OPEN=S.prototype.OPEN=n.OPEN,S.CLOSING=S.prototype.CLOSING=n.CLOSING,S.CLOSED=S.prototype.CLOSED=n.CLOSED,Object.defineProperties(S.prototype,{CONNECTING:o,OPEN:o,CLOSING:o,CLOSED:o,url:R,readyState:R,bufferedAmount:R,onopen:R,onerror:R,onclose:R,close:R,onmessage:R,binaryType:R,send:R,extensions:R,protocol:R,[Symbol.toStringTag]:{value:"WebSocket",writable:!1,enumerable:!1,configurable:!0}}),Object.defineProperties(S,{CONNECTING:o,OPEN:o,CLOSING:o,CLOSED:o}),A.converters["sequence<DOMString>"]=A.sequenceConverter(A.converters.DOMString),A.converters["DOMString or sequence<DOMString>"]=function(e){return"Object"===A.util.Type(e)&&Symbol.iterator in e?A.converters["sequence<DOMString>"](e):A.converters.DOMString(e)},A.converters.WebSocketInit=A.dictionaryConverter([{key:"protocols",converter:A.converters["DOMString or sequence<DOMString>"],get defaultValue(){return[]}},{key:"dispatcher",converter:A=>A,get defaultValue(){return b()}},{key:"headers",converter:A.nullableConverter(A.converters.HeadersInit)}]),A.converters["DOMString or sequence<DOMString> or WebSocketInit"]=function(e){return"Object"!==A.util.Type(e)||Symbol.iterator in e?{protocols:A.converters["DOMString or sequence<DOMString>"](e)}:A.converters.WebSocketInit(e)},A.converters.WebSocketSendData=function(e){if("Object"===A.util.Type(e)){if(k(e))return A.converters.Blob(e,{strict:!1});if(ArrayBuffer.isView(e)||N.isAnyArrayBuffer(e))return A.converters.BufferSource(e)}return A.converters.USVString(e)},Ao={WebSocket:S}}function No(){if(to)return sA;to=1;const A=nt(),e=De(),t=EA(),r=it(),o=function(){if(Ze)return _e;Ze=1;const{BalancedPoolMissingUpstreamError:A,InvalidArgumentError:e}=EA(),{PoolBase:t,kClients:r,kNeedDrain:o,kAddClient:n,kRemoveClient:s,kGetDispatcher:i}=st(),E=it(),{kUrl:g,kInterceptors:a}=iA(),{parseOrigin:Q}=gA(),C=Symbol("factory"),B=Symbol("options"),c=Symbol("kGreatestCommonDivisor"),I=Symbol("kCurrentWeight"),h=Symbol("kIndex"),l=Symbol("kWeight"),u=Symbol("kMaxWeightPerServer"),d=Symbol("kErrorPenalty");function f(A,e){return 0===e?A:f(e,A%e)}function y(A,e){return new E(A,e)}return _e=class extends t{constructor(A=[],{factory:t=y,...r}={}){if(super(),this[B]=r,this[h]=-1,this[I]=0,this[u]=this[B].maxWeightPerServer||100,this[d]=this[B].errorPenalty||15,Array.isArray(A)||(A=[A]),"function"!=typeof t)throw new e("factory must be a function.");this[a]=r.interceptors&&r.interceptors.BalancedPool&&Array.isArray(r.interceptors.BalancedPool)?r.interceptors.BalancedPool:[],this[C]=t;for(const e of A)this.addUpstream(e);this._updateBalancedPoolStats()}addUpstream(A){const e=Q(A).origin;if(this[r].find(A=>A[g].origin===e&&!0!==A.closed&&!0!==A.destroyed))return this;const t=this[C](e,Object.assign({},this[B]));this[n](t),t.on("connect",()=>{t[l]=Math.min(this[u],t[l]+this[d])}),t.on("connectionError",()=>{t[l]=Math.max(1,t[l]-this[d]),this._updateBalancedPoolStats()}),t.on("disconnect",(...A)=>{const e=A[2];e&&"UND_ERR_SOCKET"===e.code&&(t[l]=Math.max(1,t[l]-this[d]),this._updateBalancedPoolStats())});for(const A of this[r])A[l]=this[u];return this._updateBalancedPoolStats(),this}_updateBalancedPoolStats(){this[c]=this[r].map(A=>A[l]).reduce(f,0)}removeUpstream(A){const e=Q(A).origin,t=this[r].find(A=>A[g].origin===e&&!0!==A.closed&&!0!==A.destroyed);return t&&this[s](t),this}get upstreams(){return this[r].filter(A=>!0!==A.closed&&!0!==A.destroyed).map(A=>A[g].origin)}[i](){if(0===this[r].length)throw new A;if(!this[r].find(A=>!A[o]&&!0!==A.closed&&!0!==A.destroyed))return;const e=this[r].map(A=>A[o]).reduce((A,e)=>A&&e,!0);if(e)return;let t=0,n=this[r].findIndex(A=>!A[o]);for(;t++<this[r].length;){this[h]=(this[h]+1)%this[r].length;const A=this[r][this[h]];if(A[l]>this[r][n][l]&&!A[o]&&(n=this[h]),0===this[h]&&(this[I]=this[I]-this[c],this[I]<=0&&(this[I]=this[u])),A[l]>=this[I]&&!A[o])return A}return this[I]=this[r][n][l],this[h]=n,this[r][n]}},_e}(),n=gt(),s=gA(),{InvalidArgumentError:i}=t,E=Tt(),g=me(),a=so(),Q=Eo(),C=io(),B=Jt(),c=go(),I=ao(),{getGlobalDispatcher:h,setGlobalDispatcher:l}=Qo(),u=nr?or:(nr=1,or=class{constructor(A){this.handler=A}onConnect(...A){return this.handler.onConnect(...A)}onError(...A){return this.handler.onError(...A)}onUpgrade(...A){return this.handler.onUpgrade(...A)}onHeaders(...A){return this.handler.onHeaders(...A)}onData(...A){return this.handler.onData(...A)}onComplete(...A){return this.handler.onComplete(...A)}onBodySent(...A){return this.handler.onBodySent(...A)}}),d=tt(),f=rt();let y;try{require("crypto"),y=!0}catch{y=!1}function p(A){return(e,t,r)=>{if("function"==typeof t&&(r=t,t=null),!e||"string"!=typeof e&&"object"!=typeof e&&!(e instanceof URL))throw new i("invalid url");if(null!=t&&"object"!=typeof t)throw new i("invalid opts");if(t&&null!=t.path){if("string"!=typeof t.path)throw new i("invalid opts.path");let A=t.path;t.path.startsWith("/")||(A=`/${A}`),e=new URL(s.parseOrigin(e).origin+A)}else t||(t="object"==typeof e?e:{}),e=s.parseURL(e);const{agent:o,dispatcher:n=h()}=t;if(o)throw new i("unsupported opts.agent. Did you mean opts.client?");return A.call(n,{...t,origin:e.origin,path:e.search?`${e.pathname}${e.search}`:e.pathname,method:t.method||(t.body?"PUT":"GET")},r)}}if(Object.assign(e.prototype,E),sA.Dispatcher=e,sA.Client=A,sA.Pool=r,sA.BalancedPool=o,sA.Agent=n,sA.ProxyAgent=c,sA.RetryHandler=I,sA.DecoratorHandler=u,sA.RedirectHandler=d,sA.createRedirectInterceptor=f,sA.buildConnector=g,sA.errors=t,sA.setGlobalDispatcher=l,sA.getGlobalDispatcher=h,s.nodeMajor>16||16===s.nodeMajor&&s.nodeMinor>=8){let A=null;sA.fetch=async function(e){A||(A=Io().fetch);try{return await A(...arguments)}catch(A){throw"object"==typeof A&&Error.captureStackTrace(A,this),A}},sA.Headers=Co().Headers,sA.Response=Bo().Response,sA.Request=co().Request,sA.FormData=pe().FormData,sA.File=ye().File,sA.FileReader=function(){if(wr)return pr;wr=1;const{staticPropertyDescriptors:A,readOperation:e,fireAProgressEvent:t}=lo(),{kState:r,kError:o,kResult:n,kEvents:s,kAborted:i}=ho(),{webidl:E}=de(),{kEnumerableProperty:g}=gA();class a extends EventTarget{constructor(){super(),this[r]="empty",this[n]=null,this[o]=null,this[s]={loadend:null,error:null,abort:null,load:null,progress:null,loadstart:null}}readAsArrayBuffer(A){E.brandCheck(this,a),E.argumentLengthCheck(arguments,1,{header:"FileReader.readAsArrayBuffer"}),A=E.converters.Blob(A,{strict:!1}),e(this,A,"ArrayBuffer")}readAsBinaryString(A){E.brandCheck(this,a),E.argumentLengthCheck(arguments,1,{header:"FileReader.readAsBinaryString"}),A=E.converters.Blob(A,{strict:!1}),e(this,A,"BinaryString")}readAsText(A,t=void 0){E.brandCheck(this,a),E.argumentLengthCheck(arguments,1,{header:"FileReader.readAsText"}),A=E.converters.Blob(A,{strict:!1}),void 0!==t&&(t=E.converters.DOMString(t)),e(this,A,"Text",t)}readAsDataURL(A){E.brandCheck(this,a),E.argumentLengthCheck(arguments,1,{header:"FileReader.readAsDataURL"}),A=E.converters.Blob(A,{strict:!1}),e(this,A,"DataURL")}abort(){"empty"!==this[r]&&"done"!==this[r]?("loading"===this[r]&&(this[r]="done",this[n]=null),this[i]=!0,t("abort",this),"loading"!==this[r]&&t("loadend",this)):this[n]=null}get readyState(){switch(E.brandCheck(this,a),this[r]){case"empty":return this.EMPTY;case"loading":return this.LOADING;case"done":return this.DONE}}get result(){return E.brandCheck(this,a),this[n]}get error(){return E.brandCheck(this,a),this[o]}get onloadend(){return E.brandCheck(this,a),this[s].loadend}set onloadend(A){E.brandCheck(this,a),this[s].loadend&&this.removeEventListener("loadend",this[s].loadend),"function"==typeof A?(this[s].loadend=A,this.addEventListener("loadend",A)):this[s].loadend=null}get onerror(){return E.brandCheck(this,a),this[s].error}set onerror(A){E.brandCheck(this,a),this[s].error&&this.removeEventListener("error",this[s].error),"function"==typeof A?(this[s].error=A,this.addEventListener("error",A)):this[s].error=null}get onloadstart(){return E.brandCheck(this,a),this[s].loadstart}set onloadstart(A){E.brandCheck(this,a),this[s].loadstart&&this.removeEventListener("loadstart",this[s].loadstart),"function"==typeof A?(this[s].loadstart=A,this.addEventListener("loadstart",A)):this[s].loadstart=null}get onprogress(){return E.brandCheck(this,a),this[s].progress}set onprogress(A){E.brandCheck(this,a),this[s].progress&&this.removeEventListener("progress",this[s].progress),"function"==typeof A?(this[s].progress=A,this.addEventListener("progress",A)):this[s].progress=null}get onload(){return E.brandCheck(this,a),this[s].load}set onload(A){E.brandCheck(this,a),this[s].load&&this.removeEventListener("load",this[s].load),"function"==typeof A?(this[s].load=A,this.addEventListener("load",A)):this[s].load=null}get onabort(){return E.brandCheck(this,a),this[s].abort}set onabort(A){E.brandCheck(this,a),this[s].abort&&this.removeEventListener("abort",this[s].abort),"function"==typeof A?(this[s].abort=A,this.addEventListener("abort",A)):this[s].abort=null}}return a.EMPTY=a.prototype.EMPTY=0,a.LOADING=a.prototype.LOADING=1,a.DONE=a.prototype.DONE=2,Object.defineProperties(a.prototype,{EMPTY:A,LOADING:A,DONE:A,readAsArrayBuffer:g,readAsBinaryString:g,readAsText:g,readAsDataURL:g,abort:g,readyState:g,result:g,error:g,onloadstart:g,onprogress:g,onload:g,onabort:g,onerror:g,onloadend:g,[Symbol.toStringTag]:{value:"FileReader",writable:!1,enumerable:!1,configurable:!0}}),Object.defineProperties(a,{EMPTY:A,LOADING:A,DONE:A}),pr={FileReader:a}}().FileReader;const{setGlobalOrigin:e,getGlobalOrigin:t}=he();sA.setGlobalOrigin=e,sA.getGlobalOrigin=t;const{CacheStorage:r}=function(){if(Sr)return Fr;Sr=1;const{kConstruct:A}=uo(),{Cache:e}=fo(),{webidl:t}=de(),{kEnumerableProperty:r}=gA();class o{#I=new Map;constructor(){arguments[0]!==A&&t.illegalConstructor()}async match(r,n={}){if(t.brandCheck(this,o),t.argumentLengthCheck(arguments,1,{header:"CacheStorage.match"}),r=t.converters.RequestInfo(r),null!=(n=t.converters.MultiCacheQueryOptions(n)).cacheName){if(this.#I.has(n.cacheName)){const t=this.#I.get(n.cacheName),o=new e(A,t);return await o.match(r,n)}}else for(const t of this.#I.values()){const o=new e(A,t),s=await o.match(r,n);if(void 0!==s)return s}}async has(A){return t.brandCheck(this,o),t.argumentLengthCheck(arguments,1,{header:"CacheStorage.has"}),A=t.converters.DOMString(A),this.#I.has(A)}async open(r){if(t.brandCheck(this,o),t.argumentLengthCheck(arguments,1,{header:"CacheStorage.open"}),r=t.converters.DOMString(r),this.#I.has(r)){const t=this.#I.get(r);return new e(A,t)}const n=[];return this.#I.set(r,n),new e(A,n)}async delete(A){return t.brandCheck(this,o),t.argumentLengthCheck(arguments,1,{header:"CacheStorage.delete"}),A=t.converters.DOMString(A),this.#I.delete(A)}async keys(){return t.brandCheck(this,o),[...this.#I.keys()]}}return Object.defineProperties(o.prototype,{[Symbol.toStringTag]:{value:"CacheStorage",configurable:!0},match:r,has:r,open:r,delete:r,keys:r}),Fr={CacheStorage:o}}(),{kConstruct:o}=uo();sA.caches=new r(o)}if(s.nodeMajor>=16){const{deleteCookie:A,getCookies:e,getSetCookies:t,setCookie:r}=function(){if(Gr)return Jr;Gr=1;const{parseSetCookie:A}=po(),{stringify:e}=yo(),{webidl:t}=de(),{Headers:r}=Co();function o(A,o){t.argumentLengthCheck(arguments,2,{header:"setCookie"}),t.brandCheck(A,r,{strict:!1}),o=t.converters.Cookie(o),e(o)&&A.append("Set-Cookie",e(o))}return t.converters.DeleteCookieAttributes=t.dictionaryConverter([{converter:t.nullableConverter(t.converters.DOMString),key:"path",defaultValue:null},{converter:t.nullableConverter(t.converters.DOMString),key:"domain",defaultValue:null}]),t.converters.Cookie=t.dictionaryConverter([{converter:t.converters.DOMString,key:"name"},{converter:t.converters.DOMString,key:"value"},{converter:t.nullableConverter(A=>"number"==typeof A?t.converters["unsigned long long"](A):new Date(A)),key:"expires",defaultValue:null},{converter:t.nullableConverter(t.converters["long long"]),key:"maxAge",defaultValue:null},{converter:t.nullableConverter(t.converters.DOMString),key:"domain",defaultValue:null},{converter:t.nullableConverter(t.converters.DOMString),key:"path",defaultValue:null},{converter:t.nullableConverter(t.converters.boolean),key:"secure",defaultValue:null},{converter:t.nullableConverter(t.converters.boolean),key:"httpOnly",defaultValue:null},{converter:t.converters.USVString,key:"sameSite",allowedValues:["Strict","Lax","None"]},{converter:t.sequenceConverter(t.converters.DOMString),key:"unparsed",defaultValue:[]}]),Jr={getCookies:function(A){t.argumentLengthCheck(arguments,1,{header:"getCookies"}),t.brandCheck(A,r,{strict:!1});const e=A.get("cookie"),o={};if(!e)return o;for(const A of e.split(";")){const[e,...t]=A.split("=");o[e.trim()]=t.join("=")}return o},deleteCookie:function(A,e,n){t.argumentLengthCheck(arguments,2,{header:"deleteCookie"}),t.brandCheck(A,r,{strict:!1}),e=t.converters.DOMString(e),n=t.converters.DeleteCookieAttributes(n),o(A,{name:e,value:"",expires:new Date(0),...n})},getSetCookies:function(e){t.argumentLengthCheck(arguments,1,{header:"getSetCookies"}),t.brandCheck(e,r,{strict:!1});const o=e.getSetCookie();return o?o.map(e=>A(e)):[]},setCookie:o},Jr}();sA.deleteCookie=A,sA.getCookies=e,sA.getSetCookies=t,sA.setCookie=r;const{parseMIMEType:o,serializeAMimeType:n}=fe();sA.parseMIMEType=o,sA.serializeAMimeType=n}if(s.nodeMajor>=18&&y){const{WebSocket:A}=bo();sA.WebSocket=A}return sA.request=p(E.request),sA.stream=p(E.stream),sA.pipeline=p(E.pipeline),sA.connect=p(E.connect),sA.upgrade=p(E.upgrade),sA.MockClient=a,sA.MockPool=C,sA.MockAgent=Q,sA.mockErrors=B,sA}function Fo(){if(ro)return x;ro=1;var A=x&&x.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t);var o=Object.getOwnPropertyDescriptor(e,t);o&&!("get"in o?!e.__esModule:o.writable||o.configurable)||(o={enumerable:!0,get:function(){return e[t]}}),Object.defineProperty(A,r,o)}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),e=x&&x.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),t=x&&x.__importStar||function(t){if(t&&t.__esModule)return t;var r={};if(null!=t)for(var o in t)"default"!==o&&Object.prototype.hasOwnProperty.call(t,o)&&A(r,t,o);return e(r,t),r},r=x&&x.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(x,"__esModule",{value:!0}),x.HttpClient=x.isHttps=x.HttpClientResponse=x.HttpClientError=x.getProxyUrl=x.MediaTypes=x.Headers=x.HttpCodes=void 0;const s=t(o),i=t(n),E=t(function(){if(V)return W;function A(A){if(!A.hostname)return!1;if(function(A){const e=A.toLowerCase();return"localhost"===e||e.startsWith("127.")||e.startsWith("[::1]")||e.startsWith("[0:0:0:0:0:0:0:1]")}(A.hostname))return!0;const e=process.env.no_proxy||process.env.NO_PROXY||"";if(!e)return!1;let t;A.port?t=Number(A.port):"http:"===A.protocol?t=80:"https:"===A.protocol&&(t=443);const r=[A.hostname.toUpperCase()];"number"==typeof t&&r.push(`${r[0]}:${t}`);for(const A of e.split(",").map(A=>A.trim().toUpperCase()).filter(A=>A))if("*"===A||r.some(e=>e===A||e.endsWith(`.${A}`)||A.startsWith(".")&&e.endsWith(`${A}`)))return!0;return!1}V=1,Object.defineProperty(W,"__esModule",{value:!0}),W.checkBypass=W.getProxyUrl=void 0,W.getProxyUrl=function(t){const r="https:"===t.protocol;if(A(t))return;const o=r?process.env.https_proxy||process.env.HTTPS_PROXY:process.env.http_proxy||process.env.HTTP_PROXY;if(o)try{return new e(o)}catch(A){if(!o.startsWith("http://")&&!o.startsWith("https://"))return new e(`http://${o}`)}},W.checkBypass=A;class e extends URL{constructor(A,e){super(A,e),this._decodedUsername=decodeURIComponent(super.username),this._decodedPassword=decodeURIComponent(super.password)}get username(){return this._decodedUsername}get password(){return this._decodedPassword}}return W}()),g=t(j()),a=No();var Q,C,B;!function(A){A[A.OK=200]="OK",A[A.MultipleChoices=300]="MultipleChoices",A[A.MovedPermanently=301]="MovedPermanently",A[A.ResourceMoved=302]="ResourceMoved",A[A.SeeOther=303]="SeeOther",A[A.NotModified=304]="NotModified",A[A.UseProxy=305]="UseProxy",A[A.SwitchProxy=306]="SwitchProxy",A[A.TemporaryRedirect=307]="TemporaryRedirect",A[A.PermanentRedirect=308]="PermanentRedirect",A[A.BadRequest=400]="BadRequest",A[A.Unauthorized=401]="Unauthorized",A[A.PaymentRequired=402]="PaymentRequired",A[A.Forbidden=403]="Forbidden",A[A.NotFound=404]="NotFound",A[A.MethodNotAllowed=405]="MethodNotAllowed",A[A.NotAcceptable=406]="NotAcceptable",A[A.ProxyAuthenticationRequired=407]="ProxyAuthenticationRequired",A[A.RequestTimeout=408]="RequestTimeout",A[A.Conflict=409]="Conflict",A[A.Gone=410]="Gone",A[A.TooManyRequests=429]="TooManyRequests",A[A.InternalServerError=500]="InternalServerError",A[A.NotImplemented=501]="NotImplemented",A[A.BadGateway=502]="BadGateway",A[A.ServiceUnavailable=503]="ServiceUnavailable",A[A.GatewayTimeout=504]="GatewayTimeout"}(Q||(x.HttpCodes=Q={})),function(A){A.Accept="accept",A.ContentType="content-type"}(C||(x.Headers=C={})),function(A){A.ApplicationJson="application/json"}(B||(x.MediaTypes=B={})),x.getProxyUrl=function(A){const e=E.getProxyUrl(new URL(A));return e?e.href:""};const c=[Q.MovedPermanently,Q.ResourceMoved,Q.SeeOther,Q.TemporaryRedirect,Q.PermanentRedirect],I=[Q.BadGateway,Q.ServiceUnavailable,Q.GatewayTimeout],h=["OPTIONS","GET","DELETE","HEAD"];class l extends Error{constructor(A,e){super(A),this.name="HttpClientError",this.statusCode=e,Object.setPrototypeOf(this,l.prototype)}}x.HttpClientError=l;class u{constructor(A){this.message=A}readBody(){return r(this,void 0,void 0,function*(){return new Promise(A=>r(this,void 0,void 0,function*(){let e=Buffer.alloc(0);this.message.on("data",A=>{e=Buffer.concat([e,A])}),this.message.on("end",()=>{A(e.toString())})}))})}readBodyBuffer(){return r(this,void 0,void 0,function*(){return new Promise(A=>r(this,void 0,void 0,function*(){const e=[];this.message.on("data",A=>{e.push(A)}),this.message.on("end",()=>{A(Buffer.concat(e))})}))})}}x.HttpClientResponse=u,x.isHttps=function(A){return"https:"===new URL(A).protocol};x.HttpClient=class{constructor(A,e,t){this._ignoreSslError=!1,this._allowRedirects=!0,this._allowRedirectDowngrade=!1,this._maxRedirects=50,this._allowRetries=!1,this._maxRetries=1,this._keepAlive=!1,this._disposed=!1,this.userAgent=A,this.handlers=e||[],this.requestOptions=t,t&&(null!=t.ignoreSslError&&(this._ignoreSslError=t.ignoreSslError),this._socketTimeout=t.socketTimeout,null!=t.allowRedirects&&(this._allowRedirects=t.allowRedirects),null!=t.allowRedirectDowngrade&&(this._allowRedirectDowngrade=t.allowRedirectDowngrade),null!=t.maxRedirects&&(this._maxRedirects=Math.max(t.maxRedirects,0)),null!=t.keepAlive&&(this._keepAlive=t.keepAlive),null!=t.allowRetries&&(this._allowRetries=t.allowRetries),null!=t.maxRetries&&(this._maxRetries=t.maxRetries))}options(A,e){return r(this,void 0,void 0,function*(){return this.request("OPTIONS",A,null,e||{})})}get(A,e){return r(this,void 0,void 0,function*(){return this.request("GET",A,null,e||{})})}del(A,e){return r(this,void 0,void 0,function*(){return this.request("DELETE",A,null,e||{})})}post(A,e,t){return r(this,void 0,void 0,function*(){return this.request("POST",A,e,t||{})})}patch(A,e,t){return r(this,void 0,void 0,function*(){return this.request("PATCH",A,e,t||{})})}put(A,e,t){return r(this,void 0,void 0,function*(){return this.request("PUT",A,e,t||{})})}head(A,e){return r(this,void 0,void 0,function*(){return this.request("HEAD",A,null,e||{})})}sendStream(A,e,t,o){return r(this,void 0,void 0,function*(){return this.request(A,e,t,o)})}getJson(A,e={}){return r(this,void 0,void 0,function*(){e[C.Accept]=this._getExistingOrDefaultHeader(e,C.Accept,B.ApplicationJson);const t=yield this.get(A,e);return this._processResponse(t,this.requestOptions)})}postJson(A,e,t={}){return r(this,void 0,void 0,function*(){const r=JSON.stringify(e,null,2);t[C.Accept]=this._getExistingOrDefaultHeader(t,C.Accept,B.ApplicationJson),t[C.ContentType]=this._getExistingOrDefaultHeader(t,C.ContentType,B.ApplicationJson);const o=yield this.post(A,r,t);return this._processResponse(o,this.requestOptions)})}putJson(A,e,t={}){return r(this,void 0,void 0,function*(){const r=JSON.stringify(e,null,2);t[C.Accept]=this._getExistingOrDefaultHeader(t,C.Accept,B.ApplicationJson),t[C.ContentType]=this._getExistingOrDefaultHeader(t,C.ContentType,B.ApplicationJson);const o=yield this.put(A,r,t);return this._processResponse(o,this.requestOptions)})}patchJson(A,e,t={}){return r(this,void 0,void 0,function*(){const r=JSON.stringify(e,null,2);t[C.Accept]=this._getExistingOrDefaultHeader(t,C.Accept,B.ApplicationJson),t[C.ContentType]=this._getExistingOrDefaultHeader(t,C.ContentType,B.ApplicationJson);const o=yield this.patch(A,r,t);return this._processResponse(o,this.requestOptions)})}request(A,e,t,o){return r(this,void 0,void 0,function*(){if(this._disposed)throw new Error("Client has already been disposed.");const r=new URL(e);let n=this._prepareRequest(A,r,o);const s=this._allowRetries&&h.includes(A)?this._maxRetries+1:1;let i,E=0;do{if(i=yield this.requestRaw(n,t),i&&i.message&&i.message.statusCode===Q.Unauthorized){let A;for(const e of this.handlers)if(e.canHandleAuthentication(i)){A=e;break}return A?A.handleAuthentication(this,n,t):i}let e=this._maxRedirects;for(;i.message.statusCode&&c.includes(i.message.statusCode)&&this._allowRedirects&&e>0;){const s=i.message.headers.location;if(!s)break;const E=new URL(s);if("https:"===r.protocol&&r.protocol!==E.protocol&&!this._allowRedirectDowngrade)throw new Error("Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.");if(yield i.readBody(),E.hostname!==r.hostname)for(const A in o)"authorization"===A.toLowerCase()&&delete o[A];n=this._prepareRequest(A,E,o),i=yield this.requestRaw(n,t),e--}if(!i.message.statusCode||!I.includes(i.message.statusCode))return i;E+=1,E<s&&(yield i.readBody(),yield this._performExponentialBackoff(E))}while(E<s);return i})}dispose(){this._agent&&this._agent.destroy(),this._disposed=!0}requestRaw(A,e){return r(this,void 0,void 0,function*(){return new Promise((t,r)=>{this.requestRawWithCallback(A,e,function(A,e){A?r(A):e?t(e):r(new Error("Unknown error"))})})})}requestRawWithCallback(A,e,t){"string"==typeof e&&(A.options.headers||(A.options.headers={}),A.options.headers["Content-Length"]=Buffer.byteLength(e,"utf8"));let r=!1;function o(A,e){r||(r=!0,t(A,e))}const n=A.httpModule.request(A.options,A=>{o(void 0,new u(A))});let s;n.on("socket",A=>{s=A}),n.setTimeout(this._socketTimeout||18e4,()=>{s&&s.end(),o(new Error(`Request timeout: ${A.options.path}`))}),n.on("error",function(A){o(A)}),e&&"string"==typeof e&&n.write(e,"utf8"),e&&"string"!=typeof e?(e.on("close",function(){n.end()}),e.pipe(n)):n.end()}getAgent(A){const e=new URL(A);return this._getAgent(e)}getAgentDispatcher(A){const e=new URL(A),t=E.getProxyUrl(e);if(t&&t.hostname)return this._getProxyAgentDispatcher(e,t)}_prepareRequest(A,e,t){const r={};r.parsedUrl=e;const o="https:"===r.parsedUrl.protocol;r.httpModule=o?i:s;const n=o?443:80;if(r.options={},r.options.host=r.parsedUrl.hostname,r.options.port=r.parsedUrl.port?parseInt(r.parsedUrl.port):n,r.options.path=(r.parsedUrl.pathname||"")+(r.parsedUrl.search||""),r.options.method=A,r.options.headers=this._mergeHeaders(t),null!=this.userAgent&&(r.options.headers["user-agent"]=this.userAgent),r.options.agent=this._getAgent(r.parsedUrl),this.handlers)for(const A of this.handlers)A.prepareRequest(r.options);return r}_mergeHeaders(A){return this.requestOptions&&this.requestOptions.headers?Object.assign({},d(this.requestOptions.headers),d(A||{})):d(A||{})}_getExistingOrDefaultHeader(A,e,t){let r;return this.requestOptions&&this.requestOptions.headers&&(r=d(this.requestOptions.headers)[e]),A[e]||r||t}_getAgent(A){let e;const t=E.getProxyUrl(A),r=t&&t.hostname;if(this._keepAlive&&r&&(e=this._proxyAgent),r||(e=this._agent),e)return e;const o="https:"===A.protocol;let n=100;if(this.requestOptions&&(n=this.requestOptions.maxSockets||s.globalAgent.maxSockets),t&&t.hostname){const A={maxSockets:n,keepAlive:this._keepAlive,proxy:Object.assign(Object.assign({},(t.username||t.password)&&{proxyAuth:`${t.username}:${t.password}`}),{host:t.hostname,port:t.port})};let r;const s="https:"===t.protocol;r=o?s?g.httpsOverHttps:g.httpsOverHttp:s?g.httpOverHttps:g.httpOverHttp,e=r(A),this._proxyAgent=e}if(!e){const A={keepAlive:this._keepAlive,maxSockets:n};e=o?new i.Agent(A):new s.Agent(A),this._agent=e}return o&&this._ignoreSslError&&(e.options=Object.assign(e.options||{},{rejectUnauthorized:!1})),e}_getProxyAgentDispatcher(A,e){let t;if(this._keepAlive&&(t=this._proxyAgentDispatcher),t)return t;const r="https:"===A.protocol;return t=new a.ProxyAgent(Object.assign({uri:e.href,pipelining:this._keepAlive?1:0},(e.username||e.password)&&{token:`Basic ${Buffer.from(`${e.username}:${e.password}`).toString("base64")}`})),this._proxyAgentDispatcher=t,r&&this._ignoreSslError&&(t.options=Object.assign(t.options.requestTls||{},{rejectUnauthorized:!1})),t}_performExponentialBackoff(A){return r(this,void 0,void 0,function*(){A=Math.min(10,A);const e=5*Math.pow(2,A);return new Promise(A=>setTimeout(()=>A(),e))})}_processResponse(A,e){return r(this,void 0,void 0,function*(){return new Promise((t,o)=>r(this,void 0,void 0,function*(){const r=A.message.statusCode||0,n={statusCode:r,result:null,headers:{}};let s,i;r===Q.NotFound&&t(n);try{i=yield A.readBody(),i&&i.length>0&&(s=e&&e.deserializeDates?JSON.parse(i,function(A,e){if("string"==typeof e){const A=new Date(e);if(!isNaN(A.valueOf()))return A}return e}):JSON.parse(i),n.result=s),n.headers=A.message.headers}catch(A){}if(r>299){let A;A=s&&s.message?s.message:i&&i.length>0?i:`Failed request: (${r})`;const e=new l(A,r);e.result=n.result,o(e)}else t(n)}))})}};const d=A=>Object.keys(A).reduce((e,t)=>(e[t.toLowerCase()]=A[t],e),{});return x}var So,Uo,Lo={};function Mo(){if(So)return Lo;So=1;var A=Lo&&Lo.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(Lo,"__esModule",{value:!0}),Lo.PersonalAccessTokenCredentialHandler=Lo.BearerCredentialHandler=Lo.BasicCredentialHandler=void 0;Lo.BasicCredentialHandler=class{constructor(A,e){this.username=A,this.password=e}prepareRequest(A){if(!A.headers)throw Error("The request has no headers");A.headers.Authorization=`Basic ${Buffer.from(`${this.username}:${this.password}`).toString("base64")}`}canHandleAuthentication(){return!1}handleAuthentication(){return A(this,void 0,void 0,function*(){throw new Error("not implemented")})}};Lo.BearerCredentialHandler=class{constructor(A){this.token=A}prepareRequest(A){if(!A.headers)throw Error("The request has no headers");A.headers.Authorization=`Bearer ${this.token}`}canHandleAuthentication(){return!1}handleAuthentication(){return A(this,void 0,void 0,function*(){throw new Error("not implemented")})}};return Lo.PersonalAccessTokenCredentialHandler=class{constructor(A){this.token=A}prepareRequest(A){if(!A.headers)throw Error("The request has no headers");A.headers.Authorization=`Basic ${Buffer.from(`PAT:${this.token}`).toString("base64")}`}canHandleAuthentication(){return!1}handleAuthentication(){return A(this,void 0,void 0,function*(){throw new Error("not implemented")})}},Lo}function Yo(){if(Uo)return O;Uo=1;var A=O&&O.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(O,"__esModule",{value:!0}),O.OidcClient=void 0;const e=Fo(),t=Mo(),r=rn();class o{static createHttpClient(A=!0,r=10){const n={allowRetries:A,maxRetries:r};return new e.HttpClient("actions/oidc-client",[new t.BearerCredentialHandler(o.getRequestToken())],n)}static getRequestToken(){const A=process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;if(!A)throw new Error("Unable to get ACTIONS_ID_TOKEN_REQUEST_TOKEN env variable");return A}static getIDTokenUrl(){const A=process.env.ACTIONS_ID_TOKEN_REQUEST_URL;if(!A)throw new Error("Unable to get ACTIONS_ID_TOKEN_REQUEST_URL env variable");return A}static getCall(e){var t;return A(this,void 0,void 0,function*(){const A=o.createHttpClient(),r=yield A.getJson(e).catch(A=>{throw new Error(`Failed to get ID Token. \n \n        Error Code : ${A.statusCode}\n \n        Error Message: ${A.message}`)}),n=null===(t=r.result)||void 0===t?void 0:t.value;if(!n)throw new Error("Response json body do not have ID Token field");return n})}static getIDToken(e){return A(this,void 0,void 0,function*(){try{let A=o.getIDTokenUrl();if(e){A=`${A}&audience=${encodeURIComponent(e)}`}(0,r.debug)(`ID token url is ${A}`);const t=yield o.getCall(A);return(0,r.setSecret)(t),t}catch(A){throw new Error(`Error message: ${A.message}`)}})}}return O.OidcClient=o,O}var vo,To={};function Jo(){return vo||(vo=1,function(e){var r=To&&To.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(e,"__esModule",{value:!0}),e.summary=e.markdownSummary=e.SUMMARY_DOCS_URL=e.SUMMARY_ENV_VAR=void 0;const o=A,n=t,{access:s,appendFile:i,writeFile:E}=n.promises;e.SUMMARY_ENV_VAR="GITHUB_STEP_SUMMARY",e.SUMMARY_DOCS_URL="https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary";const g=new class{constructor(){this._buffer=""}filePath(){return r(this,void 0,void 0,function*(){if(this._filePath)return this._filePath;const A=process.env[e.SUMMARY_ENV_VAR];if(!A)throw new Error(`Unable to find environment variable for $${e.SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);try{yield s(A,n.constants.R_OK|n.constants.W_OK)}catch(e){throw new Error(`Unable to access summary file: '${A}'. Check if the file has correct read/write permissions.`)}return this._filePath=A,this._filePath})}wrap(A,e,t={}){const r=Object.entries(t).map(([A,e])=>` ${A}="${e}"`).join("");return e?`<${A}${r}>${e}</${A}>`:`<${A}${r}>`}write(A){return r(this,void 0,void 0,function*(){const e=!!(null==A?void 0:A.overwrite),t=yield this.filePath(),r=e?E:i;return yield r(t,this._buffer,{encoding:"utf8"}),this.emptyBuffer()})}clear(){return r(this,void 0,void 0,function*(){return this.emptyBuffer().write({overwrite:!0})})}stringify(){return this._buffer}isEmptyBuffer(){return 0===this._buffer.length}emptyBuffer(){return this._buffer="",this}addRaw(A,e=!1){return this._buffer+=A,e?this.addEOL():this}addEOL(){return this.addRaw(o.EOL)}addCodeBlock(A,e){const t=Object.assign({},e&&{lang:e}),r=this.wrap("pre",this.wrap("code",A),t);return this.addRaw(r).addEOL()}addList(A,e=!1){const t=e?"ol":"ul",r=A.map(A=>this.wrap("li",A)).join(""),o=this.wrap(t,r);return this.addRaw(o).addEOL()}addTable(A){const e=A.map(A=>{const e=A.map(A=>{if("string"==typeof A)return this.wrap("td",A);const{header:e,data:t,colspan:r,rowspan:o}=A,n=e?"th":"td",s=Object.assign(Object.assign({},r&&{colspan:r}),o&&{rowspan:o});return this.wrap(n,t,s)}).join("");return this.wrap("tr",e)}).join(""),t=this.wrap("table",e);return this.addRaw(t).addEOL()}addDetails(A,e){const t=this.wrap("details",this.wrap("summary",A)+e);return this.addRaw(t).addEOL()}addImage(A,e,t){const{width:r,height:o}=t||{},n=Object.assign(Object.assign({},r&&{width:r}),o&&{height:o}),s=this.wrap("img",null,Object.assign({src:A,alt:e},n));return this.addRaw(s).addEOL()}addHeading(A,e){const t=`h${e}`,r=["h1","h2","h3","h4","h5","h6"].includes(t)?t:"h1",o=this.wrap(r,A);return this.addRaw(o).addEOL()}addSeparator(){const A=this.wrap("hr",null);return this.addRaw(A).addEOL()}addBreak(){const A=this.wrap("br",null);return this.addRaw(A).addEOL()}addQuote(A,e){const t=Object.assign({},e&&{cite:e}),r=this.wrap("blockquote",A,t);return this.addRaw(r).addEOL()}addLink(A,e){const t=this.wrap("a",A,{href:e});return this.addRaw(t).addEOL()}};e.markdownSummary=g,e.summary=g}(To)),To}var Go,Ho={};var Vo,Oo,xo,Wo,qo,Po,_o={},Zo={},jo={},Xo={},Ko={};function zo(){return Vo||(Vo=1,function(A){var e,o=Ko&&Ko.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t),Object.defineProperty(A,r,{enumerable:!0,get:function(){return e[t]}})}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),n=Ko&&Ko.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),s=Ko&&Ko.__importStar||function(A){if(A&&A.__esModule)return A;var e={};if(null!=A)for(var t in A)"default"!==t&&Object.hasOwnProperty.call(A,t)&&o(e,A,t);return n(e,A),e},i=Ko&&Ko.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(A,"__esModule",{value:!0}),A.getCmdPath=A.tryGetExecutablePath=A.isRooted=A.isDirectory=A.exists=A.READONLY=A.UV_FS_O_EXLOCK=A.IS_WINDOWS=A.unlink=A.symlink=A.stat=A.rmdir=A.rm=A.rename=A.readlink=A.readdir=A.open=A.mkdir=A.lstat=A.copyFile=A.chmod=void 0;const E=s(t),g=s(r);function a(A){return(1&A.mode)>0||(8&A.mode)>0&&A.gid===process.getgid()||(64&A.mode)>0&&A.uid===process.getuid()}e=E.promises,A.chmod=e.chmod,A.copyFile=e.copyFile,A.lstat=e.lstat,A.mkdir=e.mkdir,A.open=e.open,A.readdir=e.readdir,A.readlink=e.readlink,A.rename=e.rename,A.rm=e.rm,A.rmdir=e.rmdir,A.stat=e.stat,A.symlink=e.symlink,A.unlink=e.unlink,A.IS_WINDOWS="win32"===process.platform,A.UV_FS_O_EXLOCK=268435456,A.READONLY=E.constants.O_RDONLY,A.exists=function(e){return i(this,void 0,void 0,function*(){try{yield A.stat(e)}catch(A){if("ENOENT"===A.code)return!1;throw A}return!0})},A.isDirectory=function(e,t=!1){return i(this,void 0,void 0,function*(){return(t?yield A.stat(e):yield A.lstat(e)).isDirectory()})},A.isRooted=function(e){if(!(e=function(e){if(e=e||"",A.IS_WINDOWS)return(e=e.replace(/\//g,"\\")).replace(/\\\\+/g,"\\");return e.replace(/\/\/+/g,"/")}(e)))throw new Error('isRooted() parameter "p" cannot be empty');return A.IS_WINDOWS?e.startsWith("\\")||/^[A-Z]:/i.test(e):e.startsWith("/")},A.tryGetExecutablePath=function(e,t){return i(this,void 0,void 0,function*(){let r;try{r=yield A.stat(e)}catch(A){"ENOENT"!==A.code&&console.log(`Unexpected error attempting to determine if executable file exists '${e}': ${A}`)}if(r&&r.isFile())if(A.IS_WINDOWS){const A=g.extname(e).toUpperCase();if(t.some(e=>e.toUpperCase()===A))return e}else if(a(r))return e;const o=e;for(const n of t){e=o+n,r=void 0;try{r=yield A.stat(e)}catch(A){"ENOENT"!==A.code&&console.log(`Unexpected error attempting to determine if executable file exists '${e}': ${A}`)}if(r&&r.isFile()){if(A.IS_WINDOWS){try{const t=g.dirname(e),r=g.basename(e).toUpperCase();for(const o of yield A.readdir(t))if(r===o.toUpperCase()){e=g.join(t,o);break}}catch(A){console.log(`Unexpected error attempting to determine the actual case of the file '${e}': ${A}`)}return e}if(a(r))return e}}return""})},A.getCmdPath=function(){var A;return null!==(A=process.env.COMSPEC)&&void 0!==A?A:"cmd.exe"}}(Ko)),Ko}function $o(){if(Oo)return Xo;Oo=1;var A=Xo&&Xo.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t),Object.defineProperty(A,r,{enumerable:!0,get:function(){return e[t]}})}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),e=Xo&&Xo.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),t=Xo&&Xo.__importStar||function(t){if(t&&t.__esModule)return t;var r={};if(null!=t)for(var o in t)"default"!==o&&Object.hasOwnProperty.call(t,o)&&A(r,t,o);return e(r,t),r},o=Xo&&Xo.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(Xo,"__esModule",{value:!0}),Xo.findInPath=Xo.which=Xo.mkdirP=Xo.rmRF=Xo.mv=Xo.cp=void 0;const n=g,s=t(r),i=t(zo());function E(A){return o(this,void 0,void 0,function*(){if(i.IS_WINDOWS&&/[*"<>|]/.test(A))throw new Error('File path must not contain `*`, `"`, `<`, `>` or `|` on Windows');try{yield i.rm(A,{force:!0,maxRetries:3,recursive:!0,retryDelay:300})}catch(A){throw new Error(`File was unable to be removed ${A}`)}})}function a(A){return o(this,void 0,void 0,function*(){n.ok(A,"a path argument must be provided"),yield i.mkdir(A,{recursive:!0})})}function Q(A){return o(this,void 0,void 0,function*(){if(!A)throw new Error("parameter 'tool' is required");const e=[];if(i.IS_WINDOWS&&process.env.PATHEXT)for(const A of process.env.PATHEXT.split(s.delimiter))A&&e.push(A);if(i.isRooted(A)){const t=yield i.tryGetExecutablePath(A,e);return t?[t]:[]}if(A.includes(s.sep))return[];const t=[];if(process.env.PATH)for(const A of process.env.PATH.split(s.delimiter))A&&t.push(A);const r=[];for(const o of t){const t=yield i.tryGetExecutablePath(s.join(o,A),e);t&&r.push(t)}return r})}function C(A,e,t,r){return o(this,void 0,void 0,function*(){if(t>=255)return;t++,yield a(e);const o=yield i.readdir(A);for(const n of o){const o=`${A}/${n}`,s=`${e}/${n}`;(yield i.lstat(o)).isDirectory()?yield C(o,s,t,r):yield B(o,s,r)}yield i.chmod(e,(yield i.stat(A)).mode)})}function B(A,e,t){return o(this,void 0,void 0,function*(){if((yield i.lstat(A)).isSymbolicLink()){try{yield i.lstat(e),yield i.unlink(e)}catch(A){"EPERM"===A.code&&(yield i.chmod(e,"0666"),yield i.unlink(e))}const t=yield i.readlink(A);yield i.symlink(t,e,i.IS_WINDOWS?"junction":null)}else(yield i.exists(e))&&!t||(yield i.copyFile(A,e))})}return Xo.cp=function(A,e,t={}){return o(this,void 0,void 0,function*(){const{force:r,recursive:o,copySourceDirectory:n}=function(A){const e=null==A.force||A.force,t=Boolean(A.recursive),r=null==A.copySourceDirectory||Boolean(A.copySourceDirectory);return{force:e,recursive:t,copySourceDirectory:r}}(t),E=(yield i.exists(e))?yield i.stat(e):null;if(E&&E.isFile()&&!r)return;const g=E&&E.isDirectory()&&n?s.join(e,s.basename(A)):e;if(!(yield i.exists(A)))throw new Error(`no such file or directory: ${A}`);if((yield i.stat(A)).isDirectory()){if(!o)throw new Error(`Failed to copy. ${A} is a directory, but tried to copy without recursive flag.`);yield C(A,g,0,r)}else{if(""===s.relative(A,g))throw new Error(`'${g}' and '${A}' are the same file`);yield B(A,g,r)}})},Xo.mv=function(A,e,t={}){return o(this,void 0,void 0,function*(){if(yield i.exists(e)){let r=!0;if((yield i.isDirectory(e))&&(e=s.join(e,s.basename(A)),r=yield i.exists(e)),r){if(null!=t.force&&!t.force)throw new Error("Destination already exists");yield E(e)}}yield a(s.dirname(e)),yield i.rename(A,e)})},Xo.rmRF=E,Xo.mkdirP=a,Xo.which=function A(e,t){return o(this,void 0,void 0,function*(){if(!e)throw new Error("parameter 'tool' is required");if(t){const t=yield A(e,!1);if(!t)throw i.IS_WINDOWS?new Error(`Unable to locate executable file: ${e}. Please verify either the file path exists or the file can be found within a directory specified by the PATH environment variable. Also verify the file has a valid extension for an executable file.`):new Error(`Unable to locate executable file: ${e}. Please verify either the file path exists or the file can be found within a directory specified by the PATH environment variable. Also check the file mode to verify the file is executable.`);return t}const r=yield Q(e);return r&&r.length>0?r[0]:""})},Xo.findInPath=Q,Xo}function An(){if(xo)return jo;xo=1;var e=jo&&jo.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t),Object.defineProperty(A,r,{enumerable:!0,get:function(){return e[t]}})}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),t=jo&&jo.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),o=jo&&jo.__importStar||function(A){if(A&&A.__esModule)return A;var r={};if(null!=A)for(var o in A)"default"!==o&&Object.hasOwnProperty.call(A,o)&&e(r,A,o);return t(r,A),r},n=jo&&jo.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(jo,"__esModule",{value:!0}),jo.argStringToArray=jo.ToolRunner=void 0;const s=o(A),i=o(E),g=o(k),a=o(r),Q=o($o()),C=o(zo()),B=b,c="win32"===process.platform;class I extends i.EventEmitter{constructor(A,e,t){if(super(),!A)throw new Error("Parameter 'toolPath' cannot be null or empty.");this.toolPath=A,this.args=e||[],this.options=t||{}}_debug(A){this.options.listeners&&this.options.listeners.debug&&this.options.listeners.debug(A)}_getCommandString(A,e){const t=this._getSpawnFileName(),r=this._getSpawnArgs(A);let o=e?"":"[command]";if(c)if(this._isCmdFile()){o+=t;for(const A of r)o+=` ${A}`}else if(A.windowsVerbatimArguments){o+=`"${t}"`;for(const A of r)o+=` ${A}`}else{o+=this._windowsQuoteCmdArg(t);for(const A of r)o+=` ${this._windowsQuoteCmdArg(A)}`}else{o+=t;for(const A of r)o+=` ${A}`}return o}_processLineBuffer(A,e,t){try{let r=e+A.toString(),o=r.indexOf(s.EOL);for(;o>-1;){t(r.substring(0,o)),r=r.substring(o+s.EOL.length),o=r.indexOf(s.EOL)}return r}catch(A){return this._debug(`error processing line. Failed with error ${A}`),""}}_getSpawnFileName(){return c&&this._isCmdFile()?process.env.COMSPEC||"cmd.exe":this.toolPath}_getSpawnArgs(A){if(c&&this._isCmdFile()){let e=`/D /S /C "${this._windowsQuoteCmdArg(this.toolPath)}`;for(const t of this.args)e+=" ",e+=A.windowsVerbatimArguments?t:this._windowsQuoteCmdArg(t);return e+='"',[e]}return this.args}_endsWith(A,e){return A.endsWith(e)}_isCmdFile(){const A=this.toolPath.toUpperCase();return this._endsWith(A,".CMD")||this._endsWith(A,".BAT")}_windowsQuoteCmdArg(A){if(!this._isCmdFile())return this._uvQuoteCmdArg(A);if(!A)return'""';const e=[" ","\t","&","(",")","[","]","{","}","^","=",";","!","'","+",",","`","~","|","<",">",'"'];let t=!1;for(const r of A)if(e.some(A=>A===r)){t=!0;break}if(!t)return A;let r='"',o=!0;for(let e=A.length;e>0;e--)r+=A[e-1],o&&"\\"===A[e-1]?r+="\\":'"'===A[e-1]?(o=!0,r+='"'):o=!1;return r+='"',r.split("").reverse().join("")}_uvQuoteCmdArg(A){if(!A)return'""';if(!A.includes(" ")&&!A.includes("\t")&&!A.includes('"'))return A;if(!A.includes('"')&&!A.includes("\\"))return`"${A}"`;let e='"',t=!0;for(let r=A.length;r>0;r--)e+=A[r-1],t&&"\\"===A[r-1]?e+="\\":'"'===A[r-1]?(t=!0,e+="\\"):t=!1;return e+='"',e.split("").reverse().join("")}_cloneExecOptions(A){const e={cwd:(A=A||{}).cwd||process.cwd(),env:A.env||process.env,silent:A.silent||!1,windowsVerbatimArguments:A.windowsVerbatimArguments||!1,failOnStdErr:A.failOnStdErr||!1,ignoreReturnCode:A.ignoreReturnCode||!1,delay:A.delay||1e4};return e.outStream=A.outStream||process.stdout,e.errStream=A.errStream||process.stderr,e}_getSpawnOptions(A,e){A=A||{};const t={};return t.cwd=A.cwd,t.env=A.env,t.windowsVerbatimArguments=A.windowsVerbatimArguments||this._isCmdFile(),A.windowsVerbatimArguments&&(t.argv0=`"${e}"`),t}exec(){return n(this,void 0,void 0,function*(){return!C.isRooted(this.toolPath)&&(this.toolPath.includes("/")||c&&this.toolPath.includes("\\"))&&(this.toolPath=a.resolve(process.cwd(),this.options.cwd||process.cwd(),this.toolPath)),this.toolPath=yield Q.which(this.toolPath,!0),new Promise((A,e)=>n(this,void 0,void 0,function*(){this._debug(`exec tool: ${this.toolPath}`),this._debug("arguments:");for(const A of this.args)this._debug(`   ${A}`);const t=this._cloneExecOptions(this.options);!t.silent&&t.outStream&&t.outStream.write(this._getCommandString(t)+s.EOL);const r=new h(t,this.toolPath);if(r.on("debug",A=>{this._debug(A)}),this.options.cwd&&!(yield C.exists(this.options.cwd)))return e(new Error(`The cwd: ${this.options.cwd} does not exist!`));const o=this._getSpawnFileName(),n=g.spawn(o,this._getSpawnArgs(t),this._getSpawnOptions(this.options,o));let i="";n.stdout&&n.stdout.on("data",A=>{this.options.listeners&&this.options.listeners.stdout&&this.options.listeners.stdout(A),!t.silent&&t.outStream&&t.outStream.write(A),i=this._processLineBuffer(A,i,A=>{this.options.listeners&&this.options.listeners.stdline&&this.options.listeners.stdline(A)})});let E="";if(n.stderr&&n.stderr.on("data",A=>{if(r.processStderr=!0,this.options.listeners&&this.options.listeners.stderr&&this.options.listeners.stderr(A),!t.silent&&t.errStream&&t.outStream){(t.failOnStdErr?t.errStream:t.outStream).write(A)}E=this._processLineBuffer(A,E,A=>{this.options.listeners&&this.options.listeners.errline&&this.options.listeners.errline(A)})}),n.on("error",A=>{r.processError=A.message,r.processExited=!0,r.processClosed=!0,r.CheckComplete()}),n.on("exit",A=>{r.processExitCode=A,r.processExited=!0,this._debug(`Exit code ${A} received from tool '${this.toolPath}'`),r.CheckComplete()}),n.on("close",A=>{r.processExitCode=A,r.processExited=!0,r.processClosed=!0,this._debug(`STDIO streams have closed for tool '${this.toolPath}'`),r.CheckComplete()}),r.on("done",(t,r)=>{i.length>0&&this.emit("stdline",i),E.length>0&&this.emit("errline",E),n.removeAllListeners(),t?e(t):A(r)}),this.options.input){if(!n.stdin)throw new Error("child process missing stdin");n.stdin.end(this.options.input)}}))})}}jo.ToolRunner=I,jo.argStringToArray=function(A){const e=[];let t=!1,r=!1,o="";function n(A){r&&'"'!==A&&(o+="\\"),o+=A,r=!1}for(let s=0;s<A.length;s++){const i=A.charAt(s);'"'!==i?"\\"===i&&r?n(i):"\\"===i&&t?r=!0:" "!==i||t?n(i):o.length>0&&(e.push(o),o=""):r?n(i):t=!t}return o.length>0&&e.push(o.trim()),e};class h extends i.EventEmitter{constructor(A,e){if(super(),this.processClosed=!1,this.processError="",this.processExitCode=0,this.processExited=!1,this.processStderr=!1,this.delay=1e4,this.done=!1,this.timeout=null,!e)throw new Error("toolPath must not be empty");this.options=A,this.toolPath=e,A.delay&&(this.delay=A.delay)}CheckComplete(){this.done||(this.processClosed?this._setResult():this.processExited&&(this.timeout=B.setTimeout(h.HandleTimeout,this.delay,this)))}_debug(A){this.emit("debug",A)}_setResult(){let A;this.processExited&&(this.processError?A=new Error(`There was an error when attempting to execute the process '${this.toolPath}'. This may indicate the process failed to start. Error: ${this.processError}`):0===this.processExitCode||this.options.ignoreReturnCode?this.processStderr&&this.options.failOnStdErr&&(A=new Error(`The process '${this.toolPath}' failed because one or more lines were written to the STDERR stream`)):A=new Error(`The process '${this.toolPath}' failed with exit code ${this.processExitCode}`)),this.timeout&&(clearTimeout(this.timeout),this.timeout=null),this.done=!0,this.emit("done",A,this.processExitCode)}static HandleTimeout(A){if(!A.done){if(!A.processClosed&&A.processExited){const e=`The STDIO streams did not close within ${A.delay/1e3} seconds of the exit event from process '${A.toolPath}'. This may indicate a child process inherited the STDIO streams and has not yet exited.`;A._debug(e)}A._setResult()}}}return jo}function en(){if(Wo)return Zo;Wo=1;var A=Zo&&Zo.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t),Object.defineProperty(A,r,{enumerable:!0,get:function(){return e[t]}})}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),e=Zo&&Zo.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),t=Zo&&Zo.__importStar||function(t){if(t&&t.__esModule)return t;var r={};if(null!=t)for(var o in t)"default"!==o&&Object.hasOwnProperty.call(t,o)&&A(r,t,o);return e(r,t),r},r=Zo&&Zo.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(Zo,"__esModule",{value:!0}),Zo.getExecOutput=Zo.exec=void 0;const o=R,n=t(An());function s(A,e,t){return r(this,void 0,void 0,function*(){const r=n.argStringToArray(A);if(0===r.length)throw new Error("Parameter 'commandLine' cannot be null or empty.");const o=r[0];e=r.slice(1).concat(e||[]);return new n.ToolRunner(o,e,t).exec()})}return Zo.exec=s,Zo.getExecOutput=function(A,e,t){var n,i;return r(this,void 0,void 0,function*(){let r="",E="";const g=new o.StringDecoder("utf8"),a=new o.StringDecoder("utf8"),Q=null===(n=null==t?void 0:t.listeners)||void 0===n?void 0:n.stdout,C=null===(i=null==t?void 0:t.listeners)||void 0===i?void 0:i.stderr,B=Object.assign(Object.assign({},null==t?void 0:t.listeners),{stdout:A=>{r+=g.write(A),Q&&Q(A)},stderr:A=>{E+=a.write(A),C&&C(A)}}),c=yield s(A,e,Object.assign(Object.assign({},t),{listeners:B}));return r+=g.end(),E+=a.end(),{exitCode:c,stdout:r,stderr:E}})},Zo}function tn(){return qo||(qo=1,function(e){var t=_o&&_o.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t);var o=Object.getOwnPropertyDescriptor(e,t);o&&!("get"in o?!e.__esModule:o.writable||o.configurable)||(o={enumerable:!0,get:function(){return e[t]}}),Object.defineProperty(A,r,o)}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),r=_o&&_o.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),o=_o&&_o.__importStar||function(A){if(A&&A.__esModule)return A;var e={};if(null!=A)for(var o in A)"default"!==o&&Object.prototype.hasOwnProperty.call(A,o)&&t(e,A,o);return r(e,A),e},n=_o&&_o.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})},s=_o&&_o.__importDefault||function(A){return A&&A.__esModule?A:{default:A}};Object.defineProperty(e,"__esModule",{value:!0}),e.getDetails=e.isLinux=e.isMacOS=e.isWindows=e.arch=e.platform=void 0;const i=s(A),E=o(en());e.platform=i.default.platform(),e.arch=i.default.arch(),e.isWindows="win32"===e.platform,e.isMacOS="darwin"===e.platform,e.isLinux="linux"===e.platform,e.getDetails=function(){return n(this,void 0,void 0,function*(){return Object.assign(Object.assign({},yield e.isWindows?n(void 0,void 0,void 0,function*(){const{stdout:A}=yield E.getExecOutput('powershell -command "(Get-CimInstance -ClassName Win32_OperatingSystem).Version"',void 0,{silent:!0}),{stdout:e}=yield E.getExecOutput('powershell -command "(Get-CimInstance -ClassName Win32_OperatingSystem).Caption"',void 0,{silent:!0});return{name:e.trim(),version:A.trim()}}):e.isMacOS?n(void 0,void 0,void 0,function*(){var A,e,t,r;const{stdout:o}=yield E.getExecOutput("sw_vers",void 0,{silent:!0}),n=null!==(e=null===(A=o.match(/ProductVersion:\s*(.+)/))||void 0===A?void 0:A[1])&&void 0!==e?e:"";return{name:null!==(r=null===(t=o.match(/ProductName:\s*(.+)/))||void 0===t?void 0:t[1])&&void 0!==r?r:"",version:n}}):n(void 0,void 0,void 0,function*(){const{stdout:A}=yield E.getExecOutput("lsb_release",["-i","-r","-s"],{silent:!0}),[e,t]=A.trim().split("\n");return{name:e,version:t}})),{platform:e.platform,arch:e.arch,isWindows:e.isWindows,isMacOS:e.isMacOS,isLinux:e.isLinux})})}}(_o)),_o}function rn(){return Po||(Po=1,function(o){var n=M&&M.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t);var o=Object.getOwnPropertyDescriptor(e,t);o&&!("get"in o?!e.__esModule:o.writable||o.configurable)||(o={enumerable:!0,get:function(){return e[t]}}),Object.defineProperty(A,r,o)}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),s=M&&M.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),i=M&&M.__importStar||function(A){if(A&&A.__esModule)return A;var e={};if(null!=A)for(var t in A)"default"!==t&&Object.prototype.hasOwnProperty.call(A,t)&&n(e,A,t);return s(e,A),e},E=M&&M.__awaiter||function(A,e,t,r){return new(t||(t=Promise))(function(o,n){function s(A){try{E(r.next(A))}catch(A){n(A)}}function i(A){try{E(r.throw(A))}catch(A){n(A)}}function E(A){var e;A.done?o(A.value):(e=A.value,e instanceof t?e:new t(function(A){A(e)})).then(s,i)}E((r=r.apply(A,e||[])).next())})};Object.defineProperty(o,"__esModule",{value:!0}),o.platform=o.toPlatformPath=o.toWin32Path=o.toPosixPath=o.markdownSummary=o.summary=o.getIDToken=o.getState=o.saveState=o.group=o.endGroup=o.startGroup=o.info=o.notice=o.warning=o.error=o.debug=o.isDebug=o.setFailed=o.setCommandEcho=o.setOutput=o.getBooleanInput=o.getMultilineInput=o.getInput=o.addPath=o.setSecret=o.exportVariable=o.ExitCode=void 0;const g=J(),a=function(){if(G)return H;G=1;var r=H&&H.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t);var o=Object.getOwnPropertyDescriptor(e,t);o&&!("get"in o?!e.__esModule:o.writable||o.configurable)||(o={enumerable:!0,get:function(){return e[t]}}),Object.defineProperty(A,r,o)}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),o=H&&H.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),n=H&&H.__importStar||function(A){if(A&&A.__esModule)return A;var e={};if(null!=A)for(var t in A)"default"!==t&&Object.prototype.hasOwnProperty.call(A,t)&&r(e,A,t);return o(e,A),e};Object.defineProperty(H,"__esModule",{value:!0}),H.prepareKeyValueMessage=H.issueFileCommand=void 0;const s=n(e),i=n(t),E=n(A),g=T();return H.issueFileCommand=function(A,e){const t=process.env[`GITHUB_${A}`];if(!t)throw new Error(`Unable to find environment variable for file command ${A}`);if(!i.existsSync(t))throw new Error(`Missing file at path: ${t}`);i.appendFileSync(t,`${(0,g.toCommandValue)(e)}${E.EOL}`,{encoding:"utf8"})},H.prepareKeyValueMessage=function(A,e){const t=`ghadelimiter_${s.randomUUID()}`,r=(0,g.toCommandValue)(e);if(A.includes(t))throw new Error(`Unexpected input: name should not contain the delimiter "${t}"`);if(r.includes(t))throw new Error(`Unexpected input: value should not contain the delimiter "${t}"`);return`${A}<<${t}${E.EOL}${r}${E.EOL}${t}`},H}(),Q=T(),C=i(A),B=i(r),c=Yo();var I;function h(A,e){const t=process.env[`INPUT_${A.replace(/ /g,"_").toUpperCase()}`]||"";if(e&&e.required&&!t)throw new Error(`Input required and not supplied: ${A}`);return e&&!1===e.trimWhitespace?t:t.trim()}function l(A,e={}){(0,g.issueCommand)("error",(0,Q.toCommandProperties)(e),A instanceof Error?A.toString():A)}function u(A){(0,g.issue)("group",A)}function d(){(0,g.issue)("endgroup")}!function(A){A[A.Success=0]="Success",A[A.Failure=1]="Failure"}(I||(o.ExitCode=I={})),o.exportVariable=function(A,e){const t=(0,Q.toCommandValue)(e);if(process.env[A]=t,process.env.GITHUB_ENV||"")return(0,a.issueFileCommand)("ENV",(0,a.prepareKeyValueMessage)(A,e));(0,g.issueCommand)("set-env",{name:A},t)},o.setSecret=function(A){(0,g.issueCommand)("add-mask",{},A)},o.addPath=function(A){process.env.GITHUB_PATH||""?(0,a.issueFileCommand)("PATH",A):(0,g.issueCommand)("add-path",{},A),process.env.PATH=`${A}${B.delimiter}${process.env.PATH}`},o.getInput=h,o.getMultilineInput=function(A,e){const t=h(A,e).split("\n").filter(A=>""!==A);return e&&!1===e.trimWhitespace?t:t.map(A=>A.trim())},o.getBooleanInput=function(A,e){const t=h(A,e);if(["true","True","TRUE"].includes(t))return!0;if(["false","False","FALSE"].includes(t))return!1;throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${A}\nSupport boolean input list: \`true | True | TRUE | false | False | FALSE\``)},o.setOutput=function(A,e){if(process.env.GITHUB_OUTPUT||"")return(0,a.issueFileCommand)("OUTPUT",(0,a.prepareKeyValueMessage)(A,e));process.stdout.write(C.EOL),(0,g.issueCommand)("set-output",{name:A},(0,Q.toCommandValue)(e))},o.setCommandEcho=function(A){(0,g.issue)("echo",A?"on":"off")},o.setFailed=function(A){process.exitCode=I.Failure,l(A)},o.isDebug=function(){return"1"===process.env.RUNNER_DEBUG},o.debug=function(A){(0,g.issueCommand)("debug",{},A)},o.error=l,o.warning=function(A,e={}){(0,g.issueCommand)("warning",(0,Q.toCommandProperties)(e),A instanceof Error?A.toString():A)},o.notice=function(A,e={}){(0,g.issueCommand)("notice",(0,Q.toCommandProperties)(e),A instanceof Error?A.toString():A)},o.info=function(A){process.stdout.write(A+C.EOL)},o.startGroup=u,o.endGroup=d,o.group=function(A,e){return E(this,void 0,void 0,function*(){let t;u(A);try{t=yield e()}finally{d()}return t})},o.saveState=function(A,e){if(process.env.GITHUB_STATE||"")return(0,a.issueFileCommand)("STATE",(0,a.prepareKeyValueMessage)(A,e));(0,g.issueCommand)("save-state",{name:A},(0,Q.toCommandValue)(e))},o.getState=function(A){return process.env[`STATE_${A}`]||""},o.getIDToken=function(A){return E(this,void 0,void 0,function*(){return yield c.OidcClient.getIDToken(A)})};var f=Jo();Object.defineProperty(o,"summary",{enumerable:!0,get:function(){return f.summary}});var y=Jo();Object.defineProperty(o,"markdownSummary",{enumerable:!0,get:function(){return y.markdownSummary}});var p=function(){if(Go)return Ho;Go=1;var A=Ho&&Ho.__createBinding||(Object.create?function(A,e,t,r){void 0===r&&(r=t);var o=Object.getOwnPropertyDescriptor(e,t);o&&!("get"in o?!e.__esModule:o.writable||o.configurable)||(o={enumerable:!0,get:function(){return e[t]}}),Object.defineProperty(A,r,o)}:function(A,e,t,r){void 0===r&&(r=t),A[r]=e[t]}),e=Ho&&Ho.__setModuleDefault||(Object.create?function(A,e){Object.defineProperty(A,"default",{enumerable:!0,value:e})}:function(A,e){A.default=e}),t=Ho&&Ho.__importStar||function(t){if(t&&t.__esModule)return t;var r={};if(null!=t)for(var o in t)"default"!==o&&Object.prototype.hasOwnProperty.call(t,o)&&A(r,t,o);return e(r,t),r};Object.defineProperty(Ho,"__esModule",{value:!0}),Ho.toPlatformPath=Ho.toWin32Path=Ho.toPosixPath=void 0;const o=t(r);return Ho.toPosixPath=function(A){return A.replace(/[\\]/g,"/")},Ho.toWin32Path=function(A){return A.replace(/[/]/g,"\\")},Ho.toPlatformPath=function(A){return A.replace(/[/\\]/g,o.sep)},Ho}();Object.defineProperty(o,"toPosixPath",{enumerable:!0,get:function(){return p.toPosixPath}}),Object.defineProperty(o,"toWin32Path",{enumerable:!0,get:function(){return p.toWin32Path}}),Object.defineProperty(o,"toPlatformPath",{enumerable:!0,get:function(){return p.toPlatformPath}}),o.platform=i(tn())}(M)),M}var on,nn,sn,En,gn,an,Qn,Cn,Bn,cn,In,hn,ln,un,dn,fn,yn,pn,wn,Dn,Rn,mn,kn,bn,Nn,Fn,Sn,Un,Ln,Mn,Yn=S(rn());function vn(){if(nn)return on;function A(A=""){const{length:e}=A;let t="";if(e){const r=A.charCodeAt(0);t=r>=65||r<=90?`${A[0].toLowerCase()}${A.slice(1)}`:A,e>1&&46===A.charCodeAt(e-1)&&46!==A.charCodeAt(e-2)&&(t=t.slice(0,-1))}return`Invalid purl: ${t}`}nn=1;class e extends Error{constructor(e){super(A(e))}}return on={formatPurlErrorMessage:A,PurlError:e}}function Tn(){if(an)return gn;an=1;const A=new URLSearchParams;return gn={LOOP_SENTINEL:1e6,REUSED_SEARCH_PARAMS:A,REUSED_SEARCH_PARAMS_KEY:"_",REUSED_SEARCH_PARAMS_OFFSET:2}}function Jn(){if(Cn)return Qn;Cn=1;const{LOOP_SENTINEL:A}=Tn();return Qn={isObject:function(A){return null!==A&&"object"==typeof A},recursiveFreeze:function(e){if(null===e||"object"!=typeof e&&"function"!=typeof e||Object.isFrozen(e))return e;const t=[e];let{length:r}=t,o=0;for(;o<r;){if(o===A)throw new Error("Detected infinite loop in object crawl of recursiveFreeze");const e=t[o++];if(Object.freeze(e),Array.isArray(e))for(let A=0,{length:o}=e;A<o;A+=1){const o=e[A];null===o||"object"!=typeof o&&"function"!=typeof o||Object.isFrozen(o)||(t[r++]=o)}else{const A=Reflect.ownKeys(e);for(let o=0,{length:n}=A;o<n;o+=1){const n=e[A[o]];null===n||"object"!=typeof n&&"function"!=typeof n||Object.isFrozen(n)||(t[r++]=n)}}}return e}}}function Gn(){if(cn)return Bn;cn=1;const{compare:A}=new Intl.Collator,e=/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;return Bn={isBlank:function(A){for(let e=0,{length:t}=A;e<t;e+=1){const t=A.charCodeAt(e);if(32!==t&&9!==t&&10!==t&&11!==t&&12!==t&&13!==t&&160!==t&&5760!==t&&8192!==t&&8193!==t&&8194!==t&&8195!==t&&8196!==t&&8197!==t&&8198!==t&&8199!==t&&8200!==t&&8201!==t&&8202!==t&&8232!==t&&8233!==t&&8239!==t&&8287!==t&&12288!==t&&65279!==t)return!1}return!0},isNonEmptyString:function(A){return"string"==typeof A&&A.length>0},isSemverString:function(A){return"string"==typeof A&&e.test(A)},localeCompare:A,lowerName:function(A){A.name=A.name.toLowerCase()},lowerNamespace:function(A){const{namespace:e}=A;"string"==typeof e&&(A.namespace=e.toLowerCase())},lowerVersion:function(A){const{version:e}=A;"string"==typeof e&&(A.version=e.toLowerCase())},replaceDashesWithUnderscores:function(A){let e="",t=0,r=0;for(;-1!==(r=A.indexOf("-",t));)e=e+A.slice(t,r)+"_",t=r+1;return t?e+A.slice(t):A},replaceUnderscoresWithDashes:function(A){let e="",t=0,r=0;for(;-1!==(r=A.indexOf("_",t));)e=e+A.slice(t,r)+"-",t=r+1;return t?e+A.slice(t):A},trimLeadingSlashes:function(A){let e=0;for(;47===A.charCodeAt(e);)e+=1;return 0===e?A:A.slice(e)}}}function Hn(){if(un)return ln;return un=1,ln={createHelpersNamespaceObject:function(A,e={}){const{comparator:t,...r}={__proto__:null,...e},o=Object.keys(A).sort(),n=[...new Set([...Object.values(A)].map(Object.keys).flat())].sort(t),s=Object.create(null);for(let e=0,{length:t}=n;e<t;e+=1){const t=n[e],i=Object.create(null);for(let e=0,{length:n}=o;e<n;e+=1){const n=o[e],s=A[n][t]??r[n];void 0!==s&&(i[n]=s)}s[t]=i}return s}}}function Vn(){if(fn)return dn;fn=1;const{isObject:A}=Jn(),{isBlank:e}=Gn();function t(A,e){let t="",r=0;for(;47===A.charCodeAt(r);)r+=1;let o=A.indexOf("/",r);if(-1===o)return A.slice(r);for(;-1!==o;){const n=A.slice(r,o);for((void 0===e||e(n))&&(t=t+(0===t.length?"":"/")+n),r=o+1;47===A.charCodeAt(r);)r+=1;o=A.indexOf("/",r)}const n=A.slice(r);return 0===n.length||void 0!==e&&!e(n)||(t=t+"/"+n),t}function r(A){const{length:t}=A;return(1!==t||46!==A.charCodeAt(0))&&((2!==t||46!==A.charCodeAt(0)||46!==A.charCodeAt(1))&&!e(A))}return dn={normalizeName:function(A){return"string"==typeof A?A.trim():void 0},normalizeNamespace:function(A){return"string"==typeof A?t(A):void 0},normalizePath:t,normalizeQualifiers:function(e){let t;for(const{0:r,1:o}of function(e){if(A(e))return e instanceof URLSearchParams?e.entries():Object.entries(e);return"string"==typeof e?new URLSearchParams(e).entries():Object.entries({})}(e)){const A=("string"==typeof o?o:String(o)).trim();0!==A.length&&(void 0===t&&(t={__proto__:null}),t[r.toLowerCase()]=A)}return t},normalizeSubpath:function(A){return"string"==typeof A?t(A,r):void 0},normalizeType:function(A){return"string"==typeof A?A.trim().toLowerCase():void 0},normalizeVersion:function(A){return"string"==typeof A?A.trim():void 0}}}function On(){if(pn)return yn;return pn=1,yn={isNullishOrEmptyString:function(A){return null==A||"string"==typeof A&&0===A.length}}}function xn(){if(Dn)return wn;Dn=1;const{PurlError:A}=vn(),{isNullishOrEmptyString:e}=On(),{isNonEmptyString:t}=Gn();function r(e,t){if(!n("qualifier",e,t))return!1;for(let r=0,{length:o}=e;r<o;r+=1){const o=e.charCodeAt(r);if(!(o>=48&&o<=57||o>=65&&o<=90||o>=97&&o<=122||46===o||45===o||95===o)){if(t)throw new A(`qualifier "${e}" contains an illegal character`);return!1}}return!0}function o(t,r,o){if(e(r)){if(o)throw new A(`"${t}" is a required component`);return!1}return!0}function n(e,r,o){if(t(r)){const t=r.charCodeAt(0);if(t>=48&&t<=57){if(o)throw new A(`${e} "${r}" cannot start with a number`);return!1}}return!0}function s(e,t,r){if(null==t||"string"==typeof t)return!0;if(r)throw new A(`"'${e}" must be a string`);return!1}return wn={validateEmptyByType:function(t,r,o,n){if(!e(o)){if(n)throw new A(`${t} "${r}" component must be empty`);return!1}return!0},validateName:function(A,e){return o("name",A,e)&&s("name",A,e)},validateNamespace:function(A,e){return s("namespace",A,e)},validateQualifiers:function(e,t){if(null==e)return!0;if("object"!=typeof e){if(t)throw new A('"qualifiers" must be an object');return!1}const o="function"==typeof e.keys?e.keys():Object.keys(e);for(const A of o)if(!r(A,t))return!1;return!0},validateQualifierKey:r,validateRequired:o,validateRequiredByType:function(t,r,o,n){if(e(o)){if(n)throw new A(`${t} requires a "${r}" component`);return!1}return!0},validateStartsWithoutNumber:n,validateStrings:s,validateSubpath:function(A,e){return s("subpath",A,e)},validateType:function(e,t){if(!o("type",e,t)||!s("type",e,t)||!n("type",e,t))return!1;for(let r=0,{length:o}=e;r<o;r+=1){const o=e.charCodeAt(r);if(!(o>=48&&o<=57||o>=65&&o<=90||o>=97&&o<=122||46===o||43===o||45===o)){if(t)throw new A(`type "${e}" contains an illegal character`);return!1}}return!0},validateVersion:function(A,e){return s("version",A,e)}}}function Wn(){if(mn)return Rn;mn=1;const{encodeNamespace:A,encodeVersion:e,encodeQualifiers:t,encodeQualifierParam:r,encodeSubpath:o,encodeURIComponent:n}=function(){if(hn)return In;hn=1;const{REUSED_SEARCH_PARAMS:A,REUSED_SEARCH_PARAMS_KEY:e,REUSED_SEARCH_PARAMS_OFFSET:t}=Tn(),{isObject:r}=Jn(),{isNonEmptyString:o}=Gn(),{encodeURIComponent:n}=globalThis;function s(A){return A.replace(/\+/g,"%20")}return In={encodeNamespace:function(A){return o(A)?n(A).replace(/%3A/g,":").replace(/%2F/g,"/"):""},encodeVersion:function(A){return o(A)?n(A).replace(/%3A/g,":").replace(/%2B/g,"+"):""},encodeQualifiers:function(A){if(r(A)){const e=Object.keys(A).sort(),t=new URLSearchParams;for(let r=0,{length:o}=e;r<o;r+=1){const o=e[r];t.set(o,A[o])}return s(t.toString())}return""},encodeQualifierParam:function(r){return o(r)?(A.set(e,r),s(A.toString().slice(t))):""},encodeSubpath:function(A){return o(A)?n(A).replace(/%2F/g,"/"):""},encodeURIComponent:n}}(),{createHelpersNamespaceObject:s}=Hn(),{normalizeType:i,normalizeNamespace:E,normalizeName:g,normalizeVersion:a,normalizeQualifiers:Q,normalizeSubpath:C}=Vn(),{localeCompare:B,isNonEmptyString:c}=Gn(),{validateType:I,validateNamespace:h,validateName:l,validateVersion:u,validateQualifiers:d,validateQualifierKey:f,validateSubpath:y}=xn(),p={__proto__:null,type:0,namespace:1,name:2,version:3,qualifiers:4,qualifierKey:5,qualifierValue:6,subpath:7};function w(A){return p[A]??A}return Rn={PurlComponent:s({encode:{namespace:A,version:e,qualifiers:t,qualifierKey:r,qualifierValue:r,subpath:o},normalize:{type:i,namespace:E,name:g,version:a,qualifiers:Q,subpath:C},validate:{type:I,namespace:h,name:l,version:u,qualifierKey:f,qualifiers:d,subpath:y}},{comparator:function(A,e){return B(w(A),w(e))},encode:A=>c(A)?n(A):"",normalize:A=>"string"==typeof A?A:void 0,validate:(A,e)=>!0})}}function qn(){if(Un)return Sn;Un=1;const{decodePurlComponent:A}=function(){if(En)return sn;En=1;const{PurlError:A}=vn(),{decodeURIComponent:e}=globalThis;return sn={decodePurlComponent:function(t,r){try{return e(r)}catch{}throw new A(`unable to decode "${t}" component`)}}}(),{isObject:e,recursiveFreeze:t}=Jn(),{isBlank:r,isNonEmptyString:o,trimLeadingSlashes:n}=Gn(),{PurlComponent:s}=Wn(),{PurlQualifierNames:i}=bn?kn:(bn=1,kn={PurlQualifierNames:{__proto__:null,RepositoryUrl:"repository_url",DownloadUrl:"download_url",VcsUrl:"vcs_url",FileName:"file_name",Checksum:"checksum"}}),{PurlType:E}=function(){if(Fn)return Nn;Fn=1;const{isNullishOrEmptyString:A}=On(),{createHelpersNamespaceObject:e}=Hn(),{isSemverString:t,lowerName:r,lowerNamespace:o,lowerVersion:n,replaceDashesWithUnderscores:s,replaceUnderscoresWithDashes:i}=Gn(),{validateEmptyByType:E,validateRequiredByType:g}=xn(),{PurlError:a}=vn();return Nn={PurlType:e({normalize:{alpm:A=>(o(A),r(A),A),apk:A=>(o(A),r(A),A),bitbucket:A=>(o(A),r(A),A),bitnami:A=>(r(A),A),composer:A=>(o(A),r(A),A),deb:A=>(o(A),r(A),A),gitlab:A=>(o(A),r(A),A),github:A=>(o(A),r(A),A),hex:A=>(o(A),r(A),A),huggingface:A=>(n(A),A),mlflow:A=>(A.qualifiers?.repository_url?.includes("databricks")&&r(A),A),npm:A=>(o(A),r(A),A),luarocks:A=>(n(A),A),oci:A=>(r(A),A),pub:A=>(r(A),A.name=s(A.name),A),pypi:A=>(o(A),r(A),A.name=i(A.name),A),qpkg:A=>(o(A),A),rpm:A=>(o(A),A)},validate:{conan(e,t){if(A(e.namespace)){if(e.qualifiers?.channel){if(t)throw new a('conan requires a "namespace" component when a "channel" qualifier is present');return!1}}else if(A(e.qualifiers)){if(t)throw new a('conan requires a "qualifiers" component when a namespace is present');return!1}return!0},cran:(A,e)=>g("cran","version",A.version,e),golang(A){const{version:e}=A;if("string"==typeof e&&e.length&&118===e.charCodeAt(0)&&!t(e.slice(1))){if(throws)throw new a('golang "version" component starting with a "v" must be followed by a valid semver version');return!1}return!0},maven:(A,e)=>g("maven","namespace",A.namespace,e),mlflow:(A,e)=>E("mlflow","namespace",A.namespace,e),oci:(A,e)=>E("oci","namespace",A.namespace,e),pub(A,e){const{name:t}=A;for(let A=0,{length:r}=t;A<r;A+=1){const r=t.charCodeAt(A);if(!(r>=48&&r<=57||r>=97&&r<=122||95===r)){if(e)throw new a('pub "name" component may only contain [a-z0-9_] characters');return!1}}return!0},swift:(A,e)=>g("swift","namespace",A.namespace,e)&&g("swift","version",A.version,e)}},{normalize:A=>A,validate:(A,e)=>!0})}}
-/*!
-Copyright (c) the purl authors
+import { createRequire } from "node:module";
+import { readFile } from "node:fs/promises";
+import * as os from "os";
+import { EOL } from "os";
+import * as fs from "fs";
+import { constants, promises } from "fs";
+import * as path$1 from "path";
+import path from "node:path";
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+var __commonJSMin$1 = (cb, mod) => () => (mod || (cb((mod = { exports: {} }).exports, mod, mod.exports), cb = null), mod.exports);
+var __require = /* #__PURE__ */ (() => createRequire(import.meta.url))();
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+/**
+* Sanitizes an input into a string so it can be passed into issueCommand safely
+* @param input input to sanitize into a string
+*/
+function toCommandValue(input) {
+	if (input === null || input === void 0) return "";
+	else if (typeof input === "string" || input instanceof String) return input;
+	return JSON.stringify(input);
+}
+/**
+*
+* @param annotationProperties
+* @returns The command properties to send with the actual annotation command
+* See IssueCommandProperties: https://github.com/actions/runner/blob/main/src/Runner.Worker/ActionCommandManager.cs#L646
+*/
+function toCommandProperties(annotationProperties) {
+	if (!Object.keys(annotationProperties).length) return {};
+	return {
+		title: annotationProperties.title,
+		file: annotationProperties.file,
+		line: annotationProperties.startLine,
+		endLine: annotationProperties.endLine,
+		col: annotationProperties.startColumn,
+		endColumn: annotationProperties.endColumn
+	};
+}
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/(),{PurlError:g}=vn();class a{static Component=t(s);static KnownQualifierNames=t(i);static Type=t(E);constructor(A,t,r,n,i,g){const a=o(A)?s.type.normalize(A):A;s.type.validate(a,!0);const Q=o(t)?s.namespace.normalize(t):t;s.namespace.validate(Q,!0);const C=o(r)?s.name.normalize(r):r;s.name.validate(C,!0);const B=o(n)?s.version.normalize(n):n;s.version.validate(B,!0);const c="string"==typeof i||e(i)?s.qualifiers.normalize(i):i;s.qualifiers.validate(c,!0);const I=o(g)?s.subpath.normalize(g):g;s.subpath.validate(I,!0),this.type=a,this.name=C,this.namespace=Q??void 0,this.version=B??void 0,this.qualifiers=c??void 0,this.subpath=I??void 0;const h=E[a];h&&(h.normalize(this),h.validate(this,!0))}toString(){const{namespace:A,name:e,version:t,qualifiers:r,subpath:o,type:n}=this;let i=`pkg:${s.type.encode(n)}/`;return A&&(i=`${i}${s.namespace.encode(A)}/`),i=`${i}${s.name.encode(e)}`,t&&(i=`${i}@${s.version.encode(t)}`),r&&(i=`${i}?${s.qualifiers.encode(r)}`),o&&(i=`${i}#${s.subpath.encode(o)}`),i}static fromString(A){return new a(...a.parseString(A))}static parseString(e){if("string"!=typeof e)throw new Error("A purl string argument is required.");if(r(e))return[void 0,void 0,void 0,void 0,void 0,void 0];const t=e.indexOf(":");let o,s;if(-1!==t)try{const A=e.slice(0,t),r=e.slice(t+1),i=n(r);o=new URL(`${A}:${i}`),s=r.length===i.length?o:new URL(e)}catch(A){throw new g("failed to parse as URL",{cause:A})}if("pkg:"!==o?.protocol)throw new g('missing required "pkg" scheme component');if(""!==s.username||""!==s.password)throw new g('cannot contain a "user:pass@host:port"');const{pathname:i}=o,E=i.indexOf("/"),a=A("type",-1===E?i:i.slice(0,E));if(E<1)return[a,void 0,void 0,void 0,void 0,void 0];let Q,C=i.lastIndexOf("@");-1!==C&&47===i.charCodeAt(C-1)&&(C=-1);const B=i.slice(a.length+1,-1===C?i.length:C);let c,I;-1!==C&&(Q=A("version",i.slice(C+1)));const h=B.lastIndexOf("/");let l;-1===h?I=A("name",B):(I=A("name",B.slice(h+1)),c=A("namespace",B.slice(0,h)));const{searchParams:u}=o;let d;0!==u.size&&(u.forEach(e=>A("qualifiers",e)),l=u);const{hash:f}=o;return 0!==f.length&&(d=A("subpath",f.slice(1))),[a,c,I,Q,l,d]}}for(const A of["Component","KnownQualifierNames","Type"])Reflect.defineProperty(a,A,{...Reflect.getOwnPropertyDescriptor(a,A),writable:!1});return Reflect.setPrototypeOf(a.prototype,null),Sn={PackageURL:a,PurlComponent:s,PurlQualifierNames:i,PurlType:E}}
-/*!
-Copyright (c) the purl authors
+/**
+* Issues a command to the GitHub Actions runner
+*
+* @param command - The command name to issue
+* @param properties - Additional properties for the command (key-value pairs)
+* @param message - The message to include with the command
+* @remarks
+* This function outputs a specially formatted string to stdout that the Actions
+* runner interprets as a command. These commands can control workflow behavior,
+* set outputs, create annotations, mask values, and more.
+*
+* Command Format:
+*   ::name key=value,key=value::message
+*
+* @example
+* ```typescript
+* // Issue a warning annotation
+* issueCommand('warning', {}, 'This is a warning message');
+* // Output: ::warning::This is a warning message
+*
+* // Set an environment variable
+* issueCommand('set-env', { name: 'MY_VAR' }, 'some value');
+* // Output: ::set-env name=MY_VAR::some value
+*
+* // Add a secret mask
+* issueCommand('add-mask', {}, 'secretValue123');
+* // Output: ::add-mask::secretValue123
+* ```
+*
+* @internal
+* This is an internal utility function that powers the public API functions
+* such as setSecret, warning, error, and exportVariable.
+*/
+function issueCommand(command, properties, message) {
+	const cmd = new Command(command, properties, message);
+	process.stdout.write(cmd.toString() + os.EOL);
+}
+const CMD_STRING = "::";
+var Command = class {
+	constructor(command, properties, message) {
+		if (!command) command = "missing.command";
+		this.command = command;
+		this.properties = properties;
+		this.message = message;
+	}
+	toString() {
+		let cmdStr = CMD_STRING + this.command;
+		if (this.properties && Object.keys(this.properties).length > 0) {
+			cmdStr += " ";
+			let first = true;
+			for (const key in this.properties) if (this.properties.hasOwnProperty(key)) {
+				const val = this.properties[key];
+				if (val) {
+					if (first) first = false;
+					else cmdStr += ",";
+					cmdStr += `${key}=${escapeProperty(val)}`;
+				}
+			}
+		}
+		cmdStr += `${CMD_STRING}${escapeData(this.message)}`;
+		return cmdStr;
+	}
+};
+function escapeData(s) {
+	return toCommandValue(s).replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
+}
+function escapeProperty(s) {
+	return toCommandValue(s).replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A").replace(/:/g, "%3A").replace(/,/g, "%2C");
+}
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+var __awaiter$3 = void 0 && (void 0).__awaiter || function(thisArg, _arguments, P, generator) {
+	function adopt(value) {
+		return value instanceof P ? value : new P(function(resolve) {
+			resolve(value);
+		});
+	}
+	return new (P || (P = Promise))(function(resolve, reject) {
+		function fulfilled(value) {
+			try {
+				step(generator.next(value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function rejected(value) {
+			try {
+				step(generator["throw"](value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function step(result) {
+			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+		}
+		step((generator = generator.apply(thisArg, _arguments || [])).next());
+	});
+};
+const { access, appendFile, writeFile } = promises;
+const SUMMARY_ENV_VAR = "GITHUB_STEP_SUMMARY";
+var Summary = class {
+	constructor() {
+		this._buffer = "";
+	}
+	/**
+	* Finds the summary file path from the environment, rejects if env var is not found or file does not exist
+	* Also checks r/w permissions.
+	*
+	* @returns step summary file path
+	*/
+	filePath() {
+		return __awaiter$3(this, void 0, void 0, function* () {
+			if (this._filePath) return this._filePath;
+			const pathFromEnv = process.env[SUMMARY_ENV_VAR];
+			if (!pathFromEnv) throw new Error(`Unable to find environment variable for $${SUMMARY_ENV_VAR}. Check if your runtime environment supports job summaries.`);
+			try {
+				yield access(pathFromEnv, constants.R_OK | constants.W_OK);
+			} catch (_a) {
+				throw new Error(`Unable to access summary file: '${pathFromEnv}'. Check if the file has correct read/write permissions.`);
+			}
+			this._filePath = pathFromEnv;
+			return this._filePath;
+		});
+	}
+	/**
+	* Wraps content in an HTML tag, adding any HTML attributes
+	*
+	* @param {string} tag HTML tag to wrap
+	* @param {string | null} content content within the tag
+	* @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
+	*
+	* @returns {string} content wrapped in HTML element
+	*/
+	wrap(tag, content, attrs = {}) {
+		const htmlAttrs = Object.entries(attrs).map(([key, value]) => ` ${key}="${value}"`).join("");
+		if (!content) return `<${tag}${htmlAttrs}>`;
+		return `<${tag}${htmlAttrs}>${content}</${tag}>`;
+	}
+	/**
+	* Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
+	*
+	* @param {SummaryWriteOptions} [options] (optional) options for write operation
+	*
+	* @returns {Promise<Summary>} summary instance
+	*/
+	write(options) {
+		return __awaiter$3(this, void 0, void 0, function* () {
+			const overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
+			const filePath = yield this.filePath();
+			yield (overwrite ? writeFile : appendFile)(filePath, this._buffer, { encoding: "utf8" });
+			return this.emptyBuffer();
+		});
+	}
+	/**
+	* Clears the summary buffer and wipes the summary file
+	*
+	* @returns {Summary} summary instance
+	*/
+	clear() {
+		return __awaiter$3(this, void 0, void 0, function* () {
+			return this.emptyBuffer().write({ overwrite: true });
+		});
+	}
+	/**
+	* Returns the current summary buffer as a string
+	*
+	* @returns {string} string of summary buffer
+	*/
+	stringify() {
+		return this._buffer;
+	}
+	/**
+	* If the summary buffer is empty
+	*
+	* @returns {boolen} true if the buffer is empty
+	*/
+	isEmptyBuffer() {
+		return this._buffer.length === 0;
+	}
+	/**
+	* Resets the summary buffer without writing to summary file
+	*
+	* @returns {Summary} summary instance
+	*/
+	emptyBuffer() {
+		this._buffer = "";
+		return this;
+	}
+	/**
+	* Adds raw text to the summary buffer
+	*
+	* @param {string} text content to add
+	* @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
+	*
+	* @returns {Summary} summary instance
+	*/
+	addRaw(text, addEOL = false) {
+		this._buffer += text;
+		return addEOL ? this.addEOL() : this;
+	}
+	/**
+	* Adds the operating system-specific end-of-line marker to the buffer
+	*
+	* @returns {Summary} summary instance
+	*/
+	addEOL() {
+		return this.addRaw(EOL);
+	}
+	/**
+	* Adds an HTML codeblock to the summary buffer
+	*
+	* @param {string} code content to render within fenced code block
+	* @param {string} lang (optional) language to syntax highlight code
+	*
+	* @returns {Summary} summary instance
+	*/
+	addCodeBlock(code, lang) {
+		const attrs = Object.assign({}, lang && { lang });
+		const element = this.wrap("pre", this.wrap("code", code), attrs);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML list to the summary buffer
+	*
+	* @param {string[]} items list of items to render
+	* @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
+	*
+	* @returns {Summary} summary instance
+	*/
+	addList(items, ordered = false) {
+		const tag = ordered ? "ol" : "ul";
+		const listItems = items.map((item) => this.wrap("li", item)).join("");
+		const element = this.wrap(tag, listItems);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML table to the summary buffer
+	*
+	* @param {SummaryTableCell[]} rows table rows
+	*
+	* @returns {Summary} summary instance
+	*/
+	addTable(rows) {
+		const tableBody = rows.map((row) => {
+			const cells = row.map((cell) => {
+				if (typeof cell === "string") return this.wrap("td", cell);
+				const { header, data, colspan, rowspan } = cell;
+				const tag = header ? "th" : "td";
+				const attrs = Object.assign(Object.assign({}, colspan && { colspan }), rowspan && { rowspan });
+				return this.wrap(tag, data, attrs);
+			}).join("");
+			return this.wrap("tr", cells);
+		}).join("");
+		const element = this.wrap("table", tableBody);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds a collapsable HTML details element to the summary buffer
+	*
+	* @param {string} label text for the closed state
+	* @param {string} content collapsable content
+	*
+	* @returns {Summary} summary instance
+	*/
+	addDetails(label, content) {
+		const element = this.wrap("details", this.wrap("summary", label) + content);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML image tag to the summary buffer
+	*
+	* @param {string} src path to the image you to embed
+	* @param {string} alt text description of the image
+	* @param {SummaryImageOptions} options (optional) addition image attributes
+	*
+	* @returns {Summary} summary instance
+	*/
+	addImage(src, alt, options) {
+		const { width, height } = options || {};
+		const attrs = Object.assign(Object.assign({}, width && { width }), height && { height });
+		const element = this.wrap("img", null, Object.assign({
+			src,
+			alt
+		}, attrs));
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML section heading element
+	*
+	* @param {string} text heading text
+	* @param {number | string} [level=1] (optional) the heading level, default: 1
+	*
+	* @returns {Summary} summary instance
+	*/
+	addHeading(text, level) {
+		const tag = `h${level}`;
+		const allowedTag = [
+			"h1",
+			"h2",
+			"h3",
+			"h4",
+			"h5",
+			"h6"
+		].includes(tag) ? tag : "h1";
+		const element = this.wrap(allowedTag, text);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML thematic break (<hr>) to the summary buffer
+	*
+	* @returns {Summary} summary instance
+	*/
+	addSeparator() {
+		const element = this.wrap("hr", null);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML line break (<br>) to the summary buffer
+	*
+	* @returns {Summary} summary instance
+	*/
+	addBreak() {
+		const element = this.wrap("br", null);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML blockquote to the summary buffer
+	*
+	* @param {string} text quote text
+	* @param {string} cite (optional) citation url
+	*
+	* @returns {Summary} summary instance
+	*/
+	addQuote(text, cite) {
+		const attrs = Object.assign({}, cite && { cite });
+		const element = this.wrap("blockquote", text, attrs);
+		return this.addRaw(element).addEOL();
+	}
+	/**
+	* Adds an HTML anchor tag to the summary buffer
+	*
+	* @param {string} text link text/content
+	* @param {string} href hyperlink
+	*
+	* @returns {Summary} summary instance
+	*/
+	addLink(text, href) {
+		const element = this.wrap("a", text, { href });
+		return this.addRaw(element).addEOL();
+	}
+};
+const _summary = new Summary();
+const summary = _summary;
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+var __awaiter$2 = void 0 && (void 0).__awaiter || function(thisArg, _arguments, P, generator) {
+	function adopt(value) {
+		return value instanceof P ? value : new P(function(resolve) {
+			resolve(value);
+		});
+	}
+	return new (P || (P = Promise))(function(resolve, reject) {
+		function fulfilled(value) {
+			try {
+				step(generator.next(value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function rejected(value) {
+			try {
+				step(generator["throw"](value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function step(result) {
+			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+		}
+		step((generator = generator.apply(thisArg, _arguments || [])).next());
+	});
+};
+/**
+* The code to exit an action
+*/
+var ExitCode;
+(function(ExitCode) {
+	/**
+	* A code indicating that the action was successful
+	*/
+	ExitCode[ExitCode["Success"] = 0] = "Success";
+	/**
+	* A code indicating that the action was a failure
+	*/
+	ExitCode[ExitCode["Failure"] = 1] = "Failure";
+})(ExitCode || (ExitCode = {}));
+/**
+* Gets the value of an input.
+* Unless trimWhitespace is set to false in InputOptions, the value is also trimmed.
+* Returns an empty string if the value is not defined.
+*
+* @param     name     name of the input to get
+* @param     options  optional. See InputOptions.
+* @returns   string
+*/
+function getInput(name, options) {
+	const val = process.env[`INPUT_${name.replace(/ /g, "_").toUpperCase()}`] || "";
+	if (options && options.required && !val) throw new Error(`Input required and not supplied: ${name}`);
+	if (options && options.trimWhitespace === false) return val;
+	return val.trim();
+}
+/**
+* Sets the action status to failed.
+* When the action exits it will be with an exit code of 1
+* @param message add error issue message
+*/
+function setFailed(message) {
+	process.exitCode = ExitCode.Failure;
+	error(message);
+}
+/**
+* Writes debug message to user log
+* @param message debug message
+*/
+function debug(message) {
+	issueCommand("debug", {}, message);
+}
+/**
+* Adds an error issue
+* @param message error issue message. Errors will be converted to string via toString()
+* @param properties optional properties to add to the annotation.
+*/
+function error(message, properties = {}) {
+	issueCommand("error", toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+}
+/**
+* Adds a warning issue
+* @param message warning issue message. Errors will be converted to string via toString()
+* @param properties optional properties to add to the annotation.
+*/
+function warning(message, properties = {}) {
+	issueCommand("warning", toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+}
+/**
+* Writes info to log with console.log.
+* @param message info message
+*/
+function info(message) {
+	process.stdout.write(message + os.EOL);
+}
+/**
+* Gets the value of an state set by this action's main execution.
+*
+* @param     name     name of the state to get
+* @returns   string
+*/
+function getState(name) {
+	return process.env[`STATE_${name}`] || "";
+}
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/var Pn=function(){if(Mn)return Ln;Mn=1;const{PackageURL:A,PurlComponent:e,PurlQualifierNames:t,PurlType:r}=qn();return Ln={PackageURL:A,PurlComponent:e,PurlQualifierNames:t,PurlType:r}}();"patch"===Yn.getInput("mode",{required:!0}).toLowerCase()&&(Yn.info("patch mode: no post-run actions required"),process.exit(0));const _n={jobSummary:Yn.getInput("job-summary",{required:!1}).toLowerCase()};let Zn;"true"===_n.jobSummary&&(_n.jobSummary="all"),"false"===_n.jobSummary&&(_n.jobSummary="none"),"none"===_n.jobSummary&&(Yn.info("skipping firewall job summary"),process.exit(0)),process.env.SFW_JSON_REPORT_PATH||(Yn.info("firewall report path not set"),process.exit(0));try{Yn.debug(`reading report json from ${process.env.SFW_JSON_REPORT_PATH}`);const A=await N(process.env.SFW_JSON_REPORT_PATH);Zn=JSON.parse(A)}catch(on){"ENOENT"===on.code&&(Yn.info("no report output detected, skipping creation of job summary"),process.exit(0)),Yn.debug(JSON.stringify(on)),Yn.setFailed("error importing report json"),process.exit(1)}if(await Yn.summary.addRaw("<h2>Socket Firewall Report</h2>"),Zn.blocked||Zn.parseFail||("errors"===_n.jobSummary&&(Yn.info("no errors detected, skipping job summary"),process.exit(0)),Yn.summary.addRaw("Nothing to report :tada:",!0)),Zn.blocked){Yn.summary.addRaw("<h3>Blocked :x:</h3>",!0);const A=[{data:"Name",header:!0},{data:"Version",header:!0},{data:"Registry",header:!0}],e=[];for(const A of Zn.blocked){const{type:t,namespace:r,name:o,version:n}=Pn.PackageURL.fromString(A.purlString),s=r?`${r}/${o}`:o,i=`https://socket.dev/${t}/package/${s}/overview/${n}`;e.push([`<a href="${i}">${s}</a>`,`<code>${n}</code>`,`<code>${A.registryFqdn}</code`])}await Yn.summary.addTable([A,...e])}if(Zn.parseFail){Yn.summary.addRaw("<h3>URL Parse Failure :warning:</h3>",!0);const A=[{data:"URL",header:!0},{data:"Registry",header:!0}],e=[];for(const A of Zn.parseFail)e.push([`<code>${A.urlPath}</code>`,`<code>${A.registryFqdn}</code`]);await Yn.summary.addTable([A,...e])}await Yn.summary.write();
+var require_dist = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	var __commonJSMin = (cb, mod) => () => (mod || (cb((mod = { exports: {} }).exports, mod), cb = null), mod.exports);
+	let node_module = __require("node:module");
+	var require_purl = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		exports.PURL_Type = {
+			ALPM: "alpm",
+			APK: "apk",
+			BITBUCKET: "bitbucket",
+			CARGO: "cargo",
+			CHROME: "chrome",
+			COCOAPODS: "cocoapods",
+			COMPOSER: "composer",
+			CONAN: "conan",
+			CONDA: "conda",
+			CRAN: "cran",
+			DEB: "deb",
+			DOCKER: "docker",
+			GEM: "gem",
+			GENERIC: "generic",
+			GITHUB: "github",
+			GOLANG: "golang",
+			HACKAGE: "hackage",
+			HEX: "hex",
+			HUGGINGFACE: "huggingface",
+			MAVEN: "maven",
+			MLFLOW: "mlflow",
+			NPM: "npm",
+			NUGET: "nuget",
+			OCI: "oci",
+			PUB: "pub",
+			PYPI: "pypi",
+			QPKG: "qpkg",
+			RPM: "rpm",
+			SWID: "swid",
+			SWIFT: "swift",
+			VCS: "vcs",
+			VSCODE: "vscode"
+		};
+	}));
+	var require_error = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file Safe references to `Error` and its subclass constructors, plus V8's
+		*   stack-trace API. `Error.isError` is ES2025; `captureStackTrace` /
+		*   `prepareStackTrace` / `stackTraceLimit` are V8 extensions absent on
+		*   JavaScriptCore and SpiderMonkey. Each is typed `Function | undefined` so
+		*   non-V8 importers stay safe.
+		*/
+		const ErrorCtor = Error;
+		const AggregateErrorCtor = AggregateError;
+		const EvalErrorCtor = EvalError;
+		const RangeErrorCtor = RangeError;
+		const ReferenceErrorCtor = ReferenceError;
+		const SyntaxErrorCtor = SyntaxError;
+		const TypeErrorCtor = TypeError;
+		const URIErrorCtor = URIError;
+		const ErrorIsError = Error.isError;
+		const ErrorCaptureStackTrace = Error.captureStackTrace;
+		const ErrorPrepareStackTrace = Error.prepareStackTrace;
+		const stackTraceLimitGetter = (() => {
+			const getter = Error.__lookupGetter__?.("stackTraceLimit");
+			/* c8 ignore start */
+			if (typeof getter === "function") return () => getter.call(Error);
+			/* c8 ignore stop */
+		})();
+		function ErrorStackTraceLimit() {
+			/* c8 ignore start - non-V8 fallback path unreachable under test */
+			if (stackTraceLimitGetter) return stackTraceLimitGetter();
+			return Error.stackTraceLimit;
+			/* c8 ignore stop */
+		}
+		exports.AggregateErrorCtor = AggregateErrorCtor;
+		exports.ErrorCaptureStackTrace = ErrorCaptureStackTrace;
+		exports.ErrorCtor = ErrorCtor;
+		exports.ErrorIsError = ErrorIsError;
+		exports.ErrorPrepareStackTrace = ErrorPrepareStackTrace;
+		exports.ErrorStackTraceLimit = ErrorStackTraceLimit;
+		exports.EvalErrorCtor = EvalErrorCtor;
+		exports.RangeErrorCtor = RangeErrorCtor;
+		exports.ReferenceErrorCtor = ReferenceErrorCtor;
+		exports.SyntaxErrorCtor = SyntaxErrorCtor;
+		exports.TypeErrorCtor = TypeErrorCtor;
+		exports.URIErrorCtor = URIErrorCtor;
+	}));
+	var require_runtime = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file Runtime environment detection constants. All checks use only
+		*   `typeof`-safe global probes so this module is safe to import in browser,
+		*   Node.js, Deno, Bun, and bundled contexts alike.
+		*/
+		/**
+		* True when running inside a Node.js process. Detected via
+		* `process.versions.node` — present in Node, absent in browsers and Deno/Bun
+		* which expose a different `process.versions` shape (or no `process` at all).
+		*/
+		const IS_NODE = typeof process !== "undefined" && typeof process.versions !== "undefined" && typeof process.versions.node === "string";
+		/**
+		* True when running in a browser context (window + document both defined).
+		* Note: Chrome extensions have `window` in popup contexts but not in service
+		* workers — check `IS_SERVICE_WORKER` for that case.
+		*/
+		const IS_BROWSER = typeof globalThis !== "undefined" && "window" in globalThis && typeof globalThis.window !== "undefined" && "document" in globalThis && typeof globalThis.document !== "undefined";
+		/**
+		* True when running inside a Web Worker / Chrome MV3 service worker. `self` is
+		* defined without `window` in worker contexts.
+		*/
+		const IS_WORKER = "self" in globalThis && typeof globalThis.self !== "undefined" && !("window" in globalThis) && !("document" in globalThis);
+		exports.IS_BROWSER = IS_BROWSER;
+		exports.IS_NODE = IS_NODE;
+		exports.IS_WORKER = IS_WORKER;
+	}));
+	var require_module = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_constants_runtime = require_runtime();
+		let module$1 = __require("module");
+		/**
+		* @file Accessors for `node:module` that work across runtimes. Ambient
+		*   `require` is bound in CommonJS but unbound in ESM and inside
+		*   ahead-of-time-compiled package modules (e.g. Perry), where reading it
+		*   throws. And Perry's `require('module')` value omits `isBuiltin`. So instead
+		*   of the ambient `require('module')` lazy-loader, `isBuiltin`/`createRequire`
+		*   are imported as named values from the bare `module` specifier — which
+		*   resolves on Node and Perry, and which browser bundlers can stub via
+		*   resolve.fallback (a `node:` prefix would throw UnhandledSchemeError
+		*   there).
+		*   `require` is DIRECTORY-SPECIFIC: `createRequire(base)` resolves relative
+		*   specifiers (`./x`, `../y`) from `base`'s directory. For builtins and bare
+		*   packages that's irrelevant since they resolve the same anywhere, so the
+		*   cached `getRequire` / `requireBuiltin` bind to THIS file. A RELATIVE
+		*   specifier must resolve from the CALLER's directory, so use `requireFrom`
+		*   with the caller's `import.meta.url` — binding such a load to this file
+		*   would resolve it against `src/node/` instead. Bundled, every module
+		*   collapses to one base and either works; unbundled (e.g. AOT-compiled from
+		*   source), each module sits at its own nested path and the base matters.
+		*/
+		let cachedModule;
+		let cachedRequire;
+		/**
+		* Bind a working `require`. Ambient `require` exists in CommonJS; in ESM and
+		* ahead-of-time-compiled package modules it is unbound (reading it throws or
+		* yields undefined), so fall back to `createRequire`. Returns undefined off
+		* Node and in browsers, where neither is available.
+		*
+		* `fromUrl` sets the resolution base — pass a caller's `import.meta.url` to
+		* resolve that caller's RELATIVE specifiers. When omitted, the base is this
+		* file, which is correct only for builtins / bare packages (dir-independent).
+		* With `fromUrl` the ambient `require` is skipped: it is bound to THIS file, so
+		* it would resolve a relative specifier from the wrong directory.
+		*/
+		function bindRequire(fromUrl) {
+			if (!require_constants_runtime.IS_NODE) return;
+			if (!fromUrl && typeof __require === "function") return __require;
+			if (typeof module$1.createRequire === "function") try {
+				return (0, module$1.createRequire)(fromUrl ?? __require("url").pathToFileURL(__filename).href);
+			} catch {
+				return;
+			}
+		}
+		/**
+		* Returns `node:module` loaded through the bound `require`, or undefined off
+		* Node. Cached across calls.
+		*/
+		function getNodeModule() {
+			return cachedModule ??= requireBuiltin("module");
+		}
+		/**
+		* Returns a working `require` bound to THIS file, binding one on first call
+		* (see bindRequire). Cached across calls; undefined off Node / in browsers.
+		*
+		* For builtins and bare packages only — the resolution base is this file, so a
+		* relative specifier would resolve from `src/node/`. Use `requireFrom` for
+		* relative loads.
+		*/
+		function getRequire() {
+			if (cachedRequire === void 0) cachedRequire = bindRequire();
+			return cachedRequire;
+		}
+		/**
+		* Is `name` a Node built-in module? Resolved from the statically-imported
+		* `isBuiltin`, so it works on Node and on ahead-of-time-compiled binaries
+		* (Perry), where ambient `require('module')` would lack `isBuiltin`. Returns
+		* false in browsers, where the bare `module` import is stubbed away.
+		*
+		* Single source of truth for "is this a Node builtin?" probes across socket-lib
+		* (used by the smol-binding loaders to gate their `node:smol-*` loads).
+		*/
+		function isNodeBuiltin(name) {
+			if (!require_constants_runtime.IS_NODE || typeof module$1.isBuiltin !== "function") return false;
+			return (0, module$1.isBuiltin)(name);
+		}
+		/**
+		* Load a built-in module by *computed* specifier through the bound `require`
+		* (see getRequire). The specifier is a parameter — never a literal at the call
+		* site — so browser bundlers neither walk nor bundle it. Returns undefined
+		* where no `require` can be bound.
+		*
+		* Builtins / bare packages only (dir-independent); for a relative specifier use
+		* `requireFrom`. Used by `getNodeModule` for `node:module`, and by the
+		* smol-binding loaders for the optional `node:smol-*` native bindings (gated
+		* behind `isNodeBuiltin`, true only on socket-btm's smol Node binary).
+		*/
+		function requireBuiltin(specifier) {
+			const req = getRequire();
+			if (req) return req(specifier);
+		}
+		/**
+		* Load a module by specifier from a CALLER-supplied base (its
+		* `import.meta.url`). Use this for RELATIVE specifiers (`./x`, `../y`), whose
+		* resolution depends on the caller's directory — `requireBuiltin` binds to this
+		* file and would resolve them from `src/node/`. Not cached: the binding is
+		* per-caller. Returns undefined where no `require` can be bound.
+		*/
+		function requireFrom(fromUrl, specifier) {
+			const req = bindRequire(fromUrl);
+			if (req) return req(specifier);
+		}
+		exports.bindRequire = bindRequire;
+		exports.getNodeModule = getNodeModule;
+		exports.getRequire = getRequire;
+		exports.isNodeBuiltin = isNodeBuiltin;
+		exports.requireBuiltin = requireBuiltin;
+		exports.requireFrom = requireFrom;
+	}));
+	var require_detect = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_node_module = require_module();
+		/**
+		* @file Smol detection + lazy-loader for `node:smol-util`. Two
+		*   responsibilities:
+		*
+		*   1. `isSmol()` — memoized boolean detector for socket-btm's smol Node binary.
+		*      Mirrors `isSeaBinary()` from `src/sea.ts`. Probes via
+		*      `node:module.isBuiltin('node:smol-util')` since only the smol binary
+		*      registers any `node:smol-*` builtins.
+		*   2. `getSmolUtil()` — lazy-loader for the `node:smol-util` binding, which
+		*      provides native `uncurryThis` and `applyBind` (single V8 dispatch via
+		*      `args.Data()` + `v8::Function::Call`, skipping the BoundFunction
+		*      adapter
+		*
+		*   - `Function.prototype.call` trampoline that the JS form `bind.bind(call)(fn)`
+		*     hits twice per invocation). ~2x faster on hot uncurried-call sites.
+		*     `getSmolUtil()` returns `undefined` on stock Node
+		*   - non-Node runtimes. Result is cached across calls; the lazy-loader follows
+		*     the same shape as `src/node/fs.ts` etc.
+		*
+		* @see https://github.com/SocketDev/socket-btm — socket-btm builds
+		*   the smol binary that exposes the `node:smol-util` binding.
+		*/
+		/**
+		* Cached smol-binary detection result.
+		*/
+		let isSmolCache;
+		/**
+		* Cached `node:smol-util` binding. `null` = probed and unavailable; `undefined`
+		* = not yet probed. JS truthiness collapses both to "no binding" at the call
+		* site.
+		*/
+		let smolUtilCache;
+		let smolUtilProbed = false;
+		/**
+		* Returns `node:smol-util` when running on the smol Node binary, otherwise
+		* `undefined`. Result is cached across calls.
+		*/
+		function getSmolUtil() {
+			if (!smolUtilProbed) {
+				smolUtilProbed = true;
+				/* c8 ignore start - smol Node binary only. */
+				if (require_node_module.isNodeBuiltin("node:smol-util")) smolUtilCache = require_node_module.requireBuiltin("node:smol-util");
+			}
+			return smolUtilCache;
+		}
+		/**
+		* Detect if the current process is running on socket-btm's smol Node binary.
+		* Memoized on first call.
+		*
+		* Defensive across runtimes: returns `false` on stock Node, browsers (no
+		* `node:module`), Deno and Bun, whose module resolution differs, and worker
+		* threads, each of which has its own builtin table.
+		*
+		* @example
+		*   ;```ts
+		*   import { isSmol } from '@socketsecurity/lib/exe/smol/detect'
+		*
+		*   if (isSmol()) {
+		*     // running on the smol binary; native fast paths available
+		*   }
+		*   ```
+		*/
+		function isSmol() {
+			if (isSmolCache === void 0) isSmolCache = require_node_module.isNodeBuiltin("node:smol-util");
+			return isSmolCache;
+		}
+		exports.getSmolUtil = getSmolUtil;
+		exports.isSmol = isSmol;
+	}));
+	var require_uncurry = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file `uncurryThis` and the cluster of helpers built atop it. Mirrors
+		*   Node.js's internal/per_context/primordials.js. Every other primordials leaf
+		*   depends on `uncurryThis` to expose prototype-method primordials, so this
+		*   file must be import-safe before any of them. Smol fast paths
+		*   (`node:smol-util`) replace the JS forms when running on socket-btm's smol
+		*   Node binary; stock Node and other runtimes fall back to the standard
+		*   `bind.bind(call)` shape. **IMPORTANT**: do not destructure on `globalThis`
+		*   or `Reflect` here. tsgo has a bug that mis-transpiles destructured exports.
+		*   See: https://github.com/SocketDev/socket-packageurl-js/issues/3.
+		*/
+		const smolUtil = require_detect().getSmolUtil();
+		const { apply, bind, call } = Function.prototype;
+		const uncurryThis = smolUtil?.uncurryThis ?? bind.bind(call);
+		const applyBind = smolUtil?.applyBind ?? bind.bind(apply);
+		const applyBoundForSafe = applyBind;
+		const applySafe = smolUtil?.applySafe ?? ((fn) => {
+			const apply2 = applyBoundForSafe(fn);
+			return (self, args) => {
+				try {
+					return apply2(self, args);
+				} catch {
+					return;
+				}
+			};
+		});
+		const bindCallFallback = ((fn, thisArg, ...presetArgs) => Function.prototype.bind.apply(fn, [thisArg, ...presetArgs]));
+		const bindCall = smolUtil?.bindCall ?? bindCallFallback;
+		const weakRefSafe = smolUtil?.weakRefSafe ?? ((target) => {
+			try {
+				return new WeakRef(target);
+			} catch {
+				return;
+			}
+		});
+		exports.applyBind = applyBind;
+		exports.applySafe = applySafe;
+		exports.bindCall = bindCall;
+		exports.uncurryThis = uncurryThis;
+		exports.weakRefSafe = weakRefSafe;
+	}));
+	var require_object = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to `Object` static methods and prototype methods. Annex
+		*   B legacy accessor methods (`__defineGetter__`, `__lookupGetter__`, etc.)
+		*   are exposed alongside the canonical static methods — implementations exist
+		*   in V8, SpiderMonkey, and JavaScriptCore even though the spec calls them
+		*   "normative optional".
+		*/
+		const ObjectCtor = Object;
+		const ObjectAssign = Object.assign;
+		const ObjectCreate = Object.create;
+		const ObjectDefineProperties = Object.defineProperties;
+		const ObjectDefineProperty = Object.defineProperty;
+		const ObjectEntries = Object.entries;
+		const ObjectFreeze = Object.freeze;
+		const ObjectFromEntries = Object.fromEntries;
+		const ObjectGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+		const ObjectGetOwnPropertyDescriptors = Object.getOwnPropertyDescriptors;
+		const ObjectGetOwnPropertyNames = Object.getOwnPropertyNames;
+		const ObjectGetOwnPropertySymbols = Object.getOwnPropertySymbols;
+		const ObjectGetPrototypeOf = Object.getPrototypeOf;
+		const ObjectHasOwn = Object.hasOwn;
+		const ObjectIs = Object.is;
+		const ObjectIsExtensible = Object.isExtensible;
+		const ObjectIsFrozen = Object.isFrozen;
+		const ObjectIsSealed = Object.isSealed;
+		const ObjectKeys = Object.keys;
+		const ObjectPreventExtensions = Object.preventExtensions;
+		const ObjectSeal = Object.seal;
+		const ObjectSetPrototypeOf = Object.setPrototypeOf;
+		const ObjectValues = Object.values;
+		const ObjectPrototype = Object.prototype;
+		const ObjectPrototypeHasOwnProperty = require_primordials_uncurry.uncurryThis(Object.prototype.hasOwnProperty);
+		const ObjectPrototypeIsPrototypeOf = require_primordials_uncurry.uncurryThis(Object.prototype.isPrototypeOf);
+		const ObjectPrototypePropertyIsEnumerable = require_primordials_uncurry.uncurryThis(Object.prototype.propertyIsEnumerable);
+		const ObjectPrototypeToString = require_primordials_uncurry.uncurryThis(Object.prototype.toString);
+		const ObjectPrototypeValueOf = require_primordials_uncurry.uncurryThis(Object.prototype.valueOf);
+		const objectProto = Object.prototype;
+		const ObjectPrototypeDefineGetter = require_primordials_uncurry.uncurryThis(objectProto.__defineGetter__);
+		const ObjectPrototypeDefineSetter = require_primordials_uncurry.uncurryThis(objectProto.__defineSetter__);
+		const ObjectPrototypeLookupGetter = require_primordials_uncurry.uncurryThis(objectProto.__lookupGetter__);
+		const ObjectPrototypeLookupSetter = require_primordials_uncurry.uncurryThis(objectProto.__lookupSetter__);
+		exports.ObjectAssign = ObjectAssign;
+		exports.ObjectCreate = ObjectCreate;
+		exports.ObjectCtor = ObjectCtor;
+		exports.ObjectDefineProperties = ObjectDefineProperties;
+		exports.ObjectDefineProperty = ObjectDefineProperty;
+		exports.ObjectEntries = ObjectEntries;
+		exports.ObjectFreeze = ObjectFreeze;
+		exports.ObjectFromEntries = ObjectFromEntries;
+		exports.ObjectGetOwnPropertyDescriptor = ObjectGetOwnPropertyDescriptor;
+		exports.ObjectGetOwnPropertyDescriptors = ObjectGetOwnPropertyDescriptors;
+		exports.ObjectGetOwnPropertyNames = ObjectGetOwnPropertyNames;
+		exports.ObjectGetOwnPropertySymbols = ObjectGetOwnPropertySymbols;
+		exports.ObjectGetPrototypeOf = ObjectGetPrototypeOf;
+		exports.ObjectHasOwn = ObjectHasOwn;
+		exports.ObjectIs = ObjectIs;
+		exports.ObjectIsExtensible = ObjectIsExtensible;
+		exports.ObjectIsFrozen = ObjectIsFrozen;
+		exports.ObjectIsSealed = ObjectIsSealed;
+		exports.ObjectKeys = ObjectKeys;
+		exports.ObjectPreventExtensions = ObjectPreventExtensions;
+		exports.ObjectPrototype = ObjectPrototype;
+		exports.ObjectPrototypeDefineGetter = ObjectPrototypeDefineGetter;
+		exports.ObjectPrototypeDefineSetter = ObjectPrototypeDefineSetter;
+		exports.ObjectPrototypeHasOwnProperty = ObjectPrototypeHasOwnProperty;
+		exports.ObjectPrototypeIsPrototypeOf = ObjectPrototypeIsPrototypeOf;
+		exports.ObjectPrototypeLookupGetter = ObjectPrototypeLookupGetter;
+		exports.ObjectPrototypeLookupSetter = ObjectPrototypeLookupSetter;
+		exports.ObjectPrototypePropertyIsEnumerable = ObjectPrototypePropertyIsEnumerable;
+		exports.ObjectPrototypeToString = ObjectPrototypeToString;
+		exports.ObjectPrototypeValueOf = ObjectPrototypeValueOf;
+		exports.ObjectSeal = ObjectSeal;
+		exports.ObjectSetPrototypeOf = ObjectSetPrototypeOf;
+		exports.ObjectValues = ObjectValues;
+	}));
+	var require_map_set = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		const require_primordials_object = require_object();
+		const require_primordials_error = require_error();
+		/**
+		* @file Safe references to `Map`, `Set`, `WeakMap`, `WeakSet`, and `WeakRef`.
+		*   Constructors plus uncurried prototype methods. `WeakRef` exposes only its
+		*   constructor — there's a separate `weakRefSafe` wrapper in `./uncurry` for
+		*   the throws-on-non-Object case.
+		*/
+		const MapCtor = Map;
+		const SetCtor = Set;
+		const WeakMapCtor = WeakMap;
+		const WeakRefCtor = WeakRef;
+		const WeakSetCtor = WeakSet;
+		const MapPrototypeClear = require_primordials_uncurry.uncurryThis(Map.prototype.clear);
+		const MapPrototypeDelete = require_primordials_uncurry.uncurryThis(Map.prototype.delete);
+		const MapPrototypeEntries = require_primordials_uncurry.uncurryThis(Map.prototype.entries);
+		const MapPrototypeForEach = require_primordials_uncurry.uncurryThis(Map.prototype.forEach);
+		const MapPrototypeGet = require_primordials_uncurry.uncurryThis(Map.prototype.get);
+		const MapPrototypeGetOrInsert = Map.prototype.getOrInsert === void 0 ? mapGetOrInsertFallback : require_primordials_uncurry.uncurryThis(Map.prototype.getOrInsert);
+		const MapPrototypeGetOrInsertComputed = Map.prototype.getOrInsertComputed === void 0 ? mapGetOrInsertComputedFallback : require_primordials_uncurry.uncurryThis(Map.prototype.getOrInsertComputed);
+		const MapPrototypeHas = require_primordials_uncurry.uncurryThis(Map.prototype.has);
+		const MapPrototypeKeys = require_primordials_uncurry.uncurryThis(Map.prototype.keys);
+		const MapPrototypeSet = require_primordials_uncurry.uncurryThis(Map.prototype.set);
+		const MapPrototypeValues = require_primordials_uncurry.uncurryThis(Map.prototype.values);
+		const SetPrototypeAdd = require_primordials_uncurry.uncurryThis(Set.prototype.add);
+		const SetPrototypeClear = require_primordials_uncurry.uncurryThis(Set.prototype.clear);
+		const SetPrototypeDelete = require_primordials_uncurry.uncurryThis(Set.prototype.delete);
+		const SetPrototypeDifference = require_primordials_uncurry.uncurryThis(Set.prototype.difference);
+		const SetPrototypeEntries = require_primordials_uncurry.uncurryThis(Set.prototype.entries);
+		const SetPrototypeForEach = require_primordials_uncurry.uncurryThis(Set.prototype.forEach);
+		const SetPrototypeHas = require_primordials_uncurry.uncurryThis(Set.prototype.has);
+		const SetPrototypeIntersection = require_primordials_uncurry.uncurryThis(Set.prototype.intersection);
+		const SetPrototypeIsDisjointFrom = require_primordials_uncurry.uncurryThis(Set.prototype.isDisjointFrom);
+		const SetPrototypeIsSubsetOf = require_primordials_uncurry.uncurryThis(Set.prototype.isSubsetOf);
+		const SetPrototypeIsSupersetOf = require_primordials_uncurry.uncurryThis(Set.prototype.isSupersetOf);
+		const SetPrototypeKeys = require_primordials_uncurry.uncurryThis(Set.prototype.keys);
+		const SetPrototypeSymmetricDifference = require_primordials_uncurry.uncurryThis(Set.prototype.symmetricDifference);
+		const SetPrototypeUnion = require_primordials_uncurry.uncurryThis(Set.prototype.union);
+		const SetPrototypeValues = require_primordials_uncurry.uncurryThis(Set.prototype.values);
+		const SetPrototypeSizeGetter = require_primordials_uncurry.uncurryThis(require_primordials_object.ObjectGetOwnPropertyDescriptor(Set.prototype, "size").get);
+		const WeakMapPrototypeDelete = require_primordials_uncurry.uncurryThis(WeakMap.prototype.delete);
+		const WeakMapPrototypeGet = require_primordials_uncurry.uncurryThis(WeakMap.prototype.get);
+		const WeakMapPrototypeGetOrInsert = WeakMap.prototype.getOrInsert === void 0 ? weakMapGetOrInsertFallback : require_primordials_uncurry.uncurryThis(WeakMap.prototype.getOrInsert);
+		const WeakMapPrototypeGetOrInsertComputed = WeakMap.prototype.getOrInsertComputed === void 0 ? weakMapGetOrInsertComputedFallback : require_primordials_uncurry.uncurryThis(WeakMap.prototype.getOrInsertComputed);
+		const WeakMapPrototypeHas = require_primordials_uncurry.uncurryThis(WeakMap.prototype.has);
+		const WeakMapPrototypeSet = require_primordials_uncurry.uncurryThis(WeakMap.prototype.set);
+		const WeakSetPrototypeAdd = require_primordials_uncurry.uncurryThis(WeakSet.prototype.add);
+		const WeakSetPrototypeDelete = require_primordials_uncurry.uncurryThis(WeakSet.prototype.delete);
+		const WeakSetPrototypeHas = require_primordials_uncurry.uncurryThis(WeakSet.prototype.has);
+		function mapGetOrInsertComputedFallback(map, key, callbackfn) {
+			if (typeof callbackfn !== "function") throw new require_primordials_error.TypeErrorCtor(`getOrInsertComputed takes a callback. Saw ${typeof callbackfn}, wanted a function computing the value to insert.`);
+			if (MapPrototypeHas(map, key)) return MapPrototypeGet(map, key);
+			const value = callbackfn(key);
+			MapPrototypeSet(map, key, value);
+			return value;
+		}
+		function mapGetOrInsertFallback(map, key, value) {
+			if (MapPrototypeHas(map, key)) return MapPrototypeGet(map, key);
+			MapPrototypeSet(map, key, value);
+			return value;
+		}
+		function weakMapGetOrInsertComputedFallback(map, key, callbackfn) {
+			if (typeof callbackfn !== "function") throw new require_primordials_error.TypeErrorCtor(`getOrInsertComputed takes a callback. Saw ${typeof callbackfn}, wanted a function computing the value to insert.`);
+			if (WeakMapPrototypeHas(map, key)) return WeakMapPrototypeGet(map, key);
+			const value = callbackfn(key);
+			WeakMapPrototypeSet(map, key, value);
+			return value;
+		}
+		function weakMapGetOrInsertFallback(map, key, value) {
+			if (WeakMapPrototypeHas(map, key)) return WeakMapPrototypeGet(map, key);
+			WeakMapPrototypeSet(map, key, value);
+			return value;
+		}
+		exports.MapCtor = MapCtor;
+		exports.MapPrototypeClear = MapPrototypeClear;
+		exports.MapPrototypeDelete = MapPrototypeDelete;
+		exports.MapPrototypeEntries = MapPrototypeEntries;
+		exports.MapPrototypeForEach = MapPrototypeForEach;
+		exports.MapPrototypeGet = MapPrototypeGet;
+		exports.MapPrototypeGetOrInsert = MapPrototypeGetOrInsert;
+		exports.MapPrototypeGetOrInsertComputed = MapPrototypeGetOrInsertComputed;
+		exports.MapPrototypeHas = MapPrototypeHas;
+		exports.MapPrototypeKeys = MapPrototypeKeys;
+		exports.MapPrototypeSet = MapPrototypeSet;
+		exports.MapPrototypeValues = MapPrototypeValues;
+		exports.SetCtor = SetCtor;
+		exports.SetPrototypeAdd = SetPrototypeAdd;
+		exports.SetPrototypeClear = SetPrototypeClear;
+		exports.SetPrototypeDelete = SetPrototypeDelete;
+		exports.SetPrototypeDifference = SetPrototypeDifference;
+		exports.SetPrototypeEntries = SetPrototypeEntries;
+		exports.SetPrototypeForEach = SetPrototypeForEach;
+		exports.SetPrototypeHas = SetPrototypeHas;
+		exports.SetPrototypeIntersection = SetPrototypeIntersection;
+		exports.SetPrototypeIsDisjointFrom = SetPrototypeIsDisjointFrom;
+		exports.SetPrototypeIsSubsetOf = SetPrototypeIsSubsetOf;
+		exports.SetPrototypeIsSupersetOf = SetPrototypeIsSupersetOf;
+		exports.SetPrototypeKeys = SetPrototypeKeys;
+		exports.SetPrototypeSizeGetter = SetPrototypeSizeGetter;
+		exports.SetPrototypeSymmetricDifference = SetPrototypeSymmetricDifference;
+		exports.SetPrototypeUnion = SetPrototypeUnion;
+		exports.SetPrototypeValues = SetPrototypeValues;
+		exports.WeakMapCtor = WeakMapCtor;
+		exports.WeakMapPrototypeDelete = WeakMapPrototypeDelete;
+		exports.WeakMapPrototypeGet = WeakMapPrototypeGet;
+		exports.WeakMapPrototypeGetOrInsert = WeakMapPrototypeGetOrInsert;
+		exports.WeakMapPrototypeGetOrInsertComputed = WeakMapPrototypeGetOrInsertComputed;
+		exports.WeakMapPrototypeHas = WeakMapPrototypeHas;
+		exports.WeakMapPrototypeSet = WeakMapPrototypeSet;
+		exports.WeakRefCtor = WeakRefCtor;
+		exports.WeakSetCtor = WeakSetCtor;
+		exports.WeakSetPrototypeAdd = WeakSetPrototypeAdd;
+		exports.WeakSetPrototypeDelete = WeakSetPrototypeDelete;
+		exports.WeakSetPrototypeHas = WeakSetPrototypeHas;
+		exports.mapGetOrInsertComputedFallback = mapGetOrInsertComputedFallback;
+		exports.mapGetOrInsertFallback = mapGetOrInsertFallback;
+		exports.weakMapGetOrInsertComputedFallback = weakMapGetOrInsertComputedFallback;
+		exports.weakMapGetOrInsertFallback = weakMapGetOrInsertFallback;
+	}));
+	var require_regexp = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to `RegExp` and its prototype methods. `RegExp.escape`
+		*   is ES2025; the primordial is typed `Function | undefined` so older runtimes
+		*   still load. The Symbol-keyed `[Symbol.match]` / `[Symbol.replace]` slots
+		*   are exposed alongside the named methods because some callers use them via
+		*   dynamic dispatch (e.g. `String.prototype.match` invokes
+		*   `RegExp.prototype[Symbol.match]` internally).
+		*/
+		const RegExpCtor = RegExp;
+		const RegExpEscape = RegExp.escape;
+		const RegExpPrototypeExec = require_primordials_uncurry.uncurryThis(RegExp.prototype.exec);
+		const RegExpPrototypeTest = require_primordials_uncurry.uncurryThis(RegExp.prototype.test);
+		const RegExpPrototypeSymbolMatch = require_primordials_uncurry.uncurryThis(RegExp.prototype[Symbol.match]);
+		const RegExpPrototypeSymbolReplace = require_primordials_uncurry.uncurryThis(RegExp.prototype[Symbol.replace]);
+		exports.RegExpCtor = RegExpCtor;
+		exports.RegExpEscape = RegExpEscape;
+		exports.RegExpPrototypeExec = RegExpPrototypeExec;
+		exports.RegExpPrototypeSymbolMatch = RegExpPrototypeSymbolMatch;
+		exports.RegExpPrototypeSymbolReplace = RegExpPrototypeSymbolReplace;
+		exports.RegExpPrototypeTest = RegExpPrototypeTest;
+	}));
+	var require_primordial = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_node_module = require_module();
+		/**
+		* @file Lazy-loader for socket-btm's `node:smol-primordial` binding.
+		*   `node:smol-primordial` provides V8 Fast API typed implementations of Math.*
+		*   and Number.is* primordials, registered with `CFunction::Make()` so TurboFan
+		*   inlines them directly into JIT- compiled JS callers. Bypasses the
+		*   FunctionCallbackInfo trampoline entirely — ~30-50% gain on hot loops where
+		*   V8 doesn't already auto-inline. Returns `undefined` on stock Node +
+		*   non-Node runtimes. Result is cached across calls.
+		*
+		* @internal — used by `src/primordials.ts` to resolve smol-aware
+		*   Math.* / Number.is* fast paths. Most callers should use the
+		*   standard `primordials` exports, which already route through this
+		*   when smol is present.
+		*
+		* @see https://v8.dev/blog/v8-release-99 — V8 Fast API Calls overview
+		*/
+		let smolPrimordial;
+		let smolPrimordialProbed = false;
+		/**
+		* Returns `node:smol-primordial` when running on the smol Node binary,
+		* otherwise `undefined`. Result is cached across calls.
+		*/
+		function getSmolPrimordial() {
+			if (!smolPrimordialProbed) {
+				smolPrimordialProbed = true;
+				/* c8 ignore start - smol Node binary only. */
+				if (require_node_module.isNodeBuiltin("node:smol-primordial")) smolPrimordial = require_node_module.requireBuiltin("node:smol-primordial");
+			}
+			return smolPrimordial;
+		}
+		exports.getSmolPrimordial = getSmolPrimordial;
+	}));
+	var require_string = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to `String` static methods and prototype methods.
+		*   `StringPrototypeCharCodeAt` prefers the smol Fast API binding for ASCII
+		*   inputs, which reduces to a single byte load, and translates the `-1` Fast
+		*   API sentinel back to `NaN` to preserve spec parity. Two-byte strings fall
+		*   back to the uncurried `String.prototype.charCodeAt`.
+		*
+		*   ## Fast API surface — and why it's small
+		*
+		*   Mirrors the design rationale from socket-btm's `primordial_binding.cc`
+		*   (lines 41-72). The smol Fast API exposes exactly one string op
+		*   (`stringCharCodeAt`) because that's the one shape where the C++ trampoline
+		*   genuinely beats V8's existing hot path: a single ASCII byte load, no
+		*   encoding dispatch, no HandleScope, returns a primitive. String **searches**
+		*   (`startsWith` / `endsWith` / `includes` / `indexOf` / `lastIndexOf`) are
+		*   intentionally NOT exposed. V8's existing hot path dispatches on encoding
+		*   and runs native SIMD memcmp — a Fast API binding would add overhead without
+		*   winning. Same for `Map.has` / `Set.has` / `Array.includes`. Fast API also
+		*   has a hard constraint: a fast-path function cannot return a new V8 object —
+		*   only primitives, Local<Value/Object/Array>, or FastOneByteString. That
+		*   rules out anything that produces a new string (`slice`, `substring`,
+		*   `toUpperCase`, `concat`, `repeat`, `padStart`/`padEnd`, formatted-number)
+		*   from ever being a Fast API win on the return path. Net: the current surface
+		*   is approximately the ceiling. Adding more Fast API string ops without a
+		*   flamegraph showing the cost is a regression risk, not a perf win. See
+		*   `socket-btm/packages/node-smol-builder/additions/source-patched/`
+		*   `src/socketsecurity/primordial/primordial_binding.cc:41-72` for the
+		*   canonical design statement.
+		*/
+		const smolPrimordial = require_primordial().getSmolPrimordial();
+		const StringCtor = String;
+		const StringFromCharCode = String.fromCharCode;
+		const StringFromCodePoint = String.fromCodePoint;
+		const StringRaw = String.raw;
+		const StringPrototypeAt = require_primordials_uncurry.uncurryThis(String.prototype.at);
+		const StringPrototypeCharAt = require_primordials_uncurry.uncurryThis(String.prototype.charAt);
+		const smolCharCodeAt = smolPrimordial?.stringCharCodeAt;
+		/* c8 ignore start - the smol Fast API binding ships only on socket-btm's smol Node binary, so this body cannot run under the stock-Node runner */
+		function smolStringCharCodeAt(s, i) {
+			const code = smolCharCodeAt(s, i);
+			return code === -1 ? NaN : code;
+		}
+		/* c8 ignore stop */
+		const StringPrototypeCharCodeAt = smolCharCodeAt ? smolStringCharCodeAt : require_primordials_uncurry.uncurryThis(String.prototype.charCodeAt);
+		const StringPrototypeCodePointAt = require_primordials_uncurry.uncurryThis(String.prototype.codePointAt);
+		const StringPrototypeConcat = require_primordials_uncurry.uncurryThis(String.prototype.concat);
+		const StringPrototypeEndsWith = require_primordials_uncurry.uncurryThis(String.prototype.endsWith);
+		const StringPrototypeIncludes = require_primordials_uncurry.uncurryThis(String.prototype.includes);
+		const StringPrototypeIndexOf = require_primordials_uncurry.uncurryThis(String.prototype.indexOf);
+		const StringPrototypeIsWellFormed = smolPrimordial?.stringIsWellFormed ?? require_primordials_uncurry.uncurryThis(String.prototype.isWellFormed);
+		const StringPrototypeLastIndexOf = require_primordials_uncurry.uncurryThis(String.prototype.lastIndexOf);
+		const StringPrototypeLocaleCompare = require_primordials_uncurry.uncurryThis(String.prototype.localeCompare);
+		const StringPrototypeMatch = require_primordials_uncurry.uncurryThis(String.prototype.match);
+		const StringPrototypeMatchAll = require_primordials_uncurry.uncurryThis(String.prototype.matchAll);
+		const StringPrototypeNormalize = require_primordials_uncurry.uncurryThis(String.prototype.normalize);
+		const StringPrototypePadEnd = require_primordials_uncurry.uncurryThis(String.prototype.padEnd);
+		const StringPrototypePadStart = require_primordials_uncurry.uncurryThis(String.prototype.padStart);
+		const StringPrototypeRepeat = require_primordials_uncurry.uncurryThis(String.prototype.repeat);
+		const StringPrototypeReplace = require_primordials_uncurry.uncurryThis(String.prototype.replace);
+		const StringPrototypeReplaceAll = require_primordials_uncurry.uncurryThis(String.prototype.replaceAll);
+		const StringPrototypeSearch = require_primordials_uncurry.uncurryThis(String.prototype.search);
+		const StringPrototypeSlice = require_primordials_uncurry.uncurryThis(String.prototype.slice);
+		const StringPrototypeSplit = require_primordials_uncurry.uncurryThis(String.prototype.split);
+		const StringPrototypeStartsWith = require_primordials_uncurry.uncurryThis(String.prototype.startsWith);
+		const StringPrototypeSubstring = require_primordials_uncurry.uncurryThis(String.prototype.substring);
+		const StringPrototypeToLocaleLowerCase = require_primordials_uncurry.uncurryThis(String.prototype.toLocaleLowerCase);
+		const StringPrototypeToLocaleUpperCase = require_primordials_uncurry.uncurryThis(String.prototype.toLocaleUpperCase);
+		const StringPrototypeToLowerCase = require_primordials_uncurry.uncurryThis(String.prototype.toLowerCase);
+		const StringPrototypeToString = require_primordials_uncurry.uncurryThis(String.prototype.toString);
+		const StringPrototypeToUpperCase = require_primordials_uncurry.uncurryThis(String.prototype.toUpperCase);
+		const StringPrototypeToWellFormed = require_primordials_uncurry.uncurryThis(String.prototype.toWellFormed);
+		const StringPrototypeTrim = require_primordials_uncurry.uncurryThis(String.prototype.trim);
+		const StringPrototypeTrimEnd = require_primordials_uncurry.uncurryThis(String.prototype.trimEnd);
+		const StringPrototypeTrimStart = require_primordials_uncurry.uncurryThis(String.prototype.trimStart);
+		const StringPrototypeValueOf = require_primordials_uncurry.uncurryThis(String.prototype.valueOf);
+		exports.StringCtor = StringCtor;
+		exports.StringFromCharCode = StringFromCharCode;
+		exports.StringFromCodePoint = StringFromCodePoint;
+		exports.StringPrototypeAt = StringPrototypeAt;
+		exports.StringPrototypeCharAt = StringPrototypeCharAt;
+		exports.StringPrototypeCharCodeAt = StringPrototypeCharCodeAt;
+		exports.StringPrototypeCodePointAt = StringPrototypeCodePointAt;
+		exports.StringPrototypeConcat = StringPrototypeConcat;
+		exports.StringPrototypeEndsWith = StringPrototypeEndsWith;
+		exports.StringPrototypeIncludes = StringPrototypeIncludes;
+		exports.StringPrototypeIndexOf = StringPrototypeIndexOf;
+		exports.StringPrototypeIsWellFormed = StringPrototypeIsWellFormed;
+		exports.StringPrototypeLastIndexOf = StringPrototypeLastIndexOf;
+		exports.StringPrototypeLocaleCompare = StringPrototypeLocaleCompare;
+		exports.StringPrototypeMatch = StringPrototypeMatch;
+		exports.StringPrototypeMatchAll = StringPrototypeMatchAll;
+		exports.StringPrototypeNormalize = StringPrototypeNormalize;
+		exports.StringPrototypePadEnd = StringPrototypePadEnd;
+		exports.StringPrototypePadStart = StringPrototypePadStart;
+		exports.StringPrototypeRepeat = StringPrototypeRepeat;
+		exports.StringPrototypeReplace = StringPrototypeReplace;
+		exports.StringPrototypeReplaceAll = StringPrototypeReplaceAll;
+		exports.StringPrototypeSearch = StringPrototypeSearch;
+		exports.StringPrototypeSlice = StringPrototypeSlice;
+		exports.StringPrototypeSplit = StringPrototypeSplit;
+		exports.StringPrototypeStartsWith = StringPrototypeStartsWith;
+		exports.StringPrototypeSubstring = StringPrototypeSubstring;
+		exports.StringPrototypeToLocaleLowerCase = StringPrototypeToLocaleLowerCase;
+		exports.StringPrototypeToLocaleUpperCase = StringPrototypeToLocaleUpperCase;
+		exports.StringPrototypeToLowerCase = StringPrototypeToLowerCase;
+		exports.StringPrototypeToString = StringPrototypeToString;
+		exports.StringPrototypeToUpperCase = StringPrototypeToUpperCase;
+		exports.StringPrototypeToWellFormed = StringPrototypeToWellFormed;
+		exports.StringPrototypeTrim = StringPrototypeTrim;
+		exports.StringPrototypeTrimEnd = StringPrototypeTrimEnd;
+		exports.StringPrototypeTrimStart = StringPrototypeTrimStart;
+		exports.StringPrototypeValueOf = StringPrototypeValueOf;
+		exports.StringRaw = StringRaw;
+		exports.smolStringCharCodeAt = smolStringCharCodeAt;
+	}));
+	var import_purl = require_purl();
+	var import_error = require_error();
+	var import_map_set = require_map_set();
+	var import_regexp = require_regexp();
+	var import_string = require_string();
+	let cachedPackageURL$2;
+	/**
+	* @internal Register the `PackageURL` class for string parsing in compare functions.
+	*/
+	function registerPackageURL(ctor) {
+		cachedPackageURL$2 = ctor;
+	}
+	function toCanonicalString(input) {
+		if (typeof input === "string") {
+			/* v8 ignore start -- PackageURL is always registered at module load time. */
+			if (!cachedPackageURL$2) throw new import_error.ErrorCtor("PackageURL not registered. Import PackageURL before using string comparison.");
+			/* v8 ignore stop */
+			return cachedPackageURL$2.fromString(input).toString();
+		}
+		return input.toString();
+	}
+	/**
+	* Cache for compiled wildcard regexes to avoid recompilation on repeated calls.
+	* Bounded to `1024` entries with LRU eviction (same strategy as flyweight
+	* cache).
+	*/
+	const wildcardRegexCache = new import_map_set.MapCtor();
+	const WILDCARD_CACHE_MAX = 1024;
+	/**
+	* Simple wildcard matcher for PURL components. A `*` matches any run of
+	* characters, a `?` matches a single character, and `**` matches anything
+	* including an empty string. Designed for version strings and package names,
+	* not file paths.
+	*/
+	const MAX_PATTERN_LENGTH = 4096;
+	const MAX_WILDCARDS_PER_PATTERN = 32;
+	function countWildcards(pattern) {
+		let count = 0;
+		for (let i = 0, { length } = pattern; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(pattern, i);
+			if (code === 42 || code === 63) count += 1;
+		}
+		return count;
+	}
+	function matchWildcard(pattern, value) {
+		let regex = wildcardRegexCache.get(pattern);
+		if (regex === void 0) {
+			if (pattern.length > MAX_PATTERN_LENGTH) return false;
+			if (countWildcards(pattern) > MAX_WILDCARDS_PER_PATTERN) return false;
+			const regexPattern = (0, import_string.StringPrototypeReplace)((0, import_string.StringPrototypeReplace)((0, import_string.StringPrototypeReplace)(pattern, /[.+^${}()|[\]\\]/g, "\\$&"), /\*/g, ".*"), /\?/g, ".");
+			regex = new import_regexp.RegExpCtor(`^${(0, import_string.StringPrototypeReplace)(regexPattern, /(?:\.\*)+/g, ".*")}$`);
+			if (wildcardRegexCache.size >= WILDCARD_CACHE_MAX) wildcardRegexCache.delete(wildcardRegexCache.keys().next().value);
+			wildcardRegexCache.set(pattern, regex);
+		} else {
+			wildcardRegexCache.delete(pattern);
+			wildcardRegexCache.set(pattern, regex);
+		}
+		return (0, import_regexp.RegExpPrototypeTest)(regex, value);
+	}
+	/**
+	* Match a single component value against a pattern. Handles wildcard matching
+	* for individual PURL components. `patternValue` and `actualValue` are both
+	* required — pass `''` for an absent component (the function treats an empty
+	* string as "no value", same as the underlying PURL component itself).
+	*/
+	function matchComponent(patternValue, actualValue, matcher) {
+		if (patternValue === "**") return true;
+		if (patternValue === "") return actualValue === "";
+		if (actualValue === "") return false;
+		if (matcher) return matcher(actualValue);
+		if ((0, import_string.StringPrototypeIncludes)(patternValue, "*") || (0, import_string.StringPrototypeIncludes)(patternValue, "?")) return matchWildcard(patternValue, actualValue);
+		return patternValue === actualValue;
+	}
+	/**
+	* Compare two `PackageURL`s for equality.
+	*
+	* Two `purl`s are considered equal if their canonical string representations
+	* match. This comparison is case-sensitive after normalization.
+	*
+	* Accepts both `PackageURL` instances and PURL strings. Strings are parsed and
+	* normalized before comparison.
+	*
+	* @example
+	*   ;```typescript
+	*   const purl1 = PackageURL.fromString('pkg:npm/lodash@4.17.21')
+	*   const purl2 = PackageURL.fromString('pkg:npm/lodash@4.17.21')
+	*
+	*   equalsPurls(purl1, purl2) // -> true
+	*   equalsPurls('pkg:npm/lodash@4.17.21', 'pkg:NPM/lodash@4.17.21') // -> true
+	*   equalsPurls(purl1, 'pkg:npm/lodash@4.17.20') // -> false
+	*   ```
+	*
+	* @param a - First `PackageURL` or PURL string to compare.
+	* @param b - Second `PackageURL` or PURL string to compare.
+	*
+	* @returns `true` if the `purl`s are equal, `false` otherwise
+	*/
+	function equalsPurls(a, b) {
+		return toCanonicalString(a) === toCanonicalString(b);
+	}
+	/**
+	* Compare two `PackageURL`s for sorting.
+	*
+	* Returns a number indicating sort order: - Negative if `a` comes before `b` -
+	* Zero if they are equal - Positive if `a` comes after `b`
+	*
+	* Comparison is based on canonical string representation (lexicographic).
+	*
+	* Accepts both `PackageURL` instances and PURL strings. Strings are parsed and
+	* normalized before comparison.
+	*
+	* @example
+	*   ;```typescript
+	*   comparePurls('pkg:npm/aaa', 'pkg:npm/bbb') // -> -1
+	*   comparePurls(
+	*     'pkg:npm/bbb',
+	*     'pkg:npm/aaa',
+	*   ) // -> 1
+	*   // Use with Array.sort
+	*   [('pkg:npm/bbb', 'pkg:npm/aaa')].sort(comparePurls)
+	*   // -> ['pkg:npm/aaa', 'pkg:npm/bbb']
+	*   ```
+	*
+	* @param a - First `PackageURL` or PURL string to compare.
+	* @param b - Second `PackageURL` or PURL string to compare.
+	*
+	* @returns `-1`, `0`, or `1` for sort ordering
+	*/
+	function comparePurls(a, b) {
+		const aStr = toCanonicalString(a);
+		const bStr = toCanonicalString(b);
+		if (aStr < bStr) return -1;
+		if (aStr > bStr) return 1;
+		return 0;
+	}
+	/**
+	* Parse a PURL pattern string into its individual components. Strips the `pkg:`
+	* prefix, extracts `type`/`namespace`/`name`/`version`, handles scoped `@`
+	* prefixes, and applies type-specific normalization (`npm` lowercase, `pypi`
+	* underscore-to-hyphen).
+	*
+	* Returns `undefined` if the pattern is not a valid PURL pattern shape.
+	*/
+	function parsePattern(pattern) {
+		if (!(0, import_string.StringPrototypeStartsWith)(pattern, "pkg:")) return;
+		const patternWithoutScheme = (0, import_string.StringPrototypeSlice)(pattern, 4);
+		const typeEndIndex = (0, import_string.StringPrototypeIndexOf)(patternWithoutScheme, "/");
+		if (typeEndIndex === -1) return;
+		let typePattern = (0, import_string.StringPrototypeSlice)(patternWithoutScheme, 0, typeEndIndex);
+		const remaining = (0, import_string.StringPrototypeSlice)(patternWithoutScheme, typeEndIndex + 1);
+		let namespacePattern;
+		let namePattern;
+		let versionPattern;
+		const versionSeparatorIndex = (0, import_string.StringPrototypeStartsWith)(remaining, "@") ? (0, import_string.StringPrototypeIndexOf)(remaining, "@", 1) : (0, import_string.StringPrototypeIndexOf)(remaining, "@");
+		let beforeVersion;
+		if (versionSeparatorIndex !== -1) {
+			beforeVersion = (0, import_string.StringPrototypeSlice)(remaining, 0, versionSeparatorIndex);
+			versionPattern = (0, import_string.StringPrototypeSlice)(remaining, versionSeparatorIndex + 1);
+		} else beforeVersion = remaining;
+		const lastSlashIndex = (0, import_string.StringPrototypeLastIndexOf)(beforeVersion, "/");
+		if (lastSlashIndex !== -1) {
+			namespacePattern = (0, import_string.StringPrototypeSlice)(beforeVersion, 0, lastSlashIndex);
+			namePattern = (0, import_string.StringPrototypeSlice)(beforeVersion, lastSlashIndex + 1);
+		} else namePattern = beforeVersion;
+		typePattern = (0, import_string.StringPrototypeToLowerCase)(typePattern);
+		if (typePattern === "npm") {
+			if (namespacePattern) namespacePattern = (0, import_string.StringPrototypeToLowerCase)(namespacePattern);
+			namePattern = (0, import_string.StringPrototypeToLowerCase)(namePattern);
+		}
+		if (typePattern === "pypi") namePattern = (0, import_string.StringPrototypeReplace)((0, import_string.StringPrototypeToLowerCase)(namePattern), /_/g, "-");
+		return {
+			typePattern,
+			namespacePattern,
+			namePattern,
+			versionPattern
+		};
+	}
+	/**
+	* Check if a `PackageURL` matches a pattern with wildcards.
+	*
+	* Supports glob-style wildcards: - asterisk matches any sequence of characters
+	* within a component - double asterisk matches any value including empty (for
+	* optional components) - question mark matches single character.
+	*
+	* Pattern matching is performed on normalized `purl`s (after type-specific
+	* normalization). Each component is matched independently.
+	*
+	* @example
+	*   Wildcard in name: `matchesPurl('pkg:npm/lodash-star', purl)`
+	*   Wildcard in namespace: `matchesPurl('pkg:npm/@babel/star', purl)`
+	*   Wildcard in version: `matchesPurl('pkg:npm/react@18.star', purl)`
+	*   Match any type: `matchesPurl('pkg:star/lodash', purl)`
+	*   Optional version: `matchesPurl('pkg:npm/lodash@star-star', purl)`
+	*
+	*   See `test/pattern-matching.test.mts` for comprehensive examples.
+	*
+	* @param pattern - PURL string with wildcards.
+	* @param purl - `PackageURL` instance to test.
+	*
+	* @returns `true` if `purl` matches the pattern
+	*/
+	function matchesPurl(pattern, purl) {
+		const parsed = parsePattern(pattern);
+		if (!parsed) return false;
+		const { typePattern, namespacePattern, namePattern, versionPattern } = parsed;
+		return matchComponent(typePattern, purl.type ?? "") && matchComponent(namespacePattern ?? "", purl.namespace ?? "") && matchComponent(namePattern, purl.name ?? "") && matchComponent(versionPattern ?? "", purl.version ?? "");
+	}
+	function createWildcardMatcher(pattern) {
+		return pattern && ((0, import_string.StringPrototypeIncludes)(pattern, "*") || (0, import_string.StringPrototypeIncludes)(pattern, "?")) ? (value) => matchWildcard(pattern, value) : void 0;
+	}
+	/**
+	* Create a reusable matcher function from a pattern. More efficient for testing
+	* multiple `purl`s against the same pattern.
+	*
+	* The returned function can be used with `Array` methods like `filter()`,
+	* `some()`, and `every()` for efficient batch matching operations.
+	*
+	* @example
+	*   `const isBabel = createMatcher('pkg:npm/@babel/star')`
+	*   `packages.filter(isBabel)`
+	*
+	*   See `test/pattern-matching.test.mts` for comprehensive examples.
+	*
+	* @param pattern - PURL pattern string with wildcards.
+	*
+	* @returns Function that tests `purl`s against the pattern
+	*/
+	function createMatcher(pattern) {
+		const parsed = parsePattern(pattern);
+		if (!parsed) return () => false;
+		const { typePattern, namespacePattern, namePattern, versionPattern } = parsed;
+		const typeMatcher = createWildcardMatcher(typePattern);
+		const namespaceMatcher = createWildcardMatcher(namespacePattern);
+		const nameMatcher = createWildcardMatcher(namePattern);
+		const versionMatcher = createWildcardMatcher(versionPattern);
+		return (_purl) => {
+			return matchComponent(typePattern, _purl.type ?? "", typeMatcher) && matchComponent(namespacePattern ?? "", _purl.namespace ?? "", namespaceMatcher) && matchComponent(namePattern, _purl.name ?? "", nameMatcher) && matchComponent(versionPattern ?? "", _purl.version ?? "", versionMatcher);
+		};
+	}
+	var require_array$1 = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to `Array`, typed-array, `ArrayBuffer`, `DataView`,
+		*   `Atomics`, and shared iterator-prototype primordials. `Array.fromAsync` and
+		*   `Array.prototype.with` are ES2024 / ES2023; the primordial captures the
+		*   live reference at module load so consumers never see a tampered global.
+		*/
+		const smolPrimordial = require_primordial().getSmolPrimordial();
+		const ArrayCtor = Array;
+		const ArrayBufferCtor = ArrayBuffer;
+		const DataViewCtor = DataView;
+		const Float32ArrayCtor = Float32Array;
+		const Float64ArrayCtor = Float64Array;
+		const Int8ArrayCtor = Int8Array;
+		const Int16ArrayCtor = Int16Array;
+		const Int32ArrayCtor = Int32Array;
+		const Uint8ArrayCtor = Uint8Array;
+		const Uint8ClampedArrayCtor = Uint8ClampedArray;
+		const Uint16ArrayCtor = Uint16Array;
+		const Uint32ArrayCtor = Uint32Array;
+		const ArrayFrom = Array.from;
+		const ArrayFromAsync = Array.fromAsync;
+		const ArrayIsArray = smolPrimordial?.arrayIsArray ?? Array.isArray;
+		const ArrayOf = Array.of;
+		const ArrayBufferIsView = ArrayBuffer.isView;
+		const AtomicsWait = Atomics.wait;
+		const ArrayPrototypeAt = require_primordials_uncurry.uncurryThis(Array.prototype.at);
+		const ArrayPrototypeConcat = require_primordials_uncurry.uncurryThis(Array.prototype.concat);
+		const ArrayPrototypeCopyWithin = require_primordials_uncurry.uncurryThis(Array.prototype.copyWithin);
+		const ArrayPrototypeEntries = require_primordials_uncurry.uncurryThis(Array.prototype.entries);
+		const ArrayPrototypeEvery = require_primordials_uncurry.uncurryThis(Array.prototype.every);
+		const ArrayPrototypeFill = require_primordials_uncurry.uncurryThis(Array.prototype.fill);
+		const ArrayPrototypeFilter = require_primordials_uncurry.uncurryThis(Array.prototype.filter);
+		const ArrayPrototypeFind = require_primordials_uncurry.uncurryThis(Array.prototype.find);
+		const ArrayPrototypeFindIndex = require_primordials_uncurry.uncurryThis(Array.prototype.findIndex);
+		const ArrayPrototypeFindLast = require_primordials_uncurry.uncurryThis(Array.prototype.findLast);
+		const ArrayPrototypeFindLastIndex = require_primordials_uncurry.uncurryThis(Array.prototype.findLastIndex);
+		const ArrayPrototypeFlat = require_primordials_uncurry.uncurryThis(Array.prototype.flat);
+		const ArrayPrototypeFlatMap = require_primordials_uncurry.uncurryThis(Array.prototype.flatMap);
+		const ArrayPrototypeForEach = require_primordials_uncurry.uncurryThis(Array.prototype.forEach);
+		const ArrayPrototypeIncludes = require_primordials_uncurry.uncurryThis(Array.prototype.includes);
+		const ArrayPrototypeIndexOf = require_primordials_uncurry.uncurryThis(Array.prototype.indexOf);
+		const ArrayPrototypeJoin = require_primordials_uncurry.uncurryThis(Array.prototype.join);
+		const ArrayPrototypeKeys = require_primordials_uncurry.uncurryThis(Array.prototype.keys);
+		const ArrayPrototypeLastIndexOf = require_primordials_uncurry.uncurryThis(Array.prototype.lastIndexOf);
+		const ArrayPrototypeMap = require_primordials_uncurry.uncurryThis(Array.prototype.map);
+		const ArrayPrototypePop = require_primordials_uncurry.uncurryThis(Array.prototype.pop);
+		const ArrayPrototypePush = require_primordials_uncurry.uncurryThis(Array.prototype.push);
+		const ArrayPrototypeReduce = require_primordials_uncurry.uncurryThis(Array.prototype.reduce);
+		const ArrayPrototypeReduceRight = require_primordials_uncurry.uncurryThis(Array.prototype.reduceRight);
+		const ArrayPrototypeReverse = require_primordials_uncurry.uncurryThis(Array.prototype.reverse);
+		const ArrayPrototypeShift = require_primordials_uncurry.uncurryThis(Array.prototype.shift);
+		const ArrayPrototypeSlice = require_primordials_uncurry.uncurryThis(Array.prototype.slice);
+		const ArrayPrototypeSome = require_primordials_uncurry.uncurryThis(Array.prototype.some);
+		const ArrayPrototypeSort = require_primordials_uncurry.uncurryThis(Array.prototype.sort);
+		const ArrayPrototypeSplice = require_primordials_uncurry.uncurryThis(Array.prototype.splice);
+		const ArrayPrototypeToLocaleString = require_primordials_uncurry.uncurryThis(Array.prototype.toLocaleString);
+		const ArrayPrototypeToReversed = require_primordials_uncurry.uncurryThis(Array.prototype.toReversed);
+		const ArrayPrototypeToSorted = require_primordials_uncurry.uncurryThis(Array.prototype.toSorted);
+		const ArrayPrototypeToSpliced = require_primordials_uncurry.uncurryThis(Array.prototype.toSpliced);
+		const ArrayPrototypeToString = require_primordials_uncurry.uncurryThis(Array.prototype.toString);
+		const ArrayPrototypeUnshift = require_primordials_uncurry.uncurryThis(Array.prototype.unshift);
+		const ArrayPrototypeValues = require_primordials_uncurry.uncurryThis(Array.prototype.values);
+		const ArrayPrototypeWith = require_primordials_uncurry.uncurryThis(Array.prototype.with);
+		const anyIterator = (/* @__PURE__ */ new Map()).keys();
+		let iteratorLookup = Object.getPrototypeOf(anyIterator);
+		while (iteratorLookup && typeof iteratorLookup.next !== "function")
+ /* c8 ignore next - Modern V8 puts Iterator.prototype one hop up the chain
+		so the first check already finds .next; the walk-further branch fires
+		only on hypothetical engines where the prototype layout differs. */
+		iteratorLookup = Object.getPrototypeOf(iteratorLookup);
+		const iteratorProto = iteratorLookup;
+		const IteratorPrototypeNext = require_primordials_uncurry.uncurryThis(iteratorProto.next);
+		/* c8 ignore start */
+		const IteratorPrototypeReturn = typeof iteratorProto.return === "function" ? require_primordials_uncurry.uncurryThis(iteratorProto.return) : void 0;
+		/* c8 ignore stop */
+		exports.ArrayBufferCtor = ArrayBufferCtor;
+		exports.ArrayBufferIsView = ArrayBufferIsView;
+		exports.ArrayCtor = ArrayCtor;
+		exports.ArrayFrom = ArrayFrom;
+		exports.ArrayFromAsync = ArrayFromAsync;
+		exports.ArrayIsArray = ArrayIsArray;
+		exports.ArrayOf = ArrayOf;
+		exports.ArrayPrototypeAt = ArrayPrototypeAt;
+		exports.ArrayPrototypeConcat = ArrayPrototypeConcat;
+		exports.ArrayPrototypeCopyWithin = ArrayPrototypeCopyWithin;
+		exports.ArrayPrototypeEntries = ArrayPrototypeEntries;
+		exports.ArrayPrototypeEvery = ArrayPrototypeEvery;
+		exports.ArrayPrototypeFill = ArrayPrototypeFill;
+		exports.ArrayPrototypeFilter = ArrayPrototypeFilter;
+		exports.ArrayPrototypeFind = ArrayPrototypeFind;
+		exports.ArrayPrototypeFindIndex = ArrayPrototypeFindIndex;
+		exports.ArrayPrototypeFindLast = ArrayPrototypeFindLast;
+		exports.ArrayPrototypeFindLastIndex = ArrayPrototypeFindLastIndex;
+		exports.ArrayPrototypeFlat = ArrayPrototypeFlat;
+		exports.ArrayPrototypeFlatMap = ArrayPrototypeFlatMap;
+		exports.ArrayPrototypeForEach = ArrayPrototypeForEach;
+		exports.ArrayPrototypeIncludes = ArrayPrototypeIncludes;
+		exports.ArrayPrototypeIndexOf = ArrayPrototypeIndexOf;
+		exports.ArrayPrototypeJoin = ArrayPrototypeJoin;
+		exports.ArrayPrototypeKeys = ArrayPrototypeKeys;
+		exports.ArrayPrototypeLastIndexOf = ArrayPrototypeLastIndexOf;
+		exports.ArrayPrototypeMap = ArrayPrototypeMap;
+		exports.ArrayPrototypePop = ArrayPrototypePop;
+		exports.ArrayPrototypePush = ArrayPrototypePush;
+		exports.ArrayPrototypeReduce = ArrayPrototypeReduce;
+		exports.ArrayPrototypeReduceRight = ArrayPrototypeReduceRight;
+		exports.ArrayPrototypeReverse = ArrayPrototypeReverse;
+		exports.ArrayPrototypeShift = ArrayPrototypeShift;
+		exports.ArrayPrototypeSlice = ArrayPrototypeSlice;
+		exports.ArrayPrototypeSome = ArrayPrototypeSome;
+		exports.ArrayPrototypeSort = ArrayPrototypeSort;
+		exports.ArrayPrototypeSplice = ArrayPrototypeSplice;
+		exports.ArrayPrototypeToLocaleString = ArrayPrototypeToLocaleString;
+		exports.ArrayPrototypeToReversed = ArrayPrototypeToReversed;
+		exports.ArrayPrototypeToSorted = ArrayPrototypeToSorted;
+		exports.ArrayPrototypeToSpliced = ArrayPrototypeToSpliced;
+		exports.ArrayPrototypeToString = ArrayPrototypeToString;
+		exports.ArrayPrototypeUnshift = ArrayPrototypeUnshift;
+		exports.ArrayPrototypeValues = ArrayPrototypeValues;
+		exports.ArrayPrototypeWith = ArrayPrototypeWith;
+		exports.AtomicsWait = AtomicsWait;
+		exports.DataViewCtor = DataViewCtor;
+		exports.Float32ArrayCtor = Float32ArrayCtor;
+		exports.Float64ArrayCtor = Float64ArrayCtor;
+		exports.Int16ArrayCtor = Int16ArrayCtor;
+		exports.Int32ArrayCtor = Int32ArrayCtor;
+		exports.Int8ArrayCtor = Int8ArrayCtor;
+		exports.IteratorPrototypeNext = IteratorPrototypeNext;
+		exports.IteratorPrototypeReturn = IteratorPrototypeReturn;
+		exports.Uint16ArrayCtor = Uint16ArrayCtor;
+		exports.Uint32ArrayCtor = Uint32ArrayCtor;
+		exports.Uint8ArrayCtor = Uint8ArrayCtor;
+		exports.Uint8ClampedArrayCtor = Uint8ClampedArrayCtor;
+	}));
+	var require_reflect = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file Safe references to `Reflect.*`. **IMPORTANT**: do not destructure on
+		*   `Reflect` here. tsgo has a bug that mis-transpiles destructured exports.
+		*   See: https://github.com/SocketDev/socket-packageurl-js/issues/3.
+		*/
+		const ReflectApply = Reflect.apply;
+		const ReflectConstruct = Reflect.construct;
+		const ReflectDefineProperty = Reflect.defineProperty;
+		const ReflectDeleteProperty = Reflect.deleteProperty;
+		const ReflectGet = Reflect.get;
+		const ReflectGetOwnPropertyDescriptor = Reflect.getOwnPropertyDescriptor;
+		const ReflectGetPrototypeOf = Reflect.getPrototypeOf;
+		const ReflectHas = Reflect.has;
+		const ReflectIsExtensible = Reflect.isExtensible;
+		const ReflectOwnKeys = Reflect.ownKeys;
+		const ReflectPreventExtensions = Reflect.preventExtensions;
+		const ReflectSet = Reflect.set;
+		const ReflectSetPrototypeOf = Reflect.setPrototypeOf;
+		exports.ReflectApply = ReflectApply;
+		exports.ReflectConstruct = ReflectConstruct;
+		exports.ReflectDefineProperty = ReflectDefineProperty;
+		exports.ReflectDeleteProperty = ReflectDeleteProperty;
+		exports.ReflectGet = ReflectGet;
+		exports.ReflectGetOwnPropertyDescriptor = ReflectGetOwnPropertyDescriptor;
+		exports.ReflectGetPrototypeOf = ReflectGetPrototypeOf;
+		exports.ReflectHas = ReflectHas;
+		exports.ReflectIsExtensible = ReflectIsExtensible;
+		exports.ReflectOwnKeys = ReflectOwnKeys;
+		exports.ReflectPreventExtensions = ReflectPreventExtensions;
+		exports.ReflectSet = ReflectSet;
+		exports.ReflectSetPrototypeOf = ReflectSetPrototypeOf;
+	}));
+	/**
+	* @file Object utility functions for type checking and immutable object
+	*   creation. Provides object validation and recursive freezing utilities.
+	*/
+	var import_array$1 = require_array$1();
+	var import_object = require_object();
+	var import_reflect = require_reflect();
+	/**
+	* Check if value is a non-null object. Inlined to avoid importing
+	* `@socketsecurity/lib/objects` which transitively pulls in `sorts` → `semver`
+	* → `npm-pack` (2.5 MB).
+	*/
+	function isObject(value) {
+		return value !== null && typeof value === "object";
+	}
+	function isUnfrozenObject(value) {
+		return value !== null && (typeof value === "object" || typeof value === "function") && !(0, import_object.ObjectIsFrozen)(value);
+	}
+	/**
+	* Recursively freeze an object and all nested objects. Uses breadth-first
+	* traversal with a queue for memory efficiency.
+	*
+	* @throws {Error} When object graph too large or circular reference detected.
+	*/
+	function recursiveFreeze(value_) {
+		if (!isUnfrozenObject(value_)) return value_;
+		const queue = [value_];
+		const visited = new import_map_set.WeakSetCtor();
+		visited.add(value_);
+		let { length: queueLength } = queue;
+		let pos = 0;
+		while (pos < queueLength) {
+			if (pos === 1e6) throw new import_error.ErrorCtor("Object graph too large (exceeds 1,000,000 items).");
+			const obj = queue[pos++];
+			(0, import_object.ObjectFreeze)(obj);
+			if ((0, import_array$1.ArrayIsArray)(obj)) for (let i = 0, { length } = obj; i < length; i += 1) {
+				const item = obj[i];
+				if (isUnfrozenObject(item) && !visited.has(item)) {
+					visited.add(item);
+					queue[queueLength++] = item;
+				}
+			}
+			else {
+				const keys = (0, import_reflect.ReflectOwnKeys)(obj);
+				for (let i = 0, { length } = keys; i < length; i += 1) {
+					const propValue = obj[keys[i]];
+					if (isUnfrozenObject(propValue) && !visited.has(propValue)) {
+						visited.add(propValue);
+						queue[queueLength++] = propValue;
+					}
+				}
+			}
+		}
+		return value_;
+	}
+	var require_url = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to `URL`, `URLSearchParams`, and the
+		*   `URLSearchParams.prototype` methods.
+		*/
+		const URLCtor = URL;
+		const URLSearchParamsCtor = URLSearchParams;
+		/**
+		* @unused No internal or Socket consumers; exercised only by its unit tests.
+		*/
+		const URLSearchParamsPrototypeAppend = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.append);
+		/**
+		* @unused No internal or Socket consumers; exercised only by its unit tests.
+		*/
+		const URLSearchParamsPrototypeDelete = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.delete);
+		const URLSearchParamsPrototypeForEach = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.forEach);
+		/**
+		* @unused No internal or Socket consumers; exercised only by its unit tests.
+		*/
+		const URLSearchParamsPrototypeGet = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.get);
+		/**
+		* @unused No internal or Socket consumers; exercised only by its unit tests.
+		*/
+		const URLSearchParamsPrototypeGetAll = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.getAll);
+		/**
+		* @unused No internal or Socket consumers; exercised only by its unit tests.
+		*/
+		const URLSearchParamsPrototypeHas = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.has);
+		/**
+		* @unused No internal or Socket consumers; exercised only by its unit tests.
+		*/
+		const URLSearchParamsPrototypeSet = require_primordials_uncurry.uncurryThis(URLSearchParams.prototype.set);
+		exports.URLCtor = URLCtor;
+		exports.URLSearchParamsCtor = URLSearchParamsCtor;
+		exports.URLSearchParamsPrototypeAppend = URLSearchParamsPrototypeAppend;
+		exports.URLSearchParamsPrototypeDelete = URLSearchParamsPrototypeDelete;
+		exports.URLSearchParamsPrototypeForEach = URLSearchParamsPrototypeForEach;
+		exports.URLSearchParamsPrototypeGet = URLSearchParamsPrototypeGet;
+		exports.URLSearchParamsPrototypeGetAll = URLSearchParamsPrototypeGetAll;
+		exports.URLSearchParamsPrototypeHas = URLSearchParamsPrototypeHas;
+		exports.URLSearchParamsPrototypeSet = URLSearchParamsPrototypeSet;
+	}));
+	var require_number = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to `Number`, its constants, predicates, and parse
+		*   helpers. Predicates prefer the smol fast-path (`node:smol-primordial`);
+		*   static `parseFloat` / `parseInt` use the FastOneByteString-typed bindings
+		*   for ASCII inputs and fall back to stock `Number.parse*` otherwise.
+		*/
+		const smolPrimordial = require_primordial().getSmolPrimordial();
+		const NumberCtor = Number;
+		const NumberEPSILON = Number.EPSILON;
+		const NumberMAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER;
+		const NumberMAX_VALUE = Number.MAX_VALUE;
+		const NumberMIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER;
+		const NumberMIN_VALUE = Number.MIN_VALUE;
+		const NumberNEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
+		const NumberPOSITIVE_INFINITY = Number.POSITIVE_INFINITY;
+		const NumberIsFinite = smolPrimordial?.numberIsFinite ?? Number.isFinite;
+		const NumberIsInteger = smolPrimordial?.numberIsInteger ?? Number.isInteger;
+		const NumberIsNaN = smolPrimordial?.numberIsNaN ?? Number.isNaN;
+		const NumberIsSafeInteger = smolPrimordial?.numberIsSafeInteger ?? Number.isSafeInteger;
+		const NumberParseFloat = smolPrimordial?.numberParseFloat ?? Number.parseFloat;
+		const smolParseInt10 = smolPrimordial?.numberParseInt10;
+		const stockParseInt = Number.parseInt;
+		/* c8 ignore start - the smol Fast API binding ships only on socket-btm's smol Node binary, so this body cannot run under the stock-Node runner */
+		function smolNumberParseInt(s, radix) {
+			return radix === void 0 || radix === 10 ? smolParseInt10(s) : stockParseInt(s, radix);
+		}
+		/* c8 ignore stop */
+		const NumberParseInt = smolParseInt10 ? smolNumberParseInt : stockParseInt;
+		const NumberPrototypeToExponential = require_primordials_uncurry.uncurryThis(Number.prototype.toExponential);
+		const NumberPrototypeToFixed = require_primordials_uncurry.uncurryThis(Number.prototype.toFixed);
+		const NumberPrototypeToPrecision = require_primordials_uncurry.uncurryThis(Number.prototype.toPrecision);
+		const NumberPrototypeToString = require_primordials_uncurry.uncurryThis(Number.prototype.toString);
+		const NumberPrototypeValueOf = require_primordials_uncurry.uncurryThis(Number.prototype.valueOf);
+		exports.NumberCtor = NumberCtor;
+		exports.NumberEPSILON = NumberEPSILON;
+		exports.NumberIsFinite = NumberIsFinite;
+		exports.NumberIsInteger = NumberIsInteger;
+		exports.NumberIsNaN = NumberIsNaN;
+		exports.NumberIsSafeInteger = NumberIsSafeInteger;
+		exports.NumberMAX_SAFE_INTEGER = NumberMAX_SAFE_INTEGER;
+		exports.NumberMAX_VALUE = NumberMAX_VALUE;
+		exports.NumberMIN_SAFE_INTEGER = NumberMIN_SAFE_INTEGER;
+		exports.NumberMIN_VALUE = NumberMIN_VALUE;
+		exports.NumberNEGATIVE_INFINITY = NumberNEGATIVE_INFINITY;
+		exports.NumberPOSITIVE_INFINITY = NumberPOSITIVE_INFINITY;
+		exports.NumberParseFloat = NumberParseFloat;
+		exports.NumberParseInt = NumberParseInt;
+		exports.NumberPrototypeToExponential = NumberPrototypeToExponential;
+		exports.NumberPrototypeToFixed = NumberPrototypeToFixed;
+		exports.NumberPrototypeToPrecision = NumberPrototypeToPrecision;
+		exports.NumberPrototypeToString = NumberPrototypeToString;
+		exports.NumberPrototypeValueOf = NumberPrototypeValueOf;
+		exports.smolNumberParseInt = smolNumberParseInt;
+	}));
+	var import_url = require_url();
+	var import_number = require_number();
+	/**
+	* Check if string contains only whitespace characters.
+	*/
+	function isBlank(str) {
+		return (0, import_regexp.RegExpPrototypeTest)(/^\s*$/, str);
+	}
+	/**
+	* Check if value is a non-empty string.
+	*/
+	function isNonEmptyString(value) {
+		return typeof value === "string" && value.length > 0;
+	}
+	const regexSemverNumberedGroups$1 = /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-(?:(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?:[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+	/**
+	* Check if value is a valid semantic version string.
+	*/
+	function isSemverString(value) {
+		return typeof value === "string" && (0, import_regexp.RegExpPrototypeTest)(regexSemverNumberedGroups$1, value);
+	}
+	/**
+	* Convert package name to lowercase.
+	*/
+	function lowerName(purl) {
+		purl.name = (0, import_string.StringPrototypeToLowerCase)(purl.name);
+	}
+	/**
+	* Convert package namespace to lowercase.
+	*/
+	function lowerNamespace(purl) {
+		const { namespace } = purl;
+		if (typeof namespace === "string") purl.namespace = (0, import_string.StringPrototypeToLowerCase)(namespace);
+	}
+	/**
+	* Convert package version to lowercase.
+	*/
+	function lowerVersion(purl) {
+		const { version } = purl;
+		if (typeof version === "string") purl.version = (0, import_string.StringPrototypeToLowerCase)(version);
+	}
+	/**
+	* Replace all dashes with underscores in string.
+	*/
+	function replaceDashesWithUnderscores(str) {
+		let result = "";
+		let fromIndex = 0;
+		let index = 0;
+		while ((index = (0, import_string.StringPrototypeIndexOf)(str, "-", fromIndex)) !== -1) {
+			result = `${result + (0, import_string.StringPrototypeSlice)(str, fromIndex, index)}_`;
+			fromIndex = index + 1;
+		}
+		return fromIndex ? result + (0, import_string.StringPrototypeSlice)(str, fromIndex) : str;
+	}
+	/**
+	* Replace all underscores with dashes in string.
+	*/
+	function replaceUnderscoresWithDashes(str) {
+		let result = "";
+		let fromIndex = 0;
+		let index = 0;
+		while ((index = (0, import_string.StringPrototypeIndexOf)(str, "_", fromIndex)) !== -1) {
+			result = `${result + (0, import_string.StringPrototypeSlice)(str, fromIndex, index)}-`;
+			fromIndex = index + 1;
+		}
+		return fromIndex ? result + (0, import_string.StringPrototypeSlice)(str, fromIndex) : str;
+	}
+	function isUnicodeInjectionCharCode(code) {
+		return code === 8203 || code === 8204 || code === 8205 || code === 8206 || code === 8207 || code === 8234 || code === 8235 || code === 8236 || code === 8237 || code === 8238 || code === 8288 || code === 65279 || code === 65532 || code === 65533;
+	}
+	function isAsciiInjectionPrefix(code) {
+		if (code === 32 || code === 33 || code === 34 || code === 35 || code === 36 || code === 37 || code === 38 || code === 39 || code === 40 || code === 41 || code === 42 || code === 59) return true;
+		return false;
+	}
+	function isAsciiInjectionSuffix(code) {
+		return code === 60 || code === 61 || code === 62 || code === 63 || code === 91 || code === 92 || code === 93 || code === 96 || code === 123 || code === 124 || code === 125 || code === 126 || code === 127;
+	}
+	/**
+	* Test whether a character code is an injection-dangerous character.
+	*
+	* Detects four classes of dangerous characters:
+	*
+	* 1. **Shell metacharacters** — command execution, piping, redirection, expansion:
+	*    `|`, `&`, `;`, `` ` ``, `$`, `<`, `>`, `(`, `)`, `{`, `}`, `\`
+	* 2. **Quote characters** — break out of quoted contexts in shell, SQL, URLs: `'`,
+	*    `"`
+	* 3. **URL/path delimiters** — fragment injection, comment injection: `#`
+	* 4. **Whitespace & control characters** — argument splitting, log injection,
+	*    terminal escape sequences, null-byte truncation: `0x00`-`0x1f` (all C0
+	*    controls including NUL, tab, newline, CR, ESC, etc.) space (`0x20`), DEL
+	*    (`0x7f`)
+	*/
+	function isInjectionCharCode(code) {
+		return code <= 31 || isAsciiInjectionPrefix(code) || isAsciiInjectionSuffix(code) || code >= 128 && code <= 159 || isUnicodeInjectionCharCode(code);
+	}
+	/**
+	* Test whether a character code enables command execution.
+	*
+	* A narrower scanner than `isInjectionCharCode`, targeting characters that
+	* enable shell command execution and code injection. Allows characters that are
+	* legitimate in version strings and URL-based qualifier values (like `!`, `+`,
+	* `?`, `&`, `=`, `%`, `:`, `/`, `#`, space) while still blocking the most
+	* dangerous execution vectors.
+	*
+	* Used for `version`, `subpath`, and qualifier value validation where the full
+	* injection scanner would cause false positives.
+	*/
+	function isCommandInjectionCharCode(code) {
+		if (code <= 31 && code !== 9) return true;
+		if (code === 36 || code === 59 || code === 60 || code === 62 || code === 92 || code === 96 || code === 124 || code === 127) return true;
+		if (code >= 128 && code <= 159) return true;
+		return isUnicodeInjectionCharCode(code);
+	}
+	/**
+	* Find the first command injection character in a string. Like
+	* `findInjectionCharCode` but uses the narrower command injection set. Returns
+	* the character code found, or `-1`.
+	*/
+	function findCommandInjectionCharCode(str) {
+		for (let i = 0, { length } = str; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(str, i);
+			if (isCommandInjectionCharCode(code)) return code;
+		}
+		return -1;
+	}
+	/**
+	* Find the first injection character in a string. Returns the character code of
+	* the first dangerous character found, or `-1`.
+	*
+	* Uses `charCode` scanning for performance in hot paths. The check is a single
+	* pass with no allocation, no regex, and no prototype method calls beyond the
+	* captured `StringPrototypeCharCodeAt` primordial.
+	*
+	* Null bytes (`0x00`) are also caught by `validateStrings()` in `validate.ts`,
+	* but we include them here for defense-in-depth so callers who skip the base
+	* validators still get protection.
+	*/
+	function findInjectionCharCode(str) {
+		for (let i = 0, { length } = str; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(str, i);
+			if (isInjectionCharCode(code)) return code;
+		}
+		return -1;
+	}
+	/**
+	* Narrow injection check: only the characters that enable command/shell
+	* injection when a component is interpolated into a shell, plus control
+	* characters. Unlike {@link isInjectionCharCode}, this deliberately does NOT
+	* flag PURL-spec-legal punctuation (`?`, `#`, `@`, `%`, `!`, `*`, `=`, `[`,
+	* `]`, `{`, `}`, `~`, `"`, `'`) so that unregistered PURL types stay
+	* spec-compliant while still rejecting genuine RCE payloads like `$(cmd)`,
+	* backticks, and pipes. Registered types keep the stricter
+	* {@link isInjectionCharCode} denylist via their own validators.
+	*/
+	function isShellInjectionCharCode(code) {
+		if (code <= 31) return true;
+		return code === 36 || code === 38 || code === 40 || code === 41 || code === 59 || code === 60 || code === 62 || code === 92 || code === 96 || code === 124 || code === 127;
+	}
+	/**
+	* Scan `str` for the first shell-injection character (see
+	* {@link isShellInjectionCharCode}). Returns its char code, or `-1`.
+	*/
+	function findShellInjectionCharCode(str) {
+		for (let i = 0, { length } = str; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(str, i);
+			if (isShellInjectionCharCode(code)) return code;
+		}
+		return -1;
+	}
+	/**
+	* Check if string contains characters commonly used in injection attacks.
+	* Returns `true` if any dangerous character is found.
+	*
+	* For detailed information about which character was found, use
+	* {@link findInjectionCharCode} instead.
+	*/
+	function containsInjectionCharacters(str) {
+		return findInjectionCharCode(str) !== -1;
+	}
+	/**
+	* Format an injection character code as a human-readable label for error
+	* messages. Returns a string like `"|" (0x7c)` for printable chars or `0x1b`
+	* for control chars.
+	*/
+	function formatInjectionChar(code) {
+		const hex = (0, import_number.NumberPrototypeToString)(code, 16);
+		if (code >= 32 && code <= 126) return `"${(0, import_string.StringFromCharCode)(code)}" (0x${hex})`;
+		return `0x${(0, import_string.StringPrototypePadStart)(hex, 2, "0")}`;
+	}
+	/**
+	* Remove leading slashes from string.
+	*/
+	function trimLeadingSlashes(str) {
+		let start = 0;
+		while ((0, import_string.StringPrototypeCharCodeAt)(str, start) === 47) start += 1;
+		return start === 0 ? str : (0, import_string.StringPrototypeSlice)(str, start);
+	}
+	/**
+	* @file Normalization functions for PURL components. Handles path
+	*   normalization, qualifier processing, and canonical form conversion.
+	*/
+	const EMPTY_ENTRIES = (0, import_object.ObjectFreeze)([]);
+	/**
+	* Normalize package name by trimming whitespace.
+	*/
+	function normalizeName(rawName) {
+		return typeof rawName === "string" ? (0, import_string.StringPrototypeTrim)(rawName) : void 0;
+	}
+	/**
+	* Normalize package namespace by trimming and collapsing path separators.
+	*/
+	function normalizeNamespace(rawNamespace) {
+		return typeof rawNamespace === "string" ? normalizePurlPath(rawNamespace) : void 0;
+	}
+	/**
+	* Normalize `purl` path component by collapsing separators and filtering
+	* segments.
+	*/
+	function normalizePurlPath(pathname, options) {
+		const { filter: callback } = options ?? {};
+		let collapsed = "";
+		let start = 0;
+		while ((0, import_string.StringPrototypeCharCodeAt)(pathname, start) === 47) start += 1;
+		let nextIndex = (0, import_string.StringPrototypeIndexOf)(pathname, "/", start);
+		if (nextIndex === -1) {
+			const segment = (0, import_string.StringPrototypeSlice)(pathname, start);
+			return callback === void 0 || callback(segment) ? segment : "";
+		}
+		while (nextIndex !== -1) {
+			const segment = (0, import_string.StringPrototypeSlice)(pathname, start, nextIndex);
+			if (callback === void 0 || callback(segment)) collapsed = collapsed + (collapsed.length === 0 ? "" : "/") + segment;
+			start = nextIndex + 1;
+			while ((0, import_string.StringPrototypeCharCodeAt)(pathname, start) === 47) start += 1;
+			nextIndex = (0, import_string.StringPrototypeIndexOf)(pathname, "/", start);
+		}
+		const lastSegment = (0, import_string.StringPrototypeSlice)(pathname, start);
+		if (lastSegment.length !== 0 && (callback === void 0 || callback(lastSegment))) collapsed = collapsed + (collapsed.length === 0 ? "" : "/") + lastSegment;
+		return collapsed;
+	}
+	/**
+	* Normalize qualifiers by trimming values and lowercasing keys.
+	*/
+	function normalizeQualifiers(rawQualifiers) {
+		let qualifiers;
+		for (const { 0: key, 1: value } of qualifiersToEntries(rawQualifiers)) {
+			if (typeof key !== "string") continue;
+			const strValue = typeof value === "string" ? value : typeof value === "number" || typeof value === "boolean" ? `${value}` : "";
+			const trimmed = (0, import_string.StringPrototypeTrim)(strValue);
+			if (trimmed.length === 0) continue;
+			if (qualifiers === void 0) qualifiers = (0, import_object.ObjectCreate)(null);
+			qualifiers[(0, import_string.StringPrototypeToLowerCase)(key)] = trimmed;
+		}
+		return qualifiers;
+	}
+	/**
+	* Normalize subpath by filtering invalid segments.
+	*/
+	function normalizeSubpath(rawSubpath) {
+		return typeof rawSubpath === "string" ? normalizePurlPath(rawSubpath, { filter: subpathFilter }) : void 0;
+	}
+	/**
+	* Normalize package type to lowercase.
+	*/
+	function normalizeType(rawType) {
+		return typeof rawType === "string" ? (0, import_string.StringPrototypeToLowerCase)((0, import_string.StringPrototypeTrim)(rawType)) : void 0;
+	}
+	/**
+	* Normalize package version by trimming whitespace.
+	*/
+	function normalizeVersion(rawVersion) {
+		return typeof rawVersion === "string" ? (0, import_string.StringPrototypeTrim)(rawVersion) : void 0;
+	}
+	/**
+	* Convert qualifiers to iterable entries.
+	*/
+	function qualifiersToEntries(rawQualifiers) {
+		if (isObject(rawQualifiers)) {
+			const rawQualifiersObj = rawQualifiers;
+			const entriesProperty = rawQualifiersObj["entries"];
+			return typeof entriesProperty === "function" ? (0, import_reflect.ReflectApply)(entriesProperty, rawQualifiersObj, []) : (0, import_object.ObjectEntries)(rawQualifiers);
+		}
+		return typeof rawQualifiers === "string" ? new import_url.URLSearchParamsCtor(rawQualifiers).entries() : EMPTY_ENTRIES;
+	}
+	/**
+	* Filter invalid subpath segments.
+	*/
+	function subpathFilter(segment) {
+		const { length } = segment;
+		if (length === 1 && (0, import_string.StringPrototypeCharCodeAt)(segment, 0) === 46) return false;
+		if (length === 2 && (0, import_string.StringPrototypeCharCodeAt)(segment, 0) === 46 && (0, import_string.StringPrototypeCharCodeAt)(segment, 1) === 46) return false;
+		return !isBlank(segment);
+	}
+	var require_json = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file Safe references to `JSON.parse` / `JSON.stringify`. Captured at module
+		*   load so prototype-pollution attacks (e.g. monkey-patching `JSON.parse` to
+		*   leak the parsed payload) can't redirect callers that route through these
+		*   references.
+		*/
+		const JSONParse = JSON.parse;
+		const JSONStringify = JSON.stringify;
+		exports.JSONParse = JSONParse;
+		exports.JSONStringify = JSONStringify;
+	}));
+	var require_math = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file Safe references to `Math` constants and methods. Methods prefer the
+		*   smol fast-path (`node:smol-primordial`) when available — V8 Fast API typed
+		*   implementations TurboFan inlines into JIT'd callers. Constants stay as the
+		*   stock `Math.X` since they are pre-computed scalar values with no fast-path
+		*   benefit.
+		*/
+		const smolPrimordial = require_primordial().getSmolPrimordial();
+		const MathE = Math.E;
+		const MathLN2 = Math.LN2;
+		const MathLN10 = Math.LN10;
+		const MathLOG2E = Math.LOG2E;
+		const MathLOG10E = Math.LOG10E;
+		const MathPI = Math.PI;
+		const MathSQRT1_2 = Math.SQRT1_2;
+		const MathSQRT2 = Math.SQRT2;
+		const MathAbs = smolPrimordial?.mathAbs ?? Math.abs;
+		const MathAcos = smolPrimordial?.mathAcos ?? Math.acos;
+		const MathAcosh = smolPrimordial?.mathAcosh ?? Math.acosh;
+		const MathAsin = smolPrimordial?.mathAsin ?? Math.asin;
+		const MathAsinh = smolPrimordial?.mathAsinh ?? Math.asinh;
+		const MathAtan = smolPrimordial?.mathAtan ?? Math.atan;
+		const MathAtan2 = smolPrimordial?.mathAtan2 ?? Math.atan2;
+		const MathAtanh = smolPrimordial?.mathAtanh ?? Math.atanh;
+		const MathCbrt = smolPrimordial?.mathCbrt ?? Math.cbrt;
+		const MathCeil = smolPrimordial?.mathCeil ?? Math.ceil;
+		const MathClz32 = smolPrimordial?.mathClz32 ?? Math.clz32;
+		const MathCos = smolPrimordial?.mathCos ?? Math.cos;
+		const MathCosh = smolPrimordial?.mathCosh ?? Math.cosh;
+		const MathExp = smolPrimordial?.mathExp ?? Math.exp;
+		const MathExpm1 = smolPrimordial?.mathExpm1 ?? Math.expm1;
+		const MathF16round = Math.f16round;
+		const MathFloor = smolPrimordial?.mathFloor ?? Math.floor;
+		const MathFround = smolPrimordial?.mathFround ?? Math.fround;
+		const MathHypot = smolPrimordial?.mathHypot ?? Math.hypot;
+		const MathImul = smolPrimordial?.mathImul ?? Math.imul;
+		const MathLog = smolPrimordial?.mathLog ?? Math.log;
+		const MathLog1p = smolPrimordial?.mathLog1p ?? Math.log1p;
+		const MathLog2 = smolPrimordial?.mathLog2 ?? Math.log2;
+		const MathLog10 = smolPrimordial?.mathLog10 ?? Math.log10;
+		const MathMax = Math.max;
+		const MathMin = Math.min;
+		const MathPow = smolPrimordial?.mathPow ?? Math.pow;
+		const MathRandom = Math.random;
+		const MathRound = smolPrimordial?.mathRound ?? Math.round;
+		const MathSign = smolPrimordial?.mathSign ?? Math.sign;
+		const MathSin = smolPrimordial?.mathSin ?? Math.sin;
+		const MathSinh = smolPrimordial?.mathSinh ?? Math.sinh;
+		const MathSqrt = smolPrimordial?.mathSqrt ?? Math.sqrt;
+		const MathTan = smolPrimordial?.mathTan ?? Math.tan;
+		const MathTanh = smolPrimordial?.mathTanh ?? Math.tanh;
+		const MathTrunc = smolPrimordial?.mathTrunc ?? Math.trunc;
+		exports.MathAbs = MathAbs;
+		exports.MathAcos = MathAcos;
+		exports.MathAcosh = MathAcosh;
+		exports.MathAsin = MathAsin;
+		exports.MathAsinh = MathAsinh;
+		exports.MathAtan = MathAtan;
+		exports.MathAtan2 = MathAtan2;
+		exports.MathAtanh = MathAtanh;
+		exports.MathCbrt = MathCbrt;
+		exports.MathCeil = MathCeil;
+		exports.MathClz32 = MathClz32;
+		exports.MathCos = MathCos;
+		exports.MathCosh = MathCosh;
+		exports.MathE = MathE;
+		exports.MathExp = MathExp;
+		exports.MathExpm1 = MathExpm1;
+		exports.MathF16round = MathF16round;
+		exports.MathFloor = MathFloor;
+		exports.MathFround = MathFround;
+		exports.MathHypot = MathHypot;
+		exports.MathImul = MathImul;
+		exports.MathLN10 = MathLN10;
+		exports.MathLN2 = MathLN2;
+		exports.MathLOG10E = MathLOG10E;
+		exports.MathLOG2E = MathLOG2E;
+		exports.MathLog = MathLog;
+		exports.MathLog10 = MathLog10;
+		exports.MathLog1p = MathLog1p;
+		exports.MathLog2 = MathLog2;
+		exports.MathMax = MathMax;
+		exports.MathMin = MathMin;
+		exports.MathPI = MathPI;
+		exports.MathPow = MathPow;
+		exports.MathRandom = MathRandom;
+		exports.MathRound = MathRound;
+		exports.MathSQRT1_2 = MathSQRT1_2;
+		exports.MathSQRT2 = MathSQRT2;
+		exports.MathSign = MathSign;
+		exports.MathSin = MathSin;
+		exports.MathSinh = MathSinh;
+		exports.MathSqrt = MathSqrt;
+		exports.MathTan = MathTan;
+		exports.MathTanh = MathTanh;
+		exports.MathTrunc = MathTrunc;
+	}));
+	var require_array = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_error = require_error();
+		const require_primordials_number = require_number();
+		const require_primordials_array = require_array$1();
+		const require_primordials_math = require_math();
+		/**
+		* @file Shims for the ES2023 change-array-by-copy methods, both Node 20.
+		*   Only the two the tree consumes are here: `toSorted` and `toReversed`.
+		*   Both produce a DENSE result. Reading a hole yields undefined rather than
+		*   propagating the hole, and `toSorted` places every undefined at the end
+		*   regardless of the comparator, which is the part a `[...arr].sort(cmp)`
+		*   rewrite gets right only by accident and a `filter(Boolean)` rewrite gets
+		*   wrong outright.
+		*/
+		const MAX_SAFE_LENGTH = 2 ** 53 - 1;
+		/**
+		* The native `Array.prototype.toReversed`, or undefined below Node 20.
+		*/
+		const arrayToReversedNative = typeof require_primordials_array.ArrayCtor.prototype.toReversed === "function" ? (arr) => arr.toReversed() : void 0;
+		/**
+		* `Array.prototype.toReversed` shim.
+		*
+		* Walks the source backwards by index rather than reversing in place, so the
+		* input is never mutated and the output is dense.
+		*/
+		function arrayToReversedShim(arr) {
+			const length = toLength(arr.length);
+			const out = new require_primordials_array.ArrayCtor(length);
+			for (let i = 0; i < length; i += 1) out[i] = arr[length - i - 1];
+			return out;
+		}
+		const arrayToReversed = arrayToReversedNative ?? arrayToReversedShim;
+		/**
+		* The native `Array.prototype.toSorted`, or undefined below Node 20.
+		*/
+		const arrayToSortedNative = typeof require_primordials_array.ArrayCtor.prototype.toSorted === "function" ? (arr, comparator) => arr.toSorted(comparator) : void 0;
+		/**
+		* `Array.prototype.toSorted` shim.
+		*
+		* The comparator is validated BEFORE any element is read, so a bad comparator
+		* throws on an empty array too. `sort` then supplies the rest of the observable
+		* contract: a stable order, and undefined last whatever the comparator says.
+		*/
+		function arrayToSortedShim(arr, comparator) {
+			if (comparator !== void 0 && typeof comparator !== "function") throw new require_primordials_error.TypeErrorCtor("The comparator must be a function or undefined");
+			const length = toLength(arr.length);
+			const out = new require_primordials_array.ArrayCtor(length);
+			for (let i = 0; i < length; i += 1) out[i] = arr[i];
+			return require_primordials_array.ArrayPrototypeSort(out, comparator);
+		}
+		const arrayToSorted = arrayToSortedNative ?? arrayToSortedShim;
+		/**
+		* The spec's ToLength: a length is clamped to a non-negative integer under
+		* 2^53-1. Without it a `length` of -1 or NaN reaches `new Array(length)` and
+		* throws a RangeError where the spec produces an empty array.
+		*/
+		function toLength(value) {
+			const n = require_primordials_number.NumberCtor(value);
+			if (require_primordials_number.NumberIsNaN(n) || n <= 0) return 0;
+			return require_primordials_math.MathMin(require_primordials_math.MathFloor(n), MAX_SAFE_LENGTH);
+		}
+		exports.arrayToReversed = arrayToReversed;
+		exports.arrayToReversedNative = arrayToReversedNative;
+		exports.arrayToReversedShim = arrayToReversedShim;
+		exports.arrayToSorted = arrayToSorted;
+		exports.arrayToSortedNative = arrayToSortedNative;
+		exports.arrayToSortedShim = arrayToSortedShim;
+		exports.toLength = toLength;
+	}));
+	var require_globals = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		/**
+		* @file Safe references to top-level globals that don't fit a larger
+		*   primordials leaf — primitive constructors (`Boolean`, `BigInt`), `Proxy`,
+		*   `SharedArrayBuffer`, language-level constants (`Infinity`, `NaN`,
+		*   `globalThis`), and the encode/decode helpers. Every reference is captured
+		*   once at module load so consumers reading adversarial input never see a
+		*   tampered global.
+		*/
+		const BigIntCtor = BigInt;
+		const BooleanCtor = Boolean;
+		const ProxyCtor = Proxy;
+		const SharedArrayBufferCtor = typeof SharedArrayBuffer === "undefined" ? void 0 : SharedArrayBuffer;
+		const InfinityValue = Infinity;
+		const NaNValue = NaN;
+		const capturedGlobalThis = globalThis;
+		const atob = globalThis.atob;
+		const btoa = globalThis.btoa;
+		const decodeURIComponent = globalThis.decodeURIComponent;
+		const encodeURIComponent = globalThis.encodeURIComponent;
+		exports.BigIntCtor = BigIntCtor;
+		exports.BooleanCtor = BooleanCtor;
+		exports.InfinityValue = InfinityValue;
+		exports.NaNValue = NaNValue;
+		exports.ProxyCtor = ProxyCtor;
+		exports.SharedArrayBufferCtor = SharedArrayBufferCtor;
+		exports.atob = atob;
+		exports.btoa = btoa;
+		exports.decodeURIComponent = decodeURIComponent;
+		exports.encodeURIComponent = encodeURIComponent;
+		exports.globalThis = capturedGlobalThis;
+	}));
+	/**
+	* @file URL encoding functions for PURL components. Provides special handling
+	*   for names, namespaces, versions, qualifiers, and subpaths.
+	*/
+	var import_array = require_array();
+	var import_globals = require_globals();
+	const encodeComponent = import_globals.encodeURIComponent;
+	const REUSED_SEARCH_PARAMS = new import_url.URLSearchParamsCtor();
+	const REUSED_SEARCH_PARAMS_KEY = "_";
+	const REUSED_SEARCH_PARAMS_OFFSET = 2;
+	/**
+	* Encode package name component for URL.
+	*/
+	function encodeName(name) {
+		return isNonEmptyString(name) ? (0, import_string.StringPrototypeReplaceAll)(encodePurlComponent(name), "%3A", ":") : "";
+	}
+	/**
+	* Encode package namespace component for URL.
+	*/
+	function encodeNamespace(namespace) {
+		return isNonEmptyString(namespace) ? (0, import_string.StringPrototypeReplaceAll)((0, import_string.StringPrototypeReplaceAll)(encodePurlComponent(namespace), "%3A", ":"), "%2F", "/") : "";
+	}
+	function encodePurlComponent(value) {
+		return (0, import_string.StringPrototypeReplaceAll)(encodeComponent(value), /[!'()*]/g, (character) => {
+			switch (character) {
+				case "!": return "%21";
+				case "'": return "%27";
+				case "(": return "%28";
+				case ")": return "%29";
+				default: return "%2A";
+			}
+		});
+	}
+	/**
+	* Encode qualifier parameter key or value.
+	*/
+	function encodeQualifierParam(param) {
+		if (isNonEmptyString(param)) {
+			const value = param;
+			REUSED_SEARCH_PARAMS.set(REUSED_SEARCH_PARAMS_KEY, value);
+			const search = REUSED_SEARCH_PARAMS.toString();
+			return normalizeSearchParamsEncoding((0, import_string.StringPrototypeSlice)(search, REUSED_SEARCH_PARAMS_OFFSET));
+		}
+		return "";
+	}
+	/**
+	* Encode qualifiers object as URL query string.
+	*/
+	function encodeQualifiers(qualifiers) {
+		if (isObject(qualifiers)) {
+			const qualifiersKeys = (0, import_array.arrayToSorted)((0, import_object.ObjectKeys)(qualifiers));
+			const searchParams = new import_url.URLSearchParamsCtor();
+			for (let i = 0, { length } = qualifiersKeys; i < length; i += 1) {
+				const key = qualifiersKeys[i];
+				const value = String(qualifiers[key]);
+				searchParams.set(key, value);
+			}
+			return normalizeSearchParamsEncoding(searchParams.toString());
+		}
+		return "";
+	}
+	/**
+	* Encode subpath component for URL.
+	*/
+	function encodeSubpath(subpath) {
+		return isNonEmptyString(subpath) ? (0, import_string.StringPrototypeReplaceAll)((0, import_string.StringPrototypeReplaceAll)(encodePurlComponent(subpath), "%2F", "/"), "%3A", ":") : "";
+	}
+	/**
+	* Encode package version component for URL.
+	*/
+	function encodeVersion(version) {
+		return isNonEmptyString(version) ? (0, import_string.StringPrototypeReplaceAll)(encodePurlComponent(version), "%3A", ":") : "";
+	}
+	/**
+	* Normalize `URLSearchParams` output for qualifier encoding.
+	*
+	* `URLSearchParams` applies `application/x-www-form-urlencoded` escaping, which
+	* is stricter than the purl spec. The spec lists characters that "shall not be
+	* percent-encoded" in a qualifier value; of the ones form-encoding wrongly
+	* escapes, restore the colon ':' (spec: never encoded, "whether used as a
+	* Separator Character or otherwise") and the tilde '~' (an unreserved
+	* Punctuation Character). The slash '/' and at sign '@' stay percent-encoded
+	* inside a value — they are not in the spec's no-encode set there.
+	*/
+	function normalizeSearchParamsEncoding(encoded) {
+		encoded = (0, import_string.StringPrototypeReplaceAll)(encoded, "*", "%2A");
+		if ((0, import_string.StringPrototypeIndexOf)(encoded, "%") === -1 && (0, import_string.StringPrototypeIndexOf)(encoded, "+") === -1) return encoded;
+		return (0, import_string.StringPrototypeReplaceAll)((0, import_string.StringPrototypeReplaceAll)((0, import_string.StringPrototypeReplaceAll)(encoded, "+", "%20"), "%3A", ":"), "%7E", "~");
+	}
+	/**
+	* @file Helper function for creating namespace objects. Organizes helper
+	*   functions by property names with configurable defaults and sorting.
+	*/
+	/**
+	* Create namespace object organizing helpers by property names. Callers
+	* (PurlType, PurlComponent) each pass an open, growing key domain, so the
+	* generic namespace inverter below stays Record-typed rather than branded.
+	*/
+	function createHelpersNamespaceObject(helpers, options_ = {}) {
+		const { comparator, ...defaults } = {
+			__proto__: null,
+			...options_
+		};
+		const helperNames = (0, import_array.arrayToSorted)((0, import_object.ObjectKeys)(helpers));
+		const propNames = (0, import_array.arrayToSorted)([...new import_map_set.SetCtor((0, import_array$1.ArrayPrototypeFlatMap)((0, import_object.ObjectValues)(helpers), (helper) => (0, import_object.ObjectKeys)(helper)))], comparator);
+		const nsObject = (0, import_object.ObjectCreate)(null);
+		for (let i = 0, { length } = propNames; i < length; i += 1) {
+			const propName = propNames[i];
+			const helpersForProp = (0, import_object.ObjectCreate)(null);
+			for (let j = 0, { length: helperNamesLength } = helperNames; j < helperNamesLength; j += 1) {
+				const helperName = helperNames[j];
+				const helperValue = helpers[helperName]?.[propName] ?? defaults[helperName];
+				if (helperValue !== void 0) helpersForProp[helperName] = helperValue;
+			}
+			nsObject[propName] = helpersForProp;
+		}
+		return nsObject;
+	}
+	/**
+	* Format error message for PURL exceptions.
+	*/
+	function formatPurlErrorMessage(message = "") {
+		const { length } = message;
+		let formatted = "";
+		if (length) {
+			const code0 = (0, import_string.StringPrototypeCharCodeAt)(message, 0);
+			formatted = code0 >= 65 && code0 <= 90 ? `${(0, import_string.StringPrototypeToLowerCase)(message[0])}${(0, import_string.StringPrototypeSlice)(message, 1)}` : message;
+			if (length > 1 && (0, import_string.StringPrototypeCharCodeAt)(message, length - 1) === 46 && (0, import_string.StringPrototypeCharCodeAt)(message, length - 2) !== 46) formatted = (0, import_string.StringPrototypeSlice)(formatted, 0, -1);
+		}
+		return `Invalid purl: ${formatted}`;
+	}
+	/**
+	* Custom error class for Package URL parsing and validation failures.
+	*/
+	var PurlError = class extends Error {
+		constructor(message, options) {
+			super(formatPurlErrorMessage(message), options);
+		}
+	};
+	/**
+	* Specialized error for injection character detection. Developers can catch
+	* this specifically to distinguish injection rejections from other PURL
+	* validation errors and handle them at an elevated level (e.g., logging,
+	* alerting, blocking).
+	*
+	* Properties: - `component` — which PURL component was rejected (`"name"`,
+	* `"namespace"`) - `charCode` — the character code of the injection character
+	* found - `purlType` — the package type (e.g., `"npm"`, `"maven"`)
+	*/
+	var PurlInjectionError = class extends PurlError {
+		charCode;
+		component;
+		purlType;
+		constructor(purlType, component, charCode, charLabel) {
+			super(`${purlType} "${component}" component contains injection character ${charLabel}`);
+			this.charCode = charCode;
+			this.component = component;
+			this.purlType = purlType;
+			(0, import_object.ObjectFreeze)(this);
+		}
+	};
+	(0, import_object.ObjectFreeze)(PurlInjectionError.prototype);
+	/**
+	* @file Language utility functions for checking null, undefined, and empty
+	*   string values. Provides type checking predicates for common value
+	*   validation scenarios.
+	*/
+	/**
+	* Check if a value is `null`, `undefined`, or an empty string.
+	*/
+	function isNullishOrEmptyString(value) {
+		return value === null || value === void 0 || typeof value === "string" && value.length === 0;
+	}
+	/**
+	* @file Primitive validation helpers shared by PURL component validators.
+	*   Checks for required presence, string type, null bytes, injection
+	*   characters, and leading-digit constraints.
+	*/
+	/**
+	* Validate that component is empty for specific package type.
+	*/
+	function validateEmptyByType(type, name, value, options) {
+		const { throws = false } = options ?? {};
+		if (!isNullishOrEmptyString(value)) {
+			if (throws) throw new PurlError(`${type} "${name}" component must be empty`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate that a component does not contain injection characters. Shared
+	* helper to eliminate boilerplate across per-type validators.
+	*
+	* @throws {PurlInjectionError} When validation fails and `throws` is `true`.
+	*   The error includes the specific character code, component name, and package
+	*   type so callers can log, alert, or handle injection attempts at an elevated
+	*   level.
+	*/
+	function validateNoInjectionByType(type, component, value, options) {
+		const { throws = false } = options ?? {};
+		if (typeof value === "string") {
+			const code = findInjectionCharCode(value);
+			if (code !== -1) {
+				if (throws) throw new PurlInjectionError(type, component, code, formatInjectionChar(code));
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* Validate that component is present and not empty.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateRequired(name, value, options) {
+		const { throws = false } = options ?? {};
+		if (isNullishOrEmptyString(value)) {
+			if (throws) throw new PurlError(`"${name}" is a required component`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate that component is required for specific package type.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateRequiredByType(type, name, value, options) {
+		const { throws = false } = options ?? {};
+		if (isNullishOrEmptyString(value)) {
+			if (throws) throw new PurlError(`${type} requires a "${name}" component`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate that value does not start with a number.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateStartsWithoutNumber(name, value, options) {
+		const { throws = false } = options ?? {};
+		if (isNonEmptyString(value)) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(value, 0);
+			if (code >= 48 && code <= 57) {
+				if (throws) throw new PurlError(`${name} "${value}" cannot start with a number`);
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* Validate that value is a string type.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateStrings(name, value, options) {
+		const { throws = false } = options ?? {};
+		if (value === null || value === void 0) return true;
+		if (typeof value !== "string") {
+			if (throws) throw new PurlError(`"${name}" must be a string`);
+			return false;
+		}
+		if ((0, import_string.StringPrototypeIncludes)(value, "\0")) {
+			if (throws) throw new PurlError(`"${name}" must not contain null bytes`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* @file Validation functions for PURL components. Ensures compliance with
+	*   Package URL specification requirements and constraints.
+	*/
+	function getQualifierKeys(qualifiersObj) {
+		const keysProperty = qualifiersObj["keys"];
+		return typeof keysProperty === "function" ? (0, import_reflect.ReflectApply)(keysProperty, qualifiersObj, []) : (0, import_object.ObjectKeys)(qualifiersObj);
+	}
+	function isPurlTypeCharacter(code) {
+		return code >= 48 && code <= 57 || code >= 65 && code <= 90 || code >= 97 && code <= 122 || code === 46 || code === 45;
+	}
+	/**
+	* Validate package name component.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateName(name, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (!validateRequired("name", name, opts) || !validateStrings("name", name, opts)) return false;
+		const MAX_NAME_LENGTH = 214;
+		if (typeof name === "string" && name.length > MAX_NAME_LENGTH) {
+			if (throws) throw new PurlError(`"name" exceeds maximum length of ${MAX_NAME_LENGTH} characters`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate package namespace component.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateNamespace(namespace, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (!validateStrings("namespace", namespace, opts)) return false;
+		const MAX_NAMESPACE_LENGTH = 512;
+		if (typeof namespace === "string" && namespace.length > MAX_NAMESPACE_LENGTH) {
+			if (throws) throw new PurlError(`"namespace" exceeds maximum length of ${MAX_NAMESPACE_LENGTH} characters`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate qualifier key format and characters.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateQualifierKey(key, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (key.length === 0) {
+			if (throws) throw new PurlError("qualifier key must not be empty");
+			return false;
+		}
+		const MAX_QUALIFIER_KEY_LENGTH = 256;
+		if (key.length > MAX_QUALIFIER_KEY_LENGTH) {
+			if (throws) throw new PurlError(`qualifier key exceeds maximum length of ${MAX_QUALIFIER_KEY_LENGTH} characters`);
+			return false;
+		}
+		if (!validateStartsWithoutNumber("qualifier", key, opts)) return false;
+		for (let i = 0, { length } = key; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(key, i);
+			if (!(isPurlTypeCharacter(code) || code === 95)) {
+				if (throws) throw new PurlError(`qualifier key "${key}" must match [a-z0-9.\\-_]`);
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* Validate qualifiers object structure and keys.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateQualifiers(qualifiers, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (qualifiers === null || qualifiers === void 0) return true;
+		if (typeof qualifiers !== "object" || (0, import_array$1.ArrayIsArray)(qualifiers)) {
+			if (throws) throw new PurlError("\"qualifiers\" must be a plain object");
+			return false;
+		}
+		const qualifiersObj = qualifiers;
+		const keysIterable = getQualifierKeys(qualifiersObj);
+		for (const key of keysIterable) {
+			if (typeof key !== "string") {
+				if (throws) throw new PurlError("qualifier key must be a string");
+				return false;
+			}
+			if (!validateQualifierKey(key, opts)) return false;
+			const value = typeof qualifiersObj[key] === "string" ? qualifiersObj[key] : void 0;
+			if (value !== void 0 && !validateQualifierValue(key, value, opts)) return false;
+		}
+		return true;
+	}
+	function validateQualifierValue(key, value, options) {
+		const { throws = false } = options ?? {};
+		const MAX_QUALIFIER_VALUE_LENGTH = 65536;
+		if (value.length > MAX_QUALIFIER_VALUE_LENGTH) {
+			if (throws) throw new PurlError(`qualifier "${key}" value exceeds maximum length of ${MAX_QUALIFIER_VALUE_LENGTH} characters`);
+			return false;
+		}
+		const code = findCommandInjectionCharCode(value);
+		if (code !== -1) {
+			if (throws) throw new PurlInjectionError("purl", `qualifier "${key}"`, code, formatInjectionChar(code));
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate subpath component. Rejects command injection characters (`|`, `;`,
+	* `` ` ``, `$`, `<`, `>`, `\`) while allowing characters that are legitimate in
+	* decoded subpaths (`?`, `#`, space, etc. which get percent-encoded in the PURL
+	* string representation).
+	*
+	* @throws {PurlInjectionError} When command injection characters found and
+	*   `options.throws` is `true`.
+	* @throws {PurlError} When validation fails and `options.throws` is `true`.
+	*/
+	function validateSubpath(subpath, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (!validateStrings("subpath", subpath, opts)) return false;
+		if (typeof subpath === "string") {
+			const code = findCommandInjectionCharCode(subpath);
+			if (code !== -1) {
+				if (throws) throw new PurlInjectionError("purl", "subpath", code, formatInjectionChar(code));
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* Validate package type component format and characters.
+	*
+	* @throws {PurlError} When validation fails and options.throws is true.
+	*/
+	function validateType(type, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (!validateRequired("type", type, opts) || !validateStrings("type", type, opts) || !validateStartsWithoutNumber("type", type, opts)) return false;
+		for (let i = 0, { length } = type; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(type, i);
+			if (!isPurlTypeCharacter(code) || i === 0 && (code === 46 || code === 45)) {
+				if (throws) throw new PurlError(`type "${type}" must match [A-Za-z][A-Za-z0-9.\\-]*`);
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* Validate package version component. Rejects command injection characters
+	* (`|`, `;`, `` ` ``, `$`, `<`, `>`, `\`) while allowing characters legitimate
+	* in version strings (`!`, `+`, `-`, `.`, `_`, `~`, space, `%`, `?`, `#`).
+	*
+	* @throws {PurlInjectionError} When command injection characters found and
+	*   `options.throws` is `true`.
+	* @throws {PurlError} When validation fails and `options.throws` is `true`.
+	*/
+	function validateVersion(version, options) {
+		const opts = options;
+		const { throws = false } = opts ?? {};
+		if (!validateStrings("version", version, opts)) return false;
+		const MAX_VERSION_LENGTH = 256;
+		if (typeof version === "string" && version.length > MAX_VERSION_LENGTH) {
+			if (throws) throw new PurlError(`"version" exceeds maximum length of ${MAX_VERSION_LENGTH} characters`);
+			return false;
+		}
+		if (typeof version === "string") {
+			const code = findCommandInjectionCharCode(version);
+			if (code !== -1) {
+				if (throws) throw new PurlInjectionError("purl", "version", code, formatInjectionChar(code));
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* @file PURL component handlers providing encoding, normalization, and
+	*   validation functionality. Handles all Package URL components including
+	*   `type`, `namespace`, `name`, `version`, `qualifiers`, and `subpath`.
+	*/
+	const componentSortOrderLookup = {
+		__proto__: null,
+		name: 2,
+		namespace: 1,
+		qualifierKey: 5,
+		qualifiers: 4,
+		qualifierValue: 6,
+		subpath: 7,
+		type: 0,
+		version: 3
+	};
+	/**
+	* Compare two component names for sorting.
+	*/
+	function componentComparator(compA, compB) {
+		return componentSortOrder(compA) - componentSortOrder(compB);
+	}
+	/**
+	* Get numeric sort order for component name.
+	*/
+	function componentSortOrder(comp) {
+		return componentSortOrderLookup[comp] ?? 8;
+	}
+	/**
+	* Encode PURL component value to string.
+	*/
+	function PurlComponentEncoder(comp) {
+		return isNonEmptyString(comp) ? encodeComponent(comp) : "";
+	}
+	/**
+	* Normalize PURL component to string or undefined.
+	*/
+	function PurlComponentStringNormalizer(comp) {
+		return typeof comp === "string" ? comp : void 0;
+	}
+	/**
+	* Validate PURL component value.
+	*/
+	function PurlComponentValidator(_comp, _options) {
+		return true;
+	}
+	const PurlComponent = createHelpersNamespaceObject({
+		encode: {
+			name: encodeName,
+			namespace: encodeNamespace,
+			version: encodeVersion,
+			qualifiers: encodeQualifiers,
+			qualifierKey: encodeQualifierParam,
+			qualifierValue: encodeQualifierParam,
+			subpath: encodeSubpath
+		},
+		normalize: {
+			type: normalizeType,
+			namespace: normalizeNamespace,
+			name: normalizeName,
+			version: normalizeVersion,
+			qualifiers: normalizeQualifiers,
+			subpath: normalizeSubpath
+		},
+		validate: {
+			type: validateType,
+			namespace: validateNamespace,
+			name: validateName,
+			version: validateVersion,
+			qualifierKey: validateQualifierKey,
+			qualifiers: validateQualifiers,
+			subpath: validateSubpath
+		}
+	}, {
+		comparator: componentComparator,
+		encode: PurlComponentEncoder,
+		normalize: PurlComponentStringNormalizer,
+		validate: PurlComponentValidator
+	});
+	/**
+	* @file Constants defining standard PURL qualifier names. Provides
+	*   `repository_url`, `download_url`, `vcs_url`, `file_name`, and `checksum`
+	*   qualifier constants.
+	*/
+	const PurlQualifierNames = {
+		__proto__: null,
+		Checksum: "checksum",
+		DownloadUrl: "download_url",
+		FileName: "file_name",
+		RepositoryUrl: "repository_url",
+		VcsUrl: "vcs_url",
+		Vers: "vers"
+	};
+	/**
+	* @file ALPM (Arch Linux Package Manager) PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#alpm.
+	*/
+	/**
+	* Normalize ALPM package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$27(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* @file APK (Alpine Package Manager) PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#apk.
+	*/
+	/**
+	* Normalize APK package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$26(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* @file Bazel-specific PURL validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst Bazel is
+	*   a build system. Bazel packages represent external dependencies in Bazel
+	*   `BUILD` files. No normalize step: a Bazel module name is case-sensitive and
+	*   already lowercase by Bazel's own grammar. Bazel validates module names
+	*   against `VALID_MODULE_NAME = [a-z]([a-z0-9._-]*[a-z0-9])?`
+	*   (RepositoryName.java in bazelbuild/bazel) and the Bazel Central Registry
+	*   stores each module under that exact validated string, so uppercase is
+	*   rejected at the source rather than folded — lowercasing here would only
+	*   mask an invalid name. This matches the canonical purl-spec roundtrip
+	*   fixture `pkg:bazel/Curl@8.8.0.bcr.1`, which preserves the input case. The
+	*   purl bazel type definition carries no `case_sensitive` flag and no
+	*   normalization rule, consistent with preserve.
+	*/
+	/**
+	* Validate Bazel package URL. Bazel packages must have a `version` (for
+	* reproducible builds). `name` must not contain injection characters.
+	*/
+	function bazelValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!purl.version || purl.version.length === 0) {
+			if (throws) throw new PurlError("bazel requires a \"version\" component");
+			return false;
+		}
+		if (!validateNoInjectionByType("bazel", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file Bitbucket PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#bitbucket.
+	*/
+	/**
+	* Validate Bitbucket package URL. `name` and `namespace` must not contain
+	* injection characters.
+	*/
+	function bitbucketValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("bitbucket", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("bitbucket", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize Bitbucket package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$25(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* @file Bitnami PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#bitnami.
+	*/
+	/**
+	* Normalize Bitnami package URL. Lowercases `name` only.
+	*/
+	function normalize$24(purl) {
+		lowerName(purl);
+		return purl;
+	}
+	function brewNormalize(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	var require_buffer = /* @__PURE__ */ __commonJSMin(((exports) => {
+		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+		const require_primordials_uncurry = require_uncurry();
+		/**
+		* @file Safe references to Node's `Buffer` global. `Buffer` is a Node-only
+		*   global; in browsers and in Deno without a compatibility shim the captured
+		*   references are `undefined`. Cross- env consumers must null-check before
+		*   calling.
+		*/
+		const BufferCtor = globalThis.Buffer;
+		const BufferAlloc = BufferCtor?.alloc;
+		const BufferAllocUnsafe = BufferCtor?.allocUnsafe;
+		const BufferAllocUnsafeSlow = BufferCtor?.allocUnsafeSlow;
+		const BufferByteLength = BufferCtor?.byteLength;
+		const BufferConcat = BufferCtor?.concat;
+		const BufferFrom = BufferCtor?.from;
+		const BufferIsBuffer = BufferCtor?.isBuffer;
+		const BufferIsEncoding = BufferCtor?.isEncoding;
+		/* c8 ignore start */
+		const BufferPrototypeSlice = BufferCtor ? require_primordials_uncurry.uncurryThis(BufferCtor.prototype.slice) : void 0;
+		const BufferPrototypeToString = BufferCtor ? require_primordials_uncurry.uncurryThis(BufferCtor.prototype.toString) : void 0;
+		/* c8 ignore stop */
+		exports.BufferAlloc = BufferAlloc;
+		exports.BufferAllocUnsafe = BufferAllocUnsafe;
+		exports.BufferAllocUnsafeSlow = BufferAllocUnsafeSlow;
+		exports.BufferByteLength = BufferByteLength;
+		exports.BufferConcat = BufferConcat;
+		exports.BufferCtor = BufferCtor;
+		exports.BufferFrom = BufferFrom;
+		exports.BufferIsBuffer = BufferIsBuffer;
+		exports.BufferIsEncoding = BufferIsEncoding;
+		exports.BufferPrototypeSlice = BufferPrototypeSlice;
+		exports.BufferPrototypeToString = BufferPrototypeToString;
+	}));
+	/**
+	* Validate Cargo package URL. Cargo packages must not have a `namespace`.
+	* `name` must not contain injection characters.
+	*/
+	function cargoValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("cargo", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("cargo", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file Chrome extension PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/types/chrome-extension-definition.json
+	*   The name is a Chrome Web Store extension id: exactly 32 characters a-p
+	*   rendered a-z in the spec's permitted pattern, case-insensitive (so
+	*   normalize lowercases it). The version is semver-like with 1-4 numeric
+	*   segments. A namespace is prohibited.
+	*/
+	const CHROME_EXTENSION_ID_PATTERN = /^[a-z]{32}$/;
+	const CHROME_EXTENSION_VERSION_PATTERN = /^\d+(?:\.\d+){0,3}$/;
+	/**
+	* Validate chrome-extension package URL. Chrome extensions must not have a
+	* `namespace`; `name` must be a 32-char a-z extension id; `version`, when
+	* present, must be 1-4 dot-separated numeric segments.
+	*/
+	function chromeExtensionValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("chrome-extension", "namespace", purl.namespace, { throws })) return false;
+		if (!CHROME_EXTENSION_ID_PATTERN.test(purl.name)) {
+			if (throws) throw new PurlError("chrome-extension \"name\" component must be a 32-character a-z extension id");
+			return false;
+		}
+		if (purl.version !== void 0 && !CHROME_EXTENSION_VERSION_PATTERN.test(purl.version)) {
+			if (throws) throw new PurlError("chrome-extension \"version\" component must be 1-4 dot-separated numeric segments");
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Normalize chrome-extension package URL. Lowercases `name` — the extension id
+	* is case-insensitive per spec.
+	*/
+	function normalize$23(purl) {
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Validate CocoaPods package URL. `name` cannot contain injection or whitespace
+	* characters, plus (`+`) character, or begin with a period (`.`).
+	*/
+	function cocoaodsValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const { name } = purl;
+		if (!validateNoInjectionByType("cocoapods", "name", name, { throws })) return false;
+		if ((0, import_string.StringPrototypeIncludes)(name, "+")) {
+			if (throws) throw new PurlError("cocoapods \"name\" component cannot contain a plus (+) character");
+			return false;
+		}
+		if ((0, import_string.StringPrototypeCharCodeAt)(name, 0) === 46) {
+			if (throws) throw new PurlError("cocoapods \"name\" component cannot begin with a period");
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Normalize Composer package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$22(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* @file Conan (C/C++) PURL validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#conan.
+	*/
+	/**
+	* Validate Conan package URL. If `namespace` is present, `qualifiers` are
+	* required. If `channel` qualifier is present, `namespace` is required.
+	*/
+	function conanValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (isNullishOrEmptyString(purl.namespace)) {
+			if (purl.qualifiers?.["channel"]) {
+				if (throws) throw new PurlError("conan requires a \"namespace\" component when a \"channel\" qualifier is present");
+				return false;
+			}
+		} else if (isNullishOrEmptyString(purl.qualifiers)) {
+			if (throws) throw new PurlError("conan requires a \"qualifiers\" component when a namespace is present");
+			return false;
+		}
+		if (!validateNoInjectionByType("conan", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("conan", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Validate Conda package URL. Conda packages must not have a `namespace`.
+	* `name` must not contain injection characters.
+	*/
+	function condaValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("conda", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("conda", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize Conda package URL. Lowercases `name` only.
+	*/
+	function normalize$21(purl) {
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Validate CPAN package URL. CPAN `namespace` (author/publisher ID) is optional
+	* and must be uppercase when present; `name` is a distribution name and must
+	* not contain the module-style `::` separator.
+	*/
+	function cpanValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const { namespace } = purl;
+		if (namespace && namespace !== (0, import_string.StringPrototypeToUpperCase)(namespace)) {
+			if (throws) throw new PurlError("cpan \"namespace\" component must be UPPERCASE");
+			return false;
+		}
+		if ((0, import_string.StringPrototypeIncludes)(purl.name, "::")) {
+			if (throws) throw new PurlError("cpan \"name\" component is a distribution name and must not contain \"::\"");
+			return false;
+		}
+		if (!validateNoInjectionByType("cpan", "namespace", namespace, { throws })) return false;
+		if (!validateNoInjectionByType("cpan", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Validate CRAN package URL. CRAN packages require a `version`. `name` must not
+	* contain injection characters.
+	*/
+	function cranValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateRequiredByType("cran", "version", purl.version, { throws })) return false;
+		if (!validateNoInjectionByType("cran", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file Debian package PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#deb.
+	*/
+	/**
+	* Normalize Debian package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$20(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Validate Docker package URL. `name` and `namespace` must not contain
+	* injection characters.
+	*/
+	function dockerValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("docker", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("docker", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize Docker package URL. Lowercases `namespace` (user/org) and `name`.
+	* The distribution/reference grammar makes every path-component (the user/org
+	* namespace segment and the image name) lowercase-only — `docker pull` rejects
+	* uppercase — and a registry host belongs in `repository_url`, never the
+	* namespace, so folding the namespace is never lossy. The version (a tag or
+	* sha256 id) is preserved.
+	*/
+	function normalize$19(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Validate RubyGem package URL. Gem packages must not have a `namespace`.
+	* `name` must not contain injection characters.
+	*/
+	function gemValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("gem", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("gem", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize generic package URL. No type-specific normalization for generic
+	* packages.
+	*/
+	function normalize$18(purl) {
+		return purl;
+	}
+	function gitValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		return validateRequiredByType("git", "namespace", purl.namespace, { throws }) && validateNoInjectionByType("git", "namespace", purl.namespace, { throws }) && validateNoInjectionByType("git", "name", purl.name, { throws });
+	}
+	/**
+	* @file GitHub PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#github.
+	*/
+	/**
+	* Validate GitHub package URL. `name` and `namespace` must not contain
+	* injection characters.
+	*/
+	function githubValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("github", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("github", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize GitHub package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$17(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* @file GitLab PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#other-candidate-types-to-define.
+	*/
+	/**
+	* Validate GitLab package URL. `name` and `namespace` must not contain
+	* injection characters.
+	*/
+	function gitlabValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("gitlab", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("gitlab", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize GitLab package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$16(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Decode a Go module proxy escaped path or version back to its real case.
+	*
+	* The proxy protocol escapes uppercase letters as `!` then lowercase; a literal
+	* `!` is reserved as the escape character and may not otherwise appear, so the
+	* `!`-then-lowercase pairing is unambiguous:
+	*
+	* - `github.com/!data!dog/datadog-go` -> `github.com/DataDog/datadog-go`
+	* - `v1.0.0-!r!c1` -> `v1.0.0-RC1`
+	*
+	* The "no literal `!`" guarantee is by design in the Go toolchain
+	* (`golang.org/x/mod/module`, `unescapeString`): "Import paths have never
+	* allowed exclamation marks, so there is no need to define how to escape a
+	* literal `!`." Inverse of {@link encodeGolangProxyPath} (which carries the
+	* full protocol provenance).
+	*
+	* @see https://go.dev/ref/mod#goproxy-protocol
+	* @see https://github.com/golang/mod/blob/v0.36.0/module/module.go#L763 (unescapeString)
+	*/
+	function decodeGolangProxyPath(path) {
+		return (0, import_string.StringPrototypeReplace)(path, /!([a-z])/g, (_match, letter) => (0, import_string.StringPrototypeToUpperCase)(String(letter)));
+	}
+	/**
+	* Encode a Go module path or version for the Go module proxy protocol.
+	*
+	* The proxy escapes every uppercase letter as `!` + its lowercase form so that
+	* case-insensitive filesystems and URLs cannot collide case-distinct modules:
+	*
+	* - `github.com/DataDog/datadog-go` -> `github.com/!data!dog/datadog-go`
+	* - `v1.0.0-RC1` -> `v1.0.0-!r!c1`
+	*
+	* This is a transport detail of `proxy.golang.org`, not part of the canonical
+	* PURL string. Inverse of {@link decodeGolangProxyPath}.
+	*
+	* ## Provenance — this is official Go, not Artifactory-specific
+	*
+	* The Go module proxy protocol (Go Modules Reference "Module proxies", and
+	* `go help goproxy`) defines it: to avoid ambiguity on case-insensitive file
+	* systems, $module and $version case-encode each uppercase letter as `!` plus
+	* its lowercase form. The Go toolchain implements it in
+	* `golang.org/x/mod/module` `escapeString` (via `EscapePath`/`EscapeVersion`),
+	* whose rationale is verbatim: "we cannot rely on the file system to keep
+	* rsc.io/QUOTE and rsc.io/quote separate. Windows and macOS don't…"
+	*
+	* Every conformant proxy (proxy.golang.org, Athens, Nexus, Artifactory) must
+	* implement it, and the Go client emits `!`-encoded URLs whichever proxy it
+	* talks to. Artifactory merely conforms — it historically had a bug failing to,
+	* and a Go maintainer on golang/go#34084 answered "This is correct as
+	* documented in `go help goproxy`… Please file a bug against Artifactory"
+	* (JFrog RTFACT-20227).
+	*
+	* Ecosystem note: only `packageurl-python` ships this escape among the purl
+	* libraries (`contrib/purl2url.py` `escape_golang_path`, the same purl->URL
+	* role as our url-converter), citing the same protocol. packageurl-go / java /
+	* php / ruby / upstream-js do NOT — purl->proxy-URL is an optional
+	* convenience rather than core purl parsing, so most libraries skip it.
+	*
+	* @see https://go.dev/ref/mod#goproxy-protocol
+	* @see https://github.com/golang/mod/blob/v0.36.0/module/module.go#L707 (escapeString)
+	* @see https://github.com/golang/go/issues/34084
+	*/
+	function encodeGolangProxyPath(path) {
+		return (0, import_string.StringPrototypeReplace)(path, /[A-Z]/g, (letter) => `!${(0, import_string.StringPrototypeToLowerCase)(letter)}`);
+	}
+	/**
+	* Validate Golang package URL. `name` and `namespace` must not contain
+	* injection characters. If `version` starts with `"v"`, it must be followed by
+	* a valid semver version.
+	*/
+	function golangValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("golang", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("golang", "name", purl.name, { throws })) return false;
+		const { version } = purl;
+		if ((typeof version === "string" ? version.length : 0) && (0, import_string.StringPrototypeCharCodeAt)(version, 0) === 118 && !isSemverString((0, import_string.StringPrototypeSlice)(version, 1))) {
+			if (throws) throw new PurlError("golang \"version\" component starting with a \"v\" must be followed by a valid semver version");
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate Hackage package URL. Hackage packages must not have a `namespace`
+	* because the spec prohibits it, and `name` must not contain injection
+	* characters. The name stays case-sensitive kebab-case per spec, so there is
+	* no normalize step.
+	*/
+	function hackageValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("hackage", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("hackage", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Validate Hex package URL. `name` and `namespace` must not contain injection
+	* characters.
+	*/
+	function hexValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("hex", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("hex", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize Hex package URL. Lowercases both `namespace` and `name`.
+	*/
+	function normalize$15(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* @file Hugging Face PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#huggingface.
+	*/
+	function huggingfaceValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const repositoryType = purl.qualifiers?.["type"];
+		if (repositoryType !== void 0 && repositoryType !== "model" && repositoryType !== "dataset" && repositoryType !== "space") {
+			if (throws) throw new PurlError("huggingface \"type\" qualifier must be model, dataset, or space");
+			return false;
+		}
+		return validateNoInjectionByType("huggingface", "namespace", purl.namespace, { throws }) && validateNoInjectionByType("huggingface", "name", purl.name, { throws });
+	}
+	function normalize$14(purl) {
+		if (purl.version && (0, import_regexp.RegExpPrototypeTest)(/^[\da-fA-F]{40}$/, purl.version)) lowerVersion(purl);
+		return purl;
+	}
+	/**
+	* @file Julia-specific PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst Julia
+	*   packages are distributed through the Julia General registry. Package names
+	*   are case-sensitive and typically CamelCase.
+	*/
+	/**
+	* Validate Julia package URL. Julia packages must not have a `namespace` and
+	* must carry the required `uuid` qualifier (package names are not unique
+	* across Julia registries; the UUID is the identity).
+	*/
+	function juliaValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("julia", "namespace", purl.namespace, { throws })) return false;
+		if (!purl.qualifiers?.["uuid"]) {
+			if (throws) throw new PurlError("julia requires a \"uuid\" qualifier");
+			return false;
+		}
+		if (!validateNoInjectionByType("julia", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize Julia package URL. No normalization - Julia package names are
+	* case-sensitive.
+	*/
+	function normalize$13(purl) {
+		return purl;
+	}
+	/**
+	* @file LuaRocks PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#luarocks.
+	*   Per the luarocks type definition, the namespace (author) and name (rock)
+	*   are `case_sensitive: false` and normalized to ASCII lowercase — the
+	*   luarocks client lowercases both (`name:lower()` / `namespace:lower()` in
+	*   src/luarocks/util.lua) and rock/rockspec filenames are all-lowercase. The
+	*   version is `case_sensitive: true`: the client never lowercases it and
+	*   versions like `scm-1` / `cvs-1` are distinct identifiers ("lowercase must
+	*   be used" is publisher guidance for old-client compatibility, not a
+	*   canonicalizer fold), so it is preserved.
+	*/
+	/**
+	* Normalize LuaRocks package URL. Lowercases `namespace` (author) and `name`
+	* (rock); preserves the case-sensitive `version`.
+	*/
+	function normalize$12(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Validate Maven package URL. Maven packages require a `namespace` (`groupId`).
+	* `name` and `namespace` must not contain injection characters.
+	*/
+	function mavenValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateRequiredByType("maven", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("maven", "namespace", purl.namespace, { throws })) return false;
+		if (typeof purl.namespace === "string" && (0, import_string.StringPrototypeIncludes)(purl.namespace, "/")) {
+			if (throws) throw new PurlError("maven \"namespace\" component must not contain a slash");
+			return false;
+		}
+		if (!validateNoInjectionByType("maven", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file MLflow PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#mlflow.
+	*/
+	/**
+	* Validate MLflow package URL. MLflow packages must not have a `namespace`.
+	*/
+	function mlflowValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("mlflow", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("mlflow", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize MLflow package URL. Lowercases `name` only if `repository_url`
+	* qualifier contains `'databricks'`.
+	*/
+	function normalize$11(purl) {
+		const repoUrl = purl.qualifiers?.["repository_url"];
+		if (repoUrl !== void 0 && (0, import_string.StringPrototypeIncludes)(repoUrl, "databricks")) lowerName(purl);
+		return purl;
+	}
+	var require_legacy_names = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+		module.exports = [
+			"@antoinerey/comp-Fetch",
+			"@antoinerey/comp-VideoPlayer",
+			"@beisen/Accordion",
+			"@beisen/Approve",
+			"@beisen/AreaSelector",
+			"@beisen/AutoComplete",
+			"@beisen/AutoTree",
+			"@beisen/BaseButton",
+			"@beisen/Beaute",
+			"@beisen/BeisenCloudMobile",
+			"@beisen/BeisenCloudUI",
+			"@beisen/ButtonGroup",
+			"@beisen/ChaosUI",
+			"@beisen/ChaosUI-V1",
+			"@beisen/CheckboxList",
+			"@beisen/CommonMount",
+			"@beisen/CommonPop",
+			"@beisen/DataGrid",
+			"@beisen/DateTime",
+			"@beisen/DropDownButton",
+			"@beisen/DropDownList",
+			"@beisen/ExtendComponent",
+			"@beisen/FormUploader",
+			"@beisen/IconButton",
+			"@beisen/Loading",
+			"@beisen/MultiSelect",
+			"@beisen/NaDeStyle",
+			"@beisen/Paging",
+			"@beisen/PopLayer",
+			"@beisen/RadioList",
+			"@beisen/ReactTransformTenchmark",
+			"@beisen/Search",
+			"@beisen/selectedComponent",
+			"@beisen/Sidebar",
+			"@beisen/StaticFormLabel",
+			"@beisen/TabComponent",
+			"@beisen/Textarea",
+			"@beisen/Textbox",
+			"@beisen/TimePicker",
+			"@beisen/TitaFeed",
+			"@beisen/ToolTip",
+			"@beisen/Transfer",
+			"@beisen/Tree",
+			"@beisen/UserSelector",
+			"@chasidic/tsSchema",
+			"@chymz/DaStrap",
+			"@chymz/DaUsers",
+			"@claviska/jquery-ajaxSubmit",
+			"@cryptolize/FileSaver",
+			"@djforth/I18n_helper",
+			"@dostolu/baseController",
+			"@dostolu/exctractIntl",
+			"@dostolu/mongooseSlug",
+			"@dostolu/validationTransformer",
+			"@opam-alpha/ANSITerminal",
+			"@opam-alpha/BetterErrors",
+			"@opam-alpha/reactiveData",
+			"@pioug/MidiConvert",
+			"@smuuf/idleCat",
+			"@sycoraxya/validateJS",
+			"@tempest/endWhen",
+			"@tempest/fromPromise",
+			"@tempest/replaceError",
+			"@tempest/startWith",
+			"@tempest/throwError",
+			"@yuanhao/draft-js-mentionHashtag-plugin",
+			"3dBinPack",
+			"3DViewerComponent",
+			"4meFirst-github-example",
+			"9Wares-js",
+			"37FIS",
+			"A",
+			"ABAValidator",
+			"ABCEnd",
+			"AbokyBot",
+			"Accessor",
+			"Accessor_MongoDB",
+			"Accessor_MySQL",
+			"Accessor_Singleton",
+			"Account",
+			"accumulateArray",
+			"ACCUPLACERClient",
+			"AccuplacerClient",
+			"Acid",
+			"activaDocs",
+			"ActiveResource.js",
+			"ADBCordovaAnalytics",
+			"addTimeout",
+			"AdultJS",
+			"AesUtil",
+			"AgentX",
+			"AirBridgePlugin",
+			"airLogger",
+			"ajiThird",
+			"alaGDK",
+			"AlarmClock",
+			"alarmClock",
+			"Alchemyst",
+			"AlertLogic",
+			"alertsXYZ",
+			"ali-topSdk",
+			"AliceBot",
+			"alinkRNTest",
+			"aliOcrIdCard",
+			"AllCal.WebApp",
+			"alpacaDash",
+			"AmateurJS",
+			"AMD",
+			"AMGCryptLib",
+			"AmILate",
+			"AmILateAnand",
+			"amitTest",
+			"AmpCoreApi",
+			"amProductsearch",
+			"amqpWrapper",
+			"amrToMp3",
+			"angular-autoFields-bootstrap",
+			"angular-dateParser",
+			"angular-GAPI",
+			"angular-PubSub",
+			"Angular-test-child",
+			"Angular1",
+			"Angular2",
+			"angular2-Library",
+			"angular2-localStorage",
+			"angular2-Menu",
+			"angular2-quickstart-ngSemantic",
+			"angularApp",
+			"angularCubicColorPicker",
+			"angularjs-ES6-brunch-seed",
+			"angularjsSlider",
+			"AngularStompDK",
+			"Animated_GIF",
+			"animateJs",
+			"animateSCSS",
+			"AnimationFrame",
+			"AnimIt",
+			"Anirudhnodeapp",
+			"Anjali",
+			"annoteJS",
+			"ANSIdom",
+			"antFB",
+			"antFB-init",
+			"antFB-mobile",
+			"antFB-router-redux-ie8",
+			"AntMobileUI",
+			"AnToast",
+			"Antony",
+			"aoIoHw90B5sE1wG9",
+			"API-Documentation",
+			"APIConnect",
+			"APICreatorSDK",
+			"APlan",
+			"APM-mouse",
+			"APM.P2H",
+			"apMigStats",
+			"AporaPushNotification",
+			"App2App",
+			"applqpakTest",
+			"AppTracker",
+			"AQ",
+			"ArcusNode",
+			"AriesNode",
+			"array_handler_liz_Li",
+			"Array.prototype.forEachAsync",
+			"ArrayBuffer-shim",
+			"arrayFuncs",
+			"ArrowAulaExpress",
+			"Article-collider-packages",
+			"Arunkumar-Angular-Trial",
+			"asEvented",
+			"asJam",
+			"ASP.NET",
+			"assert",
+			"AssetPipeline",
+			"assignment2-BW",
+			"Assignment6",
+			"async_hooks",
+			"asyncBuilder",
+			"asyncEJS",
+			"AsyncHttpRequest-CordovaPlugin",
+			"AsyncProxy",
+			"AsyncStorage",
+			"asyncStorage",
+			"atom-C",
+			"atom-Fe",
+			"atom-Ge",
+			"atom-K",
+			"atom-Li",
+			"atom-Na",
+			"atom-Pb",
+			"atom-Rb",
+			"atom-Si",
+			"atom-Sn",
+			"AulaExpress",
+			"austin-vertebraeTest",
+			"authorStats",
+			"AutoFixture",
+			"autoLoader",
+			"AutoReact",
+			"AutoTasks",
+			"Autowebpcss",
+			"Avifors",
+			"AVNjs",
+			"AwesomeProject",
+			"AWSS3Drive",
+			"ax-rmdirRecursive",
+			"b_Tap",
+			"Babel",
+			"babel-preset-reactTeam",
+			"Bablic_Seo_SDK",
+			"BablicLogger",
+			"Backbone-Collection-Predefined-Filters",
+			"Backbone.Aggregator",
+			"backbone.browserStorage",
+			"Backbone.Chosen",
+			"Backbone.Marionette.Handlebars",
+			"Backbone.Mutators",
+			"Backbone.Overview",
+			"Backbone.Rpc",
+			"Backbone.Subset",
+			"baDataModel",
+			"Bag",
+			"BaiduMapManager",
+			"BandGravity",
+			"bangDM",
+			"banking-Josh-demo",
+			"BankWebservice",
+			"bannerFlip",
+			"BaremetricsCalendar",
+			"Barfer",
+			"BarneyRubble",
+			"Base",
+			"Base64",
+			"baseProject",
+			"Basic-Material-framework",
+			"BasicCredentials",
+			"basicFFmpeg",
+			"bbArray",
+			"Beegee",
+			"begineer_Practice",
+			"beijingDate",
+			"bem-countMaster",
+			"bem-countSlave",
+			"bem-getHistory",
+			"Bestpack",
+			"betterMatch",
+			"BetterRegExp",
+			"Bhellyer",
+			"BHP_MSD",
+			"BiDirectionalScrollingTable",
+			"BigAssFansAPI",
+			"BigInt",
+			"BIMserverWrapper",
+			"Binary-search-tree",
+			"binarySearch",
+			"bindAll",
+			"BinHeap",
+			"biojs-vis-RDFSchema",
+			"Biolac",
+			"Birbal",
+			"BitSetModule",
+			"BizzStream",
+			"Blackfeather",
+			"BlackMirror",
+			"Blacksmith",
+			"blacktea.jsonTemplates",
+			"Blaggie-System",
+			"BlankUp",
+			"Blink1Control2",
+			"blitzLib",
+			"Blob",
+			"BlobBuilder",
+			"BlobBuilder-browser",
+			"Blog",
+			"BlueOcean",
+			"BlueOps",
+			"Blueprint-Sugar",
+			"bluthLBC",
+			"blya!",
+			"BMFE_scaffold",
+			"Bmodule",
+			"Bo-colors-project",
+			"Boilerpipe-Scraper",
+			"Bondlib",
+			"bonTemplate",
+			"BootSideMenu",
+			"bornCordova",
+			"Botcord",
+			"Bottr-cli",
+			"Brackets",
+			"brain***_games***",
+			"Brave",
+			"BrewCore",
+			"BrianPingPong",
+			"BrianSuperComponents",
+			"BrickPlus",
+			"Brocket",
+			"Brosec",
+			"browserProxy",
+			"browserType",
+			"brush-Makefile",
+			"bTap",
+			"BtMacAddress",
+			"BubbleJS",
+			"Buffer",
+			"buffer",
+			"BufferList",
+			"Bugay",
+			"Build",
+			"BuildBox",
+			"Builder",
+			"Builders",
+			"BuildWithJavascript",
+			"BusinessObjects",
+			"Button",
+			"Buttons",
+			"Bynd",
+			"ByteBuffer",
+			"C9js",
+			"Cache-Service-Collector",
+			"Cacher",
+			"callbackQueue",
+			"CallbackRouter",
+			"callBlock-plugin",
+			"callBlock.plugin",
+			"camcardPlugin",
+			"CameraPreview",
+			"Canteen",
+			"canvas-toBlob",
+			"canvasColorPicker",
+			"Caoutchouc",
+			"Cap",
+			"Carbon",
+			"cardsJS",
+			"Cartogram-Utils",
+			"cascadeDrop",
+			"Cashew",
+			"Cat4D",
+			"catchTender",
+			"CategoryJS",
+			"catl-deploySSH",
+			"cbNetwork",
+			"CbolaInfra",
+			"CBQueue",
+			"CBuffer",
+			"ccNetViz",
+			"ccPagination",
+			"ccTpl",
+			"censoreMio",
+			"Censorify",
+			"censorify_Publish20160706",
+			"censorify_Vincent_Choe",
+			"censorifyAD",
+			"censorifyAshes",
+			"censorifyGuangyi",
+			"censorifyKatKat",
+			"censorifyRayL",
+			"censorifyTM",
+			"CETEIcean",
+			"cfUtilityService",
+			"CFViews",
+			"chadschwComponentTest0001",
+			"changelogFDV",
+			"Changling-dom",
+			"CharLS.js",
+			"Chart.Annotation.js",
+			"Chart.CallBack.js",
+			"Chart.Crosshairs.js",
+			"Chart.HorizontalBar.js",
+			"Chart.Smith.js",
+			"Chart.Zoom.drag.js",
+			"Chart.Zoom.js",
+			"ChartTime",
+			"chatSocketIo",
+			"ChattingRoom",
+			"checkForModuleDuplicates",
+			"cheferizeIt",
+			"chenouTestNode",
+			"child_process",
+			"chowYen",
+			"chrome-localIp",
+			"ChuckCSS",
+			"ChuckNorrisException",
+			"chunkArray",
+			"cjdsComponents",
+			"Class",
+			"Classy",
+			"clearInterval",
+			"ClearSilver",
+			"clearTimeout",
+			"CLI-todo",
+			"CLI-UI",
+			"cliappRafa",
+			"clientFrontEnd",
+			"ClientStorage",
+			"clipDouban",
+			"ClipJS",
+			"CloudMusicCover",
+			"CloudStore",
+			"Cls",
+			"cluster",
+			"CM-react-native-document-picker",
+			"CM1",
+			"coberturaJS",
+			"codeStr",
+			"Coeus",
+			"COFFEENODE",
+			"Coflux",
+			"colegislate-DynamoDbEventRepository",
+			"ColeTownsend",
+			"collabProvidesModules",
+			"CollectionMap",
+			"colWidth.js",
+			"com.emsaeng.cordova.plugin.AdMob",
+			"com.nickreed.cordova.plugin.brotherPrinter",
+			"com.none.alarmClock",
+			"com.zwchen.firstPlugin",
+			"com.zwchen.qqAdvice",
+			"combineJS",
+			"CometJS",
+			"Comfy",
+			"Comments",
+			"CommentsJS",
+			"comp-Fetch",
+			"Company",
+			"compareStrings",
+			"CompassSM",
+			"Complex",
+			"componentDoc",
+			"componentDoc-cli",
+			"CompoundSignal",
+			"Compress-CSS",
+			"Compression",
+			"concatAll",
+			"Concur",
+			"ConfluencePageAttacher",
+			"ConnectTheDotsDesktop",
+			"Console",
+			"console",
+			"constants",
+			"constelation-Animate_",
+			"constelation-BackgroundImage",
+			"constelation-Block",
+			"constelation-Button",
+			"constelation-Col",
+			"constelation-Event_",
+			"constelation-Flex",
+			"constelation-Inline",
+			"constelation-InlineBlock",
+			"constelation-InlineCol",
+			"constelation-InlineFlex",
+			"constelation-InlineRow",
+			"constelation-Painter",
+			"constelation-Row",
+			"constelation-Style_",
+			"constelation-Text",
+			"constelation-Video",
+			"constelation-View",
+			"ConstraintNetwork",
+			"ContactMe",
+			"ContentEdit",
+			"ContentSelect",
+			"ContentTools",
+			"convertPinyin",
+			"CoolBeans",
+			"Coolhelper",
+			"copyMe",
+			"cordova-plugin-adPlayCafebazaar",
+			"cordova-plugin-adPlayPushe",
+			"cordova-plugin-bluetoothClassic-serial",
+			"cordova-plugin-coolFunction",
+			"cordova-plugin-euroart93-smartConfig",
+			"cordova-plugin-ios-android-IAP",
+			"cordova-plugin-LineLogin",
+			"Cordova-Plugin-OpenTok-JBS",
+			"cordova-plugin-permissionScope",
+			"cordova-plugin-SchaffrathWebviewer",
+			"cordova-plugin-SDKAW",
+			"Cordova-Plugin-SystemBarDimmer",
+			"cordova-plugin-YtopPlugin",
+			"Cordova-react-redux-boilerplate",
+			"cordova-StarIO-plugin",
+			"CordovaSMS",
+			"CordovaWebSocketClientCert",
+			"coreApi",
+			"CornerCut",
+			"CornerJob",
+			"CorrespondenceAnalysis",
+			"cosBuffer",
+			"cosTask",
+			"Couch-cleaner",
+			"Couchbase-sync-gateway-REST",
+			"CouchCover",
+			"CouchDBChanges",
+			"CouchDBExternal",
+			"CountAdd_000001",
+			"cPlayer",
+			"cqjPack",
+			"Crawler",
+			"Create-React-App-SCSS-HMR",
+			"createClass",
+			"createDOC",
+			"createNpm",
+			"createServer",
+			"CRMWebAPI",
+			"crockpot-fromBinary",
+			"crockpot-fromEnglish",
+			"crockpot-fromRoman",
+			"crockpot-toEnglish",
+			"crockpot-toRoman",
+			"Cron",
+			"CropSr",
+			"crypto",
+			"CSDebug",
+			"CSDLParser",
+			"CSLogger",
+			"CSSMatrix",
+			"CSSselect",
+			"Csster",
+			"CSSwhat",
+			"CSV-JS",
+			"CTP_MARKET_DATA",
+			"cttv.bubblesView",
+			"cttv.diseaseGraph",
+			"cttv.expansionView",
+			"cttv.flowerView",
+			"cttv.speciesIcons",
+			"cttv.targetAssociationsBubbles",
+			"cttv.targetAssociationsTree",
+			"cttv.targetGeneTree",
+			"Cuber",
+			"cubicColorPicker",
+			"Cui-Dialog",
+			"CustomCamera",
+			"customComponent",
+			"customLibrary",
+			"CustomPlugin",
+			"CustomWebView",
+			"cuteLogger",
+			"cwebp-binLocal",
+			"CyberJS",
+			"D",
+			"d-fordeYoutube",
+			"D-Stats",
+			"D.Va",
+			"d3-bboxCollide",
+			"d3-pathLayout",
+			"d3.geoTile",
+			"D3.TimeSlider",
+			"Daja",
+			"Daniel_NPM_Library_Test",
+			"Dante2",
+			"DanTroy-utils",
+			"Dashboard",
+			"Dasher",
+			"dashr-widget-Weather",
+			"dashr-widget-World-Pool-Championships",
+			"Data-CSS",
+			"Data-Same-Height",
+			"dataAccess",
+			"Database-Jones",
+			"DataManager",
+			"dataStream",
+			"dateFormat-kwen",
+			"dateFormatW",
+			"DateHuatingzi",
+			"DateMaskr",
+			"dateModule",
+			"DatePicker",
+			"Datepicker.js",
+			"Dateselect",
+			"DateValidator",
+			"DateZ",
+			"Datum",
+			"Davis",
+			"dd-rc-mStock",
+			"DDEvents",
+			"deBijenkorf-protractor-tests",
+			"Debug-Tracker",
+			"Deci-mal",
+			"DeCurtis-Logger",
+			"deepEqualsWith",
+			"deepPick",
+			"defaultStr",
+			"Deferred",
+			"deferredEventEmitter",
+			"defineClass",
+			"defineJS",
+			"DelegateListener",
+			"deleteMoudles",
+			"Demo",
+			"Demo1",
+			"demoNeeeew",
+			"demoWei",
+			"demoYTC",
+			"Deneme",
+			"derivco-SoundJS",
+			"derpModule",
+			"DeskSet",
+			"Desktop-command",
+			"Devbridge-FrontEnd",
+			"Developer",
+			"deviousknightFirstNpm",
+			"devisPattern",
+			"devProxy",
+			"DFP",
+			"dgram",
+			"dgURI",
+			"diagnostics_channel",
+			"Dial",
+			"DiggernautAPI",
+			"Diogenes",
+			"DirScanner",
+			"dirStat",
+			"DirWatcher",
+			"Discord-Webhook",
+			"DiscordForge",
+			"diveSync",
+			"dkastner-JSONPath",
+			"DM.NodeJS",
+			"dns",
+			"Dock-command",
+			"docxtemplaterCopy",
+			"doLink",
+			"DOM",
+			"Domai.nr",
+			"domain",
+			"DOMArray",
+			"DOMBuilder",
+			"DOMino",
+			"DOMtastic",
+			"DOMtastic-npm",
+			"dotFormat",
+			"dotJS",
+			"DoubleCheck",
+			"Dove.js",
+			"downloadAPI",
+			"downLoadFile",
+			"DownloadManager",
+			"DownloadProxy",
+			"DPS",
+			"DQ",
+			"draftjsToHTML",
+			"dragOnZone",
+			"drakovNew",
+			"Draper",
+			"DrawPDF",
+			"Dribble",
+			"Drupal-Node.js",
+			"DT",
+			"Duckface",
+			"Dui",
+			"DVA",
+			"DvA",
+			"dVa",
+			"DXIV2Inst",
+			"DynamicBuffer",
+			"dynamoDB",
+			"DynamoDBStream",
+			"DynWorker",
+			"Easy-Peasy-Slide",
+			"easyCache",
+			"easyFe",
+			"easyRestWithABL",
+			"EasyUI",
+			"eavesTool",
+			"EBI-Icon-fonts",
+			"echartsEx",
+			"EclipseScroll",
+			"ECMASquasher",
+			"edfToHtmlConverter",
+			"edGoogleApi",
+			"edGraham",
+			"EfemerideList",
+			"efemerideList",
+			"efficientLoad",
+			"eFishCrawler",
+			"EhanAreesha",
+			"Elastic-Beanstalk-Sample-App",
+			"ElasticSlider-core",
+			"electron-isDev",
+			"ElectronAppUpdater",
+			"ElectronRouter",
+			"elementsJS",
+			"Elixirx",
+			"Elm-0.17-Gulp-Coffeescript-Stylus-Lodash-Browserify-Boilerplate",
+			"EmailClient",
+			"ember-cli-fullPagejs",
+			"ember-leaflet-geoJSON",
+			"emoJiS-interpreter",
+			"Empite",
+			"EmpiteApp",
+			"emptyObject",
+			"emptyString-loader",
+			"Encloud",
+			"encodeBase64",
+			"encodeID",
+			"energyCalculator-browser",
+			"EnglishTranslator",
+			"ensureDir",
+			"Enumjs",
+			"Environment.js",
+			"ep_disableChat",
+			"EPO_OPS_WRAPPER",
+			"equalViews-comparative-selection",
+			"eRx-build",
+			"ES-poc",
+			"es6-DOM-closest",
+			"eSlider",
+			"eslint-plugin-elemMods",
+			"EsmalteMx.ProductApi.Lambdas",
+			"Estro",
+			"ETag",
+			"eValue-bs",
+			"EVE",
+			"EventDispatcher",
+			"eventDrops",
+			"EventEmitter",
+			"EventField",
+			"EventFire",
+			"EventFire.js",
+			"EventHub",
+			"EventRelayEmitter",
+			"events",
+			"EventServer",
+			"eventstore.mongoDb",
+			"EventtownProject",
+			"EventUtil",
+			"EVEoj",
+			"EverCookie",
+			"ewdDOM",
+			"ewdGateway",
+			"ExBuffer",
+			"execSync",
+			"exFrame-configuration",
+			"exFrame-core",
+			"exFrame-generator",
+			"exFrame-logger",
+			"exFrame-mq",
+			"exFrame-rest",
+			"exFrame-rpc",
+			"exFrame-security",
+			"ExifEditor",
+			"Exitent",
+			"expectThat.jasmine-node",
+			"expectThat.mocha",
+			"Express",
+			"Express-web-app",
+			"expressApi",
+			"ExpressCart",
+			"ExpressCheckout",
+			"expressingFounder",
+			"ExpressMVC",
+			"ExpressNode",
+			"expressOne",
+			"expressSite",
+			"expressWeb",
+			"ExtraInfo",
+			"extraRedis",
+			"Eyas",
+			"EzetechT",
+			"EZVersion",
+			"F",
+			"F-chronus",
+			"f*",
+			"FabioPluginiUno",
+			"Facebook_Graph_API",
+			"facebookPhotos",
+			"FacebookYarn",
+			"factor-bundle-WA64",
+			"FAEN",
+			"Faker",
+			"Falcon",
+			"fast-artDialog",
+			"fastA_node",
+			"FastLegS",
+			"Fayer",
+			"fbRecursiveRequest",
+			"FeedbackModuleTest",
+			"feedBum",
+			"fenix-ui-DataEditor",
+			"fenix-ui-DSDEditor",
+			"Fermi-UI",
+			"FetchCallLog",
+			"fieldsValidator",
+			"fig-Componts",
+			"File",
+			"File_Reader_solly",
+			"FileBrowser",
+			"FileError",
+			"fileGlue",
+			"FileList",
+			"fileLog",
+			"FilePicker-Phonegap-iOS-Plugin",
+			"FileReader",
+			"FileSaver",
+			"FileSync",
+			"FileWriter",
+			"FileWriterSync",
+			"Finder-command",
+			"FirstApp",
+			"FirstCustomPlugin",
+			"firstModule",
+			"firstNodejsModule",
+			"firstYarn",
+			"fis-parse-requireAsyncRes",
+			"fis-postpackager-inCSSToWebP",
+			"fis3SmartyTool",
+			"FitText-UMD",
+			"Flamingo",
+			"flatToTrees",
+			"fleschDe",
+			"Flex-With-Benefits",
+			"FlickrJS",
+			"flipPage",
+			"Florence",
+			"FlowerPassword",
+			"flowMap",
+			"FLTEST",
+			"fnProxy",
+			"FontAwesome-webpack",
+			"fontEnd",
+			"FontLoader",
+			"foo!",
+			"foo~",
+			"forAsync",
+			"ForceCode",
+			"forceLock",
+			"forChangeFilesName",
+			"forEachAsync",
+			"formAnimation",
+			"formatDate",
+			"formBuilder",
+			"FormData",
+			"Formless",
+			"formValidate",
+			"FrameGenerator",
+			"freightCrane",
+			"French-stemmer",
+			"Frenchpress",
+			"FreshDocs",
+			"friendsOfTrowel-buttons-component",
+			"friendsOfTrowel-dropdowns-component",
+			"friendsOfTrowel-Forms-component",
+			"friendsOfTrowel-Layouts-component",
+			"Friggeri.net",
+			"Frog",
+			"frontBuild",
+			"Frontend-starter",
+			"FrontEndCentral-documentation",
+			"FrontJSON",
+			"FrontPress",
+			"Frozor-Logger",
+			"Fruma",
+			"fs",
+			"fs-uTool",
+			"FSM",
+			"FT232H",
+			"fuck!",
+			"Fuell",
+			"FuellDocTest",
+			"FuellSys",
+			"FuellTest",
+			"FullStack",
+			"FunDemo2",
+			"FURI",
+			"Fury",
+			"futSearch",
+			"futureDocBuilder",
+			"FyreWorks-Node",
+			"fzmFE",
+			"Gaiam",
+			"Ganescha-Bot-Jokes",
+			"gaoboHello",
+			"Garrett-pokemon",
+			"gatesJs",
+			"Gauge",
+			"gaugeJS",
+			"gaussianMixture",
+			"gbL-jsMop",
+			"GC-Sequence-Viewer",
+			"gdBuildLogs",
+			"gdBuilds",
+			"Gems.PairedDeviceClient",
+			"genData",
+			"generateIndex",
+			"generator-entityV2-widgets",
+			"generator-kittJS",
+			"generator-qccr-startKit",
+			"generator-reactpackSample",
+			"generator-zillionAngular",
+			"Gengar",
+			"GeoMatrix",
+			"GeosysDroid",
+			"GeosysTest",
+			"Gerardo",
+			"getDateformat",
+			"getExtPath",
+			"getSignature",
+			"GettyEmbeddy",
+			"ghostTools",
+			"GhostTube",
+			"GiftEditor",
+			"GirlJS",
+			"GitAzure",
+			"gitbook-plugin-prism-ASH",
+			"gitbook-plugin-specialText",
+			"gitbook-start-heroku-P8-josue-nayra",
+			"gitbook-start-heroku-P9-josue-nayra",
+			"gitForge",
+			"gitHub",
+			"GitHub-Network-Graph",
+			"GitHubTrending",
+			"gitProvider",
+			"gl-flyCamera",
+			"gl-simpleTextureGenerator",
+			"glMath",
+			"GLORB",
+			"glslCanvas",
+			"glslEditor",
+			"glslGallery",
+			"GLSlideshow",
+			"Glue",
+			"GMP",
+			"golbalModule",
+			"Goldfish",
+			"Gon",
+			"Google_Plus_API",
+			"Google_Plus_Server_Library",
+			"Google-Chrome-command",
+			"GoogleDrive",
+			"googleOAuthServer",
+			"googlePlaceAutocomplete",
+			"GoogleService-NodeJs",
+			"Gord",
+			"gPagesJS",
+			"Gps2zip",
+			"GRAD_leaveNotes",
+			"GRAD_makeFire",
+			"grad-customGear",
+			"grad-factions-VR",
+			"grad-leaveNotes",
+			"grad-makeFire",
+			"Grafar",
+			"Graph",
+			"graphLock.custom.plugin",
+			"graphQl-Mysql-Server",
+			"GridFS",
+			"GridManager",
+			"gridminCss",
+			"Gridtacular",
+			"GroupePSAConnectedCar",
+			"Grow.js",
+			"Grunt-build",
+			"grunt-checkFileSize",
+			"grunt-cmd-handlebarsWrap",
+			"grunt-ftp-getComponent",
+			"grunt-httpTohttps",
+			"grunt-latexTOpdf-conversion",
+			"grunt-Npm-grunts",
+			"grunt-po2mo-multiFiles",
+			"grunt-Replacebyrefs",
+			"grunt-syncFolder",
+			"grunt-urlCacheBuster",
+			"guideJs",
+			"gulp-addSuffix",
+			"gulp-combineHtml",
+			"gulp-imgToBase64",
+			"gulp-lowerCase",
+			"gulp-phpWebserver",
+			"gulp-spacingWord",
+			"Gulp-Tasks",
+			"GumbaJS",
+			"Gusto",
+			"gz2qiCalcModule",
+			"h2oUIKit",
+			"H5UI",
+			"H666",
+			"habibtestPublish",
+			"HackBuffer",
+			"handleStr",
+			"HansontableComponent",
+			"Haraka",
+			"HariVignesh",
+			"harmonyHubCLI",
+			"HarryPotterParty",
+			"harsh-Test-Module",
+			"Harshil",
+			"hash!",
+			"hashPage",
+			"hashTranslate",
+			"HASWallpaperManager",
+			"hasWord",
+			"HeartBeatWoT_pi",
+			"Hello",
+			"hello_test_spade69XXX",
+			"Hello_World",
+			"HelloBot",
+			"helloBySoo",
+			"helloDevelopersnodejs",
+			"HelloExpress",
+			"helloModule",
+			"HelloWorld",
+			"helloWorld",
+			"HelloWorld_hlhl_040",
+			"HelloWorldComponent",
+			"HelloWorldNodeJS",
+			"helloYJ",
+			"helpBy",
+			"helpCenter",
+			"herokuRun",
+			"Hesiir-components",
+			"HHello",
+			"Hidash",
+			"HiddenMarkovModel",
+			"hideShowPassword",
+			"highcharts-*",
+			"HighlightP",
+			"Highway",
+			"Hinclude",
+			"Hipmob",
+			"Hiraku",
+			"hm_firstPackage",
+			"HMTraining",
+			"homebridge-anelPowerControl",
+			"homebridge-bigAssFans",
+			"homebridge-CurrentAmbientLightLevel",
+			"homebridge-Homeseer",
+			"homebridge-LEDStrip",
+			"homebridge-MotionSensor",
+			"homebridge-RFbulb",
+			"Homematic-Hue-Interface",
+			"hoshiCustomContent",
+			"hoshiImageLoader",
+			"HotJS",
+			"Hotshot",
+			"hoverifyBootnav",
+			"howToNPM",
+			"Hppy",
+			"Hpy",
+			"htmlCutter",
+			"htmlKompressor",
+			"HTMLString",
+			"htmlToTree",
+			"http",
+			"http2",
+			"HTTPRequest",
+			"https",
+			"httpShell",
+			"httpTohttps",
+			"Hubik",
+			"Hubik-Demo",
+			"Hubik-Platform",
+			"Hubik-Platform-Chrome",
+			"Hubik-Plugin",
+			"Hubik-Plugin-Memory",
+			"Hubik-Plugin-Network",
+			"Hubik-Plugin-Rendering",
+			"Hubik-Util",
+			"hubot-yigeAi",
+			"HuK",
+			"hybridCrypto",
+			"i18next.mongoDb",
+			"Ian_Chu",
+			"IArray",
+			"Ibis.js",
+			"iCompute",
+			"iEnhance",
+			"IENotification",
+			"iFrameAPI",
+			"IFY-gulp-kit",
+			"II",
+			"IIF",
+			"iIndexed",
+			"iKeyed",
+			"iM880-serial-comm",
+			"imageCDN-webpack-loader",
+			"imageMagick",
+			"Imager",
+			"Imageresizer",
+			"imageTool",
+			"ImageViewer",
+			"iMagPay",
+			"iMemoized",
+			"iMessageModule",
+			"Imovie",
+			"Imp",
+			"Incheon",
+			"Index",
+			"indexedStore",
+			"inferModule-jsdoc-plugin",
+			"infieldLabel",
+			"Influxer",
+			"inputcheckMemo",
+			"inspector",
+			"INSPINIA",
+			"Insplash",
+			"inStyle",
+			"interactiveConsole",
+			"Interval",
+			"IO",
+			"IObject",
+			"ionic-gulp-browserify-typescript-postTransform",
+			"IonicSocket",
+			"iOS-HelloWorld",
+			"IOTSDK",
+			"iotsol-app-FAN",
+			"iotsol-app-test-Node-RED",
+			"iotsol-service-string-upperCase",
+			"IQVIS",
+			"Iris",
+			"iRobo-react-modal",
+			"iSecured",
+			"isElementInViewport",
+			"isEqual",
+			"iSeries",
+			"isFirefoxOrIE",
+			"isHolidayInChina",
+			"iSocketService",
+			"isPureFunction",
+			"iStorable",
+			"iTransactable",
+			"iTunes-command",
+			"iValidated",
+			"iWeYou",
+			"iZettle",
+			"iziModal",
+			"JabroniJS",
+			"jaCodeMap",
+			"Jade-Sass-Gulp-Starter",
+			"jadeBundler",
+			"jadiTest",
+			"jAlert",
+			"JamSwitch",
+			"JASON",
+			"JavaScript-101",
+			"JazzScript",
+			"jcarouselSwipe",
+			"jDataView",
+			"jDate",
+			"jetsExt",
+			"Jimmy-Johns",
+			"jingwenTest",
+			"JMSList",
+			"JMSlist.js",
+			"Jody",
+			"jordenAngular",
+			"jordenAngular2",
+			"JorupeCore",
+			"JorupeInstance",
+			"JOSS",
+			"JotihuntReact",
+			"Journaling-Hash",
+			"jpaCreate",
+			"jParser",
+			"JPath",
+			"jPlotter",
+			"jPlugins",
+			"JQ",
+			"jQ-validation-laravel-extras",
+			"JQDeferred",
+			"jQGA",
+			"jqGrid",
+			"jqNode",
+			"jqPaginator",
+			"jqplot.donutRenderer",
+			"jqPromise4node",
+			"jqTreeGridWithPagination",
+			"jQuery",
+			"jquery-adaptText",
+			"jquery-asAccordion",
+			"jquery-asBgPicker",
+			"jquery-asBreadcrumbs",
+			"jquery-asCheck",
+			"jquery-asChoice",
+			"jquery-asColor",
+			"jquery-asColorPicker",
+			"jquery-asDropdown",
+			"jquery-asFontEditor",
+			"jquery-asGalleryPicker",
+			"jquery-asGmap",
+			"jquery-asGradient",
+			"jquery-asHoverScroll",
+			"jquery-asIconPicker",
+			"jquery-asImagePicker",
+			"jquery-asItemList",
+			"jquery-asModal",
+			"jquery-asOffset",
+			"jquery-asPaginator",
+			"jquery-asPieProgress",
+			"jquery-asProgress",
+			"jquery-asRange",
+			"jquery-asScroll",
+			"jquery-asScrollable",
+			"jquery-asScrollbar",
+			"jquery-asSelect",
+			"jquery-asSpinner",
+			"jquery-asSwitch",
+			"jquery-asTooltip",
+			"jquery-asTree",
+			"jQuery-by-selector",
+			"jquery-dynamicNumber",
+			"jquery-idleTimeout-plus",
+			"jquery-loadingModal",
+			"jquery-navToSelect",
+			"jQuery-QueryBuilder",
+			"jquery-rsLiteGrid",
+			"jquery-rsRefPointer",
+			"jquery-rsSlideIt",
+			"jQuery-Scanner-Detection",
+			"jquery-scrollTo",
+			"jquery-scrollToTop",
+			"jquery-slidePanel",
+			"jQuery.component",
+			"jquery.customSelect",
+			"jquery.dataTables.min.js",
+			"jquery.Jcrop.js",
+			"jQuery.keyboard",
+			"jQuery.mmenu-less",
+			"jQuery.print",
+			"jquery.rsLiteGrid",
+			"jquery.rsOverview",
+			"jquery.rsRefPointer",
+			"jquery.rsSlideIt",
+			"jquery.rsSliderLens",
+			"jQuery.toggleModifier",
+			"jquery.waitforChild",
+			"jqueryPro",
+			"js-build-RomainTrouillard",
+			"JS-Entities",
+			"JS-string-minimization",
+			"JS.Responsive",
+			"jSaBOT",
+			"jsCicada",
+			"jsConcat",
+			"JSCPP",
+			"jsDAV",
+			"JSDev",
+			"jsdoc-TENSOR",
+			"jsDocGenFromJson",
+			"jsDump",
+			"jSelect",
+			"JSErrorMonitor",
+			"JSErrorMonitor-server",
+			"jsFeed",
+			"jsFiddleDownloader",
+			"JSFramework",
+			"JSLint-commonJS",
+			"JSLintCli",
+			"JSLogger",
+			"JSON",
+			"JSON-Splora",
+			"JSON.sh",
+			"JSON2",
+			"json8-isArray",
+			"json8-isBoolean",
+			"json8-isJSON",
+			"json8-isNull",
+			"json8-isNumber",
+			"json8-isObject",
+			"json8-isPrimitive",
+			"json8-isString",
+			"json8-isStructure",
+			"JSON2016",
+			"JSONloops",
+			"JSONPath",
+			"JSONPathCLI",
+			"JSONRpc",
+			"JSONSelect",
+			"JSONStream",
+			"JsonUri",
+			"JSONUtil",
+			"jsonX",
+			"JSplay",
+			"jspolyfill-array.prototype.findIndex",
+			"JSPP",
+			"JSpring",
+			"jsQueue",
+			"jsSourceCodeParser",
+			"jStat",
+			"JSUS",
+			"JSV",
+			"JSX",
+			"jsz-isType",
+			"JTemplate",
+			"JTmpl",
+			"jTool",
+			"JuliaStyles",
+			"JumanjiJS",
+			"Jupyter-Git-Extension",
+			"justifiedGallery",
+			"justJenker",
+			"JustMy.scss",
+			"JWBootstrapSwitchDirective",
+			"jWorkflow",
+			"jxLoader",
+			"JYF_restrict",
+			"K_Tasks",
+			"K--Ajax",
+			"K-Report",
+			"KAB.Client",
+			"Kahana",
+			"Kapsel-project",
+			"Katy",
+			"Kayzen-GS",
+			"KB",
+			"KB_Model",
+			"kelTool",
+			"kelTool2",
+			"KenjutsuUI",
+			"KevinLobo3377-node",
+			"KFui",
+			"kickoff-fluidVideo.css",
+			"Kid",
+			"kingBuilder",
+			"kiranApp",
+			"Kirk",
+			"Kissui",
+			"kittJS",
+			"Kiwoom-Helper",
+			"KLC3377-node",
+			"knockout.ajaxTemplateEngine",
+			"koa-artTemplate",
+			"koa-Router",
+			"koaPlus",
+			"koaVue",
+			"KonggeIm",
+			"kpPublicPerson",
+			"kpPublicVideo",
+			"krawlerWash",
+			"ktPlayer",
+			"kylpo-BackgroundImage",
+			"kylpo-Block",
+			"kylpo-Button",
+			"kylpo-Col",
+			"kylpo-Flex",
+			"kylpo-Inline",
+			"kylpo-InlineBlock",
+			"kylpo-InlineCol",
+			"kylpo-InlineFlex",
+			"kylpo-InlineRow",
+			"kylpo-Paint",
+			"kylpo-Painter",
+			"kylpo-Row",
+			"kylpo-Text",
+			"kylpo-View",
+			"kzFormDaimyo",
+			"L.TileLayer.Kartverket",
+			"L7",
+			"labBuilder",
+			"Lactate",
+			"Lade",
+			"laravel-jQvalidation",
+			"Large",
+			"lark-PM",
+			"LasStreamReader",
+			"latte_web_ladeView",
+			"latte_webServer4",
+			"lavaK",
+			"layaIdecode",
+			"Layar",
+			"Layout",
+			"LazyBoy",
+			"lazyBum",
+			"lazyConnections",
+			"lazyLoadingGrid",
+			"lcAudioPlayer",
+			"LCM",
+			"LDAP",
+			"Leaf.js",
+			"Leaflet-MovingMaker",
+			"Leaflet.AutoLayers",
+			"Leaflet.Deflate",
+			"Leaflet.GeoJSON.Encoded",
+			"Leaflet.GreatCircle",
+			"Leaflet.MultiOptionsPolyline",
+			"Leaflet.TileLayer.MBTiles",
+			"Leaflet.vector-markers",
+			"leapShell",
+			"LearningNPM",
+			"learnnode_by_HHM",
+			"leFunc",
+			"Legos",
+			"Libby-Client",
+			"LightCinematic",
+			"lihuanxiangNpm1",
+			"limitedQueue",
+			"linearJs",
+			"lineReader",
+			"Lingo",
+			"LinkedList",
+			"linkIt",
+			"LISP.js",
+			"liteParse",
+			"liuchengjunOrder0414",
+			"LiveController",
+			"LiveDocument",
+			"LiveScript",
+			"LiveScript-brunch",
+			"LiveView",
+			"liweiUitl",
+			"lizaorenqingTool",
+			"lmONE",
+			"LMUI",
+			"LMX-Data",
+			"LNS_weixin_h5",
+			"localeMaker_v1",
+			"localforage-memoryStorageDriver",
+			"LocalRecord",
+			"localStorage",
+			"localStorage-info",
+			"localStorage-mock",
+			"LoDashfromScratch",
+			"lofterG",
+			"Loganalyzer",
+			"LogbookMessageCreator",
+			"Logger",
+			"Logging",
+			"Loggy",
+			"logic2UI",
+			"LogosDistort",
+			"LogStorage.js",
+			"logStream",
+			"LOL",
+			"lolAJ",
+			"LongestCommonSubstring",
+			"loop-setTimeout",
+			"loopback-connector-rest-addCookie",
+			"lopataJs",
+			"Lorem",
+			"Losas",
+			"LP_test_task",
+			"Lucy",
+			"LUIS",
+			"LUIS_FB",
+			"Lumenize",
+			"Lush.js",
+			"LykkeFramework",
+			"M66_math_example",
+			"mac-cropSr",
+			"MacGyver",
+			"Mad.js",
+			"magentoExt",
+			"Maggi.js",
+			"Maggi.js-0.1",
+			"MagpieUI",
+			"MALjs",
+			"Mambo-UI",
+			"mangoSlugfy",
+			"mapleTree",
+			"mappumBot",
+			"Marionette-Require-Boilerplate",
+			"markupDiff",
+			"marryB",
+			"MasterDetailApplication",
+			"MaterialAngularWithNodeJS",
+			"Math",
+			"math_example_20160505163300BR",
+			"math_example_Hala",
+			"math_example_myown_ve-01119310520_V2",
+			"math_exampleCJG",
+			"math_exampleII",
+			"math_exampleX",
+			"math_ThisIsMe",
+			"math-Murasame",
+			"Math1105",
+			"mathAdd",
+			"mathExample",
+			"MathJax-node",
+			"MathJS",
+			"mathMagic",
+			"MathTest1",
+			"MatPack",
+			"Mavigator",
+			"MAX-AVT-homebridge-led",
+			"MAXAVTDemo",
+			"MAXIMjs",
+			"MaxUPS",
+			"MCom",
+			"MD5",
+			"MDLCOMPONENT",
+			"mdlReact",
+			"mdPickers",
+			"mdRangeSlider",
+			"mdToPdf",
+			"MEAN",
+			"MeanApp1",
+			"MeCab",
+			"mediaCheck",
+			"Mediany",
+			"medicalHistory",
+			"Mercury",
+			"Meridix-WebAPI-JS",
+			"Mers",
+			"MessageBus",
+			"MetaEditor",
+			"Meteor-Test-Installer",
+			"MetroTenerife",
+			"MFL-ng",
+			"MFRC522-node",
+			"mglib-GAMS.WEBCLIENT2",
+			"MIA",
+			"MicroServices",
+			"Midgard",
+			"midhunthomas_Test",
+			"mihoo_fileUpload",
+			"mini-fileSystem-WebServer",
+			"Mini-test",
+			"MiniAppOne",
+			"MiniAppTwo",
+			"minibuyCommonality",
+			"miniJsonp",
+			"MiniManager",
+			"MiniMVC",
+			"MinionCI",
+			"Minju003",
+			"Mirador",
+			"Misho_math_example",
+			"MJackpots",
+			"mjb44-playground-module-exporting-interface-and-type-method-B",
+			"mjb44-playground-module-exporting-interface-and-type-method-C",
+			"Mkoa",
+			"Mkoa-pg-session",
+			"MKOUpload",
+			"mlm603Test",
+			"mmAnimate",
+			"mmDux",
+			"MMM-alexa",
+			"mmRequest",
+			"mmRouter",
+			"mNotes",
+			"Mockery",
+			"modalDemo",
+			"modalDemo1",
+			"modalWin.js",
+			"module",
+			"ModuleBinder",
+			"modulebyAKB",
+			"ModuleC",
+			"moduleLoader",
+			"moduleTest",
+			"MoEventEmitter",
+			"Mokr",
+			"Mole",
+			"mon-appNon0",
+			"MonApp",
+			"MongoDAL",
+			"mongoose-schema-to-graphQL",
+			"mongooseSchema-to-graphQL",
+			"Monik",
+			"MonikCommon",
+			"MoniqueWeb",
+			"Monorail.js",
+			"Mopidy-Spotmop",
+			"mosesCheckIn",
+			"MovieJS",
+			"mOxie",
+			"MoxtraPlugin_1.1",
+			"MoxtraPlugin_1.2.1",
+			"mPortalUI",
+			"MQTTClient",
+			"Mr.Array",
+			"Mr.Async",
+			"Mr.Coverage",
+			"mraaStub",
+			"MrsYu",
+			"MrsYu1",
+			"msGetStarted",
+			"mSite",
+			"msJackson",
+			"mSnackbar",
+			"Mu",
+			"Muffin",
+			"MultiSlider",
+			"musuAppsas",
+			"MWS_Automation",
+			"my-awesome-nodejs-moduleHL",
+			"my-componentAnimesh",
+			"My-First-Module",
+			"My-first-Package",
+			"My-Fist-Project",
+			"my-HLabib",
+			"My1ink",
+			"MyAngularGruntt",
+			"MyAnimalModule",
+			"myappSriniAppala",
+			"myappUSBankExample",
+			"myAries",
+			"MyBlog",
+			"myCalclator",
+			"myDate",
+			"myDialog",
+			"myDu2",
+			"myDVA",
+			"myFirst-Nodejs-Module",
+			"MyFirstContribution",
+			"myfirstDemo",
+			"myFirstModule",
+			"myFirstNodeModule",
+			"myFirstNpm",
+			"myFirstPluginAji",
+			"myFirstProject",
+			"myFirstPub",
+			"myLib",
+			"myMath",
+			"MYMODAL",
+			"MyModule",
+			"myModule",
+			"myNodeJs",
+			"myNodeJsApp",
+			"myNodejsApp",
+			"myNpm",
+			"MYnpm1",
+			"myNpm0001",
+			"myNpm2",
+			"myNpm5",
+			"myNpm10",
+			"myNpm11",
+			"myNpm111",
+			"myNpm999",
+			"myNpmfei",
+			"myNpmfei1",
+			"myNpml",
+			"myNpmModule",
+			"myNpmrz1",
+			"MyPlugin",
+			"MyProject",
+			"MyProjNode",
+			"myPromise",
+			"myrikGoodModule",
+			"Mysql-Assistant",
+			"mysupermoduleXXX",
+			"myTest",
+			"Mytest_module",
+			"mytPieChart",
+			"N",
+			"N3-components",
+			"NA1",
+			"NageshTestapplication",
+			"NAME",
+			"Nameless13",
+			"NaNNaNBatman.js",
+			"nanoTest",
+			"NasimBotPlatform",
+			"NativeAds",
+			"NativeCall",
+			"NativeProject",
+			"nativescript-CallLog",
+			"nativescript-GMImagePicker",
+			"nativescript-logEntries",
+			"NavExercise",
+			"nCinoRabbit",
+			"ncURL",
+			"NDDB",
+			"neouiReact-button",
+			"Neptune",
+			"NERDERY.JS.NAT",
+			"nestedSortable",
+			"net",
+			"NeteaseCloudMusicApi",
+			"neteaseMusicApi",
+			"Netflow",
+			"Netlifer",
+			"NetMatch",
+			"NetOS",
+			"netOS",
+			"Netpath-Test",
+			"Neuro",
+			"Neuro-Company",
+			"NewModule1",
+			"newmsPong",
+			"newPackage",
+			"newPioneer",
+			"newStart",
+			"newtouchCloud",
+			"NewWebview",
+			"NexManager",
+			"NexmoJS",
+			"NFO-Generator",
+			"ng2-clockTST",
+			"ng2-dodo-materialTypeTransfer",
+			"ng2-QppWs",
+			"ng2GifPreview",
+			"NG2TableView",
+			"ngBrowserNotification",
+			"ngCart",
+			"ngChatScroller",
+			"ngComponentRouter-patched",
+			"ngCurrentGeolocation",
+			"ngDfp",
+			"ngDrag",
+			"ngFileReader",
+			"ngGen",
+			"ngGeolocation",
+			"ngHyperVideo",
+			"ngIceberg",
+			"ngImgHandler",
+			"ngIntercom",
+			"ngKit",
+			"ngPicker",
+			"ngPluralizeFilter",
+			"ngPluralizeFilter2",
+			"ngProgress-browserify",
+			"ngScroll",
+			"ngSinaEmoji",
+			"ngSmoothScroll",
+			"ngSqlite",
+			"ngTile",
+			"ngTimeInput",
+			"ngTreeView",
+			"ngUpload",
+			"ngUpload-forked",
+			"Nguyen_test",
+			"ngVue",
+			"ngYamlConfig",
+			"nHttpInterceptor",
+			"Nick_calc",
+			"NickSam_CGD",
+			"NightPro-Web",
+			"nightwatchGui",
+			"Nikmo",
+			"nImage",
+			"Nitish",
+			"nitish.kumar.IDS-LOGIC",
+			"NlpTextArea",
+			"nltco-lgpt-clean-A",
+			"nltco-lgpt-clean-B",
+			"nltco-lgpt-dedupe-simple-A",
+			"nltco-lgpt-dedupe-simple-B",
+			"nMingle",
+			"nmPhone",
+			"nMysql",
+			"NoCR",
+			"NODE",
+			"Node_POC",
+			"node-CORSproxy",
+			"Node-FacebookMessenger",
+			"Node-HelloWorld-Demo",
+			"node-iDR",
+			"node-iOS",
+			"Node-JavaScript-Preprocessor",
+			"node-localStorage",
+			"Node-Log",
+			"Node-Module-Test",
+			"node-myPow",
+			"node-red-contrib-samsungTV",
+			"node-red-contrib-wwsNodes",
+			"node-red-StefanoTest",
+			"node-TBD",
+			"NodeApp",
+			"nodeApp",
+			"nodeAuth",
+			"nodeBase",
+			"NodeBonocarmiol",
+			"nodeCalcPax",
+			"nodeCombo",
+			"nodeDemo9.26",
+			"nodeDocs",
+			"nodeEventedCommand",
+			"NodeFileBrowser",
+			"NodeFQL",
+			"nodeHCC",
+			"nodeInterface",
+			"NodeInterval",
+			"nodeIRCbot",
+			"nodeJS",
+			"NodeJS_Tutorial",
+			"nodeJs-zip",
+			"NodejsAgent",
+			"NodeJsApplication",
+			"nodejsFramework",
+			"nodejsLessons",
+			"NodeJsNote",
+			"NodeJsPractice",
+			"nodeJsPrograms",
+			"Nodejsricardo",
+			"NodeJSTraining-demo-9823742",
+			"nodejsTutorial",
+			"NodejsWebApp1",
+			"nodejsWorkSpace",
+			"NodeKeynote",
+			"nodeLearning",
+			"nodeMarvin",
+			"nodeMarvin2",
+			"NodeMini",
+			"nodeMysqlWrapper",
+			"nodeNES",
+			"nodeos-boot-multiUser",
+			"nodeos-boot-singleUser",
+			"nodeos-boot-singleUserMount",
+			"nodepackageBoopathi",
+			"nodePhpSessions",
+			"NodePlugwise",
+			"NodePlugwiseAPI",
+			"nodeQuery",
+			"nodes_Samples",
+			"NodeSDK-Base",
+			"NodeServerExtJS",
+			"NodeSSH",
+			"nodeSSO",
+			"NodeSTEP",
+			"nodeTest",
+			"NodeTestDee",
+			"nodeTTT",
+			"nodeTut",
+			"NoDevent",
+			"NodeView",
+			"nodeWebsite",
+			"NodObjC",
+			"Nonsense",
+			"NoobConfig",
+			"NoobHTTP",
+			"normalizeName",
+			"NORRIS",
+			"nOSCSender",
+			"Note.js",
+			"NotificationPushsafer",
+			"Notifly",
+			"Npm",
+			"npm-Demo",
+			"Npm-Doc-Study",
+			"npm-mydemo-pkgTest",
+			"npm-setArray",
+			"npm-wwmTest",
+			"npmCalc",
+			"npmFile",
+			"npmModel",
+			"npmModel1",
+			"npmModel2",
+			"npmTest",
+			"npmToying",
+			"npmTutorial",
+			"NPR_Test",
+			"nrRenamer",
+			"nStoreSession",
+			"nTPL",
+			"nTunes",
+			"NudeJS",
+			"nunjucks-includeData",
+			"O",
+			"O_o",
+			"o_O",
+			"O2-countdown",
+			"O2-tap",
+			"objectFitPolyfill",
+			"ObjectSnapshot",
+			"ObjJ-Node",
+			"ObservableQueue",
+			"OCA-api",
+			"ocamlAlpha",
+			"ocamlBetterErrors",
+			"OcamlBytes",
+			"ocamlBytes",
+			"ocamlRe",
+			"OhMyCache",
+			"OK-GOOGLE",
+			"Olive",
+			"onBoarding",
+			"OnCollect",
+			"OneDollar.js",
+			"oneTest",
+			"OpenBazaar-cli",
+			"OpenDolphin",
+			"OpenJPEG.js",
+			"openWeather",
+			"OperatorUI",
+			"OPFCORS",
+			"OPFSalesforce",
+			"OptionParser",
+			"OrangeTree",
+			"Orchestrator",
+			"Order",
+			"ORIENTALASIAN",
+			"os",
+			"Osifo-package",
+			"osu-ModPropertiesCalculator",
+			"OTPAutoVerification",
+			"overloadedFunction",
+			"OwnMicroService",
+			"OwnNormalizer",
+			"OwnPubSub",
+			"OwnPubSubClient",
+			"OwnPubSubServer",
+			"p2Pixi",
+			"PaasyMcPaasFace",
+			"pacemakerJS",
+			"packAdmin",
+			"Package",
+			"packageNodeCR-Jeff.json",
+			"packagePublished",
+			"packageTesting",
+			"Packery-rows",
+			"packing-template-artTemplate",
+			"Paddinator",
+			"Paginate",
+			"palindromeCalcPax",
+			"palindromePax",
+			"PanPG",
+			"Panzer",
+			"parameterBag",
+			"paramsValidator",
+			"Parse-Server-phone-number-auth",
+			"parseArgs",
+			"Parser",
+			"parseUri",
+			"Particle",
+			"Particleground.js",
+			"PassiveRedis",
+			"path",
+			"PatternLabStarter",
+			"patternReplacer",
+			"paytmGratify",
+			"PayzenJS",
+			"pDebug",
+			"pdf-to-dataURL",
+			"pdfTOthumbnail_convert",
+			"PeA_nut",
+			"Peek",
+			"PeepJS",
+			"Pega.IO",
+			"Peggy.js",
+			"Percolator",
+			"perf_hooks",
+			"performJs",
+			"pgnToJSON",
+			"PHibernate",
+			"phoeNix-cli",
+			"phoenixCLI",
+			"PhonegapAnalytics",
+			"PhonegapBeacon",
+			"PhonegapFeeds",
+			"PhonegapGeofence",
+			"PhonegapGrowth",
+			"PhonegapLocations",
+			"PhonegapPush",
+			"picardForTynt",
+			"PicoMachine",
+			"Pictionary",
+			"Pintu",
+			"pjEmojiTest",
+			"PJsonCouch",
+			"PK",
+			"PL8",
+			"placeHolder.js",
+			"PLATO",
+			"PlayStream",
+			"pluginCreater",
+			"pluginHelloWorld",
+			"pluginHelloworld",
+			"pluginTest",
+			"PlugMan",
+			"pluuuuHeader",
+			"PoistueJS",
+			"Pokeball-Scanner",
+			"PokeChat",
+			"PokedexJS",
+			"PokemonGoBot",
+			"PokemonGoNodeDashboard",
+			"polar-cookieParser",
+			"pollUntil",
+			"Polymer",
+			"POM",
+			"pomeloGlobalChannel",
+			"pomeloScale",
+			"portal-fe-devServer",
+			"PostgresClient",
+			"Postlog",
+			"PowerPlanDisplay",
+			"powerPlug",
+			"PP",
+			"ppublishDemo",
+			"Pre",
+			"Preprocessor",
+			"PrettyCSS",
+			"prettyJson",
+			"PrimaryJS",
+			"primerNodo",
+			"primo-explore-LinkedData",
+			"primo-explore-prmFacetsToLeft",
+			"primo-explore-prmFullViewAfter",
+			"primo-explore-prmLogoAfter",
+			"primo-explore-prmSearchBarAfter",
+			"PrimoEsempio",
+			"Printer",
+			"Prism",
+			"prjTemplate",
+			"Probes.js",
+			"process",
+			"proInterface",
+			"Project-A-VK",
+			"Prometheus",
+			"Promise",
+			"Promise.js",
+			"PromiseContext",
+			"promisify-syncStore",
+			"PropagAPISpecification",
+			"propCheckers",
+			"Propeller",
+			"properJSONify",
+			"Proto",
+			"proton-quark-rabbitMQ",
+			"ProtVista",
+			"ProUI-Utils",
+			"ProvaSimone",
+			"provinceCity.js",
+			"PSNjs",
+			"PTC-Creator",
+			"ptyzhuTest_20160813",
+			"PublishDemo",
+			"publishDigitalCrafts2016",
+			"PubSub",
+			"pubsubJS",
+			"pulsarDivya",
+			"punycode",
+			"PupaFM",
+			"Puppet.svg",
+			"PureBox",
+			"PureBox-Gallery-PlayEngine",
+			"purePlayer",
+			"PushMessage",
+			"PushPanel",
+			"PushPlugin_V2",
+			"pybee!batavia",
+			"Q",
+			"q-mod-cliElements",
+			"q-mod-cliPrinter",
+			"QAP-cli",
+			"QAP-SDK",
+			"Qarticles",
+			"QnA_Fore",
+			"QNtest",
+			"qqMap",
+			"qTip2",
+			"QuadMap",
+			"QuantumExperimentService",
+			"querystring",
+			"R",
+			"R.js",
+			"R2",
+			"RAD.js",
+			"Radical",
+			"raehoweNode",
+			"Rajas",
+			"random-fullName",
+			"randomCaddress",
+			"randomCname",
+			"randomCname.js",
+			"randomLib",
+			"randomNickname",
+			"RandomSelection",
+			"randomTestOne",
+			"randString",
+			"randString.js",
+			"Range.js",
+			"Rannalhi",
+			"rAppid.js",
+			"rAppid.js-server",
+			"rAppid.js-sprd",
+			"Rapydscriptify",
+			"RaspiKids",
+			"raZerdummy",
+			"RCTMessageUI",
+			"React_Components",
+			"React-Carousel",
+			"react-countTo",
+			"react-creditCard",
+			"React-ES5-To-ES6-Checklist",
+			"react-input-dateTime",
+			"react-InputText-component",
+			"react-komposer-watchQuery",
+			"react-materialUI-components",
+			"react-native-accountKit",
+			"react-native-cascadeGrid",
+			"react-native-checkBox",
+			"react-native-DebugServerHost",
+			"React-Native-Form-Field",
+			"react-native-isDeviceRooted",
+			"react-native-LoopAnimation",
+			"react-native-MultiSlider",
+			"react-native-portableView",
+			"react-native-swRefresh",
+			"react-PPT",
+			"React-Redux-Docker-Ngnix-Seed",
+			"react-refresh-infinite-tableView",
+			"React-Select-Country",
+			"React-Tabs",
+			"React-UI-Notification",
+			"react-uploadFile",
+			"reactClass",
+			"reactcordovaApp",
+			"ReactEslint",
+			"reactFormComponentTest1",
+			"reactGallery",
+			"reactHeaderComponentTest1",
+			"ReactHero",
+			"reactIntlJson-loader",
+			"ReactNaitveImagePreviewer",
+			"ReactNative-checkbox",
+			"reactNative-checkbox",
+			"reactNativeDatepicker",
+			"reactNativeLoading",
+			"ReactNativeNavbar",
+			"ReactNativeSlideyTabs",
+			"ReactNativeSocialLogin",
+			"ReactNativeStarterKit",
+			"ReactNativeToastAndroid",
+			"reactTwo",
+			"ReactUploader",
+			"readabilitySAX",
+			"ReadableFeeds",
+			"readline",
+			"ReadSettings",
+			"Reality3D",
+			"reallySimpleWeather",
+			"ReApp",
+			"ReasonDB",
+			"RecastAI-Library-JavaScript",
+			"recordType",
+			"recordWebsite",
+			"RedisCacheEngine",
+			"redisHelper",
+			"reDIx",
+			"RefreshMedia",
+			"registerSendMsg",
+			"reloadOnUpdate",
+			"remoteFileToS3",
+			"RemoteTestService",
+			"removeNPMAbsolutePaths",
+			"RentalAdvantage",
+			"repl",
+			"Replace",
+			"Replace2.0",
+			"Replen-FrontEnd",
+			"replNetServer",
+			"Require",
+			"requireAsync",
+			"Resin",
+			"resolveDependencies",
+			"responseHostInfo",
+			"ReST-API",
+			"RESTful-API",
+			"Restifytest",
+			"Restlastic",
+			"RESTLoader",
+			"Reston",
+			"RestTest",
+			"RetreveNumbers",
+			"rgbToHexa",
+			"RhinoStyle",
+			"Richard",
+			"richardUtils",
+			"rinuts-nodeunitDriver",
+			"Risks-Tables",
+			"RNBaiduMap",
+			"RNCommon",
+			"RNSVG",
+			"RNSwiftHealthkit",
+			"rNums",
+			"RobinGitHub",
+			"Robusta",
+			"RockSelect",
+			"Router",
+			"RP_Limpezas_Industriais",
+			"Rpm",
+			"RSK-Router",
+			"RT-react-toolbox",
+			"Rubytool",
+			"runQuery",
+			"runStormTest",
+			"runTestScenario",
+			"RunwayLogger",
+			"RWD-Table-Patterns",
+			"RWPromise",
+			"Safari-command",
+			"SafeObject.js",
+			"Safood-Parse",
+			"SaFood-Parse",
+			"sahibindenServer",
+			"salgueirimTeste",
+			"samepleMicroservice",
+			"samjs-mongo-isOwner",
+			"Sample",
+			"SamplePlugIn",
+			"SandboxTools",
+			"sandcastle_multiApp",
+			"Sanitizer.js",
+			"sanitizer.unescapeEntities",
+			"Sardines",
+			"Sass-Boost",
+			"Sass-JSON",
+			"Sass-layout",
+			"Saturday",
+			"SauceBreak",
+			"sayHelloByone",
+			"sbg-queueManager",
+			"sbUtils",
+			"SC-Expense-Plugin",
+			"Scaffolding",
+			"scalejs.metadataFactory",
+			"ScgiClient",
+			"Scheduler.js",
+			"schema-inspector-anyOf",
+			"scp-cleanRedis",
+			"Scrap",
+			"scriptTools",
+			"scrollAnimation",
+			"scrollPointerEvents",
+			"ScrollShow",
+			"Sdp-App",
+			"seaModel",
+			"searchBox.js",
+			"SecChat",
+			"SecureKeyStore",
+			"segnoJS",
+			"Seguranca",
+			"SegurancaBrasilcard",
+			"Select2",
+			"selfAsync",
+			"selfAutocomplete",
+			"SelfieJS",
+			"SenseJs",
+			"SenseOrm",
+			"Sentimental",
+			"SeptemTool",
+			"seqFlow",
+			"SerialDownloader",
+			"serveItQuick",
+			"Server",
+			"Service-Discovery-DLNA-SSDP",
+			"serviceDiscovery",
+			"SessionWebSocket",
+			"Set",
+			"setInterval",
+			"setRafTimeout",
+			"setTimeout",
+			"SexyJS",
+			"sfaClient",
+			"sgBase",
+			"sgCore",
+			"sgFramework",
+			"sgLayers",
+			"sgSay",
+			"Sharder",
+			"ShareSDK",
+			"SharingCMS",
+			"Shave",
+			"Sheet",
+			"SHI-Shire",
+			"sHistory",
+			"ShowNativeContact",
+			"SHPS4Node-auth",
+			"SHPS4Node-cache",
+			"SHPS4Node-commandline",
+			"SHPS4Node-Config",
+			"SHPS4Node-config",
+			"SHPS4Node-cookie",
+			"SHPS4Node-CSS",
+			"SHPS4Node-dependency",
+			"SHPS4Node-error",
+			"SHPS4Node-file",
+			"SHPS4Node-frontend",
+			"SHPS4Node-init",
+			"SHPS4Node-language",
+			"SHPS4Node-log",
+			"SHPS4Node-make",
+			"SHPS4Node-optimize",
+			"SHPS4Node-parallel",
+			"SHPS4Node-plugin",
+			"SHPS4Node-sandbox",
+			"SHPS4Node-schedule",
+			"SHPS4Node-session",
+			"SHPS4Node-SQL",
+			"shwang1aPackage1",
+			"shy-Do",
+			"shy-static-imgJoin",
+			"SignaturePrinter",
+			"Silvera",
+			"simoneDays",
+			"Simple",
+			"Simple-Cache",
+			"simple-hello-world-apiClientsideTest",
+			"simple-jQuery-slider",
+			"simpleArgsParser",
+			"simpleCsvToJson",
+			"SimpleHtdigest",
+			"SimpleQueue",
+			"SimpleRPC",
+			"Simplog",
+			"SingularityUI",
+			"sip.js-mnQf2Q2R",
+			"Sisense-node-schedule",
+			"SITA-JS-Wrapper",
+			"siteBuild",
+			"Skadi",
+			"SkelEktron",
+			"SKRCensorText",
+			"SkyLabels.js",
+			"Skype-command",
+			"slgComponents",
+			"Slidebars",
+			"Slidebars-legacy",
+			"slidePage",
+			"Slither-Server",
+			"sLog",
+			"slush-initPro",
+			"Smaller4You",
+			"Smart-Web-Proxy",
+			"SmartConfig",
+			"SmartyGrid",
+			"SMValidator",
+			"smyNpm1",
+			"Snake.js",
+			"SnipIt",
+			"SnsShare",
+			"SocialDig.js",
+			"Socialight",
+			"socketGW",
+			"SocketIPC",
+			"sortBy.js",
+			"Soumen",
+			"SoundCloud_Node_API",
+			"SpaceMagic",
+			"SpeechJS",
+			"Speedco",
+			"Speedonetzer",
+			"Sphero-Node-SDK",
+			"Spores",
+			"Spot",
+			"spotifyCurrentlyPlaying.js",
+			"SpotlightJS",
+			"Spring",
+			"SPUtility.js",
+			"SQLClient",
+			"SQProject",
+			"SquareOfNumber",
+			"Squirrel",
+			"squishMenu",
+			"Sslac",
+			"SSO",
+			"SSSDemoNPM7oct",
+			"SSuperSchool",
+			"StaceFlow",
+			"StanLee-WPTheme-Generator",
+			"star-initReact",
+			"Starr",
+			"startInt",
+			"starW-names",
+			"StaticServer",
+			"staticServer",
+			"staticSync",
+			"StatusBar",
+			"StdJSBuilder",
+			"steamAPI",
+			"STEPNode",
+			"Stewed",
+			"stickUp",
+			"stickyNavbar.js",
+			"stickyStack",
+			"StimShopPlugin",
+			"storeJSON",
+			"storkSQL",
+			"stormClient",
+			"Str.js",
+			"Stratagem",
+			"stream",
+			"string_decoder",
+			"String_module",
+			"string-DLL",
+			"string.prototype.htmlDecode",
+			"string.prototype.htmlEntityDecode",
+			"StringDistanceTS",
+			"StringMultiplier",
+			"StringScanner",
+			"STRUCT",
+			"Suckle",
+			"sudokuMaker",
+			"sudoTracker",
+			"SUI-Angular2-Modal",
+			"superClipBoard",
+			"SuperDank",
+			"superJoy",
+			"Supermodule",
+			"supermoduleBugay",
+			"supermoduleLyu",
+			"supermoduleNik",
+			"supermoduleShulumba",
+			"Supersonic",
+			"superUsingMod",
+			"svgSprite",
+			"swimCoachStopwatch",
+			"SwitchBoard",
+			"synchro_ByJoker",
+			"SyncRun",
+			"Syndication",
+			"Synergy",
+			"sys",
+			"Sysdate",
+			"sytemMonitor-client",
+			"szxPack",
+			"T_T",
+			"T-Box",
+			"table-Q",
+			"tableComponent",
+			"Tachyon",
+			"TagCloud",
+			"tagOf",
+			"TagSelect.js",
+			"TalkerNode",
+			"TALQS",
+			"talquingApp",
+			"TangramDocs",
+			"tap-linux-2BA",
+			"tap-win-2BA",
+			"tap-win-C94",
+			"Targis",
+			"Tattletale",
+			"Tayr",
+			"tbCLI",
+			"TDTwitterStream",
+			"Tea",
+			"TeamBuilder",
+			"TechNode",
+			"TechnoLib",
+			"TeeChart",
+			"Templ8",
+			"Template",
+			"Tempus",
+			"Ter",
+			"Tereshkovmodule",
+			"Terminal-command",
+			"test_helloWorld",
+			"Test-7",
+			"test-A",
+			"test-naamat-Al-Aswad",
+			"Test-Project",
+			"TestAmILate",
+			"testApi",
+			"testApp",
+			"Testchai2",
+			"Testchai21",
+			"testContrast",
+			"TESTdelete123",
+			"testDEMOABCD",
+			"testDirJackAtherton",
+			"Teste2",
+			"testeRealTime",
+			"testForThis",
+			"testMe",
+			"testModule",
+			"testModule-hui",
+			"testNode",
+			"TestNodeJsApplication",
+			"testPackage",
+			"testPackage2",
+			"TestPlugin",
+			"testPlugin",
+			"TestProject",
+			"testProject",
+			"testPublish",
+			"testPublisha",
+			"testPublishNpmModule",
+			"TFWhatIs",
+			"Thairon-node",
+			"Thanatos_pack",
+			"ThanhNV",
+			"Theater",
+			"TheGiver",
+			"Thimble",
+			"Thing.js",
+			"thingHolder",
+			"think-paymentService",
+			"think-qiniuService",
+			"think-quotationService",
+			"think-wechatService",
+			"ThinkHub",
+			"ThinkInsteon",
+			"ThirtyDaysOfReactNative",
+			"threadHandler",
+			"threejs-htmlRenderer",
+			"ThrustFS",
+			"ThumborJS",
+			"TigraphBot",
+			"tilejsonHttpShim",
+			"Time-Tracker-Cli",
+			"Timelined",
+			"Timeliner.Core",
+			"Timeliner.Index",
+			"Timepass",
+			"timers",
+			"timeTraveller",
+			"timeUtils",
+			"tiNanta",
+			"TinyAnimate",
+			"tinyChat",
+			"tinyEmiter",
+			"tinyFrame",
+			"tinyImages",
+			"tinyLoger",
+			"Titan",
+			"TJAngular",
+			"tls",
+			"tm-apps-poolApi",
+			"tmSensor",
+			"toBin",
+			"toDataURL",
+			"toDoList",
+			"toDots",
+			"Toji",
+			"tokenAndAuthorizationManager",
+			"tokenAndAuthorizationManger",
+			"Tom",
+			"tomloprodModal",
+			"Tool-bluej-gulp",
+			"Toolshed-Client",
+			"topSdk",
+			"TopuNet-AMD-modules",
+			"TopuNet-BaiduMap",
+			"TopuNet-CalendarScroller",
+			"TopuNet-dropDownLoad",
+			"TopuNet-GrayScale",
+			"TopuNet-ImageCropCompressorH5",
+			"TopuNet-JRoll",
+			"TopuNet-js-functions",
+			"TopuNet-JsHint4Sublime",
+			"TopuNet-JsHintify",
+			"TopuNet-Landscape_mask",
+			"TopuNet-Landscape-Mask",
+			"TopuNet-LayerShow",
+			"TopuNet-mobile-stop-moved",
+			"TopuNet-node-functions",
+			"TopuNet-Pic-code",
+			"TopuNet-PromptLayer-JS",
+			"TopuNet-QueueLazyLoad",
+			"TopuNet-RequireJS",
+			"TopuNet-RotatingBanner",
+			"TopuNet-WaterFall",
+			"TopuNet-weixin-node",
+			"TorrentBeam",
+			"TorrentCollection",
+			"toSrc",
+			"toString",
+			"touchController",
+			"toYaml",
+			"TPA",
+			"tr-O64",
+			"trace_events",
+			"TradeJS",
+			"Trains",
+			"TrainsController",
+			"TrainsModel",
+			"TramiteDocumentarioFront",
+			"TransactionRelay",
+			"transformConfigJson",
+			"transitionEnd",
+			"translateFzn",
+			"Travis",
+			"TrixCSS",
+			"truncateFilename",
+			"tslint-jasmine-noSkipOrFocus",
+			"TSN",
+			"ttm-Testing",
+			"tty",
+			"Tuio.js",
+			"Turntable",
+			"tuTrabajo-client",
+			"TweenTime",
+			"TwigJS",
+			"twitterApiWrapper",
+			"txtObj",
+			"Tyche",
+			"TypeCast",
+			"typedCj.js",
+			"TypedFunc",
+			"typescript-demo-MATC-Andrew",
+			"typography-theme-Wikipedia",
+			"typopro-web-TypoPRO-AmaticSC",
+			"typopro-web-TypoPRO-AnonymousPro",
+			"typopro-web-TypoPRO-Asap",
+			"typopro-web-TypoPRO-Astloch",
+			"typopro-web-TypoPRO-BebasNeue",
+			"typopro-web-TypoPRO-Bitter",
+			"typopro-web-TypoPRO-Chawp",
+			"typopro-web-TypoPRO-ComingSoon",
+			"typopro-web-TypoPRO-Cousine",
+			"typopro-web-TypoPRO-Coustard",
+			"typopro-web-TypoPRO-CraftyGirls",
+			"typopro-web-TypoPRO-Cuprum",
+			"typopro-web-TypoPRO-Damion",
+			"typopro-web-TypoPRO-DancingScript",
+			"typopro-web-TypoPRO-Delius",
+			"typopro-web-TypoPRO-Gidole",
+			"typopro-web-TypoPRO-GiveYouGlory",
+			"typopro-web-TypoPRO-GrandHotel",
+			"typopro-web-TypoPRO-GreatVibes",
+			"typopro-web-TypoPRO-Handlee",
+			"typopro-web-TypoPRO-HHSamuel",
+			"typopro-web-TypoPRO-Inconsolata",
+			"typopro-web-TypoPRO-IndieFlower",
+			"typopro-web-TypoPRO-Junction",
+			"typopro-web-TypoPRO-Kalam",
+			"typopro-web-TypoPRO-KingthingsPetrock",
+			"typopro-web-TypoPRO-Kreon",
+			"typopro-web-TypoPRO-LeagueGothic",
+			"typopro-web-TypoPRO-Lekton",
+			"typopro-web-TypoPRO-LibreBaskerville",
+			"typopro-web-TypoPRO-Milonga",
+			"typopro-web-TypoPRO-Montserrat",
+			"typopro-web-TypoPRO-Nickainley",
+			"typopro-web-TypoPRO-Oxygen",
+			"typopro-web-TypoPRO-Pacifico",
+			"typopro-web-TypoPRO-PatuaOne",
+			"typopro-web-TypoPRO-Poetsen",
+			"typopro-web-TypoPRO-Pompiere",
+			"typopro-web-TypoPRO-PTMono",
+			"typopro-web-TypoPRO-Rosario",
+			"typopro-web-TypoPRO-SansitaOne",
+			"typopro-web-TypoPRO-Satisfy",
+			"typopro-web-TypoPRO-Signika",
+			"typopro-web-TypoPRO-Slabo",
+			"typopro-web-TypoPRO-TopSecret",
+			"typopro-web-TypoPRO-Unifraktur",
+			"typopro-web-TypoPRO-Vegur",
+			"typopro-web-TypoPRO-VeteranTypewriter",
+			"typopro-web-TypoPRO-WeblySleek",
+			"typopro-web-TypoPRO-Yellowtail",
+			"Ubertesters",
+			"Ubi",
+			"UbibotSensor",
+			"UbidotsMoscaServer",
+			"UbiName",
+			"uDom",
+			"ueberDB",
+			"ueberDB-couch",
+			"ueberRemoteStorage",
+			"ugcFore",
+			"UIjson",
+			"UkGeoTool",
+			"UltraServerIO",
+			"UM007",
+			"uMech",
+			"uMicro",
+			"uMicro-invoke",
+			"UMiracleButton",
+			"uncaughtException",
+			"Underscore-1",
+			"UnderscoreKit",
+			"UnderscoreMatchersForJasmine",
+			"underscorePlus",
+			"underscoreWithTypings",
+			"Uniform",
+			"Unit-Bezier",
+			"unity-kjXmol-1",
+			"UniversalRoute",
+			"Up2Bucket",
+			"UParams",
+			"UploadCore",
+			"Uploader",
+			"URIjs",
+			"url",
+			"URLON",
+			"urlParser",
+			"urlWatch",
+			"USAJOBS",
+			"USAJOBS_Help_Center",
+			"UserID",
+			"userModule1123455",
+			"util",
+			"utilityFileSystem",
+			"utilityTool",
+			"Utils",
+			"uTool",
+			"uTool2",
+			"uvCharts",
+			"v8",
+			"Validate",
+			"Validator",
+			"VardeminChat",
+			"vc-buttonGroup",
+			"vcPagination",
+			"vdGlslCanvas",
+			"VDU-web",
+			"Vector",
+			"Velvet",
+			"vericredClient",
+			"VerifyInput.js",
+			"Videobox-MODX",
+			"videoBoxer",
+			"VideoStream",
+			"Vidzy",
+			"ViewAbility",
+			"ViewPort",
+			"ViewTest",
+			"vintageJS",
+			"Virsical",
+			"VK-Promise",
+			"VLC-command",
+			"vm",
+			"VmosoApiClient",
+			"vmSFTP",
+			"VoiceIt",
+			"voiceLive",
+			"Votesy",
+			"VoxFeed",
+			"Voyager-search",
+			"vPromise",
+			"vQ",
+			"vQMgArq1o4U1",
+			"vsGoogleAutocomplete",
+			"vue-dS",
+			"vue-scrollTo",
+			"vueLoadingBar",
+			"VueProject",
+			"VueProjectES5",
+			"VueTree",
+			"Vuk",
+			"W2G2",
+			"w5cValidator",
+			"w11k-dropdownToggle",
+			"Wamble",
+			"wamTool",
+			"Wanderer",
+			"wangeditorForReact",
+			"wantu-nodejsSDK",
+			"wasabiD",
+			"wasabiH",
+			"wasi",
+			"WasteOfTime",
+			"WatchWorker",
+			"watsonWebSocketSTTwrapper",
+			"wb-Wisteria",
+			"wBitmask",
+			"wColor",
+			"wColor256",
+			"wConsequence",
+			"wCopyable",
+			"WCordova",
+			"wDeployer",
+			"Web_GUI_Core",
+			"web3.onChange",
+			"Web4.0",
+			"webarrancoStarter",
+			"WebConsoleUI",
+			"Webcord",
+			"webdriverNode",
+			"webext-getBytesInUse-polyfill",
+			"WebHook",
+			"WebODF",
+			"webpack-dev-server-getApp",
+			"webpack-dynamicHash",
+			"webpack-Minimount-starter",
+			"WebParrot",
+			"webpay-webserviceAPI",
+			"webStart",
+			"WebStencil",
+			"webStorage",
+			"wechat-enterprise-for-kfService",
+			"wEventHandler",
+			"wFiles",
+			"wGluCal",
+			"WhereThingsHappened",
+			"WhiteRabbit",
+			"WigGLe",
+			"Wilson_U",
+			"Wilson_Util",
+			"WiredPanels",
+			"wkhtmltopdfWrapper",
+			"wLogger",
+			"Wmhao",
+			"WNdb",
+			"WoD-Dice",
+			"WolfyEventEmitter",
+			"woodwoodnine_FirstTest",
+			"wordCounting",
+			"WordDuelConstants",
+			"wPath",
+			"wProto",
+			"wqProj-cli",
+			"wRegexpObject",
+			"WSBroker",
+			"wscn-tilesetQuote-component",
+			"wsxRest",
+			"wTemplate",
+			"wTesting",
+			"WTGeo",
+			"wTools",
+			"wy-checkBrowser",
+			"X-date",
+			"X-editable",
+			"xBEM",
+			"xlsTjson",
+			"xlsxParser",
+			"xmlToJsonTs",
+			"Xnpmtools",
+			"xSpinner",
+			"xStore",
+			"xui-vue-WorkflowArrow",
+			"Xunfei",
+			"xuNpm",
+			"XWindow",
+			"xwjApp",
+			"xxxDemo",
+			"yaDeferred",
+			"YAEventEmitter",
+			"yaMap",
+			"yamQuery-excel",
+			"yamQuery-excelAnalizer",
+			"YamYam",
+			"yang-testingNPM",
+			"YaoXiaoMi",
+			"Yeezy-Case",
+			"Yggdrasil",
+			"YJS",
+			"YmpleCommerce",
+			"YouAreDaChef",
+			"YouSlackBot",
+			"yrdLmz",
+			"yuanMath",
+			"YuicompressorValidator",
+			"Yummy",
+			"Yummy-Yummy",
+			"YunUI",
+			"Yworkcli",
+			"Yworkshell",
+			"z-lib-structure-dqIndex",
+			"zhb_helloTest",
+			"Zhengzx",
+			"zigZag",
+			"Ziz",
+			"ZJJPackage",
+			"zkModules",
+			"zlib",
+			"zmqConnector",
+			"ZooKeeper",
+			"zzcBridge",
+			"zzcCopy",
+			"zzcDownloadApp"
+		];
+	}));
+	/**
+	* @file Shared types, helpers, and utilities for `npm` PURL operations.
+	*   Includes builtin/legacy name lookups, ID helpers, normalization, registry
+	*   existence checks, and specifier parsing.
+	*/
+	let builtinSet;
+	/**
+	* Get `Set` of Node.js built-in module names for O(1) lookups. Derived from
+	* the running Node's `builtinModules` (rolldown externalizes builtins, so the
+	* CJS dist carries this as a plain `require('node:module')`).
+	*/
+	function getNpmBuiltinSet() {
+		if (builtinSet === void 0) builtinSet = new import_map_set.SetCtor(node_module.builtinModules);
+		return builtinSet;
+	}
+	/**
+	* Get `npm` package identifier with optional namespace.
+	*/
+	function getNpmId(purl) {
+		const { name, namespace } = purl;
+		return `${namespace && namespace.length > 0 ? `${namespace}/` : ""}${name}`;
+	}
+	let legacySet;
+	/**
+	* Get `Set` of `npm` legacy package names for O(1) lookups.
+	*/
+	function getNpmLegacySet() {
+		if (legacySet === void 0) {
+			let fullLegacyNames;
+			/* v8 ignore start - Fallback path only used if JSON file fails to load. */
+			try {
+				fullLegacyNames = require_legacy_names();
+			} catch {
+				fullLegacyNames = [
+					"assert",
+					"buffer",
+					"crypto",
+					"events",
+					"fs",
+					"http",
+					"os",
+					"path",
+					"url",
+					"util"
+				];
+			}
+			/* v8 ignore stop */
+			legacySet = new import_map_set.SetCtor(fullLegacyNames);
+		}
+		return legacySet;
+	}
+	/**
+	* Check if `npm` identifier is a Node.js built-in module name.
+	*/
+	function isNpmBuiltinName(id) {
+		return getNpmBuiltinSet().has((0, import_string.StringPrototypeToLowerCase)(id));
+	}
+	/**
+	* Check if `npm` identifier is a legacy package name.
+	*/
+	function isNpmLegacyName(id) {
+		return getNpmLegacySet().has(id);
+	}
+	/**
+	* Normalize `npm` package URL.
+	* https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#npm.
+	*/
+	function normalize$10(purl) {
+		lowerNamespace(purl);
+		if (!isNpmLegacyName(getNpmId(purl))) lowerName(purl);
+		return purl;
+	}
+	/**
+	* Parse npm package specifier into component data.
+	*
+	* Parses npm package specifiers into `namespace`, `name`, and `version`
+	* components. Handles scoped packages, version ranges, and normalizes version
+	* strings.
+	*
+	* **Supported formats:**
+	*
+	* - Basic packages: `lodash`, `lodash@4.17.21`
+	* - Scoped packages: `@babel/core`, `@babel/core@7.0.0`
+	* - Version ranges: `^4.17.21`, `~1.2.3`, `>=1.0.0` (prefixes stripped)
+	* - Dist-tags: `latest`, `next`, `beta` (passed through as version)
+	*
+	* **Not supported:**
+	*
+	* - Git URLs: `git+https://...`
+	* - File paths: `file:../package.tgz`
+	* - GitHub shortcuts: `user/repo#branch`
+	* - Aliases: `npm:package@version`
+	*
+	* **Note:** Dist-tags like `latest` are mutable and should be resolved to
+	* concrete versions for reproducible builds. This method passes them through
+	* as-is for convenience.
+	*
+	* @example
+	*   ;```typescript
+	*   // Basic packages
+	*   parseNpmSpecifier('lodash@4.17.21')
+	*   // -> { namespace: undefined, name: 'lodash', version: '4.17.21' }
+	*
+	*   // Scoped packages
+	*   parseNpmSpecifier('@babel/core@^7.0.0')
+	*   // -> { namespace: '@babel', name: 'core', version: '7.0.0' }
+	*
+	*   // Dist-tags (passed through)
+	*   parseNpmSpecifier('react@latest')
+	*   // -> { namespace: undefined, name: 'react', version: 'latest' }
+	*
+	*   // No version
+	*   parseNpmSpecifier('express')
+	*   // -> { namespace: undefined, name: 'express', version: undefined }
+	*   ```
+	*
+	* @param specifier - Npm package specifier (e.g., `'lodash@4.17.21'`,
+	*   `'@babel/core@^7.0.0'`)
+	*
+	* @returns Object with `namespace`, `name`, and `version` components
+	*
+	* @throws {Error} If `specifier` is not a string or is empty
+	*/
+	function parseNpmSpecifier(specifier) {
+		if (typeof specifier !== "string") throw new import_error.ErrorCtor("npm package specifier string is required.");
+		if (isBlank(specifier)) throw new import_error.ErrorCtor("npm package specifier cannot be empty.");
+		let namespace;
+		let name;
+		let version;
+		if ((0, import_string.StringPrototypeStartsWith)(specifier, "@")) {
+			const slashIndex = (0, import_string.StringPrototypeIndexOf)(specifier, "/");
+			if (slashIndex === -1) throw new import_error.ErrorCtor("npm scoped specifier must contain \"/\" after scope (e.g. \"@scope/name\").");
+			const atIndex = (0, import_string.StringPrototypeIndexOf)(specifier, "@", slashIndex);
+			if (atIndex === -1) {
+				namespace = (0, import_string.StringPrototypeSlice)(specifier, 0, slashIndex);
+				name = (0, import_string.StringPrototypeSlice)(specifier, slashIndex + 1);
+			} else {
+				namespace = (0, import_string.StringPrototypeSlice)(specifier, 0, slashIndex);
+				name = (0, import_string.StringPrototypeSlice)(specifier, slashIndex + 1, atIndex);
+				version = (0, import_string.StringPrototypeSlice)(specifier, atIndex + 1);
+			}
+		} else {
+			const atIndex = (0, import_string.StringPrototypeIndexOf)(specifier, "@");
+			if (atIndex === -1) name = specifier;
+			else {
+				name = (0, import_string.StringPrototypeSlice)(specifier, 0, atIndex);
+				version = (0, import_string.StringPrototypeSlice)(specifier, atIndex + 1);
+			}
+		}
+		if (version) {
+			version = (0, import_string.StringPrototypeReplace)(version, /^[\^~>=<]+/, "");
+			const spaceIndex = (0, import_string.StringPrototypeIndexOf)(version, " ");
+			if (spaceIndex !== -1) version = (0, import_string.StringPrototypeSlice)(version, 0, spaceIndex);
+		}
+		return {
+			namespace,
+			name,
+			version
+		};
+	}
+	/**
+	* @file `npm`-specific PURL normalization and validation. Implements npm
+	*   package naming rules from the PURL specification.
+	*/
+	/**
+	* Validate `npm` package URL. Validation based on
+	* https://github.com/npm/validate-npm-package-name/tree/v6.0.0 ISC License
+	* Copyright (c) 2015, npm, Inc.
+	*/
+	function npmValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const { name, namespace } = purl;
+		if (!validateNoInjectionByType("npm", "name", name, { throws })) return false;
+		if (!validateNoInjectionByType("npm", "namespace", namespace, { throws })) return false;
+		const hasNs = namespace && namespace.length > 0;
+		const id = getNpmId(purl);
+		const code0 = (0, import_string.StringPrototypeCharCodeAt)(id, 0);
+		const compName = hasNs ? "namespace" : "name";
+		if (!validateNpmName(name, code0, compName, { throws })) return false;
+		if (hasNs && !validateNpmNamespace(namespace, code0, { throws })) return false;
+		const loweredId = (0, import_string.StringPrototypeToLowerCase)(id);
+		if (loweredId === "favicon.ico" || loweredId === "node_modules") {
+			if (throws) throw new PurlError(`npm "${compName}" component of "${loweredId}" is not allowed`);
+			return false;
+		}
+		return validateModernNpmName(id, loweredId, name, { throws });
+	}
+	function validateModernNpmName(id, loweredId, name, { throws }) {
+		if (!isNpmLegacyName(id)) {
+			if (id.length > 214) {
+				if (throws)
+ /* v8 ignore start -- Throw path tested separately from return false path. */
+				throw new PurlError(`npm "namespace" and "name" components can not collectively be more than 214 characters`);
+				return false;
+			}
+			if (loweredId !== id) {
+				if (throws) throw new PurlError(`npm "name" component can not contain capital letters`);
+				return false;
+			}
+			/* v8 ignore start -- Unreachable: ~'!()* are all injection chars caught by validator above. */
+			if ((0, import_regexp.RegExpPrototypeTest)(/[~'!()*]/, name)) {
+				if (throws) throw new PurlError(`npm "name" component can not contain special characters ("~'!()*")`);
+				return false;
+			}
+			/* v8 ignore stop */
+			if (isNpmBuiltinName(id)) {
+				if (throws)
+ /* v8 ignore start -- Throw path tested separately from return false path. */
+				throw new PurlError("npm \"name\" component can not be a core module name");
+				return false;
+			}
+		}
+		return true;
+	}
+	function validateNpmName(name, code0, compName, { throws }) {
+		if (code0 === 46) {
+			if (throws) throw new PurlError(`npm "${compName}" component cannot start with a period`);
+			return false;
+		}
+		if (code0 === 95) {
+			if (throws) throw new PurlError(`npm "${compName}" component cannot start with an underscore`);
+			return false;
+		}
+		/* v8 ignore start -- Unreachable: space chars are caught by injection validator above. */
+		if ((0, import_string.StringPrototypeTrim)(name) !== name) {
+			if (throws) throw new PurlError("npm \"name\" component cannot contain leading or trailing spaces");
+			return false;
+		}
+		/* v8 ignore stop */
+		if (encodeComponent(name) !== name) {
+			if (throws) throw new PurlError(`npm "name" component can only contain URL-friendly characters`);
+			return false;
+		}
+		return true;
+	}
+	function validateNpmNamespace(namespace, code0, { throws }) {
+		/* v8 ignore start -- Unreachable: space chars are caught by injection validator above. */
+		if ((namespace !== void 0 ? (0, import_string.StringPrototypeTrim)(namespace) : namespace) !== namespace) {
+			if (throws) throw new PurlError("npm \"namespace\" component cannot contain leading or trailing spaces");
+			return false;
+		}
+		/* v8 ignore stop */
+		if (code0 !== 64) {
+			if (throws) throw new PurlError(`npm "namespace" component must start with an "@" character`);
+			return false;
+		}
+		const namespaceWithoutAtSign = (0, import_string.StringPrototypeSlice)(namespace, 1);
+		if (encodeComponent(namespaceWithoutAtSign) !== namespaceWithoutAtSign) {
+			if (throws) throw new PurlError(`npm "namespace" component can only contain URL-friendly characters`);
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Validate NuGet package URL. NuGet packages must not have a `namespace`.
+	* `name` must not contain injection characters.
+	*/
+	function nugetValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("nuget", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("nuget", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file OCI (Open Container Initiative) PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#oci.
+	*/
+	/**
+	* Normalize OCI package URL. Lowercases `name` and `version` per spec.
+	*/
+	function normalize$9(purl) {
+		lowerName(purl);
+		lowerVersion(purl);
+		return purl;
+	}
+	/**
+	* Validate OCI package URL. OCI packages must not have a `namespace`.
+	*/
+	function ociValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("oci", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("oci", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file OPAM-specific PURL validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst OPAM is
+	*   the OCaml package manager. Package names are lowercase.
+	*/
+	/**
+	* Validate OPAM package URL. OPAM packages must not have a `namespace`.
+	*/
+	function opamValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("opam", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("opam", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file OTP (Erlang/OTP) PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst OTP
+	*   packages are Erlang/OTP libraries and applications. Package names are
+	*   typically lowercase.
+	*/
+	/**
+	* Normalize OTP package URL. Lowercases `name`.
+	*/
+	function normalize$8(purl) {
+		lowerName(purl);
+		return purl;
+	}
+	/**
+	* Validate OTP package URL. OTP packages must not have a `namespace`.
+	*/
+	function otpValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("otp", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("otp", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize Pub package URL. Lowercases `name` and replaces dashes with
+	* underscores.
+	*/
+	function normalize$7(purl) {
+		lowerName(purl);
+		purl.name = replaceDashesWithUnderscores(purl.name);
+		return purl;
+	}
+	/**
+	* Validate Pub package URL. `name` may only contain `[a-z0-9_]` characters.
+	*/
+	function pubValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const { name } = purl;
+		for (let i = 0, { length } = name; i < length; i += 1) {
+			const code = (0, import_string.StringPrototypeCharCodeAt)(name, i);
+			if (!(code >= 48 && code <= 57 || code >= 97 && code <= 122 || code === 95)) {
+				if (throws)
+ /* v8 ignore next 3 -- Throw path tested separately from return false path. */
+				throw new PurlError("pub \"name\" component may only contain [a-z0-9_] characters");
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	* Normalize PyPI package URL. Lowercases `namespace` and `name` and replaces
+	* underscores with dashes in `name` (PEP 503). The `version` is preserved: a
+	* purl version is an opaque locator with no purl-spec normalization rule, and
+	* PEP 440 case-folding is a comparison-layer concern, not canonical form (the
+	* packageurl-python reference impl also preserves the pypi version).
+	*/
+	function normalize$6(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		purl.name = replaceUnderscoresWithDashes(purl.name);
+		return purl;
+	}
+	/**
+	* Validate PyPI package URL. `name` must not contain injection characters.
+	*/
+	function pypiValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("pypi", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file QPKG (QNAP package) PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#qpkg.
+	*/
+	/**
+	* Normalize QPKG package URL. Lowercases `namespace` only.
+	*/
+	function normalize$5(purl) {
+		lowerNamespace(purl);
+		return purl;
+	}
+	/**
+	* @file RPM (Red Hat Package Manager) PURL normalization.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#rpm.
+	*/
+	/**
+	* Normalize RPM package URL. Lowercases `namespace` only.
+	*/
+	function normalize$4(purl) {
+		lowerNamespace(purl);
+		return purl;
+	}
+	/**
+	* Normalize socket package URL. No type-specific normalization for socket
+	* packages.
+	*/
+	function normalize$3(purl) {
+		return purl;
+	}
+	/**
+	* @file SWID (Software Identification Tag) PURL validation.
+	*   https://github.com/package-url/purl-spec/blob/main/types-doc/swid-definition.md.
+	*/
+	const GUID_PATTERN = (0, import_object.ObjectFreeze)(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i);
+	/**
+	* Validate SWID package URL. SWID requires a `tag_id` qualifier that must not
+	* be empty. If `tag_id` is a GUID, it must be lowercase.
+	*/
+	function swidValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const { qualifiers } = purl;
+		const tagId = qualifiers?.["tag_id"];
+		if (!tagId) {
+			if (throws) throw new PurlError("swid requires a \"tag_id\" qualifier");
+			return false;
+		}
+		const tagIdStr = (0, import_string.StringPrototypeTrim)(tagId);
+		if (tagIdStr.length === 0) {
+			/* v8 ignore next 3 -- Throw path tested separately from return false path. */
+			if (throws) throw new PurlError("swid \"tag_id\" qualifier must not be empty");
+			return false;
+		}
+		if ((0, import_regexp.RegExpPrototypeTest)(GUID_PATTERN, tagIdStr)) {
+			if (tagIdStr !== (0, import_string.StringPrototypeToLowerCase)(tagIdStr)) {
+				if (throws) throw new PurlError("swid \"tag_id\" qualifier must be lowercase when it is a GUID");
+				return false;
+			}
+		}
+		if (!validateNoInjectionByType("swid", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file Swift PURL validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst#swift.
+	*/
+	/**
+	* Validate Swift package URL. Swift packages require both `namespace` and
+	* `version`. `name` and `namespace` must not contain injection characters.
+	*/
+	function swiftValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateRequiredByType("swift", "namespace", purl.namespace, { throws })) return false;
+		if (!validateRequiredByType("swift", "version", purl.version, { throws })) return false;
+		if (!validateNoInjectionByType("swift", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("swift", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize unknown package URL. No type-specific normalization for unknown
+	* packages.
+	*/
+	function normalize$2(purl) {
+		return purl;
+	}
+	/**
+	* @file Vcpkg (C/C++ package manager) PURL validation.
+	*   https://github.com/package-url/purl-spec/blob/main/types/vcpkg-definition.json
+	*   A vcpkg port name like `boost-asio` is a single name component — the spec
+	*   prohibits a namespace (`pkg:vcpkg/boost/asio` must fail rather than parse
+	*   as namespace + name). No normalize step: port names are already lowercase
+	*   kebab-case by vcpkg's own registry grammar and the definition carries no
+	*   normalization rules. The `port_version` / `repository_revision` / `triplet`
+	*   qualifiers are optional and flow through generic qualifier handling.
+	*/
+	/**
+	* Validate vcpkg package URL. Vcpkg packages must not have a `namespace`;
+	* `name` must not contain injection characters.
+	*/
+	function vcpkgValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateEmptyByType("vcpkg", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("vcpkg", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* Normalize VSCode extension package URL. Lowercases `namespace` (publisher),
+	* `name` (extension), and `version` per spec. Spec: `namespace`, `name`, and
+	* `version` are all case-insensitive.
+	*/
+	function normalize$1(purl) {
+		lowerNamespace(purl);
+		lowerName(purl);
+		lowerVersion(purl);
+		return purl;
+	}
+	/**
+	* Validate VSCode extension package URL. Checks `namespace` (publisher) and
+	* `name` (extension) for injection characters, and validates `version` as
+	* semver when present.
+	*/
+	function vscodeExtensionValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		const { name, namespace, version, qualifiers } = purl;
+		if (!validateRequiredByType("vscode-extension", "namespace", namespace, { throws })) return false;
+		if (!validateNoInjectionByType("vscode-extension", "namespace", namespace, { throws })) return false;
+		if (!validateNoInjectionByType("vscode-extension", "name", name, { throws })) return false;
+		if (typeof version === "string" && version.length > 0 && !isSemverString(version)) {
+			if (throws) throw new PurlError("vscode-extension \"version\" component must be a valid semver version");
+			return false;
+		}
+		if (!validateNoInjectionByType("vscode-extension", "platform", qualifiers?.["platform"], { throws })) return false;
+		return true;
+	}
+	/**
+	* @file Yocto-specific PURL normalization and validation.
+	*   https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst Yocto
+	*   Project packages (recipes) for embedded Linux distributions. The namespace
+	*   is the OPTIONAL layer name (BBFILE_COLLECTIONS in the layer's
+	*   conf/layer.conf), e.g. `pkg:yocto/core/glibc@2.35`. The purl yocto type
+	*   marks the namespace `case_sensitive: false`, so the canonical form
+	*   lowercases it. The name (recipe PN/BPN) is `case_sensitive: true` — BitBake
+	*   derives it verbatim from the `<name>_<version>.bb` filename, so it is
+	*   preserved (lowercase is a dev-manual style convention, not enforced). The
+	*   version (PV) is an opaque string and is preserved.
+	*/
+	/**
+	* Normalize Yocto package URL. Lowercases the `namespace` (layer name, which is
+	* case-insensitive); preserves `name` (recipe name, case-sensitive) and
+	* `version`.
+	*/
+	function normalize(purl) {
+		lowerNamespace(purl);
+		return purl;
+	}
+	/**
+	* Validate Yocto package URL. `namespace` (optional layer name) and `name` must
+	* not contain injection characters.
+	*/
+	function yoctoValidate(purl, options) {
+		const { throws = false } = options ?? {};
+		if (!validateNoInjectionByType("yocto", "namespace", purl.namespace, { throws })) return false;
+		if (!validateNoInjectionByType("yocto", "name", purl.name, { throws })) return false;
+		return true;
+	}
+	/**
+	* @file Package URL type-specific normalization and validation rules for
+	*   different package ecosystems. This module provides centralized access to
+	*   type-specific `normalize` and `validate` functions from individual type
+	*   modules. Each package ecosystem (`npm`, `pypi`, `maven`, etc.) has its own
+	*   module in the `purl-types/` directory with specific rules for `namespace`,
+	*   `name`, `version` normalization and validation.
+	*/
+	/**
+	* Default validator for PURL types without specific validation rules. Rejects
+	* injection characters in `name` and `namespace` components. This ensures all
+	* types get injection protection by default, and that includes any newly added
+	* type — security is opt-out, not opt-in.
+	*/
+	function PurlTypeValidator(purl, options) {
+		const { throws = false } = options ?? {};
+		const type = purl.type ?? "unknown";
+		if (typeof purl.namespace === "string") {
+			const nsCode = findShellInjectionCharCode(purl.namespace);
+			if (nsCode !== -1) {
+				if (throws) throw new PurlInjectionError(type, "namespace", nsCode, formatInjectionChar(nsCode));
+				return false;
+			}
+		}
+		const nameCode = findShellInjectionCharCode(purl.name);
+		if (nameCode !== -1) {
+			if (throws) throw new PurlInjectionError(type, "name", nameCode, formatInjectionChar(nameCode));
+			return false;
+		}
+		return true;
+	}
+	/**
+	* Default normalizer for PURL types without specific normalization rules.
+	*/
+	function PurlTypNormalizer(purl) {
+		return purl;
+	}
+	const PurlType = createHelpersNamespaceObject({
+		normalize: {
+			alpm: normalize$27,
+			apk: normalize$26,
+			bitbucket: normalize$25,
+			bitnami: normalize$24,
+			brew: brewNormalize,
+			"chrome-extension": normalize$23,
+			composer: normalize$22,
+			conda: normalize$21,
+			deb: normalize$20,
+			docker: normalize$19,
+			generic: normalize$18,
+			github: normalize$17,
+			gitlab: normalize$16,
+			hex: normalize$15,
+			huggingface: normalize$14,
+			julia: normalize$13,
+			luarocks: normalize$12,
+			mlflow: normalize$11,
+			npm: normalize$10,
+			oci: normalize$9,
+			otp: normalize$8,
+			pub: normalize$7,
+			pypi: normalize$6,
+			qpkg: normalize$5,
+			rpm: normalize$4,
+			socket: normalize$3,
+			unknown: normalize$2,
+			"vscode-extension": normalize$1,
+			yocto: normalize
+		},
+		validate: {
+			bazel: bazelValidate,
+			bitbucket: bitbucketValidate,
+			cargo: cargoValidate,
+			"chrome-extension": chromeExtensionValidate,
+			cocoapods: cocoaodsValidate,
+			conda: condaValidate,
+			conan: conanValidate,
+			cpan: cpanValidate,
+			cran: cranValidate,
+			docker: dockerValidate,
+			gem: gemValidate,
+			git: gitValidate,
+			github: githubValidate,
+			gitlab: gitlabValidate,
+			golang: golangValidate,
+			hackage: hackageValidate,
+			hex: hexValidate,
+			huggingface: huggingfaceValidate,
+			julia: juliaValidate,
+			maven: mavenValidate,
+			mlflow: mlflowValidate,
+			npm: npmValidate,
+			nuget: nugetValidate,
+			oci: ociValidate,
+			opam: opamValidate,
+			otp: otpValidate,
+			pub: pubValidate,
+			pypi: pypiValidate,
+			swift: swiftValidate,
+			swid: swidValidate,
+			vcpkg: vcpkgValidate,
+			"vscode-extension": vscodeExtensionValidate,
+			yocto: yoctoValidate
+		}
+	}, {
+		normalize: PurlTypNormalizer,
+		validate: PurlTypeValidator
+	});
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/**
+	* Successful result containing a value.
+	*/
+	var Ok = class Ok {
+		kind = "ok";
+		value;
+		constructor(value) {
+			this.value = value;
+		}
+		/**
+		* Chain another result-returning operation.
+		*/
+		andThen(fn) {
+			return fn(this.value);
+		}
+		/**
+		* Check if this result is an error.
+		*/
+		isErr() {
+			return false;
+		}
+		/**
+		* Check if this result is successful.
+		*/
+		isOk() {
+			return true;
+		}
+		/**
+		* Transform the success value.
+		*/
+		map(fn) {
+			return new Ok(fn(this.value));
+		}
+		/**
+		* Transform the error (no-op for `Ok`).
+		*/
+		mapErr(_fn) {
+			return this;
+		}
+		/**
+		* Return this result or the other if error (no-op for `Ok`).
+		*/
+		orElse(_fn) {
+			return this;
+		}
+		/**
+		* Get the success value or throw if error.
+		*/
+		unwrap() {
+			return this.value;
+		}
+		/**
+		* Get the success value or return default if error.
+		*/
+		unwrapOr(_defaultValue) {
+			return this.value;
+		}
+		/**
+		* Get the success value or compute from error if error.
+		*/
+		unwrapOrElse(_fn) {
+			return this.value;
+		}
+	};
+	/**
+	* Error result containing an error.
+	*/
+	var Err = class Err {
+		kind = "err";
+		error;
+		constructor(error) {
+			this.error = error;
+		}
+		/**
+		* Chain another result-returning operation (no-op for `Err`).
+		*/
+		andThen(_fn) {
+			return this;
+		}
+		/**
+		* Check if this result is an error.
+		*/
+		isErr() {
+			return true;
+		}
+		/**
+		* Check if this result is successful.
+		*/
+		isOk() {
+			return false;
+		}
+		/**
+		* Transform the success value (no-op for `Err`).
+		*/
+		map(_fn) {
+			return this;
+		}
+		/**
+		* Transform the error.
+		*/
+		mapErr(fn) {
+			return new Err(fn(this.error));
+		}
+		/**
+		* Return this result or the other if error.
+		*/
+		orElse(fn) {
+			return fn(this.error);
+		}
+		/**
+		* Get the success value or throw if error.
+		*/
+		unwrap() {
+			if (this.error instanceof Error) throw this.error;
+			throw new import_error.ErrorCtor(String(this.error));
+		}
+		/**
+		* Get the success value or return default if error.
+		*/
+		unwrapOr(defaultValue) {
+			return defaultValue;
+		}
+		/**
+		* Get the success value or compute from error if error.
+		*/
+		unwrapOrElse(fn) {
+			return fn(this.error);
+		}
+	};
+	/**
+	* Create an error result.
+	*/
+	function err(error) {
+		return new Err(error);
+	}
+	/**
+	* Create a successful result.
+	*/
+	function ok(value) {
+		return new Ok(value);
+	}
+	/**
+	* Utility functions for working with `PurlResult`s.
+	*/
+	const ResultUtils = {
+		/**
+		* Convert all `PurlResult`s to `Ok` values or return first error.
+		*/
+		all(results) {
+			const values = [];
+			for (let i = 0; i < results.length; i++) {
+				const result = results[i];
+				if (result.isErr()) return result;
+				(0, import_array$1.ArrayPrototypePush)(values, result.value);
+			}
+			return ok(values);
+		},
+		/**
+		* Return the first `Ok` result or the last error. Returns an error result if
+		* the input array is empty.
+		*/
+		any(results) {
+			let lastError = err(new import_error.ErrorCtor("No results provided"));
+			for (let i = 0, { length } = results; i < length; i += 1) {
+				const result = results[i];
+				if (result.isOk()) return result;
+				lastError = result;
+			}
+			return lastError;
+		},
+		/**
+		* Create an error result.
+		*/
+		err,
+		/**
+		* Wrap a function that might throw into a `PurlResult`.
+		*/
+		from(fn) {
+			try {
+				return ok(fn());
+			} catch (e) {
+				return err(e instanceof Error ? e : new import_error.ErrorCtor(String(e)));
+			}
+		},
+		/**
+		* Create a successful result.
+		*/
+		ok
+	};
+	/**
+	* @file PURL string serialization. Converts `PackageURL` instances to canonical
+	*   PURL string format.
+	*/
+	/**
+	* Convert `PackageURL` instance to canonical PURL string.
+	*
+	* Serializes a `PackageURL` object into its canonical string representation
+	* according to the PURL specification.
+	*
+	* @example
+	*   ;```typescript
+	*   const purl = new PackageURL('npm', undefined, 'lodash', '4.17.21')
+	*   stringify(purl)
+	*   // -> 'pkg:npm/lodash@4.17.21'
+	*   ```
+	*
+	* @param purl - `PackageURL` instance to stringify.
+	*
+	* @returns Canonical PURL string (e.g., `'pkg:npm/lodash@4.17.21'`)
+	*/
+	function stringify(purl) {
+		return `pkg:${isNonEmptyString(purl.type) ? encodeComponent(purl.type) : ""}/${stringifySpec(purl)}`;
+	}
+	/**
+	* Convert `PackageURL` instance to spec string (without scheme and type).
+	*
+	* Returns the package identity portion:
+	* `namespace/name@version?qualifiers#subpath` This is the `purl` equivalent of
+	* an npm "spec" — the package identity without the ecosystem prefix.
+	*
+	* @example
+	*   ;```typescript
+	*   const purl = new PackageURL('npm', '@babel', 'core', '7.0.0')
+	*   stringifySpec(purl)
+	*   // -> '%40babel/core@7.0.0'
+	*   ```
+	*
+	* @param purl - `PackageURL` instance to stringify.
+	*
+	* @returns Spec string (e.g., `'%40babel/core@7.0.0'` for
+	*   `pkg:npm/%40babel/core@7.0.0`)
+	*/
+	function stringifySpec(purl) {
+		const { name, namespace, qualifiers, subpath, version } = purl;
+		let specStr = "";
+		if (isNonEmptyString(namespace)) specStr = `${encodeNamespace(namespace)}/`;
+		specStr = `${specStr}${encodeName(name)}`;
+		if (isNonEmptyString(version)) specStr = `${specStr}@${encodeVersion(version)}`;
+		if (qualifiers) specStr = `${specStr}?${encodeQualifiers(qualifiers)}`;
+		if (isNonEmptyString(subpath)) specStr = `${specStr}#${encodeSubpath(subpath)}`;
+		return specStr;
+	}
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/**
+	* @file URL conversion utilities for converting Package URLs to repository and
+	*   download URLs.
+	*/
+	let cachedPackageURL$1;
+	/**
+	* @internal Register the `PackageURL` class for `fromUrl` construction.
+	*/
+	function registerPackageURLForUrlConverter(ctor) {
+		cachedPackageURL$1 = ctor;
+	}
+	/**
+	* Filter empty segments from a URL pathname split. Trailing slashes create
+	* empty segments that must be removed.
+	*/
+	function filterSegments(pathname) {
+		return (0, import_array$1.ArrayPrototypeFilter)((0, import_string.StringPrototypeSplit)(pathname, "/"), (s) => s.length > 0);
+	}
+	/**
+	* Safely construct a `PackageURL`, returning `undefined` if construction fails.
+	*/
+	function tryCreatePurl(type, namespace, name, version, qualifiers) {
+		/* v8 ignore start -- PackageURL is always registered at module load time. */
+		if (!cachedPackageURL$1) return;
+		/* v8 ignore stop */
+		try {
+			return new cachedPackageURL$1(type, namespace, name, version, qualifiers, void 0);
+		} catch {
+			/* v8 ignore start -- Defensive: validation error in PackageURL constructor. */
+			return;
+		}
+	}
+	/**
+	* Shared semver-ish version capture for distribution-filename parsers. Captures
+	* `major[.minor.patch...]` plus optional pre-release / build-metadata tail into
+	* a `version` group. Permissive by design — distribution filenames carry more
+	* shapes than strict semver (single-segment versions, build metadata with
+	* hyphens, etc.).
+	*/
+	const DIST_VERSION = [
+		"(?<version>",
+		"\\d+(?:\\.\\d+)*",
+		"(?:",
+		"(?:-+|\\.)",
+		"[a-zA-Z0-9]+",
+		"(?:[-.][a-zA-Z0-9]+)*",
+		")?",
+		"(?:\\+[a-zA-Z0-9.]+)?",
+		")"
+	].join("");
+	/**
+	* Extract the pathname from a URL-or-path string. A leading `http://` or
+	* `https://` scheme marks a full URL; anything else is treated as a bare path.
+	* Detection is by scheme, not a bare `http` prefix — a filename like
+	* `httpx-1.0.tar.gz` is a path, not a URL — and a malformed URL falls back to
+	* the raw input rather than throwing.
+	*/
+	function urlOrPathPathname(urlOrPath) {
+		if ((0, import_string.StringPrototypeStartsWith)(urlOrPath, "http://") || (0, import_string.StringPrototypeStartsWith)(urlOrPath, "https://")) try {
+			return new import_url.URLCtor(urlOrPath).pathname;
+		} catch {
+			/* v8 ignore next -- Defensive: a scheme-prefixed string that still fails URL parsing. */
+			return urlOrPath;
+		}
+		return urlOrPath;
+	}
+	const MAX_DISTRIBUTION_FILENAME_LENGTH = 4096;
+	/**
+	* Strip a URL or path down to its final filename segment. Distribution parsers
+	* match against the bare filename, so a full URL and a bare path resolve
+	* identically.
+	*
+	* Returns an empty string when the resolved filename exceeds
+	* {@link MAX_DISTRIBUTION_FILENAME_LENGTH}, so the downstream filename regexes
+	* never run on a pathological input (ReDoS guard). An empty string fails every
+	* filename pattern, which the callers already treat as "not a distribution
+	* URL".
+	*/
+	function distributionFilename(urlOrPath) {
+		const pathname = urlOrPathPathname(urlOrPath);
+		const segments = filterSegments(pathname);
+		const filename = segments.length ? segments[segments.length - 1] : pathname;
+		return filename.length > MAX_DISTRIBUTION_FILENAME_LENGTH ? "" : filename;
+	}
+	/**
+	* Run a `URL`-taking parser against a URL string, parsing the string first and
+	* returning `undefined` if it isn't a valid URL. Lets the public static methods
+	* accept strings while the internal parsers keep their `URL` signatures.
+	*/
+	function runUrlParser(parser, urlStr) {
+		let url;
+		try {
+			url = new import_url.URLCtor(urlStr);
+		} catch {
+			return;
+		}
+		return parser(url);
+	}
+	/**
+	* Resolve a tarball segment's version, tolerating both the bare `name-` prefix
+	* and the proxy/mirror `@scope/name-` (full scoped name) prefix that some
+	* registries (Artifactory, Nexus, Verdaccio, GitHub Packages) repeat in the
+	* filename. Returns the version string, or `undefined` if the segment is not a
+	* recognizable `<prefix>-<version>.tgz`.
+	*/
+	function npmTarballVersion(tgz, name, namespace) {
+		if (!(0, import_string.StringPrototypeEndsWith)(tgz, ".tgz")) return;
+		const withoutExt = (0, import_string.StringPrototypeSlice)(tgz, 0, -4);
+		if (namespace) {
+			const scopedPrefix = `${namespace}/${name}-`;
+			if ((0, import_string.StringPrototypeStartsWith)(withoutExt, scopedPrefix)) return (0, import_string.StringPrototypeSlice)(withoutExt, scopedPrefix.length);
+		}
+		const prefix = `${name}-`;
+		if ((0, import_string.StringPrototypeStartsWith)(withoutExt, prefix)) return (0, import_string.StringPrototypeSlice)(withoutExt, prefix.length);
+	}
+	/**
+	* Parse npm registry URLs (`registry.npmjs.org`).
+	*
+	* Handles:
+	*
+	* - Registry metadata: `/\@scope/name` or `/name`
+	* - Registry metadata with version: `/\@scope/name/version` or `/name/version`
+	* - Download tarballs: `/\@scope/name/-/name-version.tgz` or
+	*   `/name/-/name-version.tgz`
+	* - Proxy/mirror tarballs that repeat the scoped name
+	*   (`/\@scope/name/-/\@scope/name-version.tgz`) and `%2f`-encoded scope
+	*   separators that yarn and some registries emit.
+	*/
+	function fromNpmRegistryUrl(url) {
+		const segments = filterSegments((0, import_string.StringPrototypeReplace)(url.pathname, /%2f/gi, "/"));
+		if (segments.length === 0) return;
+		let namespace;
+		let name;
+		let version;
+		if (segments[0] && (0, import_string.StringPrototypeStartsWith)(segments[0], "@")) {
+			namespace = segments[0];
+			name = segments[1];
+			if (!name) return;
+			if (segments[2] === "-" && segments[3]) version = npmTarballVersion(segments[3] && (0, import_string.StringPrototypeStartsWith)(segments[3], "@") && segments[4] ? `${segments[3]}/${segments[4]}` : segments[3], name, namespace);
+			else if (segments[2]) version = segments[2];
+		} else {
+			name = segments[0];
+			/* v8 ignore start -- Defensive: filterSegments ensures non-empty. */
+			if (!name) return;
+			/* v8 ignore stop */
+			if (segments[1] === "-" && segments[2]) version = npmTarballVersion(segments[2], name, void 0);
+			else if (segments[1]) version = segments[1];
+		}
+		return tryCreatePurl("npm", namespace, name, version);
+	}
+	/**
+	* Parse npm website URLs (`www.npmjs.com`).
+	*
+	* Handles:
+	*
+	* - `/package/\@scope/name`, `/package/\@scope/name/v/version`
+	* - `/package/name`, `/package/name/v/version`
+	*/
+	function fromNpmSiteUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length === 0 || segments[0] !== "package") return;
+		let namespace;
+		let name;
+		let version;
+		if (segments[1] && (0, import_string.StringPrototypeStartsWith)(segments[1], "@")) {
+			namespace = segments[1];
+			name = segments[2];
+			if (!name) return;
+			if (segments[3] === "v" && segments[4]) version = segments[4];
+		} else {
+			name = segments[1];
+			if (!name) return;
+			if (segments[2] === "v" && segments[3]) version = segments[3];
+		}
+		return tryCreatePurl("npm", namespace, name, version);
+	}
+	/**
+	* Parse any recognized npm URL. npm's two shapes are distinguished by hostname,
+	* not path shape (`registry.npmjs.org` serves metadata / tarballs;
+	* `www.npmjs.com` serves package pages), so dispatch by host — the registry
+	* parser is greedy enough to misread a website path if tried blindly.
+	*/
+	function fromNpmUrl(url) {
+		if (url.hostname === "www.npmjs.com") return fromNpmSiteUrl(url);
+		return fromNpmRegistryUrl(url);
+	}
+	/**
+	* Parse PyPI URLs (`pypi.org`).
+	*
+	* Handles: `/project/name/`, `/project/name/version/`
+	*/
+	function fromPypiSiteUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2 || segments[0] !== "project") return;
+		const name = segments[1];
+		/* v8 ignore start -- Defensive: filterSegments ensures non-empty. */
+		if (!name) return;
+		/* v8 ignore stop */
+		const version = segments[2];
+		return tryCreatePurl("pypi", void 0, name, version);
+	}
+	/**
+	* PyPI wheel / sdist distribution filename matcher. Captures `name` + `version`
+	* from filenames like `orjson-3.11.9-cp314-cp314-manylinux_2_17_x86_64.whl`,
+	* tolerating PEP 427 compound platform tags that contain dots
+	* (`manylinux_2_17_x86_64.manylinux2014_x86_64`), an optional epoch (`3!1.0`),
+	* and an optional trailing `.metadata` suffix.
+	*/
+	const PYPI_FILENAME = new RegExp([
+		"^",
+		"(?<name>[a-zA-Z0-9._-]+?)",
+		"-",
+		"(?<epoch>\\d+!)?",
+		"(?=\\d)",
+		DIST_VERSION,
+		"(?:-[^.]+(?:\\.[^.]+)*)?",
+		"\\.",
+		"(?:whl|tar\\.gz|zip)",
+		"(?:\\.metadata)?",
+		"$"
+	].join(""));
+	/**
+	* Parse a PyPI distribution URL or path (a wheel / sdist filename) into a
+	* `PackageURL`. Works on a bare path or a full URL.
+	*
+	* Handles: `…/orjson-3.11.9-cp314-…-manylinux….whl`,
+	* `…/package-name-1.0.0.tar.gz`, `…/package-name-1.0.0.zip`, optionally with a
+	* trailing `.metadata`.
+	*/
+	function fromPypiDownloadUrl(urlOrPath) {
+		const filename = distributionFilename(urlOrPath);
+		const match = (0, import_regexp.RegExpPrototypeExec)(PYPI_FILENAME, filename);
+		if (!match?.groups) return;
+		const { epoch, name } = match.groups;
+		/* v8 ignore start -- DIST_VERSION always captures a version group on a match. */
+		if (!name || !match.groups["version"]) return;
+		/* v8 ignore stop */
+		const base = (0, import_string.StringPrototypeSplit)(match.groups["version"], "-")[0];
+		return tryCreatePurl("pypi", void 0, name, epoch ? `${epoch}${base}` : base);
+	}
+	/**
+	* Parse any recognized PyPI URL — project page (`pypi.org/project/…`) or a
+	* distribution filename (wheel / sdist). Project-page parsing wins; the
+	* distribution parser is the fallback.
+	*/
+	function fromPypiUrl(url) {
+		return fromPypiSiteUrl(url) ?? fromPypiDownloadUrl(url.href);
+	}
+	/**
+	* Parse Maven Central URLs (`repo1.maven.org`).
+	*
+	* Handles: `/maven2/{group-as-path}/{artifact}/{version}/` Group path segments
+	* are joined with `'.'`.
+	*/
+	function fromMavenSiteUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 4 || segments[0] !== "maven2") return;
+		const parts = (0, import_array$1.ArrayPrototypeSlice)(segments, 1);
+		/* v8 ignore start -- Defensive: the length>=4 guard above ensures parts>=3. */
+		if (parts.length < 3) return;
+		/* v8 ignore stop */
+		const version = parts[parts.length - 1];
+		const name = parts[parts.length - 2];
+		const groupParts = (0, import_array$1.ArrayPrototypeSlice)(parts, 0, -2);
+		const namespace = (0, import_array$1.ArrayPrototypeJoin)(groupParts, ".");
+		/* v8 ignore start -- Defensive: filterSegments yields non-empty segments. */
+		if (!namespace || !name) return;
+		/* v8 ignore stop */
+		return tryCreatePurl("maven", namespace, name, version);
+	}
+	/**
+	* Parse RubyGems URLs (`rubygems.org`).
+	*
+	* Handles: `/gems/name`, `/gems/name/versions/version`
+	*/
+	function fromGemSiteUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2 || segments[0] !== "gems") return;
+		const name = segments[1];
+		/* v8 ignore start -- Defensive: filterSegments ensures non-empty. */
+		if (!name) return;
+		/* v8 ignore stop */
+		let version;
+		if (segments[2] === "versions" && segments[3]) version = segments[3];
+		return tryCreatePurl("gem", void 0, name, version);
+	}
+	/**
+	* RubyGems distribution filename matchers. A direct `.gem`
+	* (`/gems/name-1.2.3.gem`) and a `.gemspec.rz` under the `/quick/Marshal.x/`
+	* tree, which `gem` requests over the proxy even when it bypasses the proxy for
+	* the gem file itself.
+	*/
+	const GEM_FILENAME = new RegExp([
+		"^",
+		"(?<name>[a-zA-Z0-9_-]+?)",
+		"-",
+		DIST_VERSION,
+		"\\.gem$"
+	].join(""));
+	const GEMSPEC_FILENAME = new RegExp([
+		"^",
+		"(?<name>[a-zA-Z0-9_-]+?)",
+		"-",
+		DIST_VERSION,
+		"\\.gemspec\\.rz$"
+	].join(""));
+	/**
+	* Parse a RubyGems distribution URL or path (`…/name-1.2.3.gem` or a
+	* `…/name-1.2.3.gemspec.rz`) into a `PackageURL`.
+	*/
+	function fromGemDownloadUrl(urlOrPath) {
+		const filename = distributionFilename(urlOrPath);
+		const match = (0, import_regexp.RegExpPrototypeExec)(GEM_FILENAME, filename) ?? (0, import_regexp.RegExpPrototypeExec)(GEMSPEC_FILENAME, filename);
+		if (!match?.groups?.["name"] || !match.groups["version"]) return;
+		return tryCreatePurl("gem", void 0, match.groups["name"], match.groups["version"]);
+	}
+	/**
+	* Parse any recognized RubyGems URL — gems.org web page or a distribution
+	* filename. Web-page parsing wins; the distribution parser is the fallback.
+	*/
+	function fromGemUrl(url) {
+		return fromGemSiteUrl(url) ?? fromGemDownloadUrl(url.href);
+	}
+	/**
+	* Parse `crates.io` URLs.
+	*
+	* Handles: - `/crates/name`, `/crates/name/version` -
+	* `/api/v1/crates/name/version/download`
+	*/
+	function fromCargoSiteUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		if (segments[0] === "api" && segments[1] === "v1" && segments[2] === "crates" && segments[3]) {
+			const name = segments[3];
+			const version = segments[4];
+			return tryCreatePurl("cargo", void 0, name, version);
+		}
+		if (segments[0] !== "crates") return;
+		const name = segments[1];
+		/* v8 ignore start -- Defensive: filterSegments ensures non-empty. */
+		if (!name) return;
+		/* v8 ignore stop */
+		const version = segments[2];
+		return tryCreatePurl("cargo", void 0, name, version);
+	}
+	/**
+	* Parse a crates.io download path (`/crates/name/version/download`) into a
+	* `PackageURL`. The site parser handles this shape when the `crates.io`
+	* hostname is present; this covers the same path arriving without a host (e.g.
+	* a proxy observing the bare request path).
+	*/
+	function fromCargoDownloadUrl(urlOrPath) {
+		const segments = filterSegments(urlOrPathPathname(urlOrPath));
+		if (segments.length === 4 && segments[0] === "crates" && segments[3] === "download") return tryCreatePurl("cargo", void 0, segments[1], segments[2]);
+	}
+	/**
+	* Parse NuGet URLs (`www.nuget.org` and `api.nuget.org`).
+	*
+	* Handles: - `www.nuget.org`: `/packages/Name`, `/packages/Name/version` -
+	* `api.nuget.org`: `/v3-flatcontainer/name/version/name.version.nupkg`
+	*/
+	function fromNugetSiteUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		if (url.hostname === "api.nuget.org") {
+			if (segments[0] !== "v3-flatcontainer" || !segments[1]) return;
+			const name = segments[1];
+			const version = segments[2];
+			return tryCreatePurl("nuget", void 0, name, version);
+		}
+		if (segments[0] !== "packages") return;
+		const name = segments[1];
+		/* v8 ignore start -- Defensive: filterSegments ensures non-empty. */
+		if (!name) return;
+		/* v8 ignore stop */
+		const version = segments[2];
+		return tryCreatePurl("nuget", void 0, name, version);
+	}
+	/**
+	* Parse GitHub URLs (`github.com`).
+	*
+	* Handles: - `/owner/repo` - `/owner/repo/tree/ref` - `/owner/repo/commit/sha`
+	*
+	* - `/owner/repo/releases/tag/tagname`
+	*/
+	function fromGitHubUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		const namespace = segments[0];
+		const name = segments[1];
+		let version;
+		if (segments[2] === "tree" && segments[3]) version = segments[3];
+		else if (segments[2] === "commit" && segments[3]) version = segments[3];
+		else if (segments[2] === "releases" && segments[3] === "tag" && segments[4]) version = segments[4];
+		return tryCreatePurl("github", namespace, name, version);
+	}
+	/**
+	* Parse Go package URLs (`pkg.go.dev`).
+	*
+	* Handles:
+	*
+	* - `/module/path` (e.g. `/github.com/gorilla/mux`)
+	* - `/module/path\@version` (e.g. `/github.com/gorilla/mux\@v1.8.0`)
+	*/
+	function fromGolangSiteUrl(url) {
+		let path = (0, import_string.StringPrototypeSlice)(url.pathname, 1);
+		if (!path) return;
+		let version;
+		const atIndex = (0, import_string.StringPrototypeLastIndexOf)(path, "@");
+		if (atIndex !== -1) {
+			version = (0, import_string.StringPrototypeSlice)(path, atIndex + 1);
+			path = (0, import_string.StringPrototypeSlice)(path, 0, atIndex);
+		}
+		const lastSlash = (0, import_string.StringPrototypeLastIndexOf)(path, "/");
+		if (lastSlash === -1) return;
+		const namespace = (0, import_string.StringPrototypeSlice)(path, 0, lastSlash);
+		const name = (0, import_string.StringPrototypeSlice)(path, lastSlash + 1);
+		if (!namespace || !name)
+ /* v8 ignore start -- Defensive: filterSegments ensures non-empty. */
+		return;
+		return tryCreatePurl("golang", namespace, name, version);
+	}
+	/**
+	* Go module proxy download matcher:
+	* `/<module-path>/@v/<version>.(zip|mod|info)`. The module path may contain
+	* slashes (`github.com/gorilla/mux`); the final segment is the package name,
+	* the rest is the namespace. The `v` prefix is part of the captured version.
+	*/
+	const GOLANG_PROXY = new RegExp([
+		"^/?",
+		"(?<modulePath>[^@]+?)",
+		"/@v/",
+		"(?<version>v[^/]+?)",
+		"\\.(?:zip|mod|info)",
+		"$"
+	].join(""));
+	/**
+	* Parse a Go module proxy download URL or path
+	* (`…/github.com/gorilla/mux/@v/v1.8.0.zip`) into a `PackageURL`.
+	*/
+	function fromGolangDownloadUrl(urlOrPath) {
+		const pathname = urlOrPathPathname(urlOrPath);
+		const match = (0, import_regexp.RegExpPrototypeExec)(GOLANG_PROXY, pathname);
+		if (!match?.groups?.["modulePath"] || !match.groups["version"]) return;
+		const modulePath = match.groups["modulePath"];
+		const lastSlash = (0, import_string.StringPrototypeLastIndexOf)(modulePath, "/");
+		if (lastSlash === -1) return;
+		const version = match.groups["version"];
+		const namespace = (0, import_string.StringPrototypeSlice)(modulePath, 0, lastSlash);
+		const name = (0, import_string.StringPrototypeSlice)(modulePath, lastSlash + 1);
+		if (!namespace || !name) return;
+		return tryCreatePurl("golang", decodeGolangProxyPath(namespace), decodeGolangProxyPath(name), decodeGolangProxyPath(version));
+	}
+	/**
+	* Parse any recognized Go URL — pkg.go.dev page or a module-proxy download.
+	* Page parsing wins; the download parser is the fallback.
+	*/
+	function fromGolangUrl(url) {
+		return fromGolangSiteUrl(url) ?? fromGolangDownloadUrl(url.href);
+	}
+	/**
+	* Parse GitLab URLs (`gitlab.com`). Same pattern as GitHub: `/owner/repo`,
+	* `/owner/repo/-/tree/ref`, `/owner/repo/-/commit/sha`
+	*/
+	function fromGitlabUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		const namespace = segments[0];
+		const name = segments[1];
+		let version;
+		if (segments[2] === "-") {
+			if (segments[3] === "tree" && segments[4]) version = segments[4];
+			else if (segments[3] === "commit" && segments[4]) version = segments[4];
+			else if (segments[3] === "tags" && segments[4]) version = segments[4];
+		}
+		return tryCreatePurl("gitlab", namespace, name, version);
+	}
+	/**
+	* Parse Bitbucket URLs (`bitbucket.org`). Pattern: `/owner/repo`,
+	* `/owner/repo/commits/sha`, `/owner/repo/src/ref`
+	*/
+	function fromBitbucketUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		const namespace = segments[0];
+		const name = segments[1];
+		let version;
+		if (segments[2] === "commits" && segments[3]) version = segments[3];
+		else if (segments[2] === "src" && segments[3]) version = segments[3];
+		return tryCreatePurl("bitbucket", namespace, name, version);
+	}
+	/**
+	* Parse Packagist/Composer URLs (`packagist.org`). Pattern:
+	* `/packages/namespace/name`
+	*/
+	function fromComposerUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 3 || segments[0] !== "packages") return;
+		const namespace = segments[1];
+		const name = segments[2];
+		return tryCreatePurl("composer", namespace, name, void 0);
+	}
+	/**
+	* Parse Hex.pm URLs (`hex.pm`). Pattern: `/packages/name`,
+	* `/packages/name/version`
+	*/
+	function fromHexUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2 || segments[0] !== "packages") return;
+		const name = segments[1];
+		const version = segments[2];
+		return tryCreatePurl("hex", void 0, name, version);
+	}
+	/**
+	* Parse pub.dev URLs (`pub.dev`). Pattern: `/packages/name`,
+	* `/packages/name/versions/version`
+	*/
+	function fromPubUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2 || segments[0] !== "packages") return;
+		const name = segments[1];
+		let version;
+		if (segments[2] === "versions" && segments[3]) version = segments[3];
+		return tryCreatePurl("pub", void 0, name, version);
+	}
+	/**
+	* Parse Docker Hub URLs (`hub.docker.com`). Patterns:
+	*
+	* - Official images: `/\_/name`
+	* - User images: `/r/namespace/name`
+	* - Library alias: `/r/library/name`
+	*/
+	function fromDockerUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		if (segments[0] === "_" && segments[1]) return tryCreatePurl("docker", "library", segments[1], void 0);
+		if (segments[0] === "r" && segments[1] && segments[2]) return tryCreatePurl("docker", segments[1], segments[2], void 0);
+	}
+	/**
+	* Parse CocoaPods URLs (`cocoapods.org`). Pattern: `/pods/name`
+	*/
+	function fromCocoapodsUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2 || segments[0] !== "pods") return;
+		return tryCreatePurl("cocoapods", void 0, segments[1], void 0);
+	}
+	/**
+	* Parse Hackage URLs (`hackage.haskell.org`). Pattern: `/package/name`,
+	* `/package/name-version`
+	*/
+	function fromHackageUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2 || segments[0] !== "package") return;
+		const raw = segments[1];
+		let splitIndex = -1;
+		for (let i = raw.length - 1; i >= 0; i -= 1) if ((0, import_string.StringPrototypeCharCodeAt)(raw, i) === 45) {
+			const next = (0, import_string.StringPrototypeCharCodeAt)(raw, i + 1);
+			if (next >= 48 && next <= 57) {
+				splitIndex = i;
+				break;
+			}
+		}
+		if (splitIndex === -1) return tryCreatePurl("hackage", void 0, raw, void 0);
+		return tryCreatePurl("hackage", void 0, (0, import_string.StringPrototypeSlice)(raw, 0, splitIndex), (0, import_string.StringPrototypeSlice)(raw, splitIndex + 1));
+	}
+	/**
+	* Parse CRAN URLs (`cran.r-project.org`). Pattern: `/web/packages/name`,
+	* `/package=name` (query param)
+	*/
+	function fromCranUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length >= 3 && segments[0] === "web" && segments[1] === "packages") {
+			const version = segments[3] && segments[3] !== "index.html" ? segments[3] : void 0;
+			return tryCreatePurl("cran", void 0, segments[2], version);
+		}
+	}
+	/**
+	* Parse Anaconda/Conda URLs (`anaconda.org`). Pattern: `/channel/name`,
+	* `/channel/name/version`
+	*/
+	function fromCondaUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		const name = segments[1];
+		const version = segments[2];
+		return tryCreatePurl("conda", void 0, name, version);
+	}
+	/**
+	* Parse MetaCPAN URLs (`metacpan.org`). Pattern:
+	* `/release/AUTHOR/Dist-Name-1.23` — the only MetaCPAN page shape that carries
+	* the author id a cpan purl requires as its namespace. Authorless `/pod/` and
+	* `/dist/` pages cannot become spec-valid cpan purls.
+	*/
+	function fromCpanUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 3 || segments[0] !== "release") return;
+		const author = segments[1];
+		const distWithVersion = segments[2];
+		const dashIndex = (0, import_string.StringPrototypeLastIndexOf)(distWithVersion, "-");
+		if (dashIndex < 1) return tryCreatePurl("cpan", author, distWithVersion, void 0);
+		return tryCreatePurl("cpan", author, (0, import_string.StringPrototypeSlice)(distWithVersion, 0, dashIndex), (0, import_string.StringPrototypeSlice)(distWithVersion, dashIndex + 1));
+	}
+	/**
+	* Parse Hugging Face URLs (`huggingface.co`). Pattern: `/namespace/name`,
+	* `/namespace/name/tree/ref`
+	*/
+	/**
+	* Reserved Hugging Face paths that are not model pages.
+	*/
+	const HUGGINGFACE_RESERVED = (0, import_object.ObjectFreeze)(new import_map_set.SetCtor([
+		"docs",
+		"tasks",
+		"blog",
+		"pricing",
+		"join",
+		"login",
+		"settings",
+		"api"
+	]));
+	function fromHuggingfaceUrl(url) {
+		const segments = filterSegments(url.pathname);
+		const repositoryType = segments[0] === "datasets" ? "dataset" : segments[0] === "spaces" ? "space" : void 0;
+		const offset = repositoryType ? 1 : 0;
+		if (segments.length < offset + 2) return;
+		if (HUGGINGFACE_RESERVED.has(segments[0])) return;
+		try {
+			const namespace = (0, import_globals.decodeURIComponent)(segments[offset]);
+			const name = (0, import_globals.decodeURIComponent)(segments[offset + 1]);
+			const action = segments[offset + 2];
+			const revision = segments[offset + 3];
+			return tryCreatePurl("huggingface", namespace, name, revision && (action === "blob" || action === "commit" || action === "resolve" || action === "tree") ? (0, import_globals.decodeURIComponent)(revision) : void 0, repositoryType ? { type: repositoryType } : void 0);
+		} catch {
+			return;
+		}
+	}
+	/**
+	* Parse LuaRocks URLs (`luarocks.org`). Pattern: `/modules/namespace/name`,
+	* `/modules/namespace/name/version`
+	*/
+	function fromLuarocksUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 3 || segments[0] !== "modules") return;
+		const namespace = segments[1];
+		const name = segments[2];
+		const version = segments[3];
+		return tryCreatePurl("luarocks", namespace, name, version);
+	}
+	/**
+	* Parse Swift Package Index URLs (`swiftpackageindex.com`). Pattern:
+	* `/owner/repo`
+	*/
+	function fromSwiftUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 2) return;
+		return tryCreatePurl("swift", segments[0], segments[1], segments[2]);
+	}
+	/**
+	* Parse VS Code Marketplace URLs (`marketplace.visualstudio.com`). Pattern:
+	* `/items?itemName=publisher.extension`
+	*/
+	function fromVscodeMarketplaceUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 1 || segments[0] !== "items") return;
+		const itemName = url.searchParams.get("itemName");
+		if (!itemName) return;
+		const dotIndex = (0, import_string.StringPrototypeIndexOf)(itemName, ".");
+		if (dotIndex === -1 || dotIndex === 0 || dotIndex === itemName.length - 1) return;
+		return tryCreatePurl("vscode-extension", (0, import_string.StringPrototypeSlice)(itemName, 0, dotIndex), (0, import_string.StringPrototypeSlice)(itemName, dotIndex + 1), void 0);
+	}
+	/**
+	* Parse Open VSX URLs (`open-vsx.org`). Pattern: `/extension/namespace/name`,
+	* `/extension/namespace/name/version`
+	*/
+	function fromOpenVsxUrl(url) {
+		const segments = filterSegments(url.pathname);
+		if (segments.length < 3 || segments[0] !== "extension") return;
+		const namespace = segments[1];
+		const name = segments[2];
+		const version = segments[3];
+		return tryCreatePurl("vscode-extension", namespace, name, version);
+	}
+	/**
+	* Hostname-based dispatch map for URL-to-PURL parsing.
+	*/
+	const FROM_URL_PARSERS = (0, import_object.ObjectFreeze)(new import_map_set.MapCtor([
+		["registry.npmjs.org", fromNpmRegistryUrl],
+		["www.npmjs.com", fromNpmSiteUrl],
+		["pypi.org", fromPypiUrl],
+		["repo1.maven.org", fromMavenSiteUrl],
+		["central.maven.org", fromMavenSiteUrl],
+		["rubygems.org", fromGemUrl],
+		["crates.io", fromCargoSiteUrl],
+		["www.nuget.org", fromNugetSiteUrl],
+		["api.nuget.org", fromNugetSiteUrl],
+		["pkg.go.dev", fromGolangUrl],
+		["hex.pm", fromHexUrl],
+		["pub.dev", fromPubUrl],
+		["packagist.org", fromComposerUrl],
+		["hub.docker.com", fromDockerUrl],
+		["cocoapods.org", fromCocoapodsUrl],
+		["hackage.haskell.org", fromHackageUrl],
+		["cran.r-project.org", fromCranUrl],
+		["anaconda.org", fromCondaUrl],
+		["metacpan.org", fromCpanUrl],
+		["luarocks.org", fromLuarocksUrl],
+		["swiftpackageindex.com", fromSwiftUrl],
+		["huggingface.co", fromHuggingfaceUrl],
+		["marketplace.visualstudio.com", fromVscodeMarketplaceUrl],
+		["open-vsx.org", fromOpenVsxUrl],
+		["github.com", fromGitHubUrl],
+		["gitlab.com", fromGitlabUrl],
+		["bitbucket.org", fromBitbucketUrl]
+	]));
+	/**
+	* URL conversion utilities for Package URLs.
+	*
+	* This class provides static methods for converting `PackageURL` instances into
+	* various types of URLs, including repository URLs for source code access and
+	* download URLs for package artifacts. It supports many popular package
+	* ecosystems.
+	*
+	* @example
+	*   ;```typescript
+	*   const purl = PackageURL.fromString('pkg:npm/lodash@4.17.21')
+	*   const repoUrl = UrlConverter.toRepositoryUrl(purl)
+	*   const downloadUrl = UrlConverter.toDownloadUrl(purl)
+	*   ```
+	*/
+	const DOWNLOAD_URL_TYPES = (0, import_object.ObjectFreeze)(new import_map_set.SetCtor([
+		"cargo",
+		"composer",
+		"conda",
+		"gem",
+		"golang",
+		"hex",
+		"maven",
+		"npm",
+		"nuget",
+		"pub",
+		"pypi"
+	]));
+	const REPOSITORY_URL_TYPES = (0, import_object.ObjectFreeze)(new import_map_set.SetCtor([
+		"bioconductor",
+		"bitbucket",
+		"brew",
+		"cargo",
+		"chrome",
+		"clojars",
+		"cocoapods",
+		"composer",
+		"conan",
+		"conda",
+		"cpan",
+		"deno",
+		"docker",
+		"elm",
+		"gem",
+		"github",
+		"gitlab",
+		"golang",
+		"hackage",
+		"hex",
+		"huggingface",
+		"luarocks",
+		"maven",
+		"npm",
+		"nuget",
+		"pub",
+		"pypi",
+		"swift",
+		"vscode"
+	]));
+	/**
+	* Distribution-filename parsers, tried in order by `fromDownloadUrl`. Each
+	* takes a bare path or full URL and returns a `PackageURL` only when the
+	* filename shape matches its ecosystem.
+	*/
+	const FROM_DOWNLOAD_URL_PARSERS = (0, import_object.ObjectFreeze)([
+		fromPypiDownloadUrl,
+		fromGemDownloadUrl,
+		fromGolangDownloadUrl,
+		fromCargoDownloadUrl
+	]);
+	const DOWNLOAD_URL_FACTORIES = (0, import_object.ObjectFreeze)(new import_map_set.MapCtor([
+		["npm", {
+			type: "tarball",
+			getUrl({ name, namespace, version }) {
+				return `https://registry.npmjs.org/${namespace ? `${namespace}/${name}` : name}/-/${name}-${version}.tgz`;
+			}
+		}],
+		["pypi", {
+			type: "wheel",
+			getUrl({ name }) {
+				return `https://pypi.org/simple/${name}/`;
+			}
+		}],
+		["maven", {
+			type: "jar",
+			getUrl({ name, namespace, version }) {
+				if (!namespace) return;
+				return `https://repo1.maven.org/maven2/${(0, import_string.StringPrototypeReplace)(namespace, /\./g, "/")}/${name}/${version}/${name}-${version}.jar`;
+			}
+		}],
+		["gem", {
+			type: "gem",
+			getUrl({ name, version }) {
+				return `https://rubygems.org/downloads/${name}-${version}.gem`;
+			}
+		}],
+		["cargo", {
+			type: "tarball",
+			getUrl({ name, version }) {
+				return `https://crates.io/api/v1/crates/${name}/${version}/download`;
+			}
+		}],
+		["nuget", {
+			type: "zip",
+			getUrl({ name, version }) {
+				return `https://nuget.org/packages/${name}/${version}/download`;
+			}
+		}],
+		["composer", {
+			type: "other",
+			getUrl({ name, namespace }) {
+				if (!namespace) return;
+				return `https://repo.packagist.org/p2/${namespace}/${name}.json`;
+			}
+		}],
+		["hex", {
+			type: "tarball",
+			getUrl({ name, version }) {
+				return `https://repo.hex.pm/tarballs/${name}-${version}.tar`;
+			}
+		}],
+		["pub", {
+			type: "tarball",
+			getUrl({ name, version }) {
+				return `https://pub.dev/packages/${name}/versions/${version}.tar.gz`;
+			}
+		}],
+		["conda", {
+			type: "tarball",
+			getUrl({ name, version, purl }) {
+				return `https://anaconda.org/${purl["qualifiers"]?.["channel"] ?? "conda-forge"}/${name}/${version}/download`;
+			}
+		}],
+		["golang", {
+			type: "zip",
+			getUrl({ name, namespace, version }) {
+				if (!namespace || !name) return;
+				return `https://proxy.golang.org/${encodeGolangProxyPath(namespace)}/${encodeGolangProxyPath(name)}/@v/${encodeGolangProxyPath(version)}.zip`;
+			}
+		}]
+	]));
+	const REPOSITORY_URL_FACTORIES = (0, import_object.ObjectFreeze)(new import_map_set.MapCtor([
+		["bioconductor", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://bioconductor.org/packages/${name}`;
+			}
+		}],
+		["bitbucket", {
+			type: "git",
+			getUrl({ name, namespace, version }) {
+				if (!namespace) return;
+				return version ? `https://bitbucket.org/${namespace}/${name}/src/${version}` : `https://bitbucket.org/${namespace}/${name}`;
+			}
+		}],
+		["cargo", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://crates.io/crates/${name}`;
+			}
+		}],
+		["chrome", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://chromewebstore.google.com/detail/${name}`;
+			}
+		}],
+		["clojars", {
+			type: "web",
+			getUrl({ name, namespace }) {
+				return `https://clojars.org/${namespace ? `${namespace}/` : ""}${name}`;
+			}
+		}],
+		["cocoapods", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://cocoapods.org/pods/${name}`;
+			}
+		}],
+		["composer", {
+			type: "web",
+			getUrl({ name, namespace }) {
+				return `https://packagist.org/packages/${namespace ? `${namespace}/` : ""}${name}`;
+			}
+		}],
+		["conan", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://conan.io/center/recipes/${name}`;
+			}
+		}],
+		["conda", {
+			type: "web",
+			getUrl({ name, purl }) {
+				return `https://anaconda.org/${purl["qualifiers"]?.["channel"] ?? "conda-forge"}/${name}`;
+			}
+		}],
+		["cpan", {
+			type: "web",
+			getUrl({ name, namespace, version }) {
+				return namespace && version ? `https://metacpan.org/release/${namespace}/${name}-${version}` : `https://metacpan.org/dist/${name}`;
+			}
+		}],
+		["deno", {
+			type: "web",
+			getUrl({ name, version }) {
+				return version ? `https://deno.land/x/${name}@${version}` : `https://deno.land/x/${name}`;
+			}
+		}],
+		["docker", {
+			type: "web",
+			getUrl({ name, namespace, version }) {
+				const versionSuffix = version ? `?tab=tags&name=${version}` : "";
+				if (!namespace || namespace === "library") return `https://hub.docker.com/_/${name}${versionSuffix}`;
+				return `https://hub.docker.com/r/${namespace}/${name}${versionSuffix}`;
+			}
+		}],
+		["elm", {
+			type: "web",
+			getUrl({ name, namespace, version }) {
+				if (!namespace) return;
+				return version ? `https://package.elm-lang.org/packages/${namespace}/${name}/${version}` : `https://package.elm-lang.org/packages/${namespace}/${name}/latest`;
+			}
+		}],
+		["gem", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://rubygems.org/gems/${name}`;
+			}
+		}],
+		["github", {
+			type: "git",
+			getUrl({ name, namespace, version }) {
+				if (!namespace) return;
+				return version ? `https://github.com/${namespace}/${name}/tree/${version}` : `https://github.com/${namespace}/${name}`;
+			}
+		}],
+		["gitlab", {
+			type: "git",
+			getUrl({ name, namespace }) {
+				if (!namespace) return;
+				return `https://gitlab.com/${namespace}/${name}`;
+			}
+		}],
+		["golang", {
+			type: "web",
+			getUrl({ name, namespace, version }) {
+				if (!namespace) return;
+				return version ? `https://pkg.go.dev/${namespace}/${name}@${version}` : `https://pkg.go.dev/${namespace}/${name}`;
+			}
+		}],
+		["hackage", {
+			type: "web",
+			getUrl({ name, version }) {
+				return version ? `https://hackage.haskell.org/package/${name}-${version}` : `https://hackage.haskell.org/package/${name}`;
+			}
+		}],
+		["hex", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://hex.pm/packages/${name}`;
+			}
+		}],
+		["brew", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://formulae.brew.sh/formula/${name}`;
+			}
+		}],
+		["huggingface", {
+			type: "web",
+			getUrl({ name, namespace, purl }) {
+				const repositoryType = purl.qualifiers?.["type"];
+				return `https://huggingface.co/${repositoryType === "dataset" ? "datasets/" : repositoryType === "space" ? "spaces/" : ""}${namespace ? `${(0, import_globals.encodeURIComponent)(namespace)}/` : ""}${(0, import_globals.encodeURIComponent)(name)}`;
+			}
+		}],
+		["luarocks", {
+			type: "web",
+			getUrl({ name, namespace }) {
+				return `https://luarocks.org/modules/${namespace ? `${namespace}/` : ""}${name}`;
+			}
+		}],
+		["maven", {
+			type: "web",
+			getUrl({ name, namespace, version }) {
+				if (!namespace) return;
+				return version ? `https://search.maven.org/artifact/${namespace}/${name}/${version}/jar` : `https://search.maven.org/artifact/${namespace}/${name}`;
+			}
+		}],
+		["npm", {
+			type: "web",
+			getUrl({ name, namespace, version }) {
+				return version ? `https://www.npmjs.com/package/${namespace ? `${namespace}/` : ""}${name}/v/${version}` : `https://www.npmjs.com/package/${namespace ? `${namespace}/` : ""}${name}`;
+			}
+		}],
+		["nuget", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://nuget.org/packages/${name}/`;
+			}
+		}],
+		["pub", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://pub.dev/packages/${name}`;
+			}
+		}],
+		["pypi", {
+			type: "web",
+			getUrl({ name }) {
+				return `https://pypi.org/project/${name}/`;
+			}
+		}],
+		["swift", {
+			type: "git",
+			getUrl({ name, namespace }) {
+				if (!namespace) return;
+				return `https://github.com/${namespace}/${name}`;
+			}
+		}],
+		["vscode", {
+			type: "web",
+			getUrl({ name, namespace }) {
+				return `https://marketplace.visualstudio.com/items?itemName=${namespace ? `${namespace}.` : ""}${name}`;
+			}
+		}]
+	]));
+	/**
+	* Parse a package distribution URL or path into a `PackageURL`, trying each
+	* ecosystem's distribution parser in turn. Such a path is a registry artifact
+	* filename, so this works on a bare path
+	* (`/packages/orjson-3.11.9-…-manylinux….whl`) or a full URL.
+	*/
+	function fromDownloadUrl(urlOrPath) {
+		for (let i = 0, { length } = FROM_DOWNLOAD_URL_PARSERS; i < length; i += 1) {
+			const result = FROM_DOWNLOAD_URL_PARSERS[i](urlOrPath);
+			if (result) return result;
+		}
+	}
+	var UrlConverter = class UrlConverter {
+		/**
+		* Convert a URL string to a `PackageURL` if the URL is recognized.
+		*
+		* Dispatches first by hostname (registry / web-page parsers). When no
+		* hostname parser matches — an unmapped host, or a bare path with no usable
+		* host — falls back to distribution-filename parsing (wheels, tarballs,
+		* `.nupkg`, etc.). Hostname dispatch always wins; distribution parsing only
+		* adds coverage for inputs the hostname map rejects. Returns `undefined` when
+		* neither recognizes the input.
+		*
+		* @example
+		*   ;```typescript
+		*   UrlConverter.fromUrl('https://www.npmjs.com/package/lodash')
+		*   // -> PackageURL for pkg:npm/lodash
+		*
+		*   UrlConverter.fromUrl('https://github.com/lodash/lodash')
+		*   // -> PackageURL for pkg:github/lodash/lodash
+		*
+		*   UrlConverter.fromUrl('/packages/orjson-3.11.9-cp314-cp314-manylinux_2_17_x86_64.whl')
+		*   // -> PackageURL for pkg:pypi/orjson@3.11.9 (distribution fallback)
+		*   ```
+		*/
+		static fromUrl(urlStr) {
+			let url;
+			try {
+				url = new import_url.URLCtor(urlStr);
+			} catch {
+				return fromDownloadUrl(urlStr);
+			}
+			return FROM_URL_PARSERS.get(url.hostname)?.(url) ?? fromDownloadUrl(urlStr);
+		}
+		/**
+		* Check if a URL string is recognized for conversion to a `PackageURL`.
+		*
+		* Returns `true` if the URL's hostname has a registered parser or the input
+		* parses as a distribution filename, `false` otherwise.
+		*/
+		static supportsFromUrl(urlStr) {
+			return UrlConverter.fromUrl(urlStr) !== void 0;
+		}
+		/**
+		* Parse a package distribution (download) URL or bare path — a registry
+		* artifact filename such as a wheel, sdist, tarball, gem, `.nupkg`, or Go
+		* module-proxy archive — into a `PackageURL`. Unlike {@link fromUrl} this does
+		* not require a recognized hostname; it matches on the filename shape, so a
+		* bare path resolves identically to a full URL.
+		*/
+		static fromDownloadUrl(urlOrPath) {
+			return fromDownloadUrl(urlOrPath);
+		}
+		/**
+		* Parse any recognized npm URL (registry metadata, tarball, or
+		* `www.npmjs.com` page).
+		*/
+		static fromNpmUrl(urlStr) {
+			return runUrlParser(fromNpmUrl, urlStr);
+		}
+		/**
+		* Parse any recognized PyPI URL — project page or a wheel / sdist
+		* distribution filename (URL or bare path).
+		*/
+		static fromPypiUrl(urlStr) {
+			return runUrlParser(fromPypiSiteUrl, urlStr) ?? fromPypiDownloadUrl(urlStr);
+		}
+		/**
+		* Parse any recognized RubyGems URL — gem page or a `.gem` / `.gemspec.rz`
+		* distribution filename (URL or bare path).
+		*/
+		static fromGemUrl(urlStr) {
+			return runUrlParser(fromGemSiteUrl, urlStr) ?? fromGemDownloadUrl(urlStr);
+		}
+		/**
+		* Parse any recognized Go URL — `pkg.go.dev` page or a module-proxy download
+		* (URL or bare path).
+		*/
+		static fromGolangUrl(urlStr) {
+			return runUrlParser(fromGolangSiteUrl, urlStr) ?? fromGolangDownloadUrl(urlStr);
+		}
+		/**
+		* Parse a crates.io URL — crate page, `/api/v1/.../download`, or a bare
+		* `/crates/name/version/download` path.
+		*/
+		static fromCargoUrl(urlStr) {
+			return runUrlParser(fromCargoSiteUrl, urlStr) ?? fromCargoDownloadUrl(urlStr);
+		}
+		/**
+		* Parse an `registry.npmjs.org` metadata / tarball URL.
+		*/
+		static fromNpmRegistryUrl(urlStr) {
+			return runUrlParser(fromNpmRegistryUrl, urlStr);
+		}
+		/**
+		* Parse a `www.npmjs.com` package-page URL.
+		*/
+		static fromNpmSiteUrl(urlStr) {
+			return runUrlParser(fromNpmSiteUrl, urlStr);
+		}
+		/**
+		* Parse a `pypi.org/project/...` page URL.
+		*/
+		static fromPypiSiteUrl(urlStr) {
+			return runUrlParser(fromPypiSiteUrl, urlStr);
+		}
+		/**
+		* Parse a PyPI wheel / sdist distribution filename (URL or bare path).
+		*/
+		static fromPypiDownloadUrl(urlOrPath) {
+			return fromPypiDownloadUrl(urlOrPath);
+		}
+		/**
+		* Parse a `rubygems.org/gems/...` page URL.
+		*/
+		static fromGemSiteUrl(urlStr) {
+			return runUrlParser(fromGemSiteUrl, urlStr);
+		}
+		/**
+		* Parse a RubyGems `.gem` / `.gemspec.rz` distribution filename.
+		*/
+		static fromGemDownloadUrl(urlOrPath) {
+			return fromGemDownloadUrl(urlOrPath);
+		}
+		/**
+		* Parse a `pkg.go.dev` page URL.
+		*/
+		static fromGolangSiteUrl(urlStr) {
+			return runUrlParser(fromGolangSiteUrl, urlStr);
+		}
+		/**
+		* Parse a Go module-proxy download URL or path.
+		*/
+		static fromGolangDownloadUrl(urlOrPath) {
+			return fromGolangDownloadUrl(urlOrPath);
+		}
+		/**
+		* Parse a Maven Central `/maven2/...` URL.
+		*/
+		static fromMavenSiteUrl(urlStr) {
+			return runUrlParser(fromMavenSiteUrl, urlStr);
+		}
+		/**
+		* Parse a NuGet (`www.nuget.org` / `api.nuget.org`) URL.
+		*/
+		static fromNugetSiteUrl(urlStr) {
+			return runUrlParser(fromNugetSiteUrl, urlStr);
+		}
+		/**
+		* Parse a crates.io page / `/api/v1/.../download` URL.
+		*/
+		static fromCargoSiteUrl(urlStr) {
+			return runUrlParser(fromCargoSiteUrl, urlStr);
+		}
+		/**
+		* Parse a bare `/crates/name/version/download` path.
+		*/
+		static fromCargoDownloadUrl(urlOrPath) {
+			return fromCargoDownloadUrl(urlOrPath);
+		}
+		/**
+		* Parse a `github.com/owner/repo[...]` URL.
+		*/
+		static fromGitHubUrl(urlStr) {
+			return runUrlParser(fromGitHubUrl, urlStr);
+		}
+		/**
+		* Parse a `gitlab.com/owner/repo[...]` URL.
+		*/
+		static fromGitlabUrl(urlStr) {
+			return runUrlParser(fromGitlabUrl, urlStr);
+		}
+		/**
+		* Parse a `bitbucket.org/owner/repo[...]` URL.
+		*/
+		static fromBitbucketUrl(urlStr) {
+			return runUrlParser(fromBitbucketUrl, urlStr);
+		}
+		/**
+		* Parse a `packagist.org/packages/...` URL.
+		*/
+		static fromComposerUrl(urlStr) {
+			return runUrlParser(fromComposerUrl, urlStr);
+		}
+		/**
+		* Parse a `hex.pm/packages/...` URL.
+		*/
+		static fromHexUrl(urlStr) {
+			return runUrlParser(fromHexUrl, urlStr);
+		}
+		/**
+		* Parse a `pub.dev/packages/...` URL.
+		*/
+		static fromPubUrl(urlStr) {
+			return runUrlParser(fromPubUrl, urlStr);
+		}
+		/**
+		* Parse a `hub.docker.com/...` URL.
+		*/
+		static fromDockerUrl(urlStr) {
+			return runUrlParser(fromDockerUrl, urlStr);
+		}
+		/**
+		* Parse a `cocoapods.org/pods/...` URL.
+		*/
+		static fromCocoapodsUrl(urlStr) {
+			return runUrlParser(fromCocoapodsUrl, urlStr);
+		}
+		/**
+		* Parse a `hackage.haskell.org/package/...` URL.
+		*/
+		static fromHackageUrl(urlStr) {
+			return runUrlParser(fromHackageUrl, urlStr);
+		}
+		/**
+		* Parse a `cran.r-project.org/web/packages/...` URL.
+		*/
+		static fromCranUrl(urlStr) {
+			return runUrlParser(fromCranUrl, urlStr);
+		}
+		/**
+		* Parse an `anaconda.org/channel/...` URL.
+		*/
+		static fromCondaUrl(urlStr) {
+			return runUrlParser(fromCondaUrl, urlStr);
+		}
+		/**
+		* Parse a `metacpan.org/{pod,dist}/...` URL.
+		*/
+		static fromCpanUrl(urlStr) {
+			return runUrlParser(fromCpanUrl, urlStr);
+		}
+		/**
+		* Parse a `huggingface.co/namespace/name[...]` URL.
+		*/
+		static fromHuggingfaceUrl(urlStr) {
+			return runUrlParser(fromHuggingfaceUrl, urlStr);
+		}
+		/**
+		* Parse a `luarocks.org/modules/...` URL.
+		*/
+		static fromLuarocksUrl(urlStr) {
+			return runUrlParser(fromLuarocksUrl, urlStr);
+		}
+		/**
+		* Parse a `swiftpackageindex.com/owner/repo[/version]` URL.
+		*/
+		static fromSwiftUrl(urlStr) {
+			return runUrlParser(fromSwiftUrl, urlStr);
+		}
+		/**
+		* Parse a `marketplace.visualstudio.com/items?itemName=...` URL.
+		*/
+		static fromVscodeMarketplaceUrl(urlStr) {
+			return runUrlParser(fromVscodeMarketplaceUrl, urlStr);
+		}
+		/**
+		* Parse an `open-vsx.org/extension/...` URL.
+		*/
+		static fromOpenVsxUrl(urlStr) {
+			return runUrlParser(fromOpenVsxUrl, urlStr);
+		}
+		/**
+		* Get all available URLs for a `PackageURL`.
+		*
+		* This convenience method returns both repository and download URLs in a
+		* single call, useful when you need to check all URL options.
+		*/
+		static getAllUrls(purl) {
+			return {
+				download: UrlConverter.toDownloadUrl(purl),
+				repository: UrlConverter.toRepositoryUrl(purl)
+			};
+		}
+		/**
+		* Check if a `PackageURL` type supports download URL conversion.
+		*
+		* This method checks if the given package type has download URL conversion
+		* logic implemented.
+		*/
+		static supportsDownloadUrl(type) {
+			return DOWNLOAD_URL_TYPES.has(type);
+		}
+		/**
+		* Check if a `PackageURL` type supports repository URL conversion.
+		*
+		* This method checks if the given package type has repository URL conversion
+		* logic implemented.
+		*/
+		static supportsRepositoryUrl(type) {
+			return REPOSITORY_URL_TYPES.has(type);
+		}
+		/**
+		* Convert a `PackageURL` to a download URL if possible.
+		*
+		* This method attempts to generate a download URL where the package's
+		* artifact (binary, archive, etc.) can be obtained. Requires a version to be
+		* present in the `PackageURL`.
+		*/
+		static toDownloadUrl(purl) {
+			const { name, namespace, type, version } = purl;
+			if (!version) return;
+			const factory = DOWNLOAD_URL_FACTORIES.get(type);
+			const url = factory?.getUrl({
+				name,
+				namespace,
+				version,
+				purl
+			});
+			if (url === void 0) return;
+			return {
+				type: factory.type,
+				url
+			};
+		}
+		/**
+		* Convert a `PackageURL` to a repository URL if possible.
+		*
+		* This method attempts to generate a repository URL where the package's
+		* source code can be found. Different package types use different URL
+		* patterns and repository hosting services.
+		*/
+		static toRepositoryUrl(purl) {
+			const { name, namespace, type } = purl;
+			const { version } = purl;
+			const factory = REPOSITORY_URL_FACTORIES.get(type);
+			const url = factory?.getUrl({
+				name,
+				namespace,
+				version,
+				purl
+			});
+			if (url === void 0) return;
+			return {
+				type: factory.type,
+				url
+			};
+		}
+	};
+	var import_buffer = require_buffer();
+	/**
+	* @file URL decoding functionality for PURL components. Provides proper error
+	*   handling for invalid encoded strings.
+	*/
+	const decodeComponent = import_globals.decodeURIComponent;
+	/**
+	* Decode PURL component value from URL encoding.
+	*
+	* @throws {PurlError} When component cannot be decoded.
+	*/
+	function decodePurlComponent(comp, encodedComponent) {
+		try {
+			return decodeComponent(encodedComponent);
+		} catch (e) {
+			throw new PurlError(`unable to decode "${comp}" component`, { cause: e });
+		}
+	}
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/**
+	* @file Low-level PURL string parser. Implements `parseString` — the step that
+	*   splits a raw purl string into its six components without constructing a
+	*   `PackageURL` instance.
+	*/
+	const OTHER_SCHEME_PATTERN = /^[a-zA-Z][a-zA-Z0-9+.-]{0,255}:\/\//;
+	const PURL_LIKE_PATTERN = /^[a-zA-Z0-9+.-]{1,256}\//;
+	function findPurlVersionIndex(pathname, rawType, firstSlashIndex) {
+		/* v8 ignore start -- npm vs non-npm path logic both tested but V8 sees extra branches. */
+		let atSignIndex = rawType === "npm" ? (0, import_string.StringPrototypeIndexOf)(pathname, "@", firstSlashIndex + 2) : (0, import_string.StringPrototypeLastIndexOf)(pathname, "@");
+		/* v8 ignore stop */
+		if (atSignIndex !== -1 && atSignIndex < (0, import_string.StringPrototypeLastIndexOf)(pathname, "/")) atSignIndex = -1;
+		return atSignIndex;
+	}
+	function parsePurlQualifiers(url) {
+		let rawQualifiers;
+		if (url.searchParams.size !== 0) {
+			const search = (0, import_string.StringPrototypeSlice)(url.search, 1);
+			const searchParams = new import_url.URLSearchParamsCtor();
+			const entries = (0, import_string.StringPrototypeSplit)(search, "&");
+			for (let i = 0, { length } = entries; i < length; i += 1) {
+				const entry = entries[i];
+				const eqIndex = (0, import_string.StringPrototypeIndexOf)(entry, "=");
+				const key = eqIndex === -1 ? entry : (0, import_string.StringPrototypeSlice)(entry, 0, eqIndex);
+				if (key.length === 0) throw new PurlError("qualifier key must not be empty");
+				const value = decodePurlComponent("qualifiers", eqIndex === -1 ? "" : (0, import_string.StringPrototypeSlice)(entry, eqIndex + 1));
+				/* v8 ignore next -- URLSearchParams.append has internal V8 branches we can't control. */ searchParams.append(key, value);
+			}
+			rawQualifiers = searchParams;
+		}
+		return rawQualifiers;
+	}
+	function parsePurlUrl(purlStr) {
+		const colonIndex = (0, import_string.StringPrototypeIndexOf)(purlStr, ":");
+		let url;
+		let hasAuth = false;
+		if (colonIndex !== -1) try {
+			const beforeColon = (0, import_string.StringPrototypeSlice)(purlStr, 0, colonIndex);
+			const afterColon = (0, import_string.StringPrototypeSlice)(purlStr, colonIndex + 1);
+			const trimmedAfterColon = trimLeadingSlashes(afterColon);
+			url = new import_url.URLCtor(`${beforeColon}:${trimmedAfterColon}`);
+			/* v8 ignore start - V8 coverage sees multiple branch paths that can't all be tested. */
+			if (afterColon.length !== trimmedAfterColon.length) {
+				const authorityStart = (0, import_string.StringPrototypeIndexOf)(afterColon, "//") + 2;
+				const authorityEnd = (0, import_string.StringPrototypeIndexOf)(afterColon, "/", authorityStart);
+				const authority = authorityEnd === -1 ? (0, import_string.StringPrototypeSlice)(afterColon, authorityStart) : (0, import_string.StringPrototypeSlice)(afterColon, authorityStart, authorityEnd);
+				hasAuth = (0, import_string.StringPrototypeIncludes)(authority, "@");
+			}
+		} catch (e) {
+			throw new PurlError("failed to parse as URL", { cause: e });
+		}
+		/* v8 ignore next -- Tested: colonIndex === -1 (url undefined) case, but V8 can't see both branches. */ if (url?.protocol !== "pkg:") throw new PurlError("missing required \"pkg\" scheme component");
+		if (hasAuth) throw new PurlError("cannot contain a \"user:pass@host:port\"");
+		return url;
+	}
+	/**
+	* Parse a purl string into its components without constructing a `PackageURL`.
+	*/
+	function parseString(purlStr) {
+		if (typeof purlStr !== "string") throw new import_error.ErrorCtor("A purl string argument is required.");
+		if (isBlank(purlStr)) return [
+			void 0,
+			void 0,
+			void 0,
+			void 0,
+			void 0,
+			void 0
+		];
+		const MAX_PURL_LENGTH = 4096;
+		if (purlStr.length > MAX_PURL_LENGTH) throw new import_error.ErrorCtor(`Package URL exceeds maximum length of ${MAX_PURL_LENGTH} characters.`);
+		if (!(0, import_string.StringPrototypeStartsWith)(purlStr, "pkg:")) {
+			const hasOtherScheme = (0, import_regexp.RegExpPrototypeTest)(OTHER_SCHEME_PATTERN, purlStr);
+			const looksLikePurl = (0, import_regexp.RegExpPrototypeTest)(PURL_LIKE_PATTERN, purlStr);
+			if (!hasOtherScheme && looksLikePurl) return parseString(`pkg:${purlStr}`);
+		}
+		const url = parsePurlUrl(purlStr);
+		const { pathname } = url;
+		const firstSlashIndex = (0, import_string.StringPrototypeIndexOf)(pathname, "/");
+		const rawType = firstSlashIndex === -1 ? pathname : (0, import_string.StringPrototypeSlice)(pathname, 0, firstSlashIndex);
+		if (firstSlashIndex < 1) return [
+			rawType,
+			void 0,
+			void 0,
+			void 0,
+			void 0,
+			void 0
+		];
+		let rawVersion;
+		const atSignIndex = findPurlVersionIndex(pathname, rawType, firstSlashIndex);
+		const beforeVersion = (0, import_string.StringPrototypeSlice)(pathname, rawType.length + 1, atSignIndex === -1 ? pathname.length : atSignIndex);
+		if (atSignIndex !== -1) rawVersion = decodePurlComponent("version", (0, import_string.StringPrototypeSlice)(pathname, atSignIndex + 1));
+		let rawNamespace;
+		let rawName;
+		const lastSlashIndex = (0, import_string.StringPrototypeLastIndexOf)(beforeVersion, "/");
+		if (lastSlashIndex === -1) rawName = decodePurlComponent("name", beforeVersion);
+		else {
+			rawName = decodePurlComponent("name", (0, import_string.StringPrototypeSlice)(beforeVersion, lastSlashIndex + 1));
+			rawNamespace = decodePurlComponent("namespace", (0, import_string.StringPrototypeSlice)(beforeVersion, 0, lastSlashIndex));
+		}
+		const rawQualifiers = parsePurlQualifiers(url);
+		let rawSubpath;
+		const { hash } = url;
+		if (hash.length !== 0) rawSubpath = decodePurlComponent("subpath", (0, import_string.StringPrototypeSlice)(hash, 1));
+		return [
+			rawType,
+			rawNamespace,
+			rawName,
+			rawVersion,
+			rawQualifiers,
+			rawSubpath
+		];
+	}
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/**
+	* @file Standalone implementations of `PackageURL` static factory/utility
+	*   methods. Extracted to keep `package-url.mts` under the 500-line soft cap.
+	*   Methods that construct a `PackageURL` instance receive the class via a
+	*   lazy registration call (`registerPackageURLStatics`) to avoid circular
+	*   imports.
+	*/
+	var import_json = require_json();
+	let cachedPackageURL;
+	const FLYWEIGHT_CACHE_MAX = 1024;
+	const flyweightCache = new import_map_set.MapCtor();
+	/**
+	* Freeze a freshly parsed `PackageURL` before it is shared out of the flyweight
+	* cache. A `PackageURL`'s object graph is exactly two levels — the instance,
+	* plus a flat string-valued qualifiers bag — so two `ObjectFreeze` calls cover
+	* it without the queue, `WeakSet`, and `ReflectOwnKeys` walk that the general
+	* `recursiveFreeze` needs for arbitrary graphs.
+	*/
+	function freezeParsedPurl(purl) {
+		const { qualifiers } = purl;
+		if (qualifiers !== void 0) (0, import_object.ObjectFreeze)(qualifiers);
+		(0, import_object.ObjectFreeze)(purl);
+	}
+	/**
+	* Create `PackageURL` from JSON string.
+	*/
+	function fromJSON(json) {
+		if (typeof json !== "string") throw new import_error.ErrorCtor("JSON string argument is required.");
+		const MAX_JSON_SIZE = 1048576;
+		if ((0, import_buffer.BufferByteLength)(json, "utf8") > MAX_JSON_SIZE) throw new import_error.ErrorCtor(`JSON string exceeds maximum size limit of ${MAX_JSON_SIZE} bytes`);
+		let parsed;
+		try {
+			parsed = (0, import_json.JSONParse)(json);
+		} catch (e) {
+			throw new import_error.SyntaxErrorCtor("Failed to parse PackageURL from JSON", { cause: e });
+		}
+		if (!parsed || typeof parsed !== "object" || (0, import_array$1.ArrayIsArray)(parsed)) throw new import_error.ErrorCtor("JSON must parse to an object.");
+		const parsedRecord = parsed;
+		return fromObject({
+			__proto__: null,
+			type: parsedRecord["type"],
+			namespace: parsedRecord["namespace"],
+			name: parsedRecord["name"],
+			version: parsedRecord["version"],
+			qualifiers: parsedRecord["qualifiers"],
+			subpath: parsedRecord["subpath"]
+		});
+	}
+	function fromNpm(specifier) {
+		const PackageURL = cachedPackageURL;
+		const { name, namespace, version } = parseNpmSpecifier(specifier);
+		return new PackageURL("npm", namespace, name, version, void 0, void 0);
+	}
+	function fromObject(obj) {
+		const PackageURL = cachedPackageURL;
+		if (!isObject(obj)) throw new import_error.ErrorCtor("Object argument is required.");
+		const typedObj = obj;
+		return new PackageURL(typedObj["type"], typedObj["namespace"], typedObj["name"], typedObj["version"], typedObj["qualifiers"], typedObj["subpath"]);
+	}
+	function fromSpec(type, specifier) {
+		const PackageURL = cachedPackageURL;
+		switch (type) {
+			case "npm": {
+				const { name, namespace, version } = parseNpmSpecifier(specifier);
+				return new PackageURL("npm", namespace, name, version, void 0, void 0);
+			}
+			default: throw new import_error.ErrorCtor(`Unsupported package type: ${type}. Currently supported: npm`);
+		}
+	}
+	function fromString(purlStr) {
+		const PackageURL = cachedPackageURL;
+		if (typeof purlStr === "string") {
+			const cached = flyweightCache.get(purlStr);
+			if (cached !== void 0) {
+				flyweightCache.delete(purlStr);
+				flyweightCache.set(purlStr, cached);
+				return cached;
+			}
+		}
+		const purl = new PackageURL(...parseString(purlStr));
+		freezeParsedPurl(purl);
+		if (typeof purlStr === "string") {
+			if (flyweightCache.size >= FLYWEIGHT_CACHE_MAX) flyweightCache.delete(flyweightCache.keys().next().value);
+			flyweightCache.set(purlStr, purl);
+		}
+		return purl;
+	}
+	function fromUrl(urlStr) {
+		return UrlConverter.fromUrl(urlStr);
+	}
+	function isValid(purlStr) {
+		return tryFromString(purlStr).isOk();
+	}
+	function registerPackageURLStatics(ctor) {
+		cachedPackageURL = ctor;
+	}
+	function tryFromJSON(json) {
+		return ResultUtils.from(() => fromJSON(json));
+	}
+	function tryFromObject(obj) {
+		return ResultUtils.from(() => fromObject(obj));
+	}
+	function tryFromString(purlStr) {
+		return ResultUtils.from(() => fromString(purlStr));
+	}
+	function tryParseString(purlStr) {
+		return ResultUtils.from(() => parseString(purlStr));
+	}
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/**
+	* @file Package URL parsing and construction utilities. Note on `instanceof`
+	*   checks: When this module is compiled to CommonJS and imported from ESM
+	*   contexts, `instanceof` checks may fail due to module system
+	*   interoperability issues. See `package-url-builder.ts` for detailed
+	*   explanation and workarounds.
+	*/
+	const THROWS_OPTIONS = (0, import_object.ObjectFreeze)({
+		__proto__: null,
+		throws: true
+	});
+	/**
+	* Package URL parser and constructor implementing the PURL specification.
+	* Provides methods to parse, construct, and manipulate Package URLs with
+	* validation and normalization.
+	*/
+	var PackageURL = class PackageURL {
+		static Component = recursiveFreeze(PurlComponent);
+		static KnownQualifierNames = recursiveFreeze(PurlQualifierNames);
+		static Type = recursiveFreeze(PurlType);
+		/**
+		* Memoized canonical string. A private field rather than a property so
+		* `toString()` can fill it lazily even after `fromString` freezes the
+		* instance — `Object.freeze` seals properties, not private fields.
+		*/
+		#cachedString;
+		name;
+		namespace;
+		qualifiers;
+		subpath;
+		type;
+		version;
+		constructor(rawType, rawNamespace, rawName, rawVersion, rawQualifiers, rawSubpath) {
+			const trimmedType = typeof rawType === "string" ? (0, import_string.StringPrototypeTrim)(rawType) : rawType;
+			validateType(trimmedType, THROWS_OPTIONS);
+			const type = normalizeType(trimmedType);
+			const namespace = isNonEmptyString(rawNamespace) ? normalizeNamespace(rawNamespace) : rawNamespace;
+			validateNamespace(namespace, THROWS_OPTIONS);
+			const name = isNonEmptyString(rawName) ? normalizeName(rawName) : rawName;
+			validateName(name, THROWS_OPTIONS);
+			const version = isNonEmptyString(rawVersion) ? normalizeVersion(rawVersion) : rawVersion;
+			validateVersion(version, THROWS_OPTIONS);
+			const qualifiers = typeof rawQualifiers === "string" || isObject(rawQualifiers) ? normalizeQualifiers(rawQualifiers) : rawQualifiers;
+			validateQualifiers(qualifiers, THROWS_OPTIONS);
+			const subpath = isNonEmptyString(rawSubpath) ? normalizeSubpath(rawSubpath) : rawSubpath;
+			validateSubpath(subpath, THROWS_OPTIONS);
+			this.type = type;
+			this.name = name;
+			if (namespace !== void 0) this.namespace = namespace;
+			if (version !== void 0) this.version = version;
+			this.qualifiers = qualifiers ?? void 0;
+			if (subpath !== void 0) this.subpath = subpath;
+			normalizePurlByType(this, type);
+		}
+		/**
+		* Convert `PackageURL` to object for `JSON.stringify` compatibility.
+		*/
+		toJSON() {
+			return this.toObject();
+		}
+		/**
+		* Convert `PackageURL` to JSON string representation.
+		*/
+		toJSONString() {
+			return (0, import_json.JSONStringify)(this.toObject());
+		}
+		/**
+		* Convert `PackageURL` to a plain object representation.
+		*/
+		toObject() {
+			const { qualifiers } = this;
+			let qualifiersCopy;
+			if (qualifiers !== void 0) {
+				qualifiersCopy = (0, import_object.ObjectCreate)(null);
+				const keys = (0, import_object.ObjectKeys)(qualifiers);
+				for (let i = 0, { length } = keys; i < length; i += 1) {
+					const key = keys[i];
+					qualifiersCopy[key] = qualifiers[key];
+				}
+			}
+			return {
+				__proto__: null,
+				type: this.type,
+				namespace: this.namespace,
+				name: this.name,
+				version: this.version,
+				qualifiers: qualifiersCopy,
+				subpath: this.subpath
+			};
+		}
+		/**
+		* Get the package specifier string without the scheme and type prefix.
+		*
+		* Returns `namespace/name@version?qualifiers#subpath` — the package identity
+		* without the `pkg:type/` prefix.
+		*
+		* @returns Spec string (e.g., `'@babel/core@7.0.0'` for
+		*   `pkg:npm/%40babel/core@7.0.0`)
+		*/
+		toSpec() {
+			return stringifySpec(this);
+		}
+		toString() {
+			let cached = this.#cachedString;
+			if (cached === void 0) {
+				cached = stringify(this);
+				this.#cachedString = cached;
+			}
+			return cached;
+		}
+		/**
+		* Create a new `PackageURL` with a different version. Returns a new instance
+		* — the original is unchanged.
+		*
+		* @param version - New version string.
+		*
+		* @returns New `PackageURL` with the updated version
+		*/
+		withVersion(version) {
+			return new PackageURL(this.type, this.namespace, this.name, version, this.qualifiers, this.subpath);
+		}
+		/**
+		* Create a new `PackageURL` with a different namespace. Returns a new
+		* instance — the original is unchanged.
+		*
+		* @param namespace - New namespace string.
+		*
+		* @returns New `PackageURL` with the updated namespace
+		*/
+		withNamespace(namespace) {
+			return new PackageURL(this.type, namespace, this.name, this.version, this.qualifiers, this.subpath);
+		}
+		/**
+		* Create a new `PackageURL` with a single qualifier added or updated. Returns
+		* a new instance — the original is unchanged.
+		*
+		* Keys are lowercased per the PURL spec. Values are trimmed, and a value that
+		* is empty after trimming drops the qualifier entirely.
+		*
+		* @param key - Qualifier key (will be lowercased)
+		* @param value - Qualifier value (trimmed; empty-after-trim drops the key)
+		*
+		* @returns New `PackageURL` with the qualifier set
+		*/
+		withQualifier(key, value) {
+			return new PackageURL(this.type, this.namespace, this.name, this.version, {
+				__proto__: null,
+				...this.qualifiers,
+				[key]: value
+			}, this.subpath);
+		}
+		/**
+		* Create a new `PackageURL` with all qualifiers replaced. Returns a new
+		* instance — the original is unchanged.
+		*
+		* @param qualifiers - New qualifiers object (or `undefined` to remove all)
+		*
+		* @returns New `PackageURL` with the updated qualifiers
+		*/
+		withQualifiers(qualifiers) {
+			return new PackageURL(this.type, this.namespace, this.name, this.version, qualifiers, this.subpath);
+		}
+		/**
+		* Create a new `PackageURL` with a different subpath. Returns a new instance
+		* — the original is unchanged.
+		*
+		* @param subpath - New subpath string.
+		*
+		* @returns New `PackageURL` with the updated subpath
+		*/
+		withSubpath(subpath) {
+			return new PackageURL(this.type, this.namespace, this.name, this.version, this.qualifiers, subpath);
+		}
+		/**
+		* Compare this `PackageURL` with another for equality.
+		*
+		* Two `purl`s are considered equal if their canonical string representations
+		* match. This comparison is case-sensitive after normalization.
+		*
+		* @param other - The `PackageURL` to compare with.
+		*
+		* @returns `true` if the `purl`s are equal, `false` otherwise
+		*/
+		equals(other) {
+			return equalsPurls(this, other);
+		}
+		static equals(a, b) {
+			return equalsPurls(a, b);
+		}
+		compare(other) {
+			return comparePurls(this, other);
+		}
+		static compare(a, b) {
+			return comparePurls(a, b);
+		}
+		static fromJSON(json) {
+			return fromJSON(json);
+		}
+		static fromObject(obj) {
+			return fromObject(obj);
+		}
+		static fromString(purlStr) {
+			return fromString(purlStr);
+		}
+		static fromNpm(specifier) {
+			return fromNpm(specifier);
+		}
+		static fromSpec(type, specifier) {
+			return fromSpec(type, specifier);
+		}
+		static parseString(purlStr) {
+			return parseString(purlStr);
+		}
+		static isValid(purlStr) {
+			return isValid(purlStr);
+		}
+		static fromUrl(urlStr) {
+			return fromUrl(urlStr);
+		}
+		static tryFromJSON(json) {
+			return tryFromJSON(json);
+		}
+		static tryFromObject(obj) {
+			return tryFromObject(obj);
+		}
+		static tryFromString(purlStr) {
+			return tryFromString(purlStr);
+		}
+		static tryParseString(purlStr) {
+			return tryParseString(purlStr);
+		}
+	};
+	const staticProps = [
+		"Component",
+		"KnownQualifierNames",
+		"Type"
+	];
+	for (let i = 0, { length } = staticProps; i < length; i += 1) {
+		const staticProp = staticProps[i];
+		(0, import_reflect.ReflectDefineProperty)(PackageURL, staticProp, {
+			...(0, import_reflect.ReflectGetOwnPropertyDescriptor)(PackageURL, staticProp),
+			writable: false
+		});
+	}
+	(0, import_reflect.ReflectSetPrototypeOf)(PackageURL.prototype, null);
+	registerPackageURL(PackageURL);
+	registerPackageURLForUrlConverter(PackageURL);
+	registerPackageURLStatics(PackageURL);
+	function normalizePurlByType(purl, type) {
+		const typeHelpers = PurlType[type];
+		const normalize = typeHelpers?.["normalize"] ?? PurlTypNormalizer;
+		const validate = typeHelpers?.["validate"] ?? PurlTypeValidator;
+		normalize(purl);
+		validate(purl, THROWS_OPTIONS);
+	}
+	/**
+	* @file Static factory methods for `PurlBuilder` — one method per known
+	*   package type. Kept separate from the instance API to stay under the
+	*   per-file line cap.
+	*/
+	/**
+	* Create a builder with the `bitbucket` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.bitbucket().namespace('owner').name('repo').build()`
+	*/
+	function bitbucket() {
+		return new PurlBuilder().type("bitbucket");
+	}
+	/**
+	* Create a builder with the `cargo` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.cargo().name('serde').version('1.0.0').build()`
+	*/
+	function cargo() {
+		return new PurlBuilder().type("cargo");
+	}
+	/**
+	* Create a builder with the `cocoapods` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.cocoapods().name('Alamofire').version('5.9.1').build()`
+	*/
+	function cocoapods() {
+		return new PurlBuilder().type("cocoapods");
+	}
+	/**
+	* Create a builder with the `composer` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.composer().namespace('laravel').name('framework').build()`
+	*/
+	function composer() {
+		return new PurlBuilder().type("composer");
+	}
+	/**
+	* Create a builder with the `conan` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.conan().name('zlib').version('1.3.1').build()`
+	*/
+	function conan() {
+		return new PurlBuilder().type("conan");
+	}
+	/**
+	* Create a builder with the `conda` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.conda().name('numpy').version('1.26.4').build()`
+	*/
+	function conda() {
+		return new PurlBuilder().type("conda");
+	}
+	/**
+	* Create a builder with the `cran` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.cran().name('ggplot2').version('3.5.0').build()`
+	*/
+	function cran() {
+		return new PurlBuilder().type("cran");
+	}
+	/**
+	* Create a new empty builder instance.
+	*
+	* This is a convenience factory method that returns a new `PurlBuilder`
+	* instance ready for configuration.
+	*/
+	function createPurlBuilder() {
+		return new PurlBuilder();
+	}
+	/**
+	* Create a builder with the `deb` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.deb().namespace('debian').name('curl').version('8.5.0').build()`
+	*/
+	function deb() {
+		return new PurlBuilder().type("deb");
+	}
+	/**
+	* Create a builder with the `docker` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.docker().namespace('library').name('nginx').version('latest').build()`
+	*/
+	function docker() {
+		return new PurlBuilder().type("docker");
+	}
+	/**
+	* Create a builder with the `gem` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.gem().name('rails').version('7.0.0').build()`
+	*/
+	function gem() {
+		return new PurlBuilder().type("gem");
+	}
+	/**
+	* Create a builder with the `github` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.github().namespace('socketdev').name('socket-cli').build()`
+	*/
+	function github() {
+		return new PurlBuilder().type("github");
+	}
+	/**
+	* Create a builder with the `gitlab` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.gitlab().namespace('owner').name('project').build()`
+	*/
+	function gitlab() {
+		return new PurlBuilder().type("gitlab");
+	}
+	/**
+	* Create a builder with the `golang` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.golang().namespace('github.com/go').name('text').build()`
+	*/
+	function golang() {
+		return new PurlBuilder().type("golang");
+	}
+	/**
+	* Create a builder with the `hackage` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.hackage().name('aeson').version('2.2.1.0').build()`
+	*/
+	function hackage() {
+		return new PurlBuilder().type("hackage");
+	}
+	/**
+	* Create a builder with the `hex` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.hex().name('phoenix').version('1.7.12').build()`
+	*/
+	function hex() {
+		return new PurlBuilder().type("hex");
+	}
+	/**
+	* Create a builder with the `huggingface` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.huggingface().name('bert-base-uncased').build()`
+	*/
+	function huggingface() {
+		return new PurlBuilder().type("huggingface");
+	}
+	/**
+	* Create a builder with the `luarocks` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.luarocks().name('luasocket').version('3.1.0').build()`
+	*/
+	function luarocks() {
+		return new PurlBuilder().type("luarocks");
+	}
+	/**
+	* Create a builder with the `maven` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.maven().namespace('org.apache').name('commons-lang3').build()`
+	*/
+	function maven() {
+		return new PurlBuilder().type("maven");
+	}
+	/**
+	* Create a builder with the `npm` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.npm().name('lodash').version('4.17.21').build()`
+	*/
+	function npm() {
+		return new PurlBuilder().type("npm");
+	}
+	/**
+	* Create a builder with the `nuget` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.nuget().name('Newtonsoft.Json').version('13.0.3').build()`
+	*/
+	function nuget() {
+		return new PurlBuilder().type("nuget");
+	}
+	/**
+	* Create a builder with the `oci` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.oci().name('nginx').version('sha256:abc123').build()`
+	*/
+	function oci() {
+		return new PurlBuilder().type("oci");
+	}
+	/**
+	* Create a builder with the `pub` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.pub().name('flutter').version('3.19.0').build()`
+	*/
+	function pub() {
+		return new PurlBuilder().type("pub");
+	}
+	/**
+	* Create a builder with the `pypi` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.pypi().name('requests').version('2.31.0').build()`
+	*/
+	function pypi() {
+		return new PurlBuilder().type("pypi");
+	}
+	/**
+	* Create a builder with the `rpm` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.rpm().namespace('fedora').name('curl').version('8.5.0').build()`
+	*/
+	function rpm() {
+		return new PurlBuilder().type("rpm");
+	}
+	/**
+	* Create a builder with the `swift` package type preset.
+	*
+	* @example
+	*   ;`PurlBuilder.swift().namespace('apple').name('swift-nio').version('2.64.0').build()`
+	*/
+	function swift() {
+		return new PurlBuilder().type("swift");
+	}
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/**
+	* @file Builder pattern implementation for `PackageURL` construction with
+	*   fluent API.
+	*/
+	/**
+	* Known Limitation: `instanceof` checks with ESM/CommonJS interop
+	* ==============================================================
+	*
+	* When using `PurlBuilder` in environments that mix ESM and CommonJS modules
+	* (such as Vitest tests importing CommonJS-compiled code as ESM), the
+	* `instanceof` operator may not work reliably for checking if the built objects
+	* are instances of `PackageURL`.
+	*
+	* This occurs because: - `PurlBuilder` internally imports `PackageURL` using
+	* CommonJS `require()` - External code may import `PackageURL` using ESM
+	* `import` - Node.js creates different wrapper objects for the same class - The
+	* `instanceof` check fails due to different object identities.
+	*
+	* Workaround: Instead of: `purl instanceof PackageURL` Use:
+	* `purl.constructor.name === 'PackageURL'` or check for expected
+	* properties/methods.
+	*
+	* This limitation only affects `instanceof` checks, not the actual
+	* functionality of the created `PackageURL` objects.
+	*/
+	/**
+	* Builder class for constructing `PackageURL` instances using a fluent API.
+	*
+	* This class provides a convenient way to build `PackageURL` objects step by
+	* step with method chaining. Each method returns the builder instance, allowing
+	* for fluent construction patterns.
+	*
+	* @example
+	*   ;```typescript
+	*   const purl = PurlBuilder.npm().name('lodash').version('4.17.21').build()
+	*   ```
+	*/
+	var PurlBuilder = class PurlBuilder {
+		/**
+		* The package type (e.g., `'npm'`, `'pypi'`, `'maven'`).
+		*/
+		_type;
+		/**
+		* The package namespace (organization, group, or scope).
+		*/
+		_namespace;
+		/**
+		* The package name (required for valid `PackageURL`s).
+		*/
+		_name;
+		/**
+		* The package version string.
+		*/
+		_version;
+		/**
+		* Key-value pairs of additional package qualifiers.
+		*/
+		_qualifiers;
+		/**
+		* Optional subpath within the package.
+		*/
+		_subpath;
+		/**
+		* Build and return the final `PackageURL` instance.
+		*
+		* This method creates a new `PackageURL` instance using all the properties
+		* set on this builder. The `PackageURL` constructor will handle validation
+		* and normalization of the provided values.
+		*
+		* @throws {Error} If the configuration results in an invalid `PackageURL`
+		*/
+		build() {
+			return new PackageURL(this._type, this._namespace, this._name, this._version, this._qualifiers, this._subpath);
+		}
+		/**
+		* Set the package name for the `PackageURL`.
+		*
+		* This is the core identifier for the package and is required for all valid
+		* `PackageURL`s. The name should be the canonical package name as it appears
+		* in the package repository.
+		*/
+		name(name) {
+			this._name = name;
+			return this;
+		}
+		/**
+		* Set the package namespace for the `PackageURL`.
+		*
+		* The namespace represents different concepts depending on the package type:
+		*
+		* - `npm`: organization or scope (e.g., `'@angular'` for `'@angular/core'`) -
+		*   `maven`: `groupId` (e.g., `'org.apache.commons'`) - `pypi`: typically
+		*   unused.
+		*/
+		namespace(namespace) {
+			this._namespace = namespace;
+			return this;
+		}
+		/**
+		* Add a single qualifier key-value pair.
+		*
+		* This method allows adding qualifiers incrementally. If the qualifier key
+		* already exists, its value will be overwritten.
+		*/
+		qualifier(key, value) {
+			if (!this._qualifiers) this._qualifiers = { __proto__: null };
+			this._qualifiers[key] = value;
+			return this;
+		}
+		/**
+		* Set all qualifiers at once, replacing any existing qualifiers.
+		*
+		* Qualifiers provide additional metadata about the package such as: - `arch`:
+		* target architecture - `os`: target operating system - `classifier`:
+		* additional classifier for the package.
+		*/
+		qualifiers(qualifiers) {
+			this._qualifiers = {
+				__proto__: null,
+				...qualifiers
+			};
+			return this;
+		}
+		/**
+		* Set the subpath for the `PackageURL`.
+		*
+		* The subpath represents a path within the package, useful for referencing
+		* specific files or directories within a package. It should not start with a
+		* forward slash.
+		*/
+		subpath(subpath) {
+			this._subpath = subpath;
+			return this;
+		}
+		/**
+		* Set the package type for the `PackageURL`.
+		*/
+		type(type) {
+			this._type = type;
+			return this;
+		}
+		/**
+		* Set the package version for the `PackageURL`.
+		*
+		* The version string should match the format used by the package repository.
+		* Some package types may normalize version formats (e.g., removing leading
+		* `'v'`).
+		*/
+		version(version) {
+			this._version = version;
+			return this;
+		}
+		/**
+		* Create a builder from an existing `PackageURL` instance.
+		*
+		* This factory method copies all properties from an existing `PackageURL`
+		* into a new builder, allowing for modification of existing URLs.
+		*/
+		static from(purl) {
+			const builder = new PurlBuilder();
+			if (purl.type !== void 0) builder._type = purl.type;
+			if (purl.namespace !== void 0) builder._namespace = purl.namespace;
+			if (purl.name !== void 0) builder._name = purl.name;
+			if (purl.version !== void 0) builder._version = purl.version;
+			if (purl.qualifiers !== void 0) {
+				const qualifiersObj = purl.qualifiers;
+				builder._qualifiers = (0, import_object.ObjectFromEntries)((0, import_array$1.ArrayPrototypeMap)((0, import_object.ObjectEntries)(qualifiersObj), ([key, value]) => [key, String(value)]));
+			}
+			if (purl.subpath !== void 0) builder._subpath = purl.subpath;
+			return builder;
+		}
+		static bitbucket = bitbucket;
+		static cargo = cargo;
+		static cocoapods = cocoapods;
+		static composer = composer;
+		static conan = conan;
+		static conda = conda;
+		static cran = cran;
+		static create = createPurlBuilder;
+		static deb = deb;
+		static docker = docker;
+		static gem = gem;
+		static github = github;
+		static gitlab = gitlab;
+		static golang = golang;
+		static hackage = hackage;
+		static hex = hex;
+		static huggingface = huggingface;
+		static luarocks = luarocks;
+		static maven = maven;
+		static npm = npm;
+		static nuget = nuget;
+		static oci = oci;
+		static pub = pub;
+		static pypi = pypi;
+		static rpm = rpm;
+		static swift = swift;
+	};
+	/**
+	* @file `gitDepToPurl(dep)` — convert a git dependency, in any npm-ecosystem
+	*   spelling, into a PackageURL. Hosted remotes map to their own purl type;
+	*   anything else becomes `pkg:generic` carrying a `vcs_url` qualifier.
+	*/
+	const HOST_RULES = [
+		{
+			type: "github",
+			hosts: ["github.com"],
+			shorthand: "github:"
+		},
+		{
+			type: "gitlab",
+			hosts: ["gitlab.com"],
+			shorthand: "gitlab:"
+		},
+		{
+			type: "bitbucket",
+			hosts: ["bitbucket.org"],
+			shorthand: "bitbucket:"
+		}
+	];
+	/**
+	* Returns undefined when no owner/repo can be recovered, so a malformed remote
+	* yields nothing rather than a purl that points somewhere wrong.
+	*/
+	function gitDepToPurl(dep) {
+		const raw = dep.url.trim();
+		if (!raw) return;
+		const version = dep.commit || void 0;
+		const shorthandRule = ruleForShorthand(raw);
+		if (shorthandRule) {
+			const path = raw.slice(shorthandRule.shorthand.length);
+			const slash = path.indexOf("/");
+			if (slash <= 0 || slash === path.length - 1) return;
+			return new PackageURL(shorthandRule.type, path.slice(0, slash), trimRepo(path.slice(slash + 1)), version, void 0, void 0);
+		}
+		const url = stripGitProtocol(raw);
+		const parts = ownerRepoFromGitUrl(url);
+		if (!parts) return;
+		const hostRule = ruleForHost(hostOf(url));
+		if (hostRule) return new PackageURL(hostRule.type, parts.owner, parts.repo, version, void 0, void 0);
+		return new PackageURL("generic", void 0, parts.repo, version, { [PurlQualifierNames.VcsUrl]: raw }, void 0);
+	}
+	function hostOf(url) {
+		try {
+			return new URL(url).hostname.toLowerCase();
+		} catch {
+			const at = url.indexOf("@");
+			const colon = url.indexOf(":", at + 1);
+			return at >= 0 && colon > at ? url.slice(at + 1, colon).toLowerCase() : "";
+		}
+	}
+	/**
+	* Owner and repo from a remote URL, covering the `https://host/o/r`, scp-like
+	* `git@host:o/r`, and `ssh://git@host/o/r` shapes.
+	*/
+	function ownerRepoFromGitUrl(url) {
+		const match = /[:/]([^/:]+)\/([^/]+?)(?:\.git)?\/?$/.exec(url.trim());
+		if (!match) return;
+		return {
+			owner: match[1],
+			repo: trimRepo(match[2])
+		};
+	}
+	function ruleForHost(host) {
+		for (let i = 0, { length } = HOST_RULES; i < length; i += 1) {
+			const rule = HOST_RULES[i];
+			if (rule.hosts.includes(host)) return rule;
+		}
+	}
+	function ruleForShorthand(url) {
+		for (let i = 0, { length } = HOST_RULES; i < length; i += 1) {
+			const rule = HOST_RULES[i];
+			if (url.startsWith(rule.shorthand)) return rule;
+		}
+	}
+	/**
+	* Strip the git-specific protocol prefixes purl has no place for.
+	*/
+	function stripGitProtocol(url) {
+		if (url.startsWith("git+")) return url.slice(4);
+		if (url.startsWith("git://")) return `https://${url.slice(6)}`;
+		return url;
+	}
+	function trimRepo(repo) {
+		const noSlash = repo.endsWith("/") ? repo.slice(0, -1) : repo;
+		return noSlash.endsWith(".git") ? noSlash.slice(0, -4) : noSlash;
+	}
+	/**
+	* @file Split a raw ecosystem package name into its PURL `namespace` and `name`
+	*   components per the package-url type rules
+	*   (https://github.com/package-url/purl-spec/blob/main/PURL-TYPES.rst). A
+	*   PURL's `namespace` means different things per type — an npm scope, a maven
+	*   groupId, a composer vendor, an openvsx publisher — and the split point
+	*   differs (first slash, last slash, colon-or-slash, scoped-only). Consumers
+	*   that hand-roll this per-type table tend to forget a type (composer was a
+	*   real instance), folding the namespace into the name and breaking lookups.
+	*   This is the single spec-aware table they can call instead.
+	*/
+	const FIRST_SLASH_TYPES = /* @__PURE__ */ new Set([
+		"composer",
+		"openvsx",
+		"vscode",
+		"vscode-extension"
+	]);
+	const LAST_SLASH_TYPES = /* @__PURE__ */ new Set(["golang"]);
+	function splitOnFirstSlash(packageName) {
+		const slash = (0, import_string.StringPrototypeIndexOf)(packageName, "/");
+		if (slash === -1) return {
+			name: packageName,
+			namespace: void 0
+		};
+		return {
+			name: (0, import_string.StringPrototypeSlice)(packageName, slash + 1),
+			namespace: (0, import_string.StringPrototypeSlice)(packageName, 0, slash)
+		};
+	}
+	/**
+	* Split `packageName` into `{ namespace, name }` per the PURL rules for `type`.
+	*
+	* - `composer`, `openvsx`, `vscode`(-extension): vendor/publisher before the
+	*   first slash (`laravel/framework` → `laravel` + `framework`).
+	* - `golang`: module path before the last slash (`github.com/user/repo` →
+	*   `github.com/user` + `repo`).
+	* - `maven`: groupId before a `:` or, failing that, the first `/`
+	*   (`org.apache.commons:commons-lang3`).
+	* - `npm`: only scoped names split (`@scope/name`); a bare name has no namespace.
+	* - Any other type: the whole string is the `name`, no namespace.
+	*
+	* @param type - PURL type / ecosystem (case-insensitive, e.g. `'composer'`).
+	* @param packageName - Raw package name (no version), e.g.
+	*   `'laravel/framework'`.
+	*
+	* @returns The `{ namespace, name }` split.
+	*
+	* @throws {Error} If `type` or `packageName` is not a non-empty string.
+	*/
+	function splitPurlPackageName(type, packageName) {
+		const normalizedType = normalizeType(type);
+		if (!normalizedType) throw new import_error.ErrorCtor("PURL type string is required.");
+		if (typeof packageName !== "string" || packageName.length === 0) throw new import_error.ErrorCtor("package name string is required.");
+		if (FIRST_SLASH_TYPES.has(normalizedType)) return splitOnFirstSlash(packageName);
+		if (LAST_SLASH_TYPES.has(normalizedType)) {
+			const slash = (0, import_string.StringPrototypeLastIndexOf)(packageName, "/");
+			if (slash === -1) return {
+				name: packageName,
+				namespace: void 0
+			};
+			return {
+				name: (0, import_string.StringPrototypeSlice)(packageName, slash + 1),
+				namespace: (0, import_string.StringPrototypeSlice)(packageName, 0, slash)
+			};
+		}
+		if (normalizedType === "maven") {
+			if ((0, import_string.StringPrototypeIncludes)(packageName, ":")) {
+				const colon = (0, import_string.StringPrototypeIndexOf)(packageName, ":");
+				return {
+					name: (0, import_string.StringPrototypeSlice)(packageName, colon + 1),
+					namespace: (0, import_string.StringPrototypeSlice)(packageName, 0, colon)
+				};
+			}
+			return splitOnFirstSlash(packageName);
+		}
+		if (normalizedType === "npm") {
+			if ((0, import_string.StringPrototypeStartsWith)(packageName, "@") && (0, import_string.StringPrototypeIncludes)(packageName, "/")) return splitOnFirstSlash(packageName);
+			return {
+				name: packageName,
+				namespace: void 0
+			};
+		}
+		return {
+			name: packageName,
+			namespace: void 0
+		};
+	}
+	/**
+	* @file Whether a purl's version slot names a version a registry could actually
+	*   resolve.
+	*   Deliberately separate from `validateVersion`. That one is a SAFETY gate —
+	*   command-injection characters and a length cap — and a purl carrying
+	*   `@^1.2.3` is perfectly valid per the purl spec, which treats the version as
+	*   an opaque string. Folding resolvability into validation would start
+	*   rejecting spec-valid purls.
+	*   This is the separate question a resolver needs answered: can this string
+	*   name one concrete published release? A range, a wildcard, a dist tag, or a
+	*   dependency-specifier tail that leaked into the slot all parse fine and are
+	*   all useless to look up. Callers decide what to do — reject the input, or
+	*   resolve the range first and re-ask.
+	*   Pure; no registry access.
+	*/
+	const REQUIREMENT_TAIL_RE = /[\s;]/;
+	const RANGE_OPERATOR_RE = /^[=^~<>]/;
+	const WILDCARD_RE = /^\*$|\.[*x]$/i;
+	const DIST_TAG_RE = /^(?:alpha|beta|canary|dev|edge|latest|next|nightly|rc|stable)$/i;
+	/**
+	* Why `version` cannot name a concrete release, or undefined when it can.
+	*
+	* The message names the specific pattern rather than listing every disallowed
+	* shape, so a caller can tell the user what to fix instead of what the rule is.
+	*/
+	function describeUnresolvableVersion(version) {
+		if (REQUIREMENT_TAIL_RE.test(version)) return `version '${version}' contains whitespace or ';', which looks like a dependency-specifier tail (a PEP 508 marker, or a hyphenated range) leaking into the version slot — pass just the version`;
+		if (RANGE_OPERATOR_RE.test(version)) return `version '${version}' opens with a range operator, so it is an unresolved requirement rather than a release — pass the exact resolved version`;
+		if (WILDCARD_RE.test(version)) return `version '${version}' is a wildcard, which matches many releases and names none — pass the exact resolved version`;
+		if (DIST_TAG_RE.test(version)) return `version '${version}' is a dist tag, not a version; it moves over time and is not what was installed — pass the version the tag pointed at`;
+	}
+	/**
+	* True when `version` could name one concrete published release.
+	*
+	* An empty string is unresolvable: a purl with no version names a package, not
+	* a release, and a resolver asking about it has already lost what it needs.
+	*/
+	function isResolvableVersion(version) {
+		return version !== "" && describeUnresolvableVersion(version) === void 0;
+	}
+	/**
+	* @file Semver types and utilities used by the VERS range implementation.
+	*   Provides parsing, comparison, and constraint parsing for semver-based
+	*   VERS schemes.
+	*/
+	var import_math = require_math();
+	const COMPARATORS = (0, import_object.ObjectFreeze)([
+		"!=",
+		"<=",
+		">=",
+		"<",
+		">",
+		"="
+	]);
+	const DIGITS_ONLY = /^\d+$/;
+	const regexSemverNumberedGroups = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
+	function comparePrereleaseIdentifiers(ai, bi) {
+		const aNum = (0, import_regexp.RegExpPrototypeTest)(DIGITS_ONLY, ai);
+		const bNum = (0, import_regexp.RegExpPrototypeTest)(DIGITS_ONLY, bi);
+		if (aNum && bNum) {
+			const diff = Number(ai) - Number(bi);
+			if (diff !== 0) return diff < 0 ? -1 : 1;
+		} else if (aNum) return -1;
+		else if (bNum) return 1;
+		else {
+			if (ai < bi) return -1;
+			if (ai > bi) return 1;
+		}
+		return 0;
+	}
+	/**
+	* Compare two prerelease identifier arrays per semver spec. Returns `-1`, `0`,
+	* or `1`.
+	*/
+	function comparePrereleases(a, b) {
+		if (a.length === 0 && b.length === 0) return 0;
+		if (a.length === 0) return 1;
+		if (b.length === 0) return -1;
+		const len = (0, import_math.MathMin)(a.length, b.length);
+		for (let i = 0; i < len; i += 1) {
+			const ai = a[i];
+			const bi = b[i];
+			if (ai === bi) continue;
+			const comparison = comparePrereleaseIdentifiers(ai, bi);
+			if (comparison !== 0) return comparison;
+		}
+		if (a.length !== b.length) return a.length < b.length ? -1 : 1;
+		return 0;
+	}
+	/**
+	* Compare two semver version strings. Returns `-1` if `a < b`, `0` if `a ===
+	* b`, `1` if `a > b`. Build metadata is ignored per semver spec.
+	*/
+	function compareSemver(a, b) {
+		const pa = parseSemver(a);
+		const pb = parseSemver(b);
+		if (pa.major !== pb.major) return pa.major < pb.major ? -1 : 1;
+		if (pa.minor !== pb.minor) return pa.minor < pb.minor ? -1 : 1;
+		if (pa.patch !== pb.patch) return pa.patch < pb.patch ? -1 : 1;
+		const pre = comparePrereleases(pa.prerelease, pb.prerelease);
+		if (pre !== 0) return pre < 0 ? -1 : 1;
+		return 0;
+	}
+	/**
+	* Parse a single constraint string into comparator and version.
+	*/
+	function parseConstraint(raw) {
+		const trimmed = (0, import_string.StringPrototypeTrim)(raw);
+		if (trimmed === "*") return (0, import_object.ObjectFreeze)({
+			__proto__: null,
+			comparator: "*",
+			version: "*"
+		});
+		for (let i = 0, { length } = COMPARATORS; i < length; i += 1) {
+			const op = COMPARATORS[i];
+			if ((0, import_string.StringPrototypeStartsWith)(trimmed, op)) {
+				const version = (0, import_string.StringPrototypeTrim)((0, import_string.StringPrototypeSlice)(trimmed, op.length));
+				if (version.length === 0) throw new PurlError(`empty version after comparator "${op}"`);
+				return (0, import_object.ObjectFreeze)({
+					__proto__: null,
+					comparator: op,
+					version
+				});
+			}
+		}
+		if (trimmed.length === 0) throw new PurlError("vers constraint must not be empty (use \"*\" for the wildcard)");
+		return (0, import_object.ObjectFreeze)({
+			__proto__: null,
+			comparator: "=",
+			version: trimmed
+		});
+	}
+	/**
+	* Parse a semver string into comparable components.
+	*/
+	function parseSemver(version) {
+		const match = (0, import_regexp.RegExpPrototypeExec)(regexSemverNumberedGroups, version);
+		if (!match) throw new PurlError(`semver version "${version}" must match MAJOR.MINOR.PATCH (e.g. "1.2.3")`);
+		const major = Number(match[1]);
+		const minor = Number(match[2]);
+		const patch = Number(match[3]);
+		if (major > Number.MAX_SAFE_INTEGER || minor > Number.MAX_SAFE_INTEGER || patch > Number.MAX_SAFE_INTEGER) throw new PurlError(`version component exceeds maximum safe integer in "${version}"`);
+		return {
+			major,
+			minor,
+			patch,
+			prerelease: match[4] ? (0, import_string.StringPrototypeSplit)(match[4], ".") : []
+		};
+	}
+	/**
+	* @file VERS (VErsion Range Specifier) implementation. Implements the VERS
+	*   specification for version range matching. VERS is a companion standard to
+	*   PURL, currently in pre-standard draft with Ecma submission planned for late
+	*   2026. **Early adoption warning:** The VERS spec is not yet finalized. This
+	*   implementation covers the semver scheme and common aliases (`npm`, `cargo`,
+	*   `golang`, etc.). Additional version schemes may be added as the spec
+	*   matures.
+	*
+	* @see https://github.com/package-url/vers-spec
+	*/
+	const SEMVER_SCHEMES = (0, import_object.ObjectFreeze)(new import_map_set.SetCtor([
+		"semver",
+		"npm",
+		"cargo",
+		"golang",
+		"hex",
+		"pub",
+		"cran",
+		"gem",
+		"swift"
+	]));
+	const WHITESPACE_PATTERN = /\s/;
+	const VERS_TYPE_PATTERN = /^[A-Za-z][A-Za-z0-9.-]*$/;
+	const VERS_RAW_VERSION_PATTERN = /^[\x21-\x7e]+$/;
+	const VERS_DECODED_VERSION_PATTERN = /^[\x20-\x7e]+$/;
+	const VERS_RESERVED_VERSION_PATTERN = /[!*<=>]/;
+	const RANGE_COMPARATORS = (0, import_object.ObjectFreeze)(new import_map_set.SetCtor([
+		"<",
+		"<=",
+		">",
+		">="
+	]));
+	const VERS_QUOTE_PATTERN = /[ !%*<=>|]/g;
+	const VERS_QUOTE_MAP = (0, import_object.ObjectFreeze)(new import_map_set.MapCtor([
+		[" ", "%20"],
+		["!", "%21"],
+		["%", "%25"],
+		["*", "%2A"],
+		["<", "%3C"],
+		["=", "%3D"],
+		[">", "%3E"],
+		["|", "%7C"]
+	]));
+	function containsVersRange(constraints, version) {
+		const ranges = getVersRangeConstraints(constraints);
+		if (ranges.length === 0) return false;
+		for (let i = 0, { length } = ranges; i < length; i += 1) {
+			const c = ranges[i];
+			const cmp = compareSemver(version, c.version);
+			if (c.comparator === ">" || c.comparator === ">=") {
+				if (c.comparator === ">=" ? cmp < 0 : cmp <= 0) {
+					const next = ranges[i + 1];
+					if (next && (next.comparator === "<" || next.comparator === "<=")) i += 1;
+					continue;
+				}
+				const next = ranges[i + 1];
+				if (matchesVersUpperBound(next, version)) return true;
+				i += 1;
+			} else {
+				const cmpVal = compareSemver(version, c.version);
+				if (c.comparator === "<" && cmpVal < 0) return true;
+				if (c.comparator === "<=" && cmpVal <= 0) return true;
+			}
+		}
+		return false;
+	}
+	function decodeVersVersion(version) {
+		if (!(0, import_regexp.RegExpPrototypeTest)(VERS_RAW_VERSION_PATTERN, version) || (0, import_regexp.RegExpPrototypeTest)(VERS_RESERVED_VERSION_PATTERN, version)) throw new PurlError("vers version must use printable ascii and percent-encode reserved characters");
+		let decoded = version;
+		if ((0, import_string.StringPrototypeIncludes)(version, "%")) try {
+			decoded = (0, import_globals.decodeURIComponent)(version);
+		} catch {
+			throw new PurlError("vers version has invalid percent-encoding");
+		}
+		if (!(0, import_regexp.RegExpPrototypeTest)(VERS_DECODED_VERSION_PATTERN, decoded)) throw new PurlError("vers version must contain printable ascii; only encoded space is permitted whitespace");
+		return decoded;
+	}
+	function getVersRangeConstraints(constraints) {
+		const ranges = [];
+		for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const c = constraints[i];
+			if (c.comparator !== "!=" && c.comparator !== "=") (0, import_array$1.ArrayPrototypePush)(ranges, c);
+		}
+		return ranges;
+	}
+	function matchesVersUpperBound(next, version) {
+		if (!next) return true;
+		const cmpNext = compareSemver(version, next.version);
+		if (next.comparator === "<" && cmpNext < 0) return true;
+		if (next.comparator === "<=" && cmpNext <= 0) return true;
+		return false;
+	}
+	function matchVersEquality(constraints, version) {
+		for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const c = constraints[i];
+			if (c.comparator === "!=" && compareSemver(version, c.version) === 0) return false;
+		}
+		for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const c = constraints[i];
+			if (c.comparator === "=" && compareSemver(version, c.version) === 0) return true;
+		}
+	}
+	function parseVersConstraints(rawConstraints, constraints) {
+		for (let i = 0, { length } = rawConstraints; i < length; i += 1) {
+			const raw = rawConstraints[i];
+			if ((0, import_string.StringPrototypeStartsWith)(raw, "=")) throw new PurlError("vers equality must use a bare version without an explicit comparator");
+			const constraint = parseConstraint(raw);
+			if (constraint.comparator === "*") {
+				(0, import_array$1.ArrayPrototypePush)(constraints, constraint);
+				continue;
+			}
+			(0, import_array$1.ArrayPrototypePush)(constraints, (0, import_object.ObjectFreeze)({
+				...constraint,
+				version: decodeVersVersion(constraint.version)
+			}));
+		}
+	}
+	/**
+	* URL-quote the separator/comparator characters of a version for canonical
+	* VERS serialization.
+	*/
+	function quoteVersVersion(version) {
+		return (0, import_string.StringPrototypeReplace)(version, VERS_QUOTE_PATTERN, (ch) => VERS_QUOTE_MAP.get(ch));
+	}
+	function validateCanonicalConstraints(scheme, constraints) {
+		const seenVersions = new import_map_set.SetCtor();
+		for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const c = constraints[i];
+			if (c.comparator === "*") continue;
+			if (seenVersions.has(c.version)) throw new PurlError(`vers versions must be unique: "${c.version}" occurs more than once`);
+			seenVersions.add(c.version);
+		}
+		if (SEMVER_SCHEMES.has(scheme)) for (let i = 1, { length } = constraints; i < length; i += 1) {
+			const prev = constraints[i - 1];
+			const c = constraints[i];
+			if (prev.comparator === "*" || c.comparator === "*") continue;
+			if (compareSemver(c.version, prev.version) < 0) throw new PurlError(`vers constraints must be sorted by version: "${c.version}" follows "${prev.version}"`);
+		}
+		validateVersComparatorOrder(constraints);
+	}
+	function validateVersComparatorOrder(constraints) {
+		let prevComparator;
+		for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const { comparator } = constraints[i];
+			if (comparator === "!=" || comparator === "*") continue;
+			if (prevComparator === "=" && comparator !== "=" && comparator !== ">" && comparator !== ">=") throw new PurlError(`vers "=" constraint may only be followed by "=", ">", or ">=" — saw "${comparator}"`);
+			prevComparator = comparator;
+		}
+		let prevRange;
+		for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const { comparator } = constraints[i];
+			if (!RANGE_COMPARATORS.has(comparator)) continue;
+			const isLower = comparator === ">" || comparator === ">=";
+			if (prevRange !== void 0) {
+				if ((prevRange === ">" || prevRange === ">=") === isLower) throw new PurlError(`vers range comparators must alternate between lower and upper bounds: "${comparator}" follows "${prevRange}"`);
+			}
+			prevRange = comparator;
+		}
+	}
+	function validateVersSemverConstraints(scheme, constraints) {
+		if (SEMVER_SCHEMES.has(scheme)) for (let i = 0, { length } = constraints; i < length; i += 1) {
+			const c = constraints[i];
+			if (c.comparator !== "*" && !isSemverString(c.version)) throw new PurlError(`invalid semver version "${c.version}" in VERS constraint`);
+		}
+	}
+	/**
+	* VERS (VErsion Range Specifier) parser and evaluator.
+	*
+	* **Early adoption:** The VERS spec is pre-standard draft. This implementation
+	* supports semver-based schemes (`npm`, `cargo`, `golang`, `gem`, etc.).
+	* Additional version schemes may be added as the spec matures.
+	*
+	* @example
+	*   ;```typescript
+	*   const range = Vers.parse('vers:npm/>=1.0.0|<2.0.0')
+	*   range.contains('1.5.0') // true
+	*   range.contains('2.0.0') // false
+	*   range.toString() // 'vers:npm/>=1.0.0|<2.0.0'
+	*
+	*   // Wildcard matches all versions
+	*   Vers.parse('vers:semver/*').contains('999.0.0') // true
+	*   ```
+	*/
+	var Vers = class Vers {
+		scheme;
+		constraints;
+		constructor(scheme, constraints) {
+			this.scheme = scheme;
+			this.constraints = (0, import_object.ObjectFreeze)(constraints);
+			(0, import_object.ObjectFreeze)(this);
+		}
+		static parse(versStr) {
+			return Vers.fromString(versStr);
+		}
+		static fromString(versStr) {
+			if (typeof versStr !== "string" || versStr.length === 0) throw new PurlError("vers string is required");
+			if (!(0, import_string.StringPrototypeStartsWith)(versStr, "vers:")) throw new PurlError("vers string must start with \"vers:\" scheme");
+			if ((0, import_regexp.RegExpPrototypeTest)(WHITESPACE_PATTERN, versStr)) throw new PurlError("vers string must not contain whitespace");
+			const remainder = (0, import_string.StringPrototypeSlice)(versStr, 5);
+			const slashIndex = (0, import_string.StringPrototypeIndexOf)(remainder, "/");
+			if (slashIndex === -1 || slashIndex === 0) throw new PurlError("vers string must contain a version scheme before \"/\"");
+			const rawScheme = (0, import_string.StringPrototypeSlice)(remainder, 0, slashIndex);
+			if (!(0, import_regexp.RegExpPrototypeTest)(VERS_TYPE_PATTERN, rawScheme)) throw new PurlError("vers type must start with an ascii letter and contain only letters, numbers, dots, or dashes");
+			const scheme = (0, import_string.StringPrototypeToLowerCase)(rawScheme);
+			const constraintsStr = (0, import_string.StringPrototypeSlice)(remainder, slashIndex + 1);
+			if (constraintsStr.length === 0) throw new PurlError("vers string must contain at least one constraint");
+			const rawConstraints = (0, import_string.StringPrototypeSplit)(constraintsStr, "|");
+			const MAX_CONSTRAINTS = 1e3;
+			if (rawConstraints.length > MAX_CONSTRAINTS) throw new PurlError(`vers exceeds maximum of ${MAX_CONSTRAINTS} constraints`);
+			const constraints = [];
+			parseVersConstraints(rawConstraints, constraints);
+			if (constraints.length > 1) {
+				for (let i = 0, { length } = constraints; i < length; i += 1) if (constraints[i].comparator === "*") throw new PurlError("wildcard \"*\" must be the only constraint");
+			}
+			validateVersSemverConstraints(scheme, constraints);
+			validateCanonicalConstraints(scheme, constraints);
+			return new Vers(scheme, constraints);
+		}
+		/**
+		* Check if a version is contained within this VERS range.
+		*
+		* Implements the VERS containment algorithm for semver-based schemes.
+		*
+		* @param version - Version string to check.
+		*
+		* @returns `true` if the version matches the range
+		*
+		* @throws {PurlError} If the scheme is not supported
+		*/
+		contains(version) {
+			if (!SEMVER_SCHEMES.has(this.scheme)) throw new PurlError(`unsupported VERS scheme "${this.scheme}" for containment check`);
+			const { constraints } = this;
+			if (constraints.length === 1 && constraints[0].comparator === "*") return true;
+			const equalityMatch = matchVersEquality(constraints, version);
+			if (equalityMatch !== void 0) return equalityMatch;
+			return containsVersRange(constraints, version);
+		}
+		/**
+		* Serialize to canonical VERS string.
+		*/
+		toString() {
+			const parts = [];
+			for (let i = 0, { length } = this.constraints; i < length; i += 1) {
+				const c = this.constraints[i];
+				if (c.comparator === "*") (0, import_array$1.ArrayPrototypePush)(parts, "*");
+				else if (c.comparator === "=") (0, import_array$1.ArrayPrototypePush)(parts, quoteVersVersion(c.version));
+				else (0, import_array$1.ArrayPrototypePush)(parts, `${c.comparator}${quoteVersVersion(c.version)}`);
+			}
+			return `vers:${this.scheme}/${(0, import_array$1.ArrayPrototypeJoin)(parts, "|")}`;
+		}
+	};
+	/*!
+	Copyright (c) the purl authors
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
+	*/
+	/* v8 ignore stop */
+	exports.Err = Err;
+	exports.Ok = Ok;
+	Object.defineProperty(exports, "PURL_Type", {
+		enumerable: true,
+		get: function() {
+			return import_purl.PURL_Type;
+		}
+	});
+	exports.PackageURL = PackageURL;
+	exports.PurlBuilder = PurlBuilder;
+	exports.PurlComponent = PurlComponent;
+	exports.PurlError = PurlError;
+	exports.PurlInjectionError = PurlInjectionError;
+	exports.PurlQualifierNames = PurlQualifierNames;
+	exports.PurlType = PurlType;
+	exports.ResultUtils = ResultUtils;
+	exports.UrlConverter = UrlConverter;
+	exports.Vers = Vers;
+	exports.comparePurls = comparePurls;
+	exports.containsInjectionCharacters = containsInjectionCharacters;
+	exports.createMatcher = createMatcher;
+	exports.describeUnresolvableVersion = describeUnresolvableVersion;
+	exports.equalsPurls = equalsPurls;
+	exports.err = err;
+	exports.findInjectionCharCode = findInjectionCharCode;
+	exports.formatInjectionChar = formatInjectionChar;
+	exports.gitDepToPurl = gitDepToPurl;
+	exports.isResolvableVersion = isResolvableVersion;
+	exports.matchesPurl = matchesPurl;
+	exports.ok = ok;
+	exports.ownerRepoFromGitUrl = ownerRepoFromGitUrl;
+	exports.parseNpmSpecifier = parseNpmSpecifier;
+	exports.splitPurlPackageName = splitPurlPackageName;
+	exports.stringify = stringify;
+	exports.stringifySpec = stringifySpec;
+}));
+
+var import_dist = require_dist();
+var __awaiter$1 = void 0 && (void 0).__awaiter || function(thisArg, _arguments, P, generator) {
+	function adopt(value) {
+		return value instanceof P ? value : new P(function(resolve) {
+			resolve(value);
+		});
+	}
+	return new (P || (P = Promise))(function(resolve, reject) {
+		function fulfilled(value) {
+			try {
+				step(generator.next(value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function rejected(value) {
+			try {
+				step(generator["throw"](value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function step(result) {
+			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+		}
+		step((generator = generator.apply(thisArg, _arguments || [])).next());
+	});
+};
+const { chmod, copyFile, lstat, mkdir, open, readdir, rename, rm, rmdir, stat, symlink, unlink } = fs.promises;
+const IS_WINDOWS = process.platform === "win32";
+const READONLY = fs.constants.O_RDONLY;
+/**
+* On OSX/Linux, true if path starts with '/'. On Windows, true for paths like:
+* \, \hello, \\hello\share, C:, and C:\hello (and corresponding alternate separator cases).
+*/
+function isRooted(p) {
+	p = normalizeSeparators(p);
+	if (!p) throw new Error("isRooted() parameter \"p\" cannot be empty");
+	if (IS_WINDOWS) return p.startsWith("\\") || /^[A-Z]:/i.test(p);
+	return p.startsWith("/");
+}
+/**
+* Best effort attempt to determine whether a file exists and is executable.
+* @param filePath    file path to check
+* @param extensions  additional file extensions to try
+* @return if file exists and is executable, returns the file path. otherwise empty string.
+*/
+function tryGetExecutablePath(filePath, extensions) {
+	return __awaiter$1(this, void 0, void 0, function* () {
+		let stats = void 0;
+		try {
+			stats = yield stat(filePath);
+		} catch (err) {
+			if (err.code !== "ENOENT") console.log(`Unexpected error attempting to determine if executable file exists '${filePath}': ${err}`);
+		}
+		if (stats && stats.isFile()) {
+			if (IS_WINDOWS) {
+				const upperExt = path$1.extname(filePath).toUpperCase();
+				if (extensions.some((validExt) => validExt.toUpperCase() === upperExt)) return filePath;
+			} else if (isUnixExecutable(stats)) return filePath;
+		}
+		const originalFilePath = filePath;
+		for (const extension of extensions) {
+			filePath = originalFilePath + extension;
+			stats = void 0;
+			try {
+				stats = yield stat(filePath);
+			} catch (err) {
+				if (err.code !== "ENOENT") console.log(`Unexpected error attempting to determine if executable file exists '${filePath}': ${err}`);
+			}
+			if (stats && stats.isFile()) {
+				if (IS_WINDOWS) {
+					try {
+						const directory = path$1.dirname(filePath);
+						const upperName = path$1.basename(filePath).toUpperCase();
+						for (const actualName of yield readdir(directory)) if (upperName === actualName.toUpperCase()) {
+							filePath = path$1.join(directory, actualName);
+							break;
+						}
+					} catch (err) {
+						console.log(`Unexpected error attempting to determine the actual case of the file '${filePath}': ${err}`);
+					}
+					return filePath;
+				} else if (isUnixExecutable(stats)) return filePath;
+			}
+		}
+		return "";
+	});
+}
+function normalizeSeparators(p) {
+	p = p || "";
+	if (IS_WINDOWS) {
+		p = p.replace(/\//g, "\\");
+		return p.replace(/\\\\+/g, "\\");
+	}
+	return p.replace(/\/\/+/g, "/");
+}
+function isUnixExecutable(stats) {
+	return (stats.mode & 1) > 0 || (stats.mode & 8) > 0 && process.getgid !== void 0 && stats.gid === process.getgid() || (stats.mode & 64) > 0 && process.getuid !== void 0 && stats.uid === process.getuid();
+}
+
+var __awaiter = void 0 && (void 0).__awaiter || function(thisArg, _arguments, P, generator) {
+	function adopt(value) {
+		return value instanceof P ? value : new P(function(resolve) {
+			resolve(value);
+		});
+	}
+	return new (P || (P = Promise))(function(resolve, reject) {
+		function fulfilled(value) {
+			try {
+				step(generator.next(value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function rejected(value) {
+			try {
+				step(generator["throw"](value));
+			} catch (e) {
+				reject(e);
+			}
+		}
+		function step(result) {
+			result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+		}
+		step((generator = generator.apply(thisArg, _arguments || [])).next());
+	});
+};
+/**
+* Returns path of a tool had the tool actually been invoked.  Resolves via paths.
+* If you check and the tool does not exist, it will throw.
+*
+* @param     tool              name of the tool
+* @param     check             whether to check if tool exists
+* @returns   Promise<string>   path to tool
+*/
+function which(tool, check) {
+	return __awaiter(this, void 0, void 0, function* () {
+		if (!tool) throw new Error("parameter 'tool' is required");
+		if (check) {
+			const result = yield which(tool, false);
+			if (!result) {
+				if (IS_WINDOWS) throw new Error(`Unable to locate executable file: ${tool}. Please verify either the file path exists or the file can be found within a directory specified by the PATH environment variable. Also verify the file has a valid extension for an executable file.`);
+				else throw new Error(`Unable to locate executable file: ${tool}. Please verify either the file path exists or the file can be found within a directory specified by the PATH environment variable. Also check the file mode to verify the file is executable.`);
+			}
+			return result;
+		}
+		const matches = yield findInPath(tool);
+		if (matches && matches.length > 0) return matches[0];
+		return "";
+	});
+}
+/**
+* Returns a list of all occurrences of the given tool on the system path.
+*
+* @returns   Promise<string[]>  the paths of the tool
+*/
+function findInPath(tool) {
+	return __awaiter(this, void 0, void 0, function* () {
+		if (!tool) throw new Error("parameter 'tool' is required");
+		const extensions = [];
+		if (IS_WINDOWS && process.env["PATHEXT"]) {
+			for (const extension of process.env["PATHEXT"].split(path$1.delimiter)) if (extension) extensions.push(extension);
+		}
+		if (isRooted(tool)) {
+			const filePath = yield tryGetExecutablePath(tool, extensions);
+			if (filePath) return [filePath];
+			return [];
+		}
+		if (tool.includes(path$1.sep)) return [];
+		const directories = [];
+		if (process.env.PATH) {
+			for (const p of process.env.PATH.split(path$1.delimiter)) if (p) directories.push(p);
+		}
+		const matches = [];
+		for (const directory of directories) {
+			const filePath = yield tryGetExecutablePath(path$1.join(directory, tool), extensions);
+			if (filePath) matches.push(filePath);
+		}
+		return matches;
+	});
+}
+
+var require_runtime$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	/**
+	* @file Runtime environment detection constants. All checks use only
+	*   `typeof`-safe global probes so this module is safe to import in browser,
+	*   Node.js, Deno, Bun, and bundled contexts alike.
+	*/
+	/**
+	* True when running inside a Node.js process. Detected via
+	* `process.versions.node` — present in Node, absent in browsers and Deno/Bun
+	* which expose a different `process.versions` shape (or no `process` at all).
+	*/
+	const IS_NODE = typeof process !== "undefined" && typeof process.versions !== "undefined" && typeof process.versions.node === "string";
+	/**
+	* True when running in a browser context (window + document both defined).
+	* Note: Chrome extensions have `window` in popup contexts but not in service
+	* workers — check `IS_SERVICE_WORKER` for that case.
+	*/
+	const IS_BROWSER = typeof globalThis !== "undefined" && "window" in globalThis && typeof globalThis.window !== "undefined" && "document" in globalThis && typeof globalThis.document !== "undefined";
+	/**
+	* True when running inside a Web Worker / Chrome MV3 service worker. `self` is
+	* defined without `window` in worker contexts.
+	*/
+	const IS_WORKER = "self" in globalThis && typeof globalThis.self !== "undefined" && !("window" in globalThis) && !("document" in globalThis);
+	exports.IS_BROWSER = IS_BROWSER;
+	exports.IS_NODE = IS_NODE;
+	exports.IS_WORKER = IS_WORKER;
+}));
+
+var require_os = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const nodeOs = require_runtime$1().IS_NODE ? /*@__PURE__*/ __require("os") : void 0;
+	function getNodeOs() {
+		return nodeOs;
+	}
+	const OsArch = nodeOs?.arch;
+	const OsHomedir = nodeOs?.homedir;
+	const OsPlatform = nodeOs?.platform;
+	const OsTmpdir = nodeOs?.tmpdir;
+	exports.OsArch = OsArch;
+	exports.OsHomedir = OsHomedir;
+	exports.OsPlatform = OsPlatform;
+	exports.OsTmpdir = OsTmpdir;
+	exports.getNodeOs = getNodeOs;
+}));
+
+var require_fs = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const nodeFs = require_runtime$1().IS_NODE ? /*@__PURE__*/ __require("fs") : void 0;
+	function getNodeFs() {
+		return nodeFs;
+	}
+	const FsAccessSync = nodeFs?.accessSync;
+	const FsExistsSync = nodeFs?.existsSync;
+	const FsMkdirSync = nodeFs?.mkdirSync;
+	const FsReadFileSync = nodeFs?.readFileSync;
+	const FsRealpathSync = nodeFs?.realpathSync;
+	const FsStatSync = nodeFs?.statSync;
+	const FsWriteFileSync = nodeFs?.writeFileSync;
+	exports.FsAccessSync = FsAccessSync;
+	exports.FsExistsSync = FsExistsSync;
+	exports.FsMkdirSync = FsMkdirSync;
+	exports.FsReadFileSync = FsReadFileSync;
+	exports.FsRealpathSync = FsRealpathSync;
+	exports.FsStatSync = FsStatSync;
+	exports.FsWriteFileSync = FsWriteFileSync;
+	exports.getNodeFs = getNodeFs;
+}));
+
+var require_platform = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_node_os = require_os();
+	const require_node_fs = require_fs();
+	/**
+	* @file Platform detection and OS-specific constants.
+	*/
+	let memoizedArch;
+	/**
+	* Get the current CPU architecture (memoized), e.g. `x64`, `arm64`.
+	*/
+	function getArch() {
+		if (memoizedArch === void 0) memoizedArch = require_node_os.getNodeOs().arch();
+		return memoizedArch;
+	}
+	const MUSL_LINKERS = [
+		"/lib/ld-musl-x86_64.so.1",
+		"/lib/ld-musl-aarch64.so.1",
+		"/usr/lib/ld-musl-x86_64.so.1",
+		"/usr/lib/ld-musl-aarch64.so.1"
+	];
+	let memoizedLibc;
+	let memoizedLibcProbed = false;
+	/**
+	* Get the host libc variant (memoized): `'musl'` on Alpine-and-similar,
+	* `'glibc'` on other Linux, `undefined` off-Linux. Detected by probing for the
+	* musl dynamic linker. The single source of truth for libc detection —
+	* tool-specific resolvers (`getPythonArch`, `getJreArch`) call this rather than
+	* re-probing.
+	*/
+	function getLibc() {
+		if (!memoizedLibcProbed) {
+			memoizedLibcProbed = true;
+			/* c8 ignore start - Linux-only filesystem probe. */
+			if (getOs() !== "linux") memoizedLibc = void 0;
+			else {
+				memoizedLibc = "glibc";
+				for (let i = 0, { length } = MUSL_LINKERS; i < length; i += 1) if (require_node_fs.getNodeFs().existsSync(MUSL_LINKERS[i])) {
+					memoizedLibc = "musl";
+					break;
+				}
+			}
+		}
+		return memoizedLibc;
+	}
+	let memoizedOs;
+	/**
+	* Get the current OS (memoized), e.g. `darwin`, `linux`, `win32` — the raw
+	* `process.platform` value.
+	*/
+	function getOs() {
+		if (memoizedOs === void 0) memoizedOs = require_node_os.getNodeOs().platform();
+		return memoizedOs;
+	}
+	let memoizedTarget;
+	/**
+	* Get the current host **target** in the pnpm `pack-app` vocabulary (memoized):
+	* `<os>-<arch>[-<libc>]`, e.g. `darwin-arm64`, `linux-x64`, `win32-x64`,
+	* `linux-x64-musl`. Raw Node `process.platform`/`process.arch` joined with `-`,
+	* plus a `-musl` suffix on Alpine. This is the Socket-wide naming for
+	* non-python / non-JRE tools (matches pnpm's release assets,
+	* `pnpm-<os>-<arch>[-<libc>].{tar.gz,zip}`). Tool-specific resolvers that need
+	* a different vocabulary own their own helper — see `getPythonArch` for
+	* python-build-standalone and `getJreArch` for Adoptium.
+	*/
+	function getTarget() {
+		if (memoizedTarget === void 0) {
+			const libcSuffix = getLibc() === "musl" ? "-musl" : "";
+			memoizedTarget = `${getOs()}-${getArch()}${libcSuffix}`;
+		}
+		return memoizedTarget;
+	}
+	const DARWIN = getOs() === "darwin";
+	const WIN32 = getOs() === "win32";
+	/**
+	* Returns whether the current platform is macOS. Callable predicate backed
+	* by the module-load memo, so tests can mock the module.
+	*
+	* @returns `true` on darwin, `false` otherwise
+	*/
+	function isDarwin() {
+		return DARWIN;
+	}
+	/**
+	* Returns whether the current platform is POSIX (anything but Windows).
+	* Callable predicate backed by the module-load memo, so tests can mock the
+	* module.
+	*
+	* @returns `true` on darwin/linux, `false` on win32
+	*/
+	function isPosix() {
+		return !WIN32;
+	}
+	/**
+	* Returns whether the current platform is Windows. Callable predicate backed
+	* by the module-load memo, so tests can mock the module.
+	*
+	* @returns `true` on win32, `false` otherwise
+	*/
+	function isWin32() {
+		return WIN32;
+	}
+	/**
+	* True when this process was launched as a Chrome or Chromium native
+	* messaging host. Chrome passes the extension origin URL
+	* (`chrome-extension://<id>/`) as `process.argv[2]`; no other invocation shape
+	* produces that prefix.
+	*/
+	const NATIVE_MESSAGING_HOST = typeof process !== "undefined" && typeof process.argv[2] === "string" && process.argv[2].startsWith("chrome-extension://");
+	const S_IXUSR = 64;
+	const S_IXGRP = 8;
+	const S_IXOTH = 1;
+	exports.NATIVE_MESSAGING_HOST = NATIVE_MESSAGING_HOST;
+	exports.S_IXGRP = S_IXGRP;
+	exports.S_IXOTH = S_IXOTH;
+	exports.S_IXUSR = S_IXUSR;
+	exports.getArch = getArch;
+	exports.getLibc = getLibc;
+	exports.getOs = getOs;
+	exports.getTarget = getTarget;
+	exports.isDarwin = isDarwin;
+	exports.isPosix = isPosix;
+	exports.isWin32 = isWin32;
+}));
+
+var require_module$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_constants_runtime = require_runtime$1();
+	let module$1 = __require("module");
+	/**
+	* @file Accessors for `node:module` that work across runtimes. Ambient
+	*   `require` is bound in CommonJS but unbound in ESM and inside
+	*   ahead-of-time-compiled package modules (e.g. Perry), where reading it
+	*   throws. And Perry's `require('module')` value omits `isBuiltin`. So instead
+	*   of the ambient `require('module')` lazy-loader, `isBuiltin`/`createRequire`
+	*   are imported as named values from the bare `module` specifier — which
+	*   resolves on Node and Perry, and which browser bundlers can stub via
+	*   resolve.fallback (a `node:` prefix would throw UnhandledSchemeError
+	*   there).
+	*   `require` is DIRECTORY-SPECIFIC: `createRequire(base)` resolves relative
+	*   specifiers (`./x`, `../y`) from `base`'s directory. For builtins and bare
+	*   packages that's irrelevant since they resolve the same anywhere, so the
+	*   cached `getRequire` / `requireBuiltin` bind to THIS file. A RELATIVE
+	*   specifier must resolve from the CALLER's directory, so use `requireFrom`
+	*   with the caller's `import.meta.url` — binding such a load to this file
+	*   would resolve it against `src/node/` instead. Bundled, every module
+	*   collapses to one base and either works; unbundled (e.g. AOT-compiled from
+	*   source), each module sits at its own nested path and the base matters.
+	*/
+	let cachedModule;
+	let cachedRequire;
+	/**
+	* Bind a working `require`. Ambient `require` exists in CommonJS; in ESM and
+	* ahead-of-time-compiled package modules it is unbound (reading it throws or
+	* yields undefined), so fall back to `createRequire`. Returns undefined off
+	* Node and in browsers, where neither is available.
+	*
+	* `fromUrl` sets the resolution base — pass a caller's `import.meta.url` to
+	* resolve that caller's RELATIVE specifiers. When omitted, the base is this
+	* file, which is correct only for builtins / bare packages (dir-independent).
+	* With `fromUrl` the ambient `require` is skipped: it is bound to THIS file, so
+	* it would resolve a relative specifier from the wrong directory.
+	*/
+	function bindRequire(fromUrl) {
+		if (!require_constants_runtime.IS_NODE) return;
+		if (!fromUrl && typeof __require === "function") return __require;
+		if (typeof module$1.createRequire === "function") try {
+			return (0, module$1.createRequire)(fromUrl ?? __require("url").pathToFileURL(__filename).href);
+		} catch {
+			return;
+		}
+	}
+	/**
+	* Returns `node:module` loaded through the bound `require`, or undefined off
+	* Node. Cached across calls.
+	*/
+	function getNodeModule() {
+		return cachedModule ??= requireBuiltin("module");
+	}
+	/**
+	* Returns a working `require` bound to THIS file, binding one on first call
+	* (see bindRequire). Cached across calls; undefined off Node / in browsers.
+	*
+	* For builtins and bare packages only — the resolution base is this file, so a
+	* relative specifier would resolve from `src/node/`. Use `requireFrom` for
+	* relative loads.
+	*/
+	function getRequire() {
+		if (cachedRequire === void 0) cachedRequire = bindRequire();
+		return cachedRequire;
+	}
+	/**
+	* Is `name` a Node built-in module? Resolved from the statically-imported
+	* `isBuiltin`, so it works on Node and on ahead-of-time-compiled binaries
+	* (Perry), where ambient `require('module')` would lack `isBuiltin`. Returns
+	* false in browsers, where the bare `module` import is stubbed away.
+	*
+	* Single source of truth for "is this a Node builtin?" probes across socket-lib
+	* (used by the smol-binding loaders to gate their `node:smol-*` loads).
+	*/
+	function isNodeBuiltin(name) {
+		if (!require_constants_runtime.IS_NODE || typeof module$1.isBuiltin !== "function") return false;
+		return (0, module$1.isBuiltin)(name);
+	}
+	/**
+	* Load a built-in module by *computed* specifier through the bound `require`
+	* (see getRequire). The specifier is a parameter — never a literal at the call
+	* site — so browser bundlers neither walk nor bundle it. Returns undefined
+	* where no `require` can be bound.
+	*
+	* Builtins / bare packages only (dir-independent); for a relative specifier use
+	* `requireFrom`. Used by `getNodeModule` for `node:module`, and by the
+	* smol-binding loaders for the optional `node:smol-*` native bindings (gated
+	* behind `isNodeBuiltin`, true only on socket-btm's smol Node binary).
+	*/
+	function requireBuiltin(specifier) {
+		const req = getRequire();
+		if (req) return req(specifier);
+	}
+	/**
+	* Load a module by specifier from a CALLER-supplied base (its
+	* `import.meta.url`). Use this for RELATIVE specifiers (`./x`, `../y`), whose
+	* resolution depends on the caller's directory — `requireBuiltin` binds to this
+	* file and would resolve them from `src/node/`. Not cached: the binding is
+	* per-caller. Returns undefined where no `require` can be bound.
+	*/
+	function requireFrom(fromUrl, specifier) {
+		const req = bindRequire(fromUrl);
+		if (req) return req(specifier);
+	}
+	exports.bindRequire = bindRequire;
+	exports.getNodeModule = getNodeModule;
+	exports.getRequire = getRequire;
+	exports.isNodeBuiltin = isNodeBuiltin;
+	exports.requireBuiltin = requireBuiltin;
+	exports.requireFrom = requireFrom;
+}));
+
+var require_detect$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_node_module = require_module$1();
+	/**
+	* @file Smol detection + lazy-loader for `node:smol-util`. Two
+	*   responsibilities:
+	*
+	*   1. `isSmol()` — memoized boolean detector for socket-btm's smol Node binary.
+	*      Mirrors `isSeaBinary()` from `src/sea.ts`. Probes via
+	*      `node:module.isBuiltin('node:smol-util')` since only the smol binary
+	*      registers any `node:smol-*` builtins.
+	*   2. `getSmolUtil()` — lazy-loader for the `node:smol-util` binding, which
+	*      provides native `uncurryThis` and `applyBind` (single V8 dispatch via
+	*      `args.Data()` + `v8::Function::Call`, skipping the BoundFunction
+	*      adapter
+	*
+	*   - `Function.prototype.call` trampoline that the JS form `bind.bind(call)(fn)`
+	*     hits twice per invocation). ~2x faster on hot uncurried-call sites.
+	*     `getSmolUtil()` returns `undefined` on stock Node
+	*   - non-Node runtimes. Result is cached across calls; the lazy-loader follows
+	*     the same shape as `src/node/fs.ts` etc.
+	*
+	* @see https://github.com/SocketDev/socket-btm — socket-btm builds
+	*   the smol binary that exposes the `node:smol-util` binding.
+	*/
+	/**
+	* Cached smol-binary detection result.
+	*/
+	let isSmolCache;
+	/**
+	* Cached `node:smol-util` binding. `null` = probed and unavailable; `undefined`
+	* = not yet probed. JS truthiness collapses both to "no binding" at the call
+	* site.
+	*/
+	let smolUtilCache;
+	let smolUtilProbed = false;
+	/**
+	* Returns `node:smol-util` when running on the smol Node binary, otherwise
+	* `undefined`. Result is cached across calls.
+	*/
+	function getSmolUtil() {
+		if (!smolUtilProbed) {
+			smolUtilProbed = true;
+			/* c8 ignore start - smol Node binary only. */
+			if (require_node_module.isNodeBuiltin("node:smol-util")) smolUtilCache = require_node_module.requireBuiltin("node:smol-util");
+		}
+		return smolUtilCache;
+	}
+	/**
+	* Detect if the current process is running on socket-btm's smol Node binary.
+	* Memoized on first call.
+	*
+	* Defensive across runtimes: returns `false` on stock Node, browsers (no
+	* `node:module`), Deno and Bun, whose module resolution differs, and worker
+	* threads, each of which has its own builtin table.
+	*
+	* @example
+	*   ;```ts
+	*   import { isSmol } from '@socketsecurity/lib/exe/smol/detect'
+	*
+	*   if (isSmol()) {
+	*     // running on the smol binary; native fast paths available
+	*   }
+	*   ```
+	*/
+	function isSmol() {
+		if (isSmolCache === void 0) isSmolCache = require_node_module.isNodeBuiltin("node:smol-util");
+		return isSmolCache;
+	}
+	exports.getSmolUtil = getSmolUtil;
+	exports.isSmol = isSmol;
+}));
+
+var require_uncurry$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	/**
+	* @file `uncurryThis` and the cluster of helpers built atop it. Mirrors
+	*   Node.js's internal/per_context/primordials.js. Every other primordials leaf
+	*   depends on `uncurryThis` to expose prototype-method primordials, so this
+	*   file must be import-safe before any of them. Smol fast paths
+	*   (`node:smol-util`) replace the JS forms when running on socket-btm's smol
+	*   Node binary; stock Node and other runtimes fall back to the standard
+	*   `bind.bind(call)` shape. **IMPORTANT**: do not destructure on `globalThis`
+	*   or `Reflect` here. tsgo has a bug that mis-transpiles destructured exports.
+	*   See: https://github.com/SocketDev/socket-packageurl-js/issues/3.
+	*/
+	const smolUtil = require_detect$1().getSmolUtil();
+	const { apply, bind, call } = Function.prototype;
+	const uncurryThis = smolUtil?.uncurryThis ?? bind.bind(call);
+	const applyBind = smolUtil?.applyBind ?? bind.bind(apply);
+	const applyBoundForSafe = applyBind;
+	const applySafe = smolUtil?.applySafe ?? ((fn) => {
+		const apply2 = applyBoundForSafe(fn);
+		return (self, args) => {
+			try {
+				return apply2(self, args);
+			} catch {
+				return;
+			}
+		};
+	});
+	const bindCallFallback = ((fn, thisArg, ...presetArgs) => Function.prototype.bind.apply(fn, [thisArg, ...presetArgs]));
+	const bindCall = smolUtil?.bindCall ?? bindCallFallback;
+	const weakRefSafe = smolUtil?.weakRefSafe ?? ((target) => {
+		try {
+			return new WeakRef(target);
+		} catch {
+			return;
+		}
+	});
+	exports.applyBind = applyBind;
+	exports.applySafe = applySafe;
+	exports.bindCall = bindCall;
+	exports.uncurryThis = uncurryThis;
+	exports.weakRefSafe = weakRefSafe;
+}));
+
+var require_primordial$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_node_module = require_module$1();
+	/**
+	* @file Lazy-loader for socket-btm's `node:smol-primordial` binding.
+	*   `node:smol-primordial` provides V8 Fast API typed implementations of Math.*
+	*   and Number.is* primordials, registered with `CFunction::Make()` so TurboFan
+	*   inlines them directly into JIT- compiled JS callers. Bypasses the
+	*   FunctionCallbackInfo trampoline entirely — ~30-50% gain on hot loops where
+	*   V8 doesn't already auto-inline. Returns `undefined` on stock Node +
+	*   non-Node runtimes. Result is cached across calls.
+	*
+	* @internal — used by `src/primordials.ts` to resolve smol-aware
+	*   Math.* / Number.is* fast paths. Most callers should use the
+	*   standard `primordials` exports, which already route through this
+	*   when smol is present.
+	*
+	* @see https://v8.dev/blog/v8-release-99 — V8 Fast API Calls overview
+	*/
+	let smolPrimordial;
+	let smolPrimordialProbed = false;
+	/**
+	* Returns `node:smol-primordial` when running on the smol Node binary,
+	* otherwise `undefined`. Result is cached across calls.
+	*/
+	function getSmolPrimordial() {
+		if (!smolPrimordialProbed) {
+			smolPrimordialProbed = true;
+			/* c8 ignore start - smol Node binary only. */
+			if (require_node_module.isNodeBuiltin("node:smol-primordial")) smolPrimordial = require_node_module.requireBuiltin("node:smol-primordial");
+		}
+		return smolPrimordial;
+	}
+	exports.getSmolPrimordial = getSmolPrimordial;
+}));
+
+var require_string$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_primordials_uncurry = require_uncurry$1();
+	/**
+	* @file Safe references to `String` static methods and prototype methods.
+	*   `StringPrototypeCharCodeAt` prefers the smol Fast API binding for ASCII
+	*   inputs, which reduces to a single byte load, and translates the `-1` Fast
+	*   API sentinel back to `NaN` to preserve spec parity. Two-byte strings fall
+	*   back to the uncurried `String.prototype.charCodeAt`.
+	*
+	*   ## Fast API surface — and why it's small
+	*
+	*   Mirrors the design rationale from socket-btm's `primordial_binding.cc`
+	*   (lines 41-72). The smol Fast API exposes exactly one string op
+	*   (`stringCharCodeAt`) because that's the one shape where the C++ trampoline
+	*   genuinely beats V8's existing hot path: a single ASCII byte load, no
+	*   encoding dispatch, no HandleScope, returns a primitive. String **searches**
+	*   (`startsWith` / `endsWith` / `includes` / `indexOf` / `lastIndexOf`) are
+	*   intentionally NOT exposed. V8's existing hot path dispatches on encoding
+	*   and runs native SIMD memcmp — a Fast API binding would add overhead without
+	*   winning. Same for `Map.has` / `Set.has` / `Array.includes`. Fast API also
+	*   has a hard constraint: a fast-path function cannot return a new V8 object —
+	*   only primitives, Local<Value/Object/Array>, or FastOneByteString. That
+	*   rules out anything that produces a new string (`slice`, `substring`,
+	*   `toUpperCase`, `concat`, `repeat`, `padStart`/`padEnd`, formatted-number)
+	*   from ever being a Fast API win on the return path. Net: the current surface
+	*   is approximately the ceiling. Adding more Fast API string ops without a
+	*   flamegraph showing the cost is a regression risk, not a perf win. See
+	*   `socket-btm/packages/node-smol-builder/additions/source-patched/`
+	*   `src/socketsecurity/primordial/primordial_binding.cc:41-72` for the
+	*   canonical design statement.
+	*/
+	const smolPrimordial = require_primordial$1().getSmolPrimordial();
+	const StringCtor = String;
+	const StringFromCharCode = String.fromCharCode;
+	const StringFromCodePoint = String.fromCodePoint;
+	const StringRaw = String.raw;
+	const StringPrototypeAt = require_primordials_uncurry.uncurryThis(String.prototype.at);
+	const StringPrototypeCharAt = require_primordials_uncurry.uncurryThis(String.prototype.charAt);
+	const smolCharCodeAt = smolPrimordial?.stringCharCodeAt;
+	/* c8 ignore start - the smol Fast API binding ships only on socket-btm's smol Node binary, so this body cannot run under the stock-Node runner */
+	function smolStringCharCodeAt(s, i) {
+		const code = smolCharCodeAt(s, i);
+		return code === -1 ? NaN : code;
+	}
+	/* c8 ignore stop */
+	const StringPrototypeCharCodeAt = smolCharCodeAt ? smolStringCharCodeAt : require_primordials_uncurry.uncurryThis(String.prototype.charCodeAt);
+	const StringPrototypeCodePointAt = require_primordials_uncurry.uncurryThis(String.prototype.codePointAt);
+	const StringPrototypeConcat = require_primordials_uncurry.uncurryThis(String.prototype.concat);
+	const StringPrototypeEndsWith = require_primordials_uncurry.uncurryThis(String.prototype.endsWith);
+	const StringPrototypeIncludes = require_primordials_uncurry.uncurryThis(String.prototype.includes);
+	const StringPrototypeIndexOf = require_primordials_uncurry.uncurryThis(String.prototype.indexOf);
+	const StringPrototypeIsWellFormed = smolPrimordial?.stringIsWellFormed ?? require_primordials_uncurry.uncurryThis(String.prototype.isWellFormed);
+	const StringPrototypeLastIndexOf = require_primordials_uncurry.uncurryThis(String.prototype.lastIndexOf);
+	const StringPrototypeLocaleCompare = require_primordials_uncurry.uncurryThis(String.prototype.localeCompare);
+	const StringPrototypeMatch = require_primordials_uncurry.uncurryThis(String.prototype.match);
+	const StringPrototypeMatchAll = require_primordials_uncurry.uncurryThis(String.prototype.matchAll);
+	const StringPrototypeNormalize = require_primordials_uncurry.uncurryThis(String.prototype.normalize);
+	const StringPrototypePadEnd = require_primordials_uncurry.uncurryThis(String.prototype.padEnd);
+	const StringPrototypePadStart = require_primordials_uncurry.uncurryThis(String.prototype.padStart);
+	const StringPrototypeRepeat = require_primordials_uncurry.uncurryThis(String.prototype.repeat);
+	const StringPrototypeReplace = require_primordials_uncurry.uncurryThis(String.prototype.replace);
+	const StringPrototypeReplaceAll = require_primordials_uncurry.uncurryThis(String.prototype.replaceAll);
+	const StringPrototypeSearch = require_primordials_uncurry.uncurryThis(String.prototype.search);
+	const StringPrototypeSlice = require_primordials_uncurry.uncurryThis(String.prototype.slice);
+	const StringPrototypeSplit = require_primordials_uncurry.uncurryThis(String.prototype.split);
+	const StringPrototypeStartsWith = require_primordials_uncurry.uncurryThis(String.prototype.startsWith);
+	const StringPrototypeSubstring = require_primordials_uncurry.uncurryThis(String.prototype.substring);
+	const StringPrototypeToLocaleLowerCase = require_primordials_uncurry.uncurryThis(String.prototype.toLocaleLowerCase);
+	const StringPrototypeToLocaleUpperCase = require_primordials_uncurry.uncurryThis(String.prototype.toLocaleUpperCase);
+	const StringPrototypeToLowerCase = require_primordials_uncurry.uncurryThis(String.prototype.toLowerCase);
+	const StringPrototypeToString = require_primordials_uncurry.uncurryThis(String.prototype.toString);
+	const StringPrototypeToUpperCase = require_primordials_uncurry.uncurryThis(String.prototype.toUpperCase);
+	const StringPrototypeToWellFormed = require_primordials_uncurry.uncurryThis(String.prototype.toWellFormed);
+	const StringPrototypeTrim = require_primordials_uncurry.uncurryThis(String.prototype.trim);
+	const StringPrototypeTrimEnd = require_primordials_uncurry.uncurryThis(String.prototype.trimEnd);
+	const StringPrototypeTrimStart = require_primordials_uncurry.uncurryThis(String.prototype.trimStart);
+	const StringPrototypeValueOf = require_primordials_uncurry.uncurryThis(String.prototype.valueOf);
+	exports.StringCtor = StringCtor;
+	exports.StringFromCharCode = StringFromCharCode;
+	exports.StringFromCodePoint = StringFromCodePoint;
+	exports.StringPrototypeAt = StringPrototypeAt;
+	exports.StringPrototypeCharAt = StringPrototypeCharAt;
+	exports.StringPrototypeCharCodeAt = StringPrototypeCharCodeAt;
+	exports.StringPrototypeCodePointAt = StringPrototypeCodePointAt;
+	exports.StringPrototypeConcat = StringPrototypeConcat;
+	exports.StringPrototypeEndsWith = StringPrototypeEndsWith;
+	exports.StringPrototypeIncludes = StringPrototypeIncludes;
+	exports.StringPrototypeIndexOf = StringPrototypeIndexOf;
+	exports.StringPrototypeIsWellFormed = StringPrototypeIsWellFormed;
+	exports.StringPrototypeLastIndexOf = StringPrototypeLastIndexOf;
+	exports.StringPrototypeLocaleCompare = StringPrototypeLocaleCompare;
+	exports.StringPrototypeMatch = StringPrototypeMatch;
+	exports.StringPrototypeMatchAll = StringPrototypeMatchAll;
+	exports.StringPrototypeNormalize = StringPrototypeNormalize;
+	exports.StringPrototypePadEnd = StringPrototypePadEnd;
+	exports.StringPrototypePadStart = StringPrototypePadStart;
+	exports.StringPrototypeRepeat = StringPrototypeRepeat;
+	exports.StringPrototypeReplace = StringPrototypeReplace;
+	exports.StringPrototypeReplaceAll = StringPrototypeReplaceAll;
+	exports.StringPrototypeSearch = StringPrototypeSearch;
+	exports.StringPrototypeSlice = StringPrototypeSlice;
+	exports.StringPrototypeSplit = StringPrototypeSplit;
+	exports.StringPrototypeStartsWith = StringPrototypeStartsWith;
+	exports.StringPrototypeSubstring = StringPrototypeSubstring;
+	exports.StringPrototypeToLocaleLowerCase = StringPrototypeToLocaleLowerCase;
+	exports.StringPrototypeToLocaleUpperCase = StringPrototypeToLocaleUpperCase;
+	exports.StringPrototypeToLowerCase = StringPrototypeToLowerCase;
+	exports.StringPrototypeToString = StringPrototypeToString;
+	exports.StringPrototypeToUpperCase = StringPrototypeToUpperCase;
+	exports.StringPrototypeToWellFormed = StringPrototypeToWellFormed;
+	exports.StringPrototypeTrim = StringPrototypeTrim;
+	exports.StringPrototypeTrimEnd = StringPrototypeTrimEnd;
+	exports.StringPrototypeTrimStart = StringPrototypeTrimStart;
+	exports.StringPrototypeValueOf = StringPrototypeValueOf;
+	exports.StringRaw = StringRaw;
+	exports.smolStringCharCodeAt = smolStringCharCodeAt;
+}));
+
+var require_url$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_constants_runtime = require_runtime$1();
+	let cachedUrl;
+	/**
+	* @unused No internal or Socket consumers; exercised only by its unit tests.
+	*/
+	function getNodeUrl() {
+		if (!require_constants_runtime.IS_NODE) return;
+		return cachedUrl ??= /*@__PURE__*/ __require("url");
+	}
+	exports.getNodeUrl = getNodeUrl;
+}));
+
+var require_buffer$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_primordials_uncurry = require_uncurry$1();
+	/**
+	* @file Safe references to Node's `Buffer` global. `Buffer` is a Node-only
+	*   global; in browsers and in Deno without a compatibility shim the captured
+	*   references are `undefined`. Cross- env consumers must null-check before
+	*   calling.
+	*/
+	const BufferCtor = globalThis.Buffer;
+	const BufferAlloc = BufferCtor?.alloc;
+	const BufferAllocUnsafe = BufferCtor?.allocUnsafe;
+	const BufferAllocUnsafeSlow = BufferCtor?.allocUnsafeSlow;
+	const BufferByteLength = BufferCtor?.byteLength;
+	const BufferConcat = BufferCtor?.concat;
+	const BufferFrom = BufferCtor?.from;
+	const BufferIsBuffer = BufferCtor?.isBuffer;
+	const BufferIsEncoding = BufferCtor?.isEncoding;
+	/* c8 ignore start */
+	const BufferPrototypeSlice = BufferCtor ? require_primordials_uncurry.uncurryThis(BufferCtor.prototype.slice) : void 0;
+	const BufferPrototypeToString = BufferCtor ? require_primordials_uncurry.uncurryThis(BufferCtor.prototype.toString) : void 0;
+	/* c8 ignore stop */
+	exports.BufferAlloc = BufferAlloc;
+	exports.BufferAllocUnsafe = BufferAllocUnsafe;
+	exports.BufferAllocUnsafeSlow = BufferAllocUnsafeSlow;
+	exports.BufferByteLength = BufferByteLength;
+	exports.BufferConcat = BufferConcat;
+	exports.BufferCtor = BufferCtor;
+	exports.BufferFrom = BufferFrom;
+	exports.BufferIsBuffer = BufferIsBuffer;
+	exports.BufferIsEncoding = BufferIsEncoding;
+	exports.BufferPrototypeSlice = BufferPrototypeSlice;
+	exports.BufferPrototypeToString = BufferPrototypeToString;
+}));
+
+var require_encoding = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	/**
+	* @file Character encoding and character code constants. Exports the default
+	*   UTF-8 encoding name and numeric char codes for common ASCII characters used
+	*   by path and parsing utilities.
+	*/
+	const UTF8 = "utf8";
+	const CHAR_BACKWARD_SLASH = 92;
+	const CHAR_COLON = 58;
+	const CHAR_FORWARD_SLASH = 47;
+	const CHAR_LOWERCASE_A = 97;
+	const CHAR_LOWERCASE_Z = 122;
+	const CHAR_UPPERCASE_A = 65;
+	const CHAR_UPPERCASE_Z = 90;
+	exports.CHAR_BACKWARD_SLASH = CHAR_BACKWARD_SLASH;
+	exports.CHAR_COLON = CHAR_COLON;
+	exports.CHAR_FORWARD_SLASH = CHAR_FORWARD_SLASH;
+	exports.CHAR_LOWERCASE_A = CHAR_LOWERCASE_A;
+	exports.CHAR_LOWERCASE_Z = CHAR_LOWERCASE_Z;
+	exports.CHAR_UPPERCASE_A = CHAR_UPPERCASE_A;
+	exports.CHAR_UPPERCASE_Z = CHAR_UPPERCASE_Z;
+	exports.UTF8 = UTF8;
+}));
+
+var require_shared = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_constants_platform = require_platform();
+	const require_primordials_string = require_string$1();
+	const require_node_url = require_url$1();
+	const require_primordials_buffer = require_buffer$1();
+	const require_constants_encoding = require_encoding();
+	/**
+	* @file Shared internals for the `paths/` module — the leaf-level primitives
+	*   every other path leaf depends on. Kept as a single file so `normalize`,
+	*   `predicates`, `conversion`, and `resolve` can layer above it without
+	*   circular imports.
+	*
+	*   - char-code constants + shared regexps
+	*   - `pathLikeToString` — `string | Buffer | URL` → `string`
+	*   - `normalizePath` and its `msysDriveToNative` / `foldPathForCompare` helpers
+	*     — they live at the leaf because `conversion` and `resolve` call
+	*     `normalizePath` and `predicates` calls `foldPathForCompare`. Hosting them
+	*     one layer up made `paths/normalize` import its own importers, and the
+	*     built CJS barrel then snapshotted those re-exports as `undefined`.
+	*     Nothing here may import a sibling `paths/*` leaf. That is the invariant
+	*     `scripts/repo/check/reexports-have-no-import-cycles.mts` enforces.
+	*/
+	const DRIVE_LETTER_REGEXP = /^[A-Za-z]:$/;
+	const msysDriveRegExp = /^\/([a-zA-Z])($|\/)/;
+	const nodeModulesPathRegExp = /(?:[/\\]|^)node_modules(?:$|[/\\])/;
+	const slashRegExp = /[/\\]/;
+	function appendNormalizedPathSegment(state, segment, prefix) {
+		if (segment.length === 0 || segment === ".") return;
+		if (segment === "..") collapsePathParent(state, prefix);
+		else {
+			state.collapsed += (state.collapsed.length === 0 ? "" : "/") + segment;
+			state.segmentCount += 1;
+		}
+	}
+	function collapsePathParent(state, prefix) {
+		if (state.segmentCount > 0) {
+			const lastSeparatorIndex = state.collapsed.lastIndexOf("/");
+			if (lastSeparatorIndex === -1) {
+				state.collapsed = "";
+				state.segmentCount = 0;
+				if (state.leadingDotDots > 0 && !prefix) {
+					state.collapsed = "..";
+					state.leadingDotDots = 1;
+				}
+			} else {
+				const lastSegmentStart = lastSeparatorIndex + 1;
+				if (state.collapsed.slice(lastSegmentStart) === "..") {
+					state.collapsed = `${state.collapsed}/..`;
+					state.leadingDotDots += 1;
+				} else {
+					state.collapsed = state.collapsed.slice(0, lastSeparatorIndex);
+					state.segmentCount -= 1;
+				}
+			}
+		} else if (!prefix) {
+			state.collapsed = state.collapsed + (state.collapsed.length === 0 ? "" : "/") + "..";
+			state.leadingDotDots += 1;
+		}
+	}
+	/**
+	* Normalize a path for equality comparison — forward slashes, no trailing
+	* separator, lowercased on Windows.
+	*
+	* @example
+	*   ;```typescript
+	*   foldPathForCompare('C:\\Program Files\\') // 'c:/program files'
+	*   ```
+	*/
+	function foldPathForCompare(pathLike) {
+		let normalized = normalizePath(pathLike);
+		if (normalized.length > 1 && normalized.endsWith("/")) normalized = normalized.slice(0, -1);
+		return require_constants_platform.isWin32() ? normalized.toLowerCase() : normalized;
+	}
+	function hasUncPathPrefix(filepath) {
+		const first = require_primordials_string.StringPrototypeCharCodeAt(filepath, 0);
+		return filepath.length > 2 && isPathSeparatorCode(first) && require_primordials_string.StringPrototypeCharCodeAt(filepath, 1) === first && require_primordials_string.StringPrototypeCharCodeAt(filepath, 2) !== first;
+	}
+	function hasUncPathShare(filepath) {
+		const serverEnd = indexOfPathSeparator(filepath, skipPathSeparators(filepath, 2));
+		return serverEnd > 2 && skipPathSeparators(filepath, serverEnd) < filepath.length;
+	}
+	/**
+	* Find the next path separator at or after an index.
+	*
+	* Scans char codes for `/` (47) and `\` (92) — the same two characters
+	* `slashRegExp` matches — and allocates nothing. Reaching the same answer
+	* through `search` costs a substring, an options bag, and a regex match per
+	* lookup, which a segment walk pays once per segment.
+	*
+	* @example
+	*   ;```typescript
+	*   indexOfPathSeparator('a/b', 0) // 1
+	*   indexOfPathSeparator('a/b', 2) // -1
+	*   indexOfPathSeparator('a\\b', 0) // 1
+	*   ```
+	*
+	* @param {string} filepath - The path to scan.
+	* @param {number} fromIndex - The index to start scanning at.
+	*
+	* @returns {number} The index of the first separator at or after `fromIndex`,
+	*   or -1 when there is none.
+	*/
+	function indexOfPathSeparator(filepath, fromIndex) {
+		const { length } = filepath;
+		for (let i = fromIndex; i < length; i += 1) {
+			const code = require_primordials_string.StringPrototypeCharCodeAt(filepath, i);
+			if (code === 47 || code === 92) return i;
+		}
+		return -1;
+	}
+	function isPathSeparatorCode(code) {
+		return code === 47 || code === 92;
+	}
+	function msysDriveToNative(normalized) {
+		/* c8 ignore start - Windows-only branch. */
+		if (require_constants_platform.isWin32()) return normalized.replace(msysDriveRegExp, (_, letter, sep) => `${letter.toUpperCase()}:${sep || "/"}`);
+		/* c8 ignore stop */
+		return normalized;
+	}
+	function normalizedPathPrefix(filepath) {
+		const namespaceKind = require_primordials_string.StringPrototypeCharCodeAt(filepath, 2);
+		if (filepath.length > 4 && require_primordials_string.StringPrototypeCharCodeAt(filepath, 3) === 92 && (namespaceKind === 63 || namespaceKind === 46) && require_primordials_string.StringPrototypeCharCodeAt(filepath, 0) === 92 && require_primordials_string.StringPrototypeCharCodeAt(filepath, 1) === 92) return {
+			__proto__: null,
+			prefix: "//",
+			start: 2
+		};
+		if (hasUncPathPrefix(filepath) && hasUncPathShare(filepath)) return {
+			__proto__: null,
+			prefix: "//",
+			start: 2
+		};
+		const start = skipPathSeparators(filepath, 0);
+		return {
+			__proto__: null,
+			prefix: start ? "/" : "",
+			start
+		};
+	}
+	/**
+	* Normalize a path by converting backslashes to forward slashes and collapsing
+	* segments.
+	*
+	* - Converts all backslashes (`\`) to forward slashes (`/`)
+	* - Collapses repeated slashes
+	* - Resolves `.` and `..` segments
+	* - Preserves UNC path prefixes (`//server/share`)
+	* - Preserves Windows namespace prefixes (`//./`, `//?/`)
+	* - Returns `.` for empty or collapsed paths
+	* - On Windows: MSYS drive letters `/c/path` become `C:/path`
+	*
+	* @example
+	*   ;```typescript
+	*   normalizePath('foo/bar//baz') // 'foo/bar/baz'
+	*   normalizePath('foo/./bar') // 'foo/bar'
+	*   normalizePath('foo/bar/../baz') // 'foo/baz'
+	*   normalizePath('C:\\Users\\u\\file.txt') // 'C:/Users/u/file.txt'
+	*   normalizePath('\\\\server\\share\\file') // '//server/share/file'
+	*   normalizePath('') // '.'
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to normalize.
+	*
+	* @returns {string} The normalized path
+	*
+	* @security
+	* **WARNING**: This function resolves `..` patterns as part of normalization, which means
+	* paths like `/../etc/passwd` become `/etc/passwd`. When processing untrusted user input
+	* (HTTP requests, file uploads, URL parameters), you MUST validate for path traversal
+	* attacks BEFORE calling this function.
+	*/
+	function normalizePath(pathLike) {
+		const filepath = pathLikeToString(pathLike);
+		const { length } = filepath;
+		if (length === 0) return ".";
+		if (length === 1) return require_primordials_string.StringPrototypeCharCodeAt(filepath, 0) === 92 ? "/" : filepath;
+		const initial = normalizedPathPrefix(filepath);
+		const { prefix } = initial;
+		let { start } = initial;
+		let nextIndex = indexOfPathSeparator(filepath, start);
+		if (nextIndex === -1) return normalizeSinglePathSegment(filepath.slice(start), prefix);
+		const state = {
+			collapsed: "",
+			segmentCount: 0,
+			leadingDotDots: 0
+		};
+		while (nextIndex !== -1) {
+			appendNormalizedPathSegment(state, filepath.slice(start, nextIndex), prefix);
+			start = skipPathSeparators(filepath, nextIndex + 1);
+			nextIndex = indexOfPathSeparator(filepath, start);
+		}
+		appendNormalizedPathSegment(state, filepath.slice(start), prefix);
+		const { collapsed } = state;
+		if (collapsed.length === 0) return prefix || ".";
+		if (DRIVE_LETTER_REGEXP.test(collapsed) && isPathSeparatorCode(require_primordials_string.StringPrototypeCharCodeAt(filepath, 2))) return msysDriveToNative(`${prefix}${collapsed}/`);
+		return msysDriveToNative(prefix + collapsed);
+	}
+	function normalizeSinglePathSegment(segment, prefix) {
+		if (segment === "." || segment.length === 0) return prefix || ".";
+		if (segment === "..") return prefix ? require_primordials_string.StringPrototypeSlice(prefix, 0, -1) || "/" : "..";
+		return msysDriveToNative(prefix + segment);
+	}
+	/**
+	* Convert a path-like value to a string.
+	*
+	* Converts various path-like types (string, Buffer, URL) into a normalized
+	* string representation. Handles different input formats and provides
+	* consistent string output for path operations.
+	*
+	* @example
+	*   ;```typescript
+	*   pathLikeToString('/home/user') // '/home/user'
+	*   pathLikeToString(Buffer.from('/tmp/file')) // '/tmp/file'
+	*   pathLikeToString(new URL('file:///home/user')) // '/home/user'
+	*   pathLikeToString(null) // ''
+	*   ```
+	*
+	* @param {string | Buffer | URL | null | undefined} pathLike - The value to
+	*   convert.
+	*
+	* @returns {string} The string representation, or empty string for
+	*   null/undefined.
+	*/
+	function pathLikeToString(pathLike) {
+		if (pathLike === null || pathLike === void 0) return "";
+		if (typeof pathLike === "string") return pathLike;
+		if (require_primordials_buffer.BufferIsBuffer(pathLike)) return pathLike.toString("utf8");
+		const url = require_node_url.getNodeUrl();
+		if (pathLike instanceof URL) try {
+			return url.fileURLToPath(pathLike);
+		} catch {
+			const pathname = pathLike.pathname;
+			const decodedPathname = decodeURIComponent(pathname);
+			/* c8 ignore start - Windows-only URL drive-letter handling. */
+			if (require_constants_platform.isWin32() && require_primordials_string.StringPrototypeStartsWith(decodedPathname, "/")) {
+				const letter = require_primordials_string.StringPrototypeCharCodeAt(decodedPathname, 1) | 32;
+				if (!(decodedPathname.length >= 3 && letter >= 97 && letter <= 122 && require_primordials_string.StringPrototypeCharAt(decodedPathname, 2) === ":")) return decodedPathname;
+			}
+			/* c8 ignore stop */
+			return decodedPathname;
+		}
+		return String(pathLike);
+	}
+	function skipPathSeparators(filepath, start) {
+		while (isPathSeparatorCode(require_primordials_string.StringPrototypeCharCodeAt(filepath, start))) start += 1;
+		return start;
+	}
+	exports.CHAR_BACKWARD_SLASH = require_constants_encoding.CHAR_BACKWARD_SLASH;
+	exports.CHAR_COLON = require_constants_encoding.CHAR_COLON;
+	exports.CHAR_FORWARD_SLASH = require_constants_encoding.CHAR_FORWARD_SLASH;
+	exports.CHAR_LOWERCASE_A = require_constants_encoding.CHAR_LOWERCASE_A;
+	exports.CHAR_LOWERCASE_Z = require_constants_encoding.CHAR_LOWERCASE_Z;
+	exports.CHAR_UPPERCASE_A = require_constants_encoding.CHAR_UPPERCASE_A;
+	exports.CHAR_UPPERCASE_Z = require_constants_encoding.CHAR_UPPERCASE_Z;
+	exports.appendNormalizedPathSegment = appendNormalizedPathSegment;
+	exports.collapsePathParent = collapsePathParent;
+	exports.foldPathForCompare = foldPathForCompare;
+	exports.hasUncPathPrefix = hasUncPathPrefix;
+	exports.hasUncPathShare = hasUncPathShare;
+	exports.indexOfPathSeparator = indexOfPathSeparator;
+	exports.isPathSeparatorCode = isPathSeparatorCode;
+	exports.msysDriveRegExp = msysDriveRegExp;
+	exports.msysDriveToNative = msysDriveToNative;
+	exports.nodeModulesPathRegExp = nodeModulesPathRegExp;
+	exports.normalizePath = normalizePath;
+	exports.normalizeSinglePathSegment = normalizeSinglePathSegment;
+	exports.normalizedPathPrefix = normalizedPathPrefix;
+	exports.pathLikeToString = pathLikeToString;
+	exports.skipPathSeparators = skipPathSeparators;
+	exports.slashRegExp = slashRegExp;
+}));
+
+var require_conversion = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_constants_platform = require_platform();
+	const require_primordials_string = require_string$1();
+	const require_paths_shared = require_shared();
+	/**
+	* @file Path conversion utilities — MSYS↔native bridging and string-shape
+	*   helpers. Split out of `paths/normalize.ts` for size hygiene.
+	*
+	*   - `fromUnixPath` / `toUnixPath` — MSYS↔native conversion
+	*   - `splitPath` — segment-array view of a path
+	*   - `trimLeadingDotSlash` — strip a single `./` / `.\` prefix
+	*/
+	/**
+	* Convert Unix-style POSIX paths to native Windows paths.
+	*
+	* This is the inverse of {@link toUnixPath}. On Windows, MSYS-style paths use
+	* `/c/` notation for drive letters and forward slashes, which PowerShell and
+	* cmd.exe cannot resolve. This function converts them to native Windows format
+	* with backslashes and proper drive letters.
+	*
+	* @example
+	*   ;```typescript
+	*   fromUnixPath('/c/projects/app/file.txt') // 'C:\\projects\\app\\file.txt' on Windows
+	*   fromUnixPath('/tmp/build/output') // '/tmp/build/output'
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The MSYS/Unix-style path to
+	*   convert.
+	*
+	* @returns {string} Native Windows path or normalized Unix path
+	*/
+	function fromUnixPath(pathLike) {
+		const normalized = require_paths_shared.normalizePath(pathLike);
+		/* c8 ignore start */
+		if (require_constants_platform.isWin32()) return normalized.replace(/\//g, "\\");
+		/* c8 ignore stop */
+		return normalized;
+	}
+	/**
+	* Split a path into an array of segments.
+	*
+	* Divides a path into individual components by splitting on both forward-slash
+	* and backslash path separators.
+	*
+	* @example
+	*   ;```typescript
+	*   splitPath('/workspace/example/file.txt') // ['', 'workspace', 'example', 'file.txt']
+	*   splitPath('C:\\Users\\John') // ['C:', 'Users', 'John']
+	*   splitPath('') // []
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to split.
+	*
+	* @returns {string[]} Array of path segments, or empty array for empty paths
+	*/
+	function splitPath(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		if (filepath === "") return [];
+		return filepath.split(require_paths_shared.slashRegExp);
+	}
+	/**
+	* Convert Windows paths to MSYS/Unix-style POSIX paths for Git Bash tools.
+	*
+	* Git for Windows and MSYS2 tools expect POSIX-style paths with forward slashes
+	* and Unix drive letter notation (`/c/` instead of `C:\`).
+	*
+	* This is the inverse of {@link fromUnixPath}.
+	*
+	* @example
+	*   ;```typescript
+	*   toUnixPath('C:\\path\\to\\file.txt') // '/c/path/to/file.txt' on Windows
+	*   toUnixPath('/workspace/example/file') // '/workspace/example/file'
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to convert.
+	*
+	* @returns {string} Unix-style POSIX path
+	*/
+	function toUnixPath(pathLike) {
+		const normalized = require_paths_shared.normalizePath(pathLike);
+		/* c8 ignore start */
+		if (require_constants_platform.isWin32()) return normalized.replace(/^([A-Z]):/i, (_, letter) => `/${letter.toLowerCase()}`);
+		/* c8 ignore stop */
+		return normalized;
+	}
+	/**
+	* Remove a leading `./` or `.\` prefix from a path.
+	*
+	* Only removes a single leading `./` or `.\`. Does not touch `../` prefixes.
+	*
+	* @example
+	*   ;```typescript
+	*   trimLeadingDotSlash('./src/index.js') // 'src/index.js'
+	*   trimLeadingDotSlash('../lib/util.js') // '../lib/util.js'
+	*   trimLeadingDotSlash('/absolute/path') // '/absolute/path'
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to process.
+	*
+	* @returns {string} The path without leading `./` / `.\`, or unchanged
+	*/
+	function trimLeadingDotSlash(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		if (require_primordials_string.StringPrototypeStartsWith(filepath, "./") || require_primordials_string.StringPrototypeStartsWith(filepath, ".\\")) return filepath.slice(2);
+		return filepath;
+	}
+	exports.fromUnixPath = fromUnixPath;
+	exports.splitPath = splitPath;
+	exports.toUnixPath = toUnixPath;
+	exports.trimLeadingDotSlash = trimLeadingDotSlash;
+}));
+
+var require_regexp$1 = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_primordials_uncurry = require_uncurry$1();
+	/**
+	* @file Safe references to `RegExp` and its prototype methods. `RegExp.escape`
+	*   is ES2025; the primordial is typed `Function | undefined` so older runtimes
+	*   still load. The Symbol-keyed `[Symbol.match]` / `[Symbol.replace]` slots
+	*   are exposed alongside the named methods because some callers use them via
+	*   dynamic dispatch (e.g. `String.prototype.match` invokes
+	*   `RegExp.prototype[Symbol.match]` internally).
+	*/
+	const RegExpCtor = RegExp;
+	const RegExpEscape = RegExp.escape;
+	const RegExpPrototypeExec = require_primordials_uncurry.uncurryThis(RegExp.prototype.exec);
+	const RegExpPrototypeTest = require_primordials_uncurry.uncurryThis(RegExp.prototype.test);
+	const RegExpPrototypeSymbolMatch = require_primordials_uncurry.uncurryThis(RegExp.prototype[Symbol.match]);
+	const RegExpPrototypeSymbolReplace = require_primordials_uncurry.uncurryThis(RegExp.prototype[Symbol.replace]);
+	exports.RegExpCtor = RegExpCtor;
+	exports.RegExpEscape = RegExpEscape;
+	exports.RegExpPrototypeExec = RegExpPrototypeExec;
+	exports.RegExpPrototypeSymbolMatch = RegExpPrototypeSymbolMatch;
+	exports.RegExpPrototypeSymbolReplace = RegExpPrototypeSymbolReplace;
+	exports.RegExpPrototypeTest = RegExpPrototypeTest;
+}));
+
+var require_predicates = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_constants_platform = require_platform();
+	const require_primordials_string = require_string$1();
+	require_encoding();
+	const require_paths_shared = require_shared();
+	const require_primordials_regexp = require_regexp$1();
+	/**
+	* @file Path predicates — `is*` checks for path shape and kind. Split out of
+	*   `paths/normalize.ts` for file-size hygiene. Pure boolean predicates over
+	*   paths and character codes.
+	*
+	*   - `isAbsolute`, `isRelative` — root-anchoring shape
+	*   - `isPath` — file-path vs package-spec vs URL discriminator
+	*   - `isNodeModules`, `isUnixPath` — content-pattern checks
+	*   - `isPathSeparator`, `isWindowsDeviceRoot` — char-code primitives
+	*   - `isPathWithinRoot` — realpath containment check
+	*/
+	/**
+	* Check if a path is absolute.
+	*
+	* Handles both POSIX (`/...`) and Windows (drive-letter, UNC, device) absolute
+	* path shapes.
+	*
+	* @example
+	*   ;```typescript
+	*   isAbsolute('/home/user') // true
+	*   isAbsolute('C:\\Windows') // true on Windows
+	*   isAbsolute('../relative') // false
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to check.
+	*
+	* @returns {boolean} `true` if absolute, `false` otherwise
+	*/
+	function isAbsolute(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		const { length } = filepath;
+		if (length === 0) return false;
+		const code = require_primordials_string.StringPrototypeCharCodeAt(filepath, 0);
+		if (code === 47) return true;
+		if (code === 92) return true;
+		/* c8 ignore start - Windows drive-letter detection. */
+		if (require_constants_platform.isWin32() && length > 2) {
+			if (isWindowsDeviceRoot(code) && require_primordials_string.StringPrototypeCharCodeAt(filepath, 1) === 58 && isPathSeparator(require_primordials_string.StringPrototypeCharCodeAt(filepath, 2))) return true;
+		}
+		/* c8 ignore stop */
+		return false;
+	}
+	/**
+	* Check if a path contains a `node_modules` directory segment.
+	*
+	* Matches `node_modules` only as a complete path segment.
+	*
+	* @example
+	*   ;```typescript
+	*   isNodeModules('/project/node_modules/package') // true
+	*   isNodeModules('/src/my_node_modules_backup') // false
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to check.
+	*
+	* @returns {boolean} `true` if the path contains `node_modules`
+	*/
+	function isNodeModules(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		return require_primordials_regexp.RegExpPrototypeTest(require_paths_shared.nodeModulesPathRegExp, filepath);
+	}
+	/**
+	* Check if a value is a valid absolute or relative file path.
+	*
+	* Distinguishes between file paths and other string formats like package names,
+	* URLs, or bare module specifiers.
+	*
+	* @example
+	*   ;```typescript
+	*   isPath('/absolute/path') // true
+	*   isPath('./relative/path') // true
+	*   isPath('@scope/name/subpath') // true
+	*   isPath('lodash') // false
+	*   isPath('http://example.com') // false
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The value to check.
+	*
+	* @returns {boolean} `true` if the value is a valid file path
+	*/
+	function isPath(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		if (typeof filepath !== "string" || filepath.length === 0) return false;
+		if (/^[a-z][a-z0-9+.-]+:/i.test(filepath)) return false;
+		if (filepath === "." || filepath === "..") return true;
+		if (isAbsolute(filepath)) return true;
+		if (filepath.includes("/") || filepath.includes("\\")) {
+			if (require_primordials_string.StringPrototypeStartsWith(filepath, "@") && !require_primordials_string.StringPrototypeStartsWith(filepath, "@/")) {
+				const parts = filepath.split("/");
+				if (parts.length <= 2 && !parts[1]?.includes("\\")) return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	/**
+	* Check if a character code is a path separator (`/` or `\`).
+	*
+	* @example
+	*   ;```typescript
+	*   isPathSeparator(47) // true — '/'
+	*   isPathSeparator(92) // true — '\'
+	*   isPathSeparator(65) // false — 'A'
+	*   ```
+	*
+	* @param {number} code - The character code to check.
+	*
+	* @returns {boolean} `true` if separator
+	*/
+	function isPathSeparator(code) {
+		return code === 47 || code === 92;
+	}
+	/**
+	* Report whether a path sits at or under a root. Both sides must already be
+	* realpath'd.
+	*
+	* @example
+	*   ;```typescript
+	*   isPathWithinRoot('/repo/bin/git', '/repo') // true
+	*   isPathWithinRoot('/usr/bin/git', '/repo') // false
+	*   ```
+	*/
+	function isPathWithinRoot(candidate, root) {
+		const left = require_paths_shared.foldPathForCompare(candidate);
+		const right = require_paths_shared.foldPathForCompare(root);
+		return left === right || left.startsWith(`${right}/`);
+	}
+	/**
+	* Check if a path is relative (i.e., not absolute).
+	*
+	* Empty strings are treated as relative.
+	*
+	* @example
+	*   ;```typescript
+	*   isRelative('./src/index.js') // true
+	*   isRelative('src/file.js') // true
+	*   isRelative('/home/user') // false
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to check.
+	*
+	* @returns {boolean} `true` if the path is relative
+	*/
+	function isRelative(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		/* c8 ignore start */
+		if (typeof filepath !== "string") return false;
+		/* c8 ignore stop */
+		if (filepath.length === 0) return true;
+		return !isAbsolute(filepath);
+	}
+	/**
+	* Check if a value is wrapped in path separators on BOTH ends — the
+	* `/wrapped/` sigil some list formats use to mark a substring (not exact)
+	* entry. Either separator direction counts on either end, so a stray
+	* backslash-wrapped entry is still read as the sigil rather than silently
+	* treated as an exact path.
+	*
+	* @example
+	*   ;```typescript
+	*   isSeparatorWrapped('/rendering-chromium-to-png/') // true
+	*   isSeparatorWrapped('\\rendering-chromium-to-png\\') // true
+	*   isSeparatorWrapped('scripts/fleet/acquire.mts') // false
+	*   isSeparatorWrapped('//') // false
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The value to check.
+	*
+	* @returns {boolean} `true` if both ends are path separators with content
+	*   between.
+	*/
+	function isSeparatorWrapped(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		const { length } = filepath;
+		if (length < 3) return false;
+		return isPathSeparator(require_primordials_string.StringPrototypeCharCodeAt(filepath, 0)) && isPathSeparator(require_primordials_string.StringPrototypeCharCodeAt(filepath, length - 1));
+	}
+	/**
+	* Check if a path uses MSYS/Git Bash Unix-style drive letter notation.
+	*
+	* Detects paths in the format `/c/...` where a single letter after the leading
+	* slash represents a Windows drive letter.
+	*
+	* @example
+	*   ;```typescript
+	*   isUnixPath('/c/tools/bin') // true
+	*   isUnixPath('/tmp/build') // false
+	*   isUnixPath('C:/Windows') // false
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The path to check.
+	*
+	* @returns {boolean} `true` if the path uses MSYS drive letter notation
+	*/
+	function isUnixPath(pathLike) {
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		return typeof filepath === "string" && require_primordials_regexp.RegExpPrototypeTest(require_paths_shared.msysDriveRegExp, filepath);
+	}
+	/**
+	* Check if a character code is a Windows device root letter (A-Z / a-z).
+	*
+	* @example
+	*   ;```typescript
+	*   isWindowsDeviceRoot(67) // true  — 'C'
+	*   isWindowsDeviceRoot(99) // true  — 'c'
+	*   isWindowsDeviceRoot(58) // false — ':'
+	*   ```
+	*
+	* @param {number} code - The character code to check.
+	*
+	* @returns {boolean} `true` if valid drive-letter code
+	*/
+	/* c8 ignore start - Only called from Windows-only branches. */
+	function isWindowsDeviceRoot(code) {
+		return code >= 65 && code <= 90 || code >= 97 && code <= 122;
+	}
+	/* c8 ignore stop */
+	/**
+	* The forward-slash substring form of a separator-wrapped entry, or
+	* undefined when the value is not wrapped. The inner segment's backslashes
+	* become forward slashes so the needle matches against normalized paths.
+	*
+	* @example
+	*   ;```typescript
+	*   separatorWrappedSubstring('/rendering-chromium-to-png/') // '/rendering-chromium-to-png/'
+	*   separatorWrappedSubstring('\\rendering-chromium-to-png\\') // '/rendering-chromium-to-png/'
+	*   separatorWrappedSubstring('scripts/fleet/acquire.mts') // undefined
+	*   ```
+	*
+	* @param {string | Buffer | URL} pathLike - The value to convert.
+	*
+	* @returns {string | undefined} The `/inner/` substring form, or undefined
+	*/
+	function separatorWrappedSubstring(pathLike) {
+		if (!isSeparatorWrapped(pathLike)) return;
+		const filepath = require_paths_shared.pathLikeToString(pathLike);
+		return `/${require_paths_shared.normalizePath(require_primordials_string.StringPrototypeSlice(filepath, 1, -1))}/`;
+	}
+	exports.isAbsolute = isAbsolute;
+	exports.isNodeModules = isNodeModules;
+	exports.isPath = isPath;
+	exports.isPathSeparator = isPathSeparator;
+	exports.isPathWithinRoot = isPathWithinRoot;
+	exports.isRelative = isRelative;
+	exports.isSeparatorWrapped = isSeparatorWrapped;
+	exports.isUnixPath = isUnixPath;
+	exports.isWindowsDeviceRoot = isWindowsDeviceRoot;
+	exports.separatorWrappedSubstring = separatorWrappedSubstring;
+}));
+
+var require_resolve = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_constants_platform = require_platform();
+	const require_primordials_string = require_string$1();
+	require_encoding();
+	const require_paths_shared = require_shared();
+	const require_paths_predicates = require_predicates();
+	/**
+	* @file Path resolution utilities — `resolve`, `relative`, `relativeResolve`.
+	*   Split out of `paths/normalize.ts` for size hygiene.
+	*
+	*   - `resolve` — Node-style `path.resolve()` over absolute-path semantics
+	*   - `relative` — relative path from one absolute to another
+	*   - `relativeResolve` — `relative` + `normalizePath` convenience wrapper
+	*/
+	function findCommonPathPrefix(actualFrom, actualTo) {
+		const length = actualFrom.length < actualTo.length ? actualFrom.length - 1 : actualTo.length - 1;
+		let lastCommonSep = -1;
+		let i = 0;
+		for (; i < length; i += 1) {
+			let fromCode = require_primordials_string.StringPrototypeCharCodeAt(actualFrom, 1 + i);
+			let toCode = require_primordials_string.StringPrototypeCharCodeAt(actualTo, 1 + i);
+			/* c8 ignore start - Windows-only case folding. */
+			if (require_constants_platform.isWin32()) {
+				if (fromCode >= 65 && fromCode <= 90) fromCode += 32;
+				if (toCode >= 65 && toCode <= 90) toCode += 32;
+			}
+			/* c8 ignore stop */
+			if (fromCode !== toCode) break;
+			if (require_paths_predicates.isPathSeparator(require_primordials_string.StringPrototypeCharCodeAt(actualFrom, 1 + i))) lastCommonSep = i;
+		}
+		return {
+			__proto__: null,
+			length,
+			index: i,
+			lastCommonSep
+		};
+	}
+	/**
+	* Calculate the relative path from one path to another.
+	*
+	* Both inputs are resolved to absolute paths first, then compared to find the
+	* longest common base, and finally a relative path is constructed using `../`
+	* for parent-directory traversal.
+	*
+	* Windows file systems are case-insensitive; the comparison reflects that.
+	*
+	* @example
+	*   ;```typescript
+	*   relative('/foo/bar', '/foo/baz') // '../baz'
+	*   relative('/foo/bar/baz', '/foo') // '../..'
+	*   relative('/foo', '/foo/bar') // 'bar'
+	*   relative('/foo/bar', '/foo/bar') // ''
+	*   ```
+	*
+	* @param {string} from - Source path.
+	* @param {string} to - Destination path.
+	*
+	* @returns {string} Relative path from `from` to `to`, or empty string if equal
+	*/
+	function relative(from, to) {
+		if (from === to) return "";
+		const actualFrom = resolve(from);
+		const actualTo = resolve(to);
+		if (actualFrom === actualTo) return "";
+		/* c8 ignore start - Windows-only case-insensitive comparison. */
+		if (require_constants_platform.isWin32()) {
+			if (actualFrom.toLowerCase() === actualTo.toLowerCase()) return "";
+		}
+		/* c8 ignore stop */
+		const fromStart = 1;
+		const fromLen = actualFrom.length - fromStart;
+		const toStart = 1;
+		const toLen = actualTo.length - toStart;
+		const common = findCommonPathPrefix(actualFrom, actualTo);
+		const { length, index: i } = common;
+		let { lastCommonSep } = common;
+		/* c8 ignore start */
+		if (i === length) {
+			if (toLen > length) {
+				const toCode = require_primordials_string.StringPrototypeCharCodeAt(actualTo, toStart + i);
+				if (require_paths_predicates.isPathSeparator(toCode)) return actualTo.slice(toStart + i + 1);
+				if (i === 0) return actualTo.slice(toStart + i);
+			} else if (fromLen > length) {
+				const fromCode = require_primordials_string.StringPrototypeCharCodeAt(actualFrom, fromStart + i);
+				if (require_paths_predicates.isPathSeparator(fromCode)) lastCommonSep = i;
+				else if (i === 0) lastCommonSep = 0;
+			}
+		}
+		return relativePathParentSegments(actualFrom, fromStart + lastCommonSep + 1) + actualTo.slice(toStart + lastCommonSep);
+	}
+	function relativePathParentSegments(actualFrom, start) {
+		const fromEnd = actualFrom.length;
+		let out = "";
+		for (let i = start; i <= fromEnd; i += 1) {
+			const code = require_primordials_string.StringPrototypeCharCodeAt(actualFrom, i);
+			if (i === fromEnd || require_paths_predicates.isPathSeparator(code)) out += out.length === 0 ? ".." : "/..";
+		}
+		return out;
+	}
+	/**
+	* Get the normalized relative path from one path to another.
+	*
+	* Computes the relative path using `relative()` then runs the result through
+	* `normalizePath()`. An empty string, meaning the same path, is preserved
+	* verbatim rather than collapsed to `.`.
+	*
+	* @example
+	*   ;```typescript
+	*   relativeResolve('/foo/bar', '/foo/baz') // '../baz'
+	*   relativeResolve('/foo/bar', '/foo/bar') // ''
+	*   relativeResolve('/foo/./bar', '/foo/baz') // '../baz'
+	*   ```
+	*
+	* @param {string} from - Source path.
+	* @param {string} to - Destination path.
+	*
+	* @returns {string} Normalized relative path, or empty string if equal
+	*/
+	function relativeResolve(from, to) {
+		const rel = relative(from, to);
+		if (rel === "") return "";
+		return require_paths_shared.normalizePath(rel);
+	}
+	/**
+	* Resolve an absolute path from path segments.
+	*
+	* Mimics Node.js `path.resolve()`: processes segments right-to-left, stops at
+	* the first absolute segment, and prepends the cwd if no absolute segment is
+	* found. The final path is normalized.
+	*
+	* @example
+	*   ;```typescript
+	*   resolve('foo', 'bar', 'baz') // '/cwd/foo/bar/baz'
+	*   resolve('/foo', 'bar', 'baz') // '/foo/bar/baz'
+	*   resolve('foo', '/bar', 'baz') // '/bar/baz'
+	*   resolve() // '/cwd'
+	*   ```
+	*
+	* @param {...string} segments - Path segments to resolve.
+	*
+	* @returns {string} The resolved absolute path
+	*/
+	function resolve(...segments) {
+		let resolvedPath = "";
+		let resolvedAbsolute = false;
+		for (let i = segments.length - 1; i >= 0 && !resolvedAbsolute; i -= 1) {
+			const segment = segments[i];
+			/* c8 ignore start */
+			if (typeof segment !== "string" || segment.length === 0) continue;
+			resolvedPath = segment + (resolvedPath.length === 0 ? "" : `/${resolvedPath}`);
+			resolvedAbsolute = require_paths_predicates.isAbsolute(segment);
+		}
+		if (!resolvedAbsolute) resolvedPath = /* @__PURE__ */ __require("node:process").cwd() + (resolvedPath.length === 0 ? "" : `/${resolvedPath}`);
+		/* c8 ignore stop */
+		return require_paths_shared.normalizePath(resolvedPath);
+	}
+	exports.findCommonPathPrefix = findCommonPathPrefix;
+	exports.relative = relative;
+	exports.relativePathParentSegments = relativePathParentSegments;
+	exports.relativeResolve = relativeResolve;
+	exports.resolve = resolve;
+}));
+
+var require_normalize = /* @__PURE__ */ __commonJSMin$1(((exports) => {
+	Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+	const require_paths_shared = require_shared();
+	const require_paths_conversion = require_conversion();
+	const require_paths_predicates = require_predicates();
+	const require_paths_resolve = require_resolve();
+	exports.foldPathForCompare = require_paths_shared.foldPathForCompare;
+	exports.fromUnixPath = require_paths_conversion.fromUnixPath;
+	exports.isAbsolute = require_paths_predicates.isAbsolute;
+	exports.isNodeModules = require_paths_predicates.isNodeModules;
+	exports.isPath = require_paths_predicates.isPath;
+	exports.isPathSeparator = require_paths_predicates.isPathSeparator;
+	exports.isRelative = require_paths_predicates.isRelative;
+	exports.isSeparatorWrapped = require_paths_predicates.isSeparatorWrapped;
+	exports.isUnixPath = require_paths_predicates.isUnixPath;
+	exports.isWindowsDeviceRoot = require_paths_predicates.isWindowsDeviceRoot;
+	exports.msysDriveToNative = require_paths_shared.msysDriveToNative;
+	exports.normalizePath = require_paths_shared.normalizePath;
+	exports.pathLikeToString = require_paths_shared.pathLikeToString;
+	exports.relative = require_paths_resolve.relative;
+	exports.relativeResolve = require_paths_resolve.relativeResolve;
+	exports.resolve = require_paths_resolve.resolve;
+	exports.separatorWrappedSubstring = require_paths_predicates.separatorWrappedSubstring;
+	exports.splitPath = require_paths_conversion.splitPath;
+	exports.toUnixPath = require_paths_conversion.toUnixPath;
+	exports.trimLeadingDotSlash = require_paths_conversion.trimLeadingDotSlash;
+}));
+
+var import_conversion = require_conversion();
+var import_normalize = require_normalize();
+const FIREWALL_SHIM_STATE_KEY = "firewall-shims";
+async function assertFirewallShimPrecedence() {
+	const saved = getState(FIREWALL_SHIM_STATE_KEY);
+	if (!saved) return;
+	const state = parseFirewallShimState(saved);
+	const shadowed = [];
+	for (const command of state.commands) {
+		const actual = await which(command, false);
+		if (!actual) continue;
+		const expected = path.join(state.directory, process.platform === "win32" ? `${command}.cmd` : command);
+		if (firewallCommandPath(actual) !== firewallCommandPath(expected)) shadowed.push(command);
+	}
+	if (shadowed.length) throw Object.assign(/* @__PURE__ */ new Error(`Firewall command precedence changed during the job: ${shadowed.join(", ")} resolve outside the expected firewall shim directory. Run runtime and package-manager setup before this action, or invoke sfw explicitly. This final check cannot protect earlier installs.`), { code: "SFW_SHIM_SHADOWED" });
+}
+function firewallCommandPath(filename) {
+	const normalized = (0, import_normalize.normalizePath)(path.resolve((0, import_conversion.fromUnixPath)(filename)));
+	return process.platform === "win32" ? normalized.toLowerCase() : normalized;
+}
+function invalidFirewallShimState() {
+	return Object.assign(/* @__PURE__ */ new Error("Cannot validate firewall command precedence: saved action state is invalid. Expected a shim directory and command list. Run the firewall action again."), { code: "SFW_SHIM_STATE_INVALID" });
+}
+function parseFirewallShimState(saved) {
+	let state;
+	try {
+		state = JSON.parse(saved);
+	} catch {
+		throw invalidFirewallShimState();
+	}
+	if (!state || typeof state !== "object" || typeof state.directory !== "string" || !path.isAbsolute(state.directory) || !Array.isArray(state.commands) || state.commands.length === 0 || !state.commands.every((command) => typeof command === "string" && /^[a-z][a-z0-9]*$/.test(command)) || state.completedCommands !== void 0 && (!Array.isArray(state.completedCommands) || !state.completedCommands.every((command) => typeof command === "string" && /^[a-z][a-z0-9]*$/.test(command)))) throw invalidFirewallShimState();
+	return state;
+}
+
+/**
+* @typedef {{
+*   command: string
+*   status: 'selected' | 'missing' | 'shadowed' | 'unavailable'
+* }} FirewallShimDiagnostic
+*/
+/**
+* Report which saved firewall shims resolve first in the current job PATH.
+*
+* @returns {Promise<FirewallShimDiagnostic[]>}
+*/
+async function diagnoseFirewallShims() {
+	const saved = getState(FIREWALL_SHIM_STATE_KEY);
+	if (!saved) return [];
+	const state = parseFirewallShimState(saved);
+	const expectedDirectory = firewallCommandPath(state.directory);
+	const diagnostics = [];
+	const commands = state.completedCommands ?? state.commands;
+	for (const command of commands) {
+		let executable;
+		try {
+			executable = await which(command, false);
+		} catch {
+			diagnostics.push({
+				command,
+				status: "unavailable"
+			});
+			continue;
+		}
+		if (!executable) {
+			diagnostics.push({
+				command,
+				status: "missing"
+			});
+			continue;
+		}
+		const actualDirectory = firewallCommandPath(path.dirname(executable));
+		diagnostics.push({
+			command,
+			status: actualDirectory === expectedDirectory ? "selected" : "shadowed"
+		});
+	}
+	return diagnostics;
+}
+
+async function writeFirewallSummary() {
+	const inputs = { jobSummary: getInput("job-summary", { required: false }).toLowerCase() };
+	if (inputs.jobSummary === "true") inputs.jobSummary = "all";
+	if (inputs.jobSummary === "false") inputs.jobSummary = "none";
+	if (inputs.jobSummary === "none") {
+		info("skipping firewall job summary");
+		return;
+	}
+	if (!process.env.SFW_JSON_REPORT_PATH) {
+		info("firewall report path not set");
+		return;
+	}
+	let report;
+	try {
+		debug(`reading report json from ${process.env.SFW_JSON_REPORT_PATH}`);
+		const json = await readFile(process.env.SFW_JSON_REPORT_PATH);
+		report = JSON.parse(json);
+	} catch (error) {
+		if (error.code === "ENOENT") {
+			info("no report output detected, skipping creation of job summary");
+			return;
+		}
+		debug(JSON.stringify(error));
+		setFailed("error importing report json");
+		process.exit(1);
+	}
+	summary.addRaw("<h2>Socket Firewall Report</h2>");
+	if (!report.blocked && !report.parseFail) {
+		if (inputs.jobSummary === "errors") {
+			info("no errors detected, skipping job summary");
+			return;
+		}
+		summary.addRaw("Nothing to report :tada:", true);
+	}
+	if (report.blocked) {
+		summary.addRaw("<h3>Blocked :x:</h3>", true);
+		const headers = [
+			{
+				data: "Name",
+				header: true
+			},
+			{
+				data: "Version",
+				header: true
+			},
+			{
+				data: "Registry",
+				header: true
+			}
+		];
+		const rows = [];
+		for (const p of report.blocked) {
+			const { name, namespace, type, version } = import_dist.PackageURL.fromString(p.purlString);
+			const fullName = namespace ? `${namespace}/${name}` : name;
+			const link = `https://socket.dev/${type}/package/${fullName}/overview/${version}`;
+			rows.push([
+				`<a href="${link}">${fullName}</a>`,
+				`<code>${version}</code>`,
+				`<code>${p.registryFqdn}</code`
+			]);
+		}
+		summary.addTable([headers, ...rows]);
+	}
+	if (report.parseFail) {
+		summary.addRaw("<h3>URL Parse Failure :warning:</h3>", true);
+		const headers = [{
+			data: "URL",
+			header: true
+		}, {
+			data: "Registry",
+			header: true
+		}];
+		const rows = [];
+		for (const p of report.parseFail) rows.push([`<code>${p.urlPath}</code>`, `<code>${p.registryFqdn}</code`]);
+		summary.addTable([headers, ...rows]);
+	}
+	await summary.write();
+}
+/**
+* Render the firewall report left behind by the main step as a job summary.
+*/
+async function main() {
+	if (getInput("mode", { required: true }).toLowerCase() === "patch") {
+		info("patch mode: no post-run actions required");
+		return;
+	}
+	const affected = (await diagnoseFirewallShims()).filter((diagnostic) => ["missing", "unavailable"].includes(diagnostic.status));
+	if (affected.length > 0) {
+		const commands = affected.map(({ command, status }) => status === "unavailable" ? `${command} (could not be checked)` : `${command} (${status})`).join(", ");
+		warning(`Socket Firewall could not verify shims for: ${commands}. This check observes the final PATH and cannot confirm whether earlier commands were intercepted. Run runtime and package-manager setup before Socket, or run Socket again after those setup steps.`);
+	}
+	await assertFirewallShimPrecedence();
+	await writeFirewallSummary();
+}
+main().catch((error) => {
+	setFailed(`${error?.message ?? String(error)}`);
+	process.exit(1);
+});
+
+export { main, writeFirewallSummary };

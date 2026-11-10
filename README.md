@@ -1,9 +1,20 @@
-# Socket Security (GitHub Action)
+# <picture><img width="48" height="48" alt="action" src="https://raw.githubusercontent.com/SocketDev/action/HEAD/assets/repo/logomark.svg"></picture> Socket Security (GitHub Action)
+
+[![Follow @SocketSecurity](https://img.shields.io/twitter/follow/SocketSecurity?style=social)](https://twitter.com/SocketSecurity)
+[![Follow @socket.dev on Bluesky](https://img.shields.io/badge/Follow-@socket.dev-1DA1F2?style=social&logo=bluesky)](https://bsky.app/profile/socket.dev)
 
 A GitHub Action for running [Socket.dev](https://socket.dev)
 
 > [!TIP]
 > A [GitHub App](https://github.com/marketplace/socket-security) is also available for a fully automated SCA workflow.
+
+## Install
+
+There is nothing to install. Reference the action from a workflow step and the
+runner fetches it at the ref you pin. The workflow step, with the `mode`
+input filled in, is in [Usage](#usage) below. Pin to a commit SHA rather than a
+tag; [Why We Recommend Pinning](#why-we-recommend-pinning) explains the
+trade-off.
 
 ## Usage
 
@@ -11,7 +22,13 @@ This action can run in multiple modes:
 
 - [Socket Firewall: Free](#socket-firewall-free)
 - [Socket Firewall: Enterprise](#socket-firewall-enterprise)
+- [Patch mode](docs/action.md#patch-mode)
 - Socket CLI: _Coming soon_
+
+### Documentation
+
+See the [Action reference](docs/action.md) for every input and output, supported
+modes, runner platforms, and workflow effects.
 
 ### Why We Recommend Pinning
 
@@ -21,6 +38,11 @@ Socket is a security control, so the action that installs it should be pinned, t
 
 Downloads and installs [Socket Firewall: Free](https://github.com/SocketDev/sfw-free) edition in your GitHub Action job, making it available to use in subsequent steps.
 
+The published action requires an explicit `sfw` prefix, as shown below. Automatic shims and final PATH validation are unreleased features in the current source.
+
+<details>
+<summary>Free edition examples, inputs, and outputs</summary>
+
 #### Most secure: pin to a commit SHA
 
 ```yaml
@@ -33,12 +55,16 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: SocketDev/action@2d3f25590c6ed6ba11a9a14c064d962a3a04698f # v1.3.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      - uses: SocketDev/action@ba6de6cc0565af1f42295590380973573297e31f # v1.3.2
         with:
           mode: firewall-free
 
       # javascript / typescript
-      - run: sfw npm install # or yarn, pnpm
+      - run: sfw npm install # or sfw pnpm install, sfw yarn install
 
       # rust
       - run: sfw cargo fetch
@@ -59,12 +85,16 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: SocketDev/action@v1.3.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      - uses: SocketDev/action@v1.3.2
         with:
           mode: firewall-free
 
       # javascript / typescript
-      - run: sfw npm install # or yarn, pnpm
+      - run: sfw npm install # or sfw pnpm install, sfw yarn install
 
       # rust
       - run: sfw cargo fetch
@@ -73,15 +103,27 @@ jobs:
       - run: sfw pip install -r requirements.txt
 ```
 
+#### Explicit sfw invocation
+
+Prefix each package-manager command with `sfw`:
+
+```yaml
+- uses: SocketDev/action@v1.3.2
+  with:
+    mode: firewall-free
+
+- run: sfw npm install
+```
+
 #### Dependabot config
 
 ```yaml
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     cooldown:
       semver-major-days: 14
       semver-minor-days: 7
@@ -95,20 +137,28 @@ Add a cooldown period if you want an extra buffer before newly published action 
 | Input              | Description                                                      | Required | Default              |
 | ------------------ | ---------------------------------------------------------------- | -------- | -------------------- |
 | `firewall-version` | Specify the firewall version number                              | No       | `latest`             |
-| `job-summary`      | Create a [job summary][job-summary] (`all`, `errors`, or `none`) | No       | `all`                |
-| `use-cache`        | Cache the Socket binaries (force download if `false`)            | No       | `true`               |
 | `github-token`     | GitHub API Token used for downloading binaries                   | No       | `${{ github.token}}` |
+| `job-summary`      | Create a [job summary][job-summary] (`all`, `errors`, or `none`) | No       | `all`                |
+| `shims`            | Create automatic shims (unreleased source only)                  | No       | `true`               |
+| `use-cache`        | Cache the Socket binaries (force download if `false`)            | No       | `true`               |
 
 #### Outputs
 
 | Output                 | Description                                |
 | ---------------------- | ------------------------------------------ |
-| `firewall-path-report` | Path to the generated firewall report JSON |
 | `firewall-path-binary` | Path to the installed binary               |
+| `firewall-path-report` | Path to the generated firewall report JSON |
+
+</details>
 
 ### Socket Firewall: Enterprise
 
-Downloads and installs [Socket Firewall: Enterprise](https://github.com/SocketDev/firewall-release) edition in your GitHub Action job, making it available to use in subsequent steps as a wrapper.
+Downloads and installs [Socket Firewall: Enterprise](https://github.com/SocketDev/firewall-release) edition in your GitHub Action job, making it available to use in subsequent steps.
+
+The published action requires the same explicit `sfw` prefix as the free edition.
+
+<details>
+<summary>Enterprise edition examples, inputs, and outputs</summary>
 
 #### Most secure: pin to a commit SHA
 
@@ -122,13 +172,17 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: SocketDev/action@2d3f25590c6ed6ba11a9a14c064d962a3a04698f # v1.3.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      - uses: SocketDev/action@ba6de6cc0565af1f42295590380973573297e31f # v1.3.2
         with:
           mode: firewall-enterprise
           socket-token: ${{ secrets.SOCKET_API_KEY }}
 
       # javascript / typescript
-      - run: sfw npm install # or yarn, pnpm
+      - run: sfw npm install # or sfw pnpm install, sfw yarn install
 
       # rust
       - run: sfw cargo fetch
@@ -149,13 +203,17 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: SocketDev/action@v1.3.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      - uses: SocketDev/action@v1.3.2
         with:
           mode: firewall-enterprise
           socket-token: ${{ secrets.SOCKET_API_KEY }}
 
       # javascript / typescript
-      - run: sfw npm install # or yarn, pnpm
+      - run: sfw npm install # or sfw pnpm install, sfw yarn install
 
       # rust
       - run: sfw cargo fetch
@@ -169,10 +227,10 @@ jobs:
 ```yaml
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     cooldown:
       semver-major-days: 14
       semver-minor-days: 7
@@ -186,16 +244,122 @@ Add a cooldown period if you want an extra buffer before newly published action 
 | Input              | Description                                                      | Required | Default              |
 | ------------------ | ---------------------------------------------------------------- | -------- | -------------------- |
 | `firewall-version` | Specify the firewall version number                              | No       | `latest`             |
-| `job-summary`      | Create a [job summary][job-summary] (`all`, `errors`, or `none`) | No       | `all`                |
-| `use-cache`        | Cache the Socket binaries (force download if `false`)            | No       | `true`               |
 | `github-token`     | GitHub API Token used for downloading binaries                   | No       | `${{ github.token}}` |
+| `job-summary`      | Create a [job summary][job-summary] (`all`, `errors`, or `none`) | No       | `all`                |
+| `shims`            | Create automatic shims (unreleased source only)                  | No       | `true`               |
 | `socket-token`     | Socket API Token                                                 | **YES**  | `-`                  |
+| `use-cache`        | Cache the Socket binaries (force download if `false`)            | No       | `true`               |
 
 #### Outputs
 
 | Output                 | Description                                |
 | ---------------------- | ------------------------------------------ |
-| `firewall-path-report` | Path to the generated firewall report JSON |
 | `firewall-path-binary` | Path to the installed binary               |
+| `firewall-path-report` | Path to the generated firewall report JSON |
+
+</details>
+
+### Supported Ecosystems
+
+The supported ecosystems depend on the edition. Current unreleased source also routes these commands through automatic shims when `shims` is `true`.
+
+<details>
+<summary>Package managers by edition</summary>
+
+#### Free + Enterprise
+
+Available in both [sfw-free][sfw-free-ecosystems] and [sfw-enterprise][sfw-enterprise-ecosystems]:
+
+| Ecosystem       | Package Manager |
+| --------------- | --------------- |
+| JavaScript/Node | `npm`           |
+| JavaScript/Node | `pnpm`          |
+| JavaScript/Node | `yarn`          |
+| Python          | `pip`           |
+| Python          | `pip3`          |
+| Python          | `uv`            |
+| Rust            | `cargo`         |
+
+#### Enterprise only
+
+Additional ecosystems available with [sfw-enterprise][sfw-enterprise-ecosystems]:
+
+| Ecosystem | Package Manager | Note       |
+| --------- | --------------- | ---------- |
+| .NET      | `nuget`         |            |
+| Go        | `go`            | Linux only |
+| Ruby      | `bundler`       |            |
+| Ruby      | `gem`           |            |
+
+[sfw-free-ecosystems]: https://github.com/SocketDev/sfw-free?tab=readme-ov-file#supported-package-managers
+[sfw-enterprise-ecosystems]: https://github.com/SocketDev/firewall-release/wiki#support-matrix
+
+</details>
+
+### Setup order for automatic shims
+
+Run `actions/setup-node`, `actions/setup-python`, and package-manager setup before Socket. Install dependencies afterward. Automatic shims cover supported tools that are installed when Socket runs. A later setup step can put its binaries ahead of the firewall shims on `PATH`.
+
+The post action fails if a recorded command resolves outside its shim directory and warns if a recorded shim is missing. These checks also run with `job-summary: none`. They inspect the final job `PATH` and cannot prove whether earlier commands were intercepted or detect temporary drift that was later restored.
+
+Run Socket again after later tool setup, or call `sfw` explicitly. When `shims: 'false'`, use explicit `sfw` invocation and no final shim diagnostic runs.
+
+### Bypassing shims for publishing
+
+With automatic shims enabled in current source, the action exports `SFW_SHIM_DIR` as an environment variable pointing to the shim directory. If you need to bypass sfw for a specific step (e.g. `npm publish`), you can temporarily disable the shims by renaming them and restore them afterwards:
+
+<details>
+<summary>Disable and restore shims around publishing</summary>
+
+```yaml
+# disable shims before publishing
+- name: Disable sfw shims
+  run: |
+    if [ -n "$SFW_SHIM_DIR" ] && [ -d "$SFW_SHIM_DIR" ]; then
+      for SHIM in "$SFW_SHIM_DIR"/*; do
+        [ -f "$SHIM" ] && mv "$SHIM" "${SHIM}.disabled"
+      done
+    fi
+
+- run: npm publish
+
+# re-enable shims after publishing
+- name: Restore sfw shims
+  if: always()
+  run: |
+    if [ -n "$SFW_SHIM_DIR" ] && [ -d "$SFW_SHIM_DIR" ]; then
+      for SHIM in "$SFW_SHIM_DIR"/*.disabled; do
+        [ -f "$SHIM" ] && mv "$SHIM" "${SHIM%.disabled}"
+      done
+    fi
+```
+
+</details>
+
+### Checksum Validation
+
+Current source validates each downloaded firewall binary against a checksum pinned in the action source.
 
 [job-summary]: https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries
+
+## Development
+
+Requires Node 24+ and pnpm.
+
+```sh
+pnpm install
+pnpm run build
+pnpm run check --all
+```
+
+`src/` holds the action sources and `dist/` holds the bundle a workflow runner
+actually executes. A consumer resolves the action at a git tag and runs the
+committed `dist/main.js` and `dist/post.js`, with no `node_modules` beside
+them. That makes `dist/` part of the source of truth: run `pnpm run build` and
+commit the result in the same change as any `src/` edit, or the next tag ships
+a bundle that silently does not contain your change. The
+`committed-dist-is-current` check is the gate that catches a miss.
+
+## License
+
+MIT
